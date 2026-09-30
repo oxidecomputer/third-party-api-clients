@@ -16,12 +16,10 @@ impl EnvelopeHtmlDefinitions {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/html_definitions` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn responsive_html_get_envelope_definition(
         &self,

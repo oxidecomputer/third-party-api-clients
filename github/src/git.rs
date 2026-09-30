@@ -12,18 +12,16 @@ impl Git {
     }
 
     /**
-     * Create a blob.
+     * Create a blob
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/git/blobs` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/git#create-a-blob>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_blob(
         &self,
@@ -50,7 +48,7 @@ impl Git {
             .await
     }
     /**
-     * Get a blob.
+     * Get a blob
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/blobs/{file_sha}` endpoint.
      *
@@ -62,9 +60,9 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `file_sha: &str`
+     * * `owner`
+     * * `repo`
+     * * `file_sha`
      */
     pub async fn get_blob(
         &self,
@@ -92,7 +90,7 @@ impl Git {
             .await
     }
     /**
-     * Create a commit.
+     * Create a commit
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/git/commits` endpoint.
      *
@@ -131,8 +129,8 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_commit(
         &self,
@@ -159,7 +157,7 @@ impl Git {
             .await
     }
     /**
-     * Get a commit.
+     * Get a commit
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/commits/{commit_sha}` endpoint.
      *
@@ -198,9 +196,9 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `commit_sha: &str` -- commit_sha parameter.
+     * * `owner`
+     * * `repo`
+     * * `commit_sha` -- commit_sha parameter
      */
     pub async fn get_commit(
         &self,
@@ -228,7 +226,7 @@ impl Git {
             .await
     }
     /**
-     * List matching references.
+     * List matching references
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/matching-refs/{ref}` endpoint.
      *
@@ -244,11 +242,11 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_matching_refs(
         &self,
@@ -287,7 +285,7 @@ impl Git {
             .await
     }
     /**
-     * List matching references.
+     * List matching references
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/matching-refs/{ref}` endpoint.
      *
@@ -329,7 +327,7 @@ impl Git {
             .await
     }
     /**
-     * Get a reference.
+     * Get a reference
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/ref/{ref}` endpoint.
      *
@@ -341,9 +339,9 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
      */
     pub async fn get_ref(
         &self,
@@ -371,7 +369,7 @@ impl Git {
             .await
     }
     /**
-     * Create a reference.
+     * Create a reference
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/git/refs` endpoint.
      *
@@ -381,8 +379,8 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_ref(
         &self,
@@ -409,19 +407,17 @@ impl Git {
             .await
     }
     /**
-     * Delete a reference.
+     * Delete a reference
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/git/refs/{ref}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/git#delete-a-reference>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
      */
     pub async fn delete_ref(
         &self,
@@ -449,19 +445,17 @@ impl Git {
             .await
     }
     /**
-     * Update a reference.
+     * Update a reference
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/git/refs/{ref}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/git#update-a-reference>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
      */
     pub async fn update_ref(
         &self,
@@ -490,7 +484,7 @@ impl Git {
             .await
     }
     /**
-     * Create a tag object.
+     * Create a tag object
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/git/tags` endpoint.
      *
@@ -529,8 +523,8 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_tag(
         &self,
@@ -557,7 +551,7 @@ impl Git {
             .await
     }
     /**
-     * Get a tag.
+     * Get a tag
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/tags/{tag_sha}` endpoint.
      *
@@ -594,9 +588,9 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `tag_sha: &str`
+     * * `owner`
+     * * `repo`
+     * * `tag_sha`
      */
     pub async fn get_tag(
         &self,
@@ -624,7 +618,7 @@ impl Git {
             .await
     }
     /**
-     * Create a tree.
+     * Create a tree
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/git/trees` endpoint.
      *
@@ -636,8 +630,8 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_tree(
         &self,
@@ -664,7 +658,7 @@ impl Git {
             .await
     }
     /**
-     * Get a tree.
+     * Get a tree
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/trees/{tree_sha}` endpoint.
      *
@@ -676,10 +670,10 @@ impl Git {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `tree_sha: &str`
-     * * `recursive: &str` -- Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees.
+     * * `owner`
+     * * `repo`
+     * * `tree_sha`
+     * * `recursive` -- Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees.
      */
     pub async fn get_tree(
         &self,

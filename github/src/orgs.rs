@@ -12,7 +12,7 @@ impl Orgs {
     }
 
     /**
-     * List organizations.
+     * List organizations
      *
      * This function performs a `GET` to the `/organizations` endpoint.
      *
@@ -24,8 +24,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `since: i64` -- An organization ID. Only return organizations with an ID greater than this ID.
-     * * `per_page: i64` -- Results per page (max 100).
+     * * `since` -- An organization ID. Only return organizations with an ID greater than this ID.
+     * * `per_page` -- Results per page (max 100)
      */
     pub async fn list(
         &self,
@@ -40,7 +40,7 @@ impl Orgs {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/organizations?{}", query_), None);
+        let url = self.client.url(&format!("/organizations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -52,7 +52,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organizations.
+     * List organizations
      *
      * This function performs a `GET` to the `/organizations` endpoint.
      *
@@ -73,7 +73,7 @@ impl Orgs {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/organizations?{}", query_), None);
+        let url = self.client.url(&format!("/organizations?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -85,7 +85,7 @@ impl Orgs {
             .await
     }
     /**
-     * Get an organization.
+     * Get an organization
      *
      * This function performs a `GET` to the `/orgs/{org}` endpoint.
      *
@@ -97,7 +97,7 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get(
         &self,
@@ -118,7 +118,7 @@ impl Orgs {
             .await
     }
     /**
-     * Update an organization.
+     * Update an organization
      *
      * This function performs a `PATCH` to the `/orgs/{org}` endpoint.
      *
@@ -130,7 +130,7 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn update(
         &self,
@@ -152,7 +152,7 @@ impl Orgs {
             .await
     }
     /**
-     * Get the audit log for an organization.
+     * Get the audit log for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/audit-log` endpoint.
      *
@@ -164,22 +164,22 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `phrase: &str` -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
-     * * `include: crate::types::Include` -- The event types to include:
-     *  
-     *  - `web` - returns web (non-Git) events
-     *  - `git` - returns Git events
-     *  - `all` - returns both web and Git events
-     *  
-     *  The default is `web`.
-     * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
-     * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-     * * `order: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `phrase` -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
+     * * `include` -- The event types to include:
+     *
+     *   - `web` - returns web (non-Git) events
+     *   - `git` - returns Git events
+     *   - `all` - returns both web and Git events
+     *
+     *   The default is `web`.
+     * * `after` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+     * * `before` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
+     * * `order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn get_audit_log(
         &self,
@@ -234,7 +234,7 @@ impl Orgs {
             .await
     }
     /**
-     * Get the audit log for an organization.
+     * Get the audit log for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/audit-log` endpoint.
      *
@@ -291,7 +291,7 @@ impl Orgs {
             .await
     }
     /**
-     * List users blocked by an organization.
+     * List users blocked by an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/blocks` endpoint.
      *
@@ -301,7 +301,7 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn list_blocked_users(
         &self,
@@ -325,7 +325,7 @@ impl Orgs {
             .await
     }
     /**
-     * List users blocked by an organization.
+     * List users blocked by an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/blocks` endpoint.
      *
@@ -357,18 +357,16 @@ impl Orgs {
             .await
     }
     /**
-     * Check if a user is blocked by an organization.
+     * Check if a user is blocked by an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/blocks/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#check-if-a-user-is-blocked-by-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn check_blocked_user(
         &self,
@@ -394,18 +392,16 @@ impl Orgs {
             .await
     }
     /**
-     * Block a user from an organization.
+     * Block a user from an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/blocks/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#block-a-user-from-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn block_user(&self, org: &str, username: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -427,18 +423,16 @@ impl Orgs {
             .await
     }
     /**
-     * Unblock a user from an organization.
+     * Unblock a user from an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/blocks/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#unblock-a-user-from-an-organization>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn unblock_user(
         &self,
@@ -464,7 +458,7 @@ impl Orgs {
             .await
     }
     /**
-     * List SAML SSO authorizations for an organization.
+     * List SAML SSO authorizations for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/credential-authorizations` endpoint.
      *
@@ -476,7 +470,7 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn list_saml_sso_authorizations(
         &self,
@@ -500,7 +494,7 @@ impl Orgs {
             .await
     }
     /**
-     * List SAML SSO authorizations for an organization.
+     * List SAML SSO authorizations for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/credential-authorizations` endpoint.
      *
@@ -534,7 +528,7 @@ impl Orgs {
             .await
     }
     /**
-     * Remove a SAML SSO authorization for an organization.
+     * Remove a SAML SSO authorization for an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/credential-authorizations/{credential_id}` endpoint.
      *
@@ -546,8 +540,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `credential_id: i64`
+     * * `org`
+     * * `credential_id`
      */
     pub async fn remove_saml_sso_authorization(
         &self,
@@ -573,7 +567,7 @@ impl Orgs {
             .await
     }
     /**
-     * List failed organization invitations.
+     * List failed organization invitations
      *
      * This function performs a `GET` to the `/orgs/{org}/failed_invitations` endpoint.
      *
@@ -583,9 +577,9 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_failed_invitations(
         &self,
@@ -620,7 +614,7 @@ impl Orgs {
             .await
     }
     /**
-     * List failed organization invitations.
+     * List failed organization invitations
      *
      * This function performs a `GET` to the `/orgs/{org}/failed_invitations` endpoint.
      *
@@ -652,19 +646,17 @@ impl Orgs {
             .await
     }
     /**
-     * List organization webhooks.
+     * List organization webhooks
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-webhooks>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_webhooks(
         &self,
@@ -699,13 +691,11 @@ impl Orgs {
             .await
     }
     /**
-     * List organization webhooks.
+     * List organization webhooks
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks` endpoint.
      *
      * As opposed to `list_webhooks`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-webhooks>
      */
@@ -731,7 +721,7 @@ impl Orgs {
             .await
     }
     /**
-     * Create an organization webhook.
+     * Create an organization webhook
      *
      * This function performs a `POST` to the `/orgs/{org}/hooks` endpoint.
      *
@@ -741,7 +731,7 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create_webhook(
         &self,
@@ -766,7 +756,7 @@ impl Orgs {
             .await
     }
     /**
-     * Get an organization webhook.
+     * Get an organization webhook
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}` endpoint.
      *
@@ -776,8 +766,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
+     * * `org`
+     * * `hook_id`
      */
     pub async fn get_webhook(
         &self,
@@ -803,18 +793,16 @@ impl Orgs {
             .await
     }
     /**
-     * Delete an organization webhook.
+     * Delete an organization webhook
      *
      * This function performs a `DELETE` to the `/orgs/{org}/hooks/{hook_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#delete-an-organization-webhook>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
+     * * `org`
+     * * `hook_id`
      */
     pub async fn delete_webhook(
         &self,
@@ -840,7 +828,7 @@ impl Orgs {
             .await
     }
     /**
-     * Update an organization webhook.
+     * Update an organization webhook
      *
      * This function performs a `PATCH` to the `/orgs/{org}/hooks/{hook_id}` endpoint.
      *
@@ -850,8 +838,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
+     * * `org`
+     * * `hook_id`
      */
     pub async fn update_webhook(
         &self,
@@ -878,7 +866,7 @@ impl Orgs {
             .await
     }
     /**
-     * Get a webhook configuration for an organization.
+     * Get a webhook configuration for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/config` endpoint.
      *
@@ -890,8 +878,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
+     * * `org`
+     * * `hook_id`
      */
     pub async fn get_webhook_config_for_org(
         &self,
@@ -917,7 +905,7 @@ impl Orgs {
             .await
     }
     /**
-     * Update a webhook configuration for an organization.
+     * Update a webhook configuration for an organization
      *
      * This function performs a `PATCH` to the `/orgs/{org}/hooks/{hook_id}/config` endpoint.
      *
@@ -929,8 +917,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
+     * * `org`
+     * * `hook_id`
      */
     pub async fn update_webhook_config_for_org(
         &self,
@@ -957,7 +945,7 @@ impl Orgs {
             .await
     }
     /**
-     * List deliveries for an organization webhook.
+     * List deliveries for an organization webhook
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/deliveries` endpoint.
      *
@@ -967,10 +955,10 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `cursor: &str` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+     * * `org`
+     * * `hook_id`
+     * * `per_page` -- Results per page (max 100)
+     * * `cursor` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
      */
     pub async fn list_webhook_deliveries(
         &self,
@@ -1007,7 +995,7 @@ impl Orgs {
             .await
     }
     /**
-     * List deliveries for an organization webhook.
+     * List deliveries for an organization webhook
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/deliveries` endpoint.
      *
@@ -1048,7 +1036,7 @@ impl Orgs {
             .await
     }
     /**
-     * Get a webhook delivery for an organization webhook.
+     * Get a webhook delivery for an organization webhook
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/deliveries/{delivery_id}` endpoint.
      *
@@ -1058,9 +1046,9 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
-     * * `delivery_id: i64`
+     * * `org`
+     * * `hook_id`
+     * * `delivery_id`
      */
     pub async fn get_webhook_delivery(
         &self,
@@ -1088,7 +1076,7 @@ impl Orgs {
             .await
     }
     /**
-     * Redeliver a delivery for an organization webhook.
+     * Redeliver a delivery for an organization webhook
      *
      * This function performs a `POST` to the `/orgs/{org}/hooks/{hook_id}/deliveries/{delivery_id}/attempts` endpoint.
      *
@@ -1098,9 +1086,9 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
-     * * `delivery_id: i64`
+     * * `org`
+     * * `hook_id`
+     * * `delivery_id`
      */
     pub async fn redeliver_webhook_delivery(
         &self,
@@ -1128,7 +1116,7 @@ impl Orgs {
             .await
     }
     /**
-     * Ping an organization webhook.
+     * Ping an organization webhook
      *
      * This function performs a `POST` to the `/orgs/{org}/hooks/{hook_id}/pings` endpoint.
      *
@@ -1138,8 +1126,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `hook_id: i64`
+     * * `org`
+     * * `hook_id`
      */
     pub async fn ping_webhook(&self, org: &str, hook_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1161,7 +1149,7 @@ impl Orgs {
             .await
     }
     /**
-     * List app installations for an organization.
+     * List app installations for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/installations` endpoint.
      *
@@ -1171,9 +1159,9 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_app_installations(
         &self,
@@ -1208,7 +1196,7 @@ impl Orgs {
             .await
     }
     /**
-     * List pending organization invitations.
+     * List pending organization invitations
      *
      * This function performs a `GET` to the `/orgs/{org}/invitations` endpoint.
      *
@@ -1218,9 +1206,9 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_pending_invitations(
         &self,
@@ -1255,7 +1243,7 @@ impl Orgs {
             .await
     }
     /**
-     * List pending organization invitations.
+     * List pending organization invitations
      *
      * This function performs a `GET` to the `/orgs/{org}/invitations` endpoint.
      *
@@ -1287,7 +1275,7 @@ impl Orgs {
             .await
     }
     /**
-     * Create an organization invitation.
+     * Create an organization invitation
      *
      * This function performs a `POST` to the `/orgs/{org}/invitations` endpoint.
      *
@@ -1299,7 +1287,7 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create_invitation(
         &self,
@@ -1324,7 +1312,7 @@ impl Orgs {
             .await
     }
     /**
-     * Cancel an organization invitation.
+     * Cancel an organization invitation
      *
      * This function performs a `DELETE` to the `/orgs/{org}/invitations/{invitation_id}` endpoint.
      *
@@ -1336,8 +1324,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `invitation_id: i64` -- invitation_id parameter.
+     * * `org`
+     * * `invitation_id` -- invitation_id parameter
      */
     pub async fn cancel_invitation(
         &self,
@@ -1363,7 +1351,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organization invitation teams.
+     * List organization invitation teams
      *
      * This function performs a `GET` to the `/orgs/{org}/invitations/{invitation_id}/teams` endpoint.
      *
@@ -1373,10 +1361,10 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `invitation_id: i64` -- invitation_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `invitation_id` -- invitation_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_invitation_teams(
         &self,
@@ -1413,7 +1401,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organization invitation teams.
+     * List organization invitation teams
      *
      * This function performs a `GET` to the `/orgs/{org}/invitations/{invitation_id}/teams` endpoint.
      *
@@ -1447,7 +1435,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organization members.
+     * List organization members
      *
      * This function performs a `GET` to the `/orgs/{org}/members` endpoint.
      *
@@ -1457,16 +1445,16 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `filter: crate::types::OrgsListMembersFilter` -- Filter members returned in the list. Can be one of:  
-     *  \\* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
-     *  \\* `all` - All members the authenticated user can see.
-     * * `role: crate::types::OrgsListMembersRole` -- Filter members returned by their role. Can be one of:  
-     *  \\* `all` - All members of the organization, regardless of role.  
-     *  \\* `admin` - Organization owners.  
-     *  \\* `member` - Non-owner organization members.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `filter` -- Filter members returned in the list. Can be one of:
+     *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
+     *   \* `all` - All members the authenticated user can see.
+     * * `role` -- Filter members returned by their role. Can be one of:
+     *   \* `all` - All members of the organization, regardless of role.
+     *   \* `admin` - Organization owners.
+     *   \* `member` - Non-owner organization members.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_members(
         &self,
@@ -1509,7 +1497,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organization members.
+     * List organization members
      *
      * This function performs a `GET` to the `/orgs/{org}/members` endpoint.
      *
@@ -1552,7 +1540,7 @@ impl Orgs {
             .await
     }
     /**
-     * Check organization membership for a user.
+     * Check organization membership for a user
      *
      * This function performs a `GET` to the `/orgs/{org}/members/{username}` endpoint.
      *
@@ -1562,8 +1550,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn check_membership_for_user(
         &self,
@@ -1589,7 +1577,7 @@ impl Orgs {
             .await
     }
     /**
-     * Remove an organization member.
+     * Remove an organization member
      *
      * This function performs a `DELETE` to the `/orgs/{org}/members/{username}` endpoint.
      *
@@ -1599,8 +1587,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn remove_member(
         &self,
@@ -1626,7 +1614,7 @@ impl Orgs {
             .await
     }
     /**
-     * Get organization membership for a user.
+     * Get organization membership for a user
      *
      * This function performs a `GET` to the `/orgs/{org}/memberships/{username}` endpoint.
      *
@@ -1636,8 +1624,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn get_membership_for_user(
         &self,
@@ -1663,14 +1651,14 @@ impl Orgs {
             .await
     }
     /**
-     * Set organization membership for a user.
+     * Set organization membership for a user
      *
      * This function performs a `PUT` to the `/orgs/{org}/memberships/{username}` endpoint.
      *
      * Only authenticated organization owners can add a member to the organization or update the member's role.
      *
      * *   If the authenticated user is _adding_ a member to the organization, the invited user will receive an email inviting them to the organization. The user's [membership status](https://docs.github.com/rest/reference/orgs#get-organization-membership-for-a-user) will be `pending` until they accept the invitation.
-     *     
+     *
      * *   Authenticated users can _update_ a user's membership by passing the `role` parameter. If the authenticated user changes a member's role to `admin`, the affected user will receive an email notifying them that they've been made an organization owner. If the authenticated user changes an owner's role to `member`, no email will be sent.
      *
      * **Rate limits**
@@ -1681,8 +1669,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn set_membership_for_user(
         &self,
@@ -1709,7 +1697,7 @@ impl Orgs {
             .await
     }
     /**
-     * Remove organization membership for a user.
+     * Remove organization membership for a user
      *
      * This function performs a `DELETE` to the `/orgs/{org}/memberships/{username}` endpoint.
      *
@@ -1721,8 +1709,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn remove_membership_for_user(
         &self,
@@ -1748,7 +1736,7 @@ impl Orgs {
             .await
     }
     /**
-     * List outside collaborators for an organization.
+     * List outside collaborators for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/outside_collaborators` endpoint.
      *
@@ -1758,12 +1746,12 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `filter: crate::types::OrgsListMembersFilter` -- Filter members returned in the list. Can be one of:  
-     *  \\* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
-     *  \\* `all` - All members the authenticated user can see.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `filter` -- Filter members returned in the list. Can be one of:
+     *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
+     *   \* `all` - All members the authenticated user can see.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_outside_collaborators(
         &self,
@@ -1802,7 +1790,7 @@ impl Orgs {
             .await
     }
     /**
-     * List outside collaborators for an organization.
+     * List outside collaborators for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/outside_collaborators` endpoint.
      *
@@ -1841,7 +1829,7 @@ impl Orgs {
             .await
     }
     /**
-     * Convert an organization member to outside collaborator.
+     * Convert an organization member to outside collaborator
      *
      * This function performs a `PUT` to the `/orgs/{org}/outside_collaborators/{username}` endpoint.
      *
@@ -1851,8 +1839,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn convert_member_to_outside_collaborator(
         &self,
@@ -1878,7 +1866,7 @@ impl Orgs {
             .await
     }
     /**
-     * Remove outside collaborator from an organization.
+     * Remove outside collaborator from an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/outside_collaborators/{username}` endpoint.
      *
@@ -1888,8 +1876,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn remove_outside_collaborator(
         &self,
@@ -1915,7 +1903,7 @@ impl Orgs {
             .await
     }
     /**
-     * List public organization members.
+     * List public organization members
      *
      * This function performs a `GET` to the `/orgs/{org}/public_members` endpoint.
      *
@@ -1925,9 +1913,9 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_members(
         &self,
@@ -1962,7 +1950,7 @@ impl Orgs {
             .await
     }
     /**
-     * List public organization members.
+     * List public organization members
      *
      * This function performs a `GET` to the `/orgs/{org}/public_members` endpoint.
      *
@@ -1994,18 +1982,16 @@ impl Orgs {
             .await
     }
     /**
-     * Check public organization membership for a user.
+     * Check public organization membership for a user
      *
      * This function performs a `GET` to the `/orgs/{org}/public_members/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#check-public-organization-membership-for-a-user>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn check_public_membership_for_user(
         &self,
@@ -2031,7 +2017,7 @@ impl Orgs {
             .await
     }
     /**
-     * Set public organization membership for the authenticated user.
+     * Set public organization membership for the authenticated user
      *
      * This function performs a `PUT` to the `/orgs/{org}/public_members/{username}` endpoint.
      *
@@ -2043,8 +2029,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn set_public_membership_for_authenticated_user(
         &self,
@@ -2070,18 +2056,16 @@ impl Orgs {
             .await
     }
     /**
-     * Remove public organization membership for the authenticated user.
+     * Remove public organization membership for the authenticated user
      *
      * This function performs a `DELETE` to the `/orgs/{org}/public_members/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#remove-public-organization-membership-for-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `username: &str`
+     * * `org`
+     * * `username`
      */
     pub async fn remove_public_membership_for_authenticated_user(
         &self,
@@ -2107,19 +2091,17 @@ impl Orgs {
             .await
     }
     /**
-     * List organization memberships for the authenticated user.
+     * List organization memberships for the authenticated user
      *
      * This function performs a `GET` to the `/user/memberships/orgs` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `state: crate::types::OrgMembershipState` -- Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `state` -- Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_memberships_for_authenticated_user(
         &self,
@@ -2140,7 +2122,7 @@ impl Orgs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/memberships/orgs?{}", query_), None);
+            .url(&format!("/user/memberships/orgs?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2152,13 +2134,11 @@ impl Orgs {
             .await
     }
     /**
-     * List organization memberships for the authenticated user.
+     * List organization memberships for the authenticated user
      *
      * This function performs a `GET` to the `/user/memberships/orgs` endpoint.
      *
      * As opposed to `list_memberships_for_authenticated_user`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user>
      */
@@ -2173,7 +2153,7 @@ impl Orgs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/memberships/orgs?{}", query_), None);
+            .url(&format!("/user/memberships/orgs?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -2185,17 +2165,15 @@ impl Orgs {
             .await
     }
     /**
-     * Get an organization membership for the authenticated user.
+     * Get an organization membership for the authenticated user
      *
      * This function performs a `GET` to the `/user/memberships/orgs/{org}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#get-an-organization-membership-for-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_membership_for_authenticated_user(
         &self,
@@ -2219,17 +2197,15 @@ impl Orgs {
             .await
     }
     /**
-     * Update an organization membership for the authenticated user.
+     * Update an organization membership for the authenticated user
      *
      * This function performs a `PATCH` to the `/user/memberships/orgs/{org}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#update-an-organization-membership-for-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn update_membership_for_authenticated_user(
         &self,
@@ -2254,7 +2230,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organizations for the authenticated user.
+     * List organizations for the authenticated user
      *
      * This function performs a `GET` to the `/user/orgs` endpoint.
      *
@@ -2268,8 +2244,8 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_authenticated_user(
         &self,
@@ -2284,7 +2260,7 @@ impl Orgs {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/orgs?{}", query_), None);
+        let url = self.client.url(&format!("/user/orgs?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2296,7 +2272,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organizations for the authenticated user.
+     * List organizations for the authenticated user
      *
      * This function performs a `GET` to the `/user/orgs` endpoint.
      *
@@ -2325,7 +2301,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organizations for a user.
+     * List organizations for a user
      *
      * This function performs a `GET` to the `/users/{username}/orgs` endpoint.
      *
@@ -2337,9 +2313,9 @@ impl Orgs {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_user(
         &self,
@@ -2374,7 +2350,7 @@ impl Orgs {
             .await
     }
     /**
-     * List organizations for a user.
+     * List organizations for a user
      *
      * This function performs a `GET` to the `/users/{username}/orgs` endpoint.
      *

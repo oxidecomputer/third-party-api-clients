@@ -12,7 +12,7 @@ impl Domains {
     }
 
     /**
-     * List Domains.
+     * List Domains
      *
      * This function performs a `GET` to the `/api/v1/domains` endpoint.
      *
@@ -31,7 +31,7 @@ impl Domains {
             .await
     }
     /**
-     * Create Domain.
+     * Create Domain
      *
      * This function performs a `POST` to the `/api/v1/domains` endpoint.
      *
@@ -53,7 +53,7 @@ impl Domains {
             .await
     }
     /**
-     * Get Domain.
+     * Get Domain
      *
      * This function performs a `GET` to the `/api/v1/domains/{domainId}` endpoint.
      *
@@ -61,7 +61,7 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `domain_id: &str`
+     * * `domain_id`
      */
     pub async fn get(
         &self,
@@ -85,7 +85,7 @@ impl Domains {
             .await
     }
     /**
-     * Delete Domain.
+     * Delete Domain
      *
      * This function performs a `DELETE` to the `/api/v1/domains/{domainId}` endpoint.
      *
@@ -93,7 +93,7 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `domain_id: &str`
+     * * `domain_id`
      */
     pub async fn delete(&self, domain_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -114,7 +114,7 @@ impl Domains {
             .await
     }
     /**
-     * Create Certificate.
+     * Create Certificate
      *
      * This function performs a `PUT` to the `/api/v1/domains/{domainId}/certificate` endpoint.
      *
@@ -122,7 +122,7 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `domain_id: &str`
+     * * `domain_id`
      */
     pub async fn create_certificate(
         &self,
@@ -147,7 +147,7 @@ impl Domains {
             .await
     }
     /**
-     * Verify Domain.
+     * Verify Domain
      *
      * This function performs a `POST` to the `/api/v1/domains/{domainId}/verify` endpoint.
      *
@@ -155,7 +155,7 @@ impl Domains {
      *
      * **Parameters:**
      *
-     * * `domain_id: &str`
+     * * `domain_id`
      */
     pub async fn verify(
         &self,

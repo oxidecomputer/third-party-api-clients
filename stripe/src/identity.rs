@@ -18,17 +18,14 @@ impl Identity {
      *
      * **Parameters:**
      *
-     * * `created: &str`
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `type_: crate::types::GelatoVerificationReportType` -- Only return VerificationReports of this type.
-     * * `verification_session: &str` -- Only return VerificationReports created by this VerificationSession ID. It is allowed to provide a VerificationIntent ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `type_` -- Only return VerificationReports of this type
+     * * `verification_session` -- Only return VerificationReports created by this VerificationSession ID. It is allowed to provide a VerificationIntent ID.
      */
     pub async fn get_verification_reports(
         &self,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -55,10 +52,9 @@ impl Identity {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/v1/identity/verification_reports?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/v1/identity/verification_reports?{query_}"), None);
         let resp: crate::Response<crate::types::GetIdentityVerificationReportsResponse> = self
             .client
             .get(
@@ -86,7 +82,6 @@ impl Identity {
      */
     pub async fn get_all_verification_reports(
         &self,
-        created: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationReport>>> {
@@ -101,10 +96,9 @@ impl Identity {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/v1/identity/verification_reports?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/v1/identity/verification_reports?{query_}"), None);
         let crate::Response::<crate::types::GetIdentityVerificationReportsResponse> {
             mut status,
             mut headers,
@@ -144,7 +138,7 @@ impl Identity {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -159,7 +153,7 @@ impl Identity {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -183,8 +177,7 @@ impl Identity {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `report: &str` -- The account's country.
+     * * `report` -- The account's country.
      */
     pub async fn get_verification_reports_report(
         &self,
@@ -214,16 +207,13 @@ impl Identity {
      *
      * **Parameters:**
      *
-     * * `created: &str`
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::GelatoVerificationSessionStatus` -- Only return VerificationSessions with this status. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- Only return VerificationSessions with this status. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
      */
     pub async fn get_verification_sessions(
         &self,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -244,7 +234,7 @@ impl Identity {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/v1/identity/verification_sessions?{}", query_),
+            &format!("/v1/identity/verification_sessions?{query_}"),
             None,
         );
         let resp: crate::Response<crate::types::GetIdentityVerificationSessionsResponse> = self
@@ -274,7 +264,6 @@ impl Identity {
      */
     pub async fn get_all_verification_sessions(
         &self,
-        created: &str,
         status: crate::types::GelatoVerificationSessionStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::GelatoVerificationSession>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -283,7 +272,7 @@ impl Identity {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/v1/identity/verification_sessions?{}", query_),
+            &format!("/v1/identity/verification_sessions?{query_}"),
             None,
         );
         let crate::Response::<crate::types::GetIdentityVerificationSessionsResponse> {
@@ -325,7 +314,7 @@ impl Identity {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -340,7 +329,7 @@ impl Identity {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -392,8 +381,7 @@ impl Identity {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `session: &str` -- The account's country.
+     * * `session` -- The account's country.
      */
     pub async fn get_verification_sessions_session(
         &self,
@@ -426,7 +414,7 @@ impl Identity {
      *
      * **Parameters:**
      *
-     * * `session: &str` -- The account's country.
+     * * `session` -- The account's country.
      */
     pub async fn post_verification_sessions_session(
         &self,
@@ -458,7 +446,7 @@ impl Identity {
      *
      * **Parameters:**
      *
-     * * `session: &str` -- The account's country.
+     * * `session` -- The account's country.
      */
     pub async fn post_verification_sessions_session_cancel(
         &self,
@@ -506,7 +494,7 @@ impl Identity {
      *
      * **Parameters:**
      *
-     * * `session: &str` -- The account's country.
+     * * `session` -- The account's country.
      */
     pub async fn post_verification_sessions_session_redact(
         &self,

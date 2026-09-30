@@ -20,7 +20,7 @@ impl Calls {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
+     * * `token` -- Authentication token. Requires scope: `calls:write`
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.add", None);
@@ -43,7 +43,7 @@ impl Calls {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
+     * * `token` -- Authentication token. Requires scope: `calls:write`
      */
     pub async fn end(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.end", None);
@@ -66,8 +66,8 @@ impl Calls {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `calls:read`.
-     * * `id: &str` -- `id` of the Call returned by the [`calls.add`](/methods/calls.add) method.
+     * * `token` -- Authentication token. Requires scope: `calls:read`
+     * * `id` -- `id` of the Call returned by the [`calls.add`](/methods/calls.add) method.
      */
     pub async fn info(
         &self,
@@ -78,7 +78,7 @@ impl Calls {
             query_args.push(("id".to_string(), id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/calls.info?{}", query_), None);
+        let url = self.client.url(&format!("/calls.info?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -98,7 +98,7 @@ impl Calls {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `calls:write`.
+     * * `token` -- Authentication token. Requires scope: `calls:write`
      */
     pub async fn update(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/calls.update", None);

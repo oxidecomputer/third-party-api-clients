@@ -12,7 +12,7 @@ impl Gists {
     }
 
     /**
-     * List gists for the authenticated user.
+     * List gists for the authenticated user
      *
      * This function performs a `GET` to the `/gists` endpoint.
      *
@@ -22,9 +22,9 @@ impl Gists {
      *
      * **Parameters:**
      *
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list(
         &self,
@@ -43,7 +43,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/gists?{}", query_), None);
+        let url = self.client.url(&format!("/gists?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -55,7 +55,7 @@ impl Gists {
             .await
     }
     /**
-     * List gists for the authenticated user.
+     * List gists for the authenticated user
      *
      * This function performs a `GET` to the `/gists` endpoint.
      *
@@ -74,7 +74,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/gists?{}", query_), None);
+        let url = self.client.url(&format!("/gists?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -86,7 +86,7 @@ impl Gists {
             .await
     }
     /**
-     * Create a gist.
+     * Create a gist
      *
      * This function performs a `POST` to the `/gists` endpoint.
      *
@@ -112,7 +112,7 @@ impl Gists {
             .await
     }
     /**
-     * List public gists.
+     * List public gists
      *
      * This function performs a `GET` to the `/gists/public` endpoint.
      *
@@ -124,9 +124,9 @@ impl Gists {
      *
      * **Parameters:**
      *
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public(
         &self,
@@ -145,7 +145,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/gists/public?{}", query_), None);
+        let url = self.client.url(&format!("/gists/public?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -157,7 +157,7 @@ impl Gists {
             .await
     }
     /**
-     * List public gists.
+     * List public gists
      *
      * This function performs a `GET` to the `/gists/public` endpoint.
      *
@@ -178,7 +178,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/gists/public?{}", query_), None);
+        let url = self.client.url(&format!("/gists/public?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -190,7 +190,7 @@ impl Gists {
             .await
     }
     /**
-     * List starred gists.
+     * List starred gists
      *
      * This function performs a `GET` to the `/gists/starred` endpoint.
      *
@@ -200,9 +200,9 @@ impl Gists {
      *
      * **Parameters:**
      *
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_starred(
         &self,
@@ -221,7 +221,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/gists/starred?{}", query_), None);
+        let url = self.client.url(&format!("/gists/starred?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -233,7 +233,7 @@ impl Gists {
             .await
     }
     /**
-     * List starred gists.
+     * List starred gists
      *
      * This function performs a `GET` to the `/gists/starred` endpoint.
      *
@@ -252,7 +252,7 @@ impl Gists {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/gists/starred?{}", query_), None);
+        let url = self.client.url(&format!("/gists/starred?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -264,17 +264,15 @@ impl Gists {
             .await
     }
     /**
-     * Get a gist.
+     * Get a gist
      *
      * This function performs a `GET` to the `/gists/{gist_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn get(
         &self,
@@ -295,17 +293,15 @@ impl Gists {
             .await
     }
     /**
-     * Delete a gist.
+     * Delete a gist
      *
      * This function performs a `DELETE` to the `/gists/{gist_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#delete-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn delete(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -323,7 +319,7 @@ impl Gists {
             .await
     }
     /**
-     * Update a gist.
+     * Update a gist
      *
      * This function performs a `PATCH` to the `/gists/{gist_id}` endpoint.
      *
@@ -333,7 +329,7 @@ impl Gists {
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn update(
         &self,
@@ -355,19 +351,17 @@ impl Gists {
             .await
     }
     /**
-     * List gist comments.
+     * List gist comments
      *
      * This function performs a `GET` to the `/gists/{gist_id}/comments` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `gist_id` -- gist_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_comments(
         &self,
@@ -402,13 +396,11 @@ impl Gists {
             .await
     }
     /**
-     * List gist comments.
+     * List gist comments
      *
      * This function performs a `GET` to the `/gists/{gist_id}/comments` endpoint.
      *
      * As opposed to `list_comments`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
      */
@@ -434,17 +426,15 @@ impl Gists {
             .await
     }
     /**
-     * Create a gist comment.
+     * Create a gist comment
      *
      * This function performs a `POST` to the `/gists/{gist_id}/comments` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#create-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn create_comment(
         &self,
@@ -469,18 +459,16 @@ impl Gists {
             .await
     }
     /**
-     * Get a gist comment.
+     * Get a gist comment
      *
      * This function performs a `GET` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `gist_id` -- gist_id parameter
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn get_comment(
         &self,
@@ -506,18 +494,16 @@ impl Gists {
             .await
     }
     /**
-     * Delete a gist comment.
+     * Delete a gist comment
      *
      * This function performs a `DELETE` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#delete-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `gist_id` -- gist_id parameter
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn delete_comment(
         &self,
@@ -543,18 +529,16 @@ impl Gists {
             .await
     }
     /**
-     * Update a gist comment.
+     * Update a gist comment
      *
      * This function performs a `PATCH` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#update-a-gist-comment>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `gist_id` -- gist_id parameter
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn update_comment(
         &self,
@@ -581,19 +565,17 @@ impl Gists {
             .await
     }
     /**
-     * List gist commits.
+     * List gist commits
      *
      * This function performs a `GET` to the `/gists/{gist_id}/commits` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `gist_id` -- gist_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_commits(
         &self,
@@ -628,13 +610,11 @@ impl Gists {
             .await
     }
     /**
-     * List gist commits.
+     * List gist commits
      *
      * This function performs a `GET` to the `/gists/{gist_id}/commits` endpoint.
      *
      * As opposed to `list_commits`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
      */
@@ -660,19 +640,17 @@ impl Gists {
             .await
     }
     /**
-     * List gist forks.
+     * List gist forks
      *
      * This function performs a `GET` to the `/gists/{gist_id}/forks` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `gist_id` -- gist_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_forks(
         &self,
@@ -707,13 +685,11 @@ impl Gists {
             .await
     }
     /**
-     * List gist forks.
+     * List gist forks
      *
      * This function performs a `GET` to the `/gists/{gist_id}/forks` endpoint.
      *
      * As opposed to `list_forks`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
      */
@@ -739,7 +715,7 @@ impl Gists {
             .await
     }
     /**
-     * Fork a gist.
+     * Fork a gist
      *
      * This function performs a `POST` to the `/gists/{gist_id}/forks` endpoint.
      *
@@ -749,7 +725,7 @@ impl Gists {
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn fork(
         &self,
@@ -773,17 +749,15 @@ impl Gists {
             .await
     }
     /**
-     * Check if a gist is starred.
+     * Check if a gist is starred
      *
      * This function performs a `GET` to the `/gists/{gist_id}/star` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#check-if-a-gist-is-starred>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn check_is_starred(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -804,7 +778,7 @@ impl Gists {
             .await
     }
     /**
-     * Star a gist.
+     * Star a gist
      *
      * This function performs a `PUT` to the `/gists/{gist_id}/star` endpoint.
      *
@@ -814,7 +788,7 @@ impl Gists {
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn star(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -835,17 +809,15 @@ impl Gists {
             .await
     }
     /**
-     * Unstar a gist.
+     * Unstar a gist
      *
      * This function performs a `DELETE` to the `/gists/{gist_id}/star` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#unstar-a-gist>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
+     * * `gist_id` -- gist_id parameter
      */
     pub async fn unstar(&self, gist_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -866,18 +838,16 @@ impl Gists {
             .await
     }
     /**
-     * Get a gist revision.
+     * Get a gist revision
      *
      * This function performs a `GET` to the `/gists/{gist_id}/{sha}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist-revision>
      *
      * **Parameters:**
      *
-     * * `gist_id: &str` -- gist_id parameter.
-     * * `sha: &str`
+     * * `gist_id` -- gist_id parameter
+     * * `sha`
      */
     pub async fn get_revision(
         &self,
@@ -903,7 +873,7 @@ impl Gists {
             .await
     }
     /**
-     * List gists for a user.
+     * List gists for a user
      *
      * This function performs a `GET` to the `/users/{username}/gists` endpoint.
      *
@@ -913,10 +883,10 @@ impl Gists {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_user(
         &self,
@@ -955,7 +925,7 @@ impl Gists {
             .await
     }
     /**
-     * List gists for a user.
+     * List gists for a user
      *
      * This function performs a `GET` to the `/users/{username}/gists` endpoint.
      *

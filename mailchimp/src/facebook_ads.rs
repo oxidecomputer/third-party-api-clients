@@ -12,7 +12,7 @@ impl FacebookAds {
     }
 
     /**
-     * List facebook ads.
+     * List facebook ads
      *
      * This function performs a `GET` to the `/facebook-ads` endpoint.
      *
@@ -20,12 +20,12 @@ impl FacebookAds {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `sort_field: crate::types::GetAllFacebookAdsSortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `sort_field` -- Returns files sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
      */
     pub async fn get_all(
         &self,
@@ -56,7 +56,7 @@ impl FacebookAds {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/facebook-ads?{}", query_), None);
+        let url = self.client.url(&format!("/facebook-ads?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -68,7 +68,7 @@ impl FacebookAds {
             .await
     }
     /**
-     * Get facebook ad info.
+     * Get facebook ad info
      *
      * This function performs a `GET` to the `/facebook-ads/{outreach_id}` endpoint.
      *
@@ -76,9 +76,9 @@ impl FacebookAds {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `outreach_id: &str` -- The name of the folder.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `outreach_id` -- The name of the folder.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get(
         &self,

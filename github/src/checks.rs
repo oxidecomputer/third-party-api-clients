@@ -12,7 +12,7 @@ impl Checks {
     }
 
     /**
-     * Create a check run.
+     * Create a check run
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/check-runs` endpoint.
      *
@@ -26,8 +26,8 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create(
         &self,
@@ -54,7 +54,7 @@ impl Checks {
             .await
     }
     /**
-     * Get a check run.
+     * Get a check run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}` endpoint.
      *
@@ -66,9 +66,9 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `check_run_id: i64` -- check_run_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `check_run_id` -- check_run_id parameter
      */
     pub async fn get(
         &self,
@@ -96,7 +96,7 @@ impl Checks {
             .await
     }
     /**
-     * Update a check run.
+     * Update a check run
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}` endpoint.
      *
@@ -108,9 +108,9 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `check_run_id: i64` -- check_run_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `check_run_id` -- check_run_id parameter
      */
     pub async fn update(
         &self,
@@ -139,7 +139,7 @@ impl Checks {
             .await
     }
     /**
-     * List check run annotations.
+     * List check run annotations
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations` endpoint.
      *
@@ -149,11 +149,11 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `check_run_id: i64` -- check_run_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `check_run_id` -- check_run_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_annotations(
         &self,
@@ -192,7 +192,7 @@ impl Checks {
             .await
     }
     /**
-     * List check run annotations.
+     * List check run annotations
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations` endpoint.
      *
@@ -228,7 +228,7 @@ impl Checks {
             .await
     }
     /**
-     * Create a check suite.
+     * Create a check suite
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/check-suites` endpoint.
      *
@@ -240,8 +240,8 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_suite(
         &self,
@@ -268,7 +268,7 @@ impl Checks {
             .await
     }
     /**
-     * Update repository preferences for check suites.
+     * Update repository preferences for check suites
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/check-suites/preferences` endpoint.
      *
@@ -278,8 +278,8 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn set_suites_preferences(
         &self,
@@ -306,7 +306,7 @@ impl Checks {
             .await
     }
     /**
-     * Get a check suite.
+     * Get a check suite
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/check-suites/{check_suite_id}` endpoint.
      *
@@ -318,9 +318,9 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `check_suite_id: i64` -- check_suite_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `check_suite_id` -- check_suite_id parameter
      */
     pub async fn get_suite(
         &self,
@@ -348,7 +348,7 @@ impl Checks {
             .await
     }
     /**
-     * List check runs in a check suite.
+     * List check runs in a check suite
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs` endpoint.
      *
@@ -360,16 +360,16 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `check_suite_id: i64` -- check_suite_id parameter.
-     * * `check_name: &str` -- Returns check runs with the specified `name`.
-     * * `status: crate::types::JobStatus` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters jobs by their `completed_at` timestamp. Can be one of:  
-     *  \\* `latest`: Returns jobs from the most recent execution of the workflow run.  
-     *  \\* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `check_suite_id` -- check_suite_id parameter
+     * * `check_name` -- Returns check runs with the specified `name`.
+     * * `status` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
+     * * `filter` -- Filters jobs by their `completed_at` timestamp. Can be one of:
+     *   \* `latest`: Returns jobs from the most recent execution of the workflow run.
+     *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_suite(
         &self,
@@ -420,7 +420,7 @@ impl Checks {
             .await
     }
     /**
-     * Rerequest a check suite.
+     * Rerequest a check suite
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest` endpoint.
      *
@@ -432,9 +432,9 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `check_suite_id: i64` -- check_suite_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `check_suite_id` -- check_suite_id parameter
      */
     pub async fn rerequest_suite(
         &self,
@@ -462,7 +462,7 @@ impl Checks {
             .await
     }
     /**
-     * List check runs for a Git reference.
+     * List check runs for a Git reference
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/check-runs` endpoint.
      *
@@ -474,17 +474,17 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
-     * * `check_name: &str` -- Returns check runs with the specified `name`.
-     * * `status: crate::types::JobStatus` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters jobs by their `completed_at` timestamp. Can be one of:  
-     *  \\* `latest`: Returns jobs from the most recent execution of the workflow run.  
-     *  \\* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `app_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
+     * * `check_name` -- Returns check runs with the specified `name`.
+     * * `status` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
+     * * `filter` -- Filters jobs by their `completed_at` timestamp. Can be one of:
+     *   \* `latest`: Returns jobs from the most recent execution of the workflow run.
+     *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `app_id`
      */
     pub async fn list_for_ref(
         &self,
@@ -539,7 +539,7 @@ impl Checks {
             .await
     }
     /**
-     * List check suites for a Git reference.
+     * List check suites for a Git reference
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/check-suites` endpoint.
      *
@@ -551,13 +551,13 @@ impl Checks {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
-     * * `app_id: i64` -- Filters check suites by GitHub App `id`.
-     * * `check_name: &str` -- Returns check runs with the specified `name`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
+     * * `app_id` -- Filters check suites by GitHub App `id`.
+     * * `check_name` -- Returns check runs with the specified `name`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_suites_for_ref(
         &self,

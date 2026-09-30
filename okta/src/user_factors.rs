@@ -18,7 +18,7 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn list_factors(
         &self,
@@ -70,7 +70,7 @@ impl UserFactors {
             .await
     }
     /**
-     * Enroll Factor.
+     * Enroll Factor
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/factors` endpoint.
      *
@@ -78,11 +78,11 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `update_phone: bool`
-     * * `template_id: &str` -- id of SMS template (only for SMS factor).
-     * * `token_lifetime_seconds: i64`
-     * * `activate: bool`
+     * * `user_id`
+     * * `update_phone`
+     * * `template_id` -- id of SMS template (only for SMS factor)
+     * * `token_lifetime_seconds`
+     * * `activate`
      */
     pub async fn enroll_factor(
         &self,
@@ -135,7 +135,7 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn list_supported_factors(
         &self,
@@ -193,7 +193,7 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn list_supported_security_questions(
         &self,
@@ -251,8 +251,8 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `factor_id: &str`
+     * * `user_id`
+     * * `factor_id`
      */
     pub async fn get_factor(
         &self,
@@ -284,8 +284,8 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `factor_id: &str`
+     * * `user_id`
+     * * `factor_id`
      */
     pub async fn delete_factor(
         &self,
@@ -311,7 +311,7 @@ impl UserFactors {
             .await
     }
     /**
-     * Activate Factor.
+     * Activate Factor
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/factors/{factorId}/lifecycle/activate` endpoint.
      *
@@ -319,8 +319,8 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `factor_id: &str`
+     * * `user_id`
+     * * `factor_id`
      */
     pub async fn activate_factor(
         &self,
@@ -353,9 +353,9 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `factor_id: &str`
-     * * `transaction_id: &str`
+     * * `user_id`
+     * * `factor_id`
+     * * `transaction_id`
      */
     pub async fn get_factor_transaction_status(
         &self,
@@ -383,7 +383,7 @@ impl UserFactors {
             .await
     }
     /**
-     * Verify MFA Factor.
+     * Verify MFA Factor
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/factors/{factorId}/verify` endpoint.
      *
@@ -391,13 +391,13 @@ impl UserFactors {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `factor_id: &str`
-     * * `template_id: &str`
-     * * `token_lifetime_seconds: i64`
-     * * `x_forwarded_for: &str`
-     * * `user_agent: &str`
-     * * `accept_language: &str`
+     * * `user_id`
+     * * `factor_id`
+     * * `template_id`
+     * * `token_lifetime_seconds`
+     * * `x_forwarded_for`
+     * * `user_agent`
+     * * `accept_language`
      */
     pub async fn verify_factor(
         &self,

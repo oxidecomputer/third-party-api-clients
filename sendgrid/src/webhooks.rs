@@ -12,7 +12,7 @@ impl Webhooks {
     }
 
     /**
-     * Retrieve Event Webhook settings.
+     * Retrieve Event Webhook settings
      *
      * This function performs a `GET` to the `/user/webhooks/event/settings` endpoint.
      *
@@ -26,7 +26,7 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_event_settings(
         &self,
@@ -43,7 +43,7 @@ impl Webhooks {
             .await
     }
     /**
-     * Update Event Notification Settings.
+     * Update Event Notification Settings
      *
      * This function performs a `PATCH` to the `/user/webhooks/event/settings` endpoint.
      *
@@ -57,7 +57,7 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_user_event_settings(
         &self,
@@ -75,7 +75,7 @@ impl Webhooks {
             .await
     }
     /**
-     * Retrieve all parse settings.
+     * Retrieve all parse settings
      *
      * This function performs a `GET` to the `/user/webhooks/parse/settings` endpoint.
      *
@@ -83,7 +83,7 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_parse_settings(
         &self,
@@ -112,12 +112,12 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The license key provided with your New Relic account.
-     * * `offset: &str` -- The license key provided with your New Relic account.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `start_date: &str` -- The starting date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- The license key provided with your New Relic account.
+     * * `offset` -- The license key provided with your New Relic account.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `start_date` -- The starting date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD
+     * * `end_date` -- The end date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_parse_stats(
         &self,
@@ -147,7 +147,7 @@ impl Webhooks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/webhooks/parse/stats?{}", query_), None);
+            .url(&format!("/user/webhooks/parse/stats?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -195,7 +195,7 @@ impl Webhooks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/webhooks/parse/stats?{}", query_), None);
+            .url(&format!("/user/webhooks/parse/stats?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -207,7 +207,7 @@ impl Webhooks {
             .await
     }
     /**
-     * Retrieve Signed Webhook Public Key.
+     * Retrieve Signed Webhook Public Key
      *
      * This function performs a `GET` to the `/user/webhooks/event/settings/signed` endpoint.
      *
@@ -219,7 +219,7 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_event_settings_signed(
         &self,
@@ -239,7 +239,7 @@ impl Webhooks {
             .await
     }
     /**
-     * Enable/Disable Signed Webhook.
+     * Enable/Disable Signed Webhook
      *
      * This function performs a `PATCH` to the `/user/webhooks/event/settings/signed` endpoint.
      *
@@ -251,7 +251,7 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_user_event_settings_signed(
         &self,
@@ -272,7 +272,7 @@ impl Webhooks {
             .await
     }
     /**
-     * Test Event Notification Settings.
+     * Test Event Notification Settings
      *
      * This function performs a `POST` to the `/user/webhooks/event/test` endpoint.
      *
@@ -288,7 +288,7 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_user_event_test(
         &self,

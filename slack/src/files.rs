@@ -20,7 +20,7 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
+     * * `token` -- Authentication token. Requires scope: `files:write:user`
      */
     pub async fn delete(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/files.delete", None);
@@ -43,12 +43,12 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `files:read`.
-     * * `file: &str` -- Specify a file by providing its ID.
-     * * `count: &str`
-     * * `page: &str`
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
-     * * `cursor: &str` -- Parameter for pagination. File comments are paginated for a single file. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. See [pagination](/docs/pagination) for more details.
+     * * `token` -- Authentication token. Requires scope: `files:read`
+     * * `file` -- Specify a file by providing its ID.
+     * * `count`
+     * * `page`
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+     * * `cursor` -- Parameter for pagination. File comments are paginated for a single file. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. See [pagination](/docs/pagination) for more details.
      */
     pub async fn info(
         &self,
@@ -75,7 +75,7 @@ impl Files {
             query_args.push(("page".to_string(), page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/files.info?{}", query_), None);
+        let url = self.client.url(&format!("/files.info?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -95,15 +95,15 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `files:read`.
-     * * `user: &str` -- Filter files created by a single user.
-     * * `channel: &str` -- Filter files appearing in a specific channel, indicated by its ID.
-     * * `ts_from: f64` -- Filter files created after this timestamp (inclusive).
-     * * `ts_to: f64` -- Filter files created before this timestamp (inclusive).
-     * * `types: &str` -- Filter files by type ([see below](#file_types)). You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
-     * * `count: &str`
-     * * `page: &str`
-     * * `show_files_hidden_by_limit: bool` -- Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.
+     * * `token` -- Authentication token. Requires scope: `files:read`
+     * * `user` -- Filter files created by a single user.
+     * * `channel` -- Filter files appearing in a specific channel, indicated by its ID.
+     * * `ts_from` -- Filter files created after this timestamp (inclusive).
+     * * `ts_to` -- Filter files created before this timestamp (inclusive).
+     * * `types` -- Filter files by type ([see below](#file_types)). You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
+     * * `count`
+     * * `page`
+     * * `show_files_hidden_by_limit` -- Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit.
      */
     pub async fn list(
         &self,
@@ -145,7 +145,7 @@ impl Files {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/files.list?{}", query_), None);
+        let url = self.client.url(&format!("/files.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -165,7 +165,7 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
+     * * `token` -- Authentication token. Requires scope: `files:write:user`
      */
     pub async fn revoke_public_url(
         &self,
@@ -190,7 +190,7 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
+     * * `token` -- Authentication token. Requires scope: `files:write:user`
      */
     pub async fn shared_public_url(
         &self,

@@ -12,7 +12,7 @@ impl SettingsTracking {
     }
 
     /**
-     * Retrieve Tracking Settings.
+     * Retrieve Tracking Settings
      *
      * This function performs a `GET` to the `/tracking_settings` endpoint.
      *
@@ -20,7 +20,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_tracking_settings(
         &self,
@@ -37,7 +37,7 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Retrieve Click Track Settings.
+     * Retrieve Click Track Settings
      *
      * This function performs a `GET` to the `/tracking_settings/click` endpoint.
      *
@@ -49,7 +49,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_tracking_settings_click(
         &self,
@@ -66,7 +66,7 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Update Click Tracking Settings.
+     * Update Click Tracking Settings
      *
      * This function performs a `PATCH` to the `/tracking_settings/click` endpoint.
      *
@@ -78,7 +78,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_tracking_settings_click(
         &self,
@@ -96,12 +96,11 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Retrieve Google Analytics Settings.
+     * Retrieve Google Analytics Settings
      *
      * This function performs a `GET` to the `/tracking_settings/google_analytics` endpoint.
      *
      * **This endpoint allows you to retrieve your current setting for Google Analytics.**
-     *
      *
      * Google Analytics helps you understand how users got to your site and what they're doing there. For more information about using Google Analytics, please refer to [Google’s URL Builder](https://support.google.com/analytics/answer/1033867?hl=en) and their article on ["Best Practices for Campaign Building"](https://support.google.com/analytics/answer/1037445).
      *
@@ -109,7 +108,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_tracking_settings_google_analytic(
         &self,
@@ -126,7 +125,7 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Update Google Analytics Settings.
+     * Update Google Analytics Settings
      *
      * This function performs a `PATCH` to the `/tracking_settings/google_analytics` endpoint.
      *
@@ -138,7 +137,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_tracking_settings_google_analytics(
         &self,
@@ -156,7 +155,7 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Get Open Tracking Settings.
+     * Get Open Tracking Settings
      *
      * This function performs a `GET` to the `/tracking_settings/open` endpoint.
      *
@@ -170,7 +169,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_tracking_settings_open(
         &self,
@@ -187,7 +186,7 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Update Open Tracking Settings.
+     * Update Open Tracking Settings
      *
      * This function performs a `PATCH` to the `/tracking_settings/open` endpoint.
      *
@@ -201,7 +200,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_tracking_settings_open(
         &self,
@@ -219,7 +218,7 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Retrieve Subscription Tracking Settings.
+     * Retrieve Subscription Tracking Settings
      *
      * This function performs a `GET` to the `/tracking_settings/subscription` endpoint.
      *
@@ -229,7 +228,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_tracking_settings_subscription(
         &self,
@@ -246,7 +245,7 @@ impl SettingsTracking {
             .await
     }
     /**
-     * Update Subscription Tracking Settings.
+     * Update Subscription Tracking Settings
      *
      * This function performs a `PATCH` to the `/tracking_settings/subscription` endpoint.
      *
@@ -256,7 +255,7 @@ impl SettingsTracking {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_tracking_settings_subscription(
         &self,

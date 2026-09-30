@@ -12,7 +12,7 @@ impl SubuserStatistics {
     }
 
     /**
-     * Retrieve the monthly email statistics for a single subuser.
+     * Retrieve the monthly email statistics for a single subuser
      *
      * This function performs a `GET` to the `/subusers/{subuser_name}/stats/monthly` endpoint.
      *
@@ -23,11 +23,11 @@ impl SubuserStatistics {
      *
      * **Parameters:**
      *
-     * * `date: &str` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD.
-     * * `sort_by_metric: &str` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'.
-     * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
-     * * `limit: i64` -- Optional field to limit the number of results returned.
-     * * `offset: i64` -- Optional beginning point in the list to retrieve from.
+     * * `date` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
+     * * `sort_by_metric` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'
+     * * `sort_by_direction` -- The direction you want to sort.
+     * * `limit` -- Optional field to limit the number of results returned.
+     * * `offset` -- Optional beginning point in the list to retrieve from.
      */
     pub async fn get_subusers_subuser_name_stats_monthly(
         &self,
@@ -77,7 +77,7 @@ impl SubuserStatistics {
             .await
     }
     /**
-     * Retrieve monthly stats for all subusers.
+     * Retrieve monthly stats for all subusers
      *
      * This function performs a `GET` to the `/subusers/stats/monthly` endpoint.
      *
@@ -88,12 +88,12 @@ impl SubuserStatistics {
      *
      * **Parameters:**
      *
-     * * `date: &str` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD.
-     * * `subuser: &str` -- The license key provided with your New Relic account.
-     * * `sort_by_metric: crate::types::SortByMetric` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'.
-     * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
-     * * `limit: i64` -- Optional field to limit the number of results returned.
-     * * `offset: i64` -- Optional beginning point in the list to retrieve from.
+     * * `date` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
+     * * `subuser` -- The license key provided with your New Relic account.
+     * * `sort_by_metric` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'
+     * * `sort_by_direction` -- The direction you want to sort.
+     * * `limit` -- Optional field to limit the number of results returned.
+     * * `offset` -- Optional beginning point in the list to retrieve from.
      */
     pub async fn get_subusers_stats_monthly(
         &self,
@@ -129,7 +129,7 @@ impl SubuserStatistics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/subusers/stats/monthly?{}", query_), None);
+            .url(&format!("/subusers/stats/monthly?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -149,13 +149,13 @@ impl SubuserStatistics {
      *
      * **Parameters:**
      *
-     * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
-     * * `limit: i64` -- Limits the number of results returned per page.
-     * * `offset: i64` -- The point in the list to begin retrieving results from.
-     * * `aggregated_by: &str` -- How to group the statistics. Defaults to today. Must follow format YYYY-MM-DD.
-     * * `sort_by_metric: &str` -- The metric that you want to sort by.  Must be a single metric.
+     * * `sort_by_direction` -- The direction you want to sort.
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `limit` -- Limits the number of results returned per page.
+     * * `offset` -- The point in the list to begin retrieving results from.
+     * * `aggregated_by` -- How to group the statistics. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `sort_by_metric` -- The metric that you want to sort by.  Must be a single metric.
      */
     pub async fn get_subusers_stats_sum(
         &self,
@@ -195,7 +195,7 @@ impl SubuserStatistics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/subusers/stats/sums?{}", query_), None);
+            .url(&format!("/subusers/stats/sums?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -217,12 +217,12 @@ impl SubuserStatistics {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- Limits the number of results returned per page.
-     * * `offset: i64` -- The point in the list to begin retrieving results from.
-     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-     * * `subusers: &str` -- The subuser you want to retrieve statistics for. You may include this parameter up to 10 times to retrieve statistics for multiple subusers.
-     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today.
+     * * `limit` -- Limits the number of results returned per page.
+     * * `offset` -- The point in the list to begin retrieving results from.
+     * * `aggregated_by` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `subusers` -- The subuser you want to retrieve statistics for. You may include this parameter up to 10 times to retrieve statistics for multiple subusers.
+     * * `start_date` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date` -- The end date of the statistics to retrieve. Defaults to today.
      */
     pub async fn get_subusers_stat(
         &self,
@@ -253,9 +253,7 @@ impl SubuserStatistics {
             query_args.push(("subusers".to_string(), subusers.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/subusers/stats?{}", query_), None);
+        let url = self.client.url(&format!("/subusers/stats?{query_}"), None);
         self.client
             .get(
                 &url,

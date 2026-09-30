@@ -18,16 +18,13 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
-     * * `customer: &str` -- Only return PaymentIntents for the customer specified by this customer ID.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `customer` -- Only return PaymentIntents for the customer specified by this customer ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
-        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -49,7 +46,7 @@ impl PaymentIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/payment_intents?{}", query_), None);
+            .url(&format!("/v1/payment_intents?{query_}"), None);
         let resp: crate::Response<crate::types::PaymentFlowsIntentList> = self
             .client
             .get(
@@ -77,7 +74,6 @@ impl PaymentIntents {
      */
     pub async fn get_all(
         &self,
-        created: &str,
         customer: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PaymentIntent>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -87,7 +83,7 @@ impl PaymentIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/payment_intents?{}", query_), None);
+            .url(&format!("/v1/payment_intents?{query_}"), None);
         let crate::Response::<crate::types::PaymentFlowsIntentList> {
             mut status,
             mut headers,
@@ -127,7 +123,7 @@ impl PaymentIntents {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -142,7 +138,7 @@ impl PaymentIntents {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -195,10 +191,9 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `page: &str` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
-     * * `query: &str` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for payment intents](https://stripe.com/docs/search#query-fields-for-payment-intents).
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `page` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
+     * * `query` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for payment intents](https://stripe.com/docs/search#query-fields-for-payment-intents).
      */
     pub async fn get_search(
         &self,
@@ -219,7 +214,7 @@ impl PaymentIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/payment_intents/search?{}", query_), None);
+            .url(&format!("/v1/payment_intents/search?{query_}"), None);
         let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
@@ -259,7 +254,7 @@ impl PaymentIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/payment_intents/search?{}", query_), None);
+            .url(&format!("/v1/payment_intents/search?{query_}"), None);
         let crate::Response::<crate::types::SearchResult> {
             mut status,
             mut headers,
@@ -299,7 +294,7 @@ impl PaymentIntents {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -314,7 +309,7 @@ impl PaymentIntents {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -342,9 +337,8 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `client_secret: &str` -- The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the source.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `intent: &str` -- The account's country.
+     * * `client_secret` -- The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the source.
+     * * `intent` -- The account's country.
      */
     pub async fn get_intent(
         &self,
@@ -387,7 +381,7 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent(
         &self,
@@ -421,7 +415,7 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent_cancel(
         &self,
@@ -455,7 +449,7 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent_capture(
         &self,
@@ -509,7 +503,7 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent_confirm(
         &self,
@@ -539,7 +533,7 @@ impl PaymentIntents {
      *
      * **Parameters:**
      *
-     * * `intent: &str` -- The account's country.
+     * * `intent` -- The account's country.
      */
     pub async fn post_intent_verify_microdeposit(
         &self,

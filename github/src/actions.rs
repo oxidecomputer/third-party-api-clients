@@ -12,7 +12,7 @@ impl Actions {
     }
 
     /**
-     * Get GitHub Actions permissions for an organization.
+     * Get GitHub Actions permissions for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/permissions` endpoint.
      *
@@ -24,7 +24,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_github_actions_permissions_organization(
         &self,
@@ -48,7 +48,7 @@ impl Actions {
             .await
     }
     /**
-     * Set GitHub Actions permissions for an organization.
+     * Set GitHub Actions permissions for an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/permissions` endpoint.
      *
@@ -62,7 +62,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn set_github_actions_permissions_organization(
         &self,
@@ -87,7 +87,7 @@ impl Actions {
             .await
     }
     /**
-     * List selected repositories enabled for GitHub Actions in an organization.
+     * List selected repositories enabled for GitHub Actions in an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/permissions/repositories` endpoint.
      *
@@ -99,9 +99,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_selected_repositories_enabled_github_actions_organization(
         &self,
@@ -140,7 +140,7 @@ impl Actions {
             .await
     }
     /**
-     * Set selected repositories enabled for GitHub Actions in an organization.
+     * Set selected repositories enabled for GitHub Actions in an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/permissions/repositories` endpoint.
      *
@@ -152,7 +152,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn set_selected_repositories_enabled_github_actions_organization(
         &self,
@@ -177,7 +177,7 @@ impl Actions {
             .await
     }
     /**
-     * Enable a selected repository for GitHub Actions in an organization.
+     * Enable a selected repository for GitHub Actions in an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/permissions/repositories/{repository_id}` endpoint.
      *
@@ -189,8 +189,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `repository_id: i64`
+     * * `org`
+     * * `repository_id`
      */
     pub async fn enable_selected_repository_github_actions_organization(
         &self,
@@ -216,7 +216,7 @@ impl Actions {
             .await
     }
     /**
-     * Disable a selected repository for GitHub Actions in an organization.
+     * Disable a selected repository for GitHub Actions in an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/actions/permissions/repositories/{repository_id}` endpoint.
      *
@@ -228,8 +228,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `repository_id: i64`
+     * * `org`
+     * * `repository_id`
      */
     pub async fn disable_selected_repository_github_actions_organization(
         &self,
@@ -255,7 +255,7 @@ impl Actions {
             .await
     }
     /**
-     * Get allowed actions for an organization.
+     * Get allowed actions for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/permissions/selected-actions` endpoint.
      *
@@ -267,7 +267,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_allowed_actions_organization(
         &self,
@@ -291,7 +291,7 @@ impl Actions {
             .await
     }
     /**
-     * Set allowed actions for an organization.
+     * Set allowed actions for an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/permissions/selected-actions` endpoint.
      *
@@ -307,7 +307,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn set_allowed_actions_organization(
         &self,
@@ -332,7 +332,7 @@ impl Actions {
             .await
     }
     /**
-     * List self-hosted runner groups for an organization.
+     * List self-hosted runner groups for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups` endpoint.
      *
@@ -346,9 +346,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_self_hosted_runner_groups_for_org(
         &self,
@@ -384,7 +384,7 @@ impl Actions {
             .await
     }
     /**
-     * Create a self-hosted runner group for an organization.
+     * Create a self-hosted runner group for an organization
      *
      * This function performs a `POST` to the `/orgs/{org}/actions/runner-groups` endpoint.
      *
@@ -398,7 +398,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create_self_hosted_runner_group_for_org(
         &self,
@@ -423,7 +423,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a self-hosted runner group for an organization.
+     * Get a self-hosted runner group for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}` endpoint.
      *
@@ -437,8 +437,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn get_self_hosted_runner_group_for_org(
         &self,
@@ -464,7 +464,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete a self-hosted runner group from an organization.
+     * Delete a self-hosted runner group from an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}` endpoint.
      *
@@ -478,8 +478,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn delete_self_hosted_runner_group_from_org(
         &self,
@@ -505,7 +505,7 @@ impl Actions {
             .await
     }
     /**
-     * Update a self-hosted runner group for an organization.
+     * Update a self-hosted runner group for an organization
      *
      * This function performs a `PATCH` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}` endpoint.
      *
@@ -519,8 +519,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn update_self_hosted_runner_group_for_org(
         &self,
@@ -547,7 +547,7 @@ impl Actions {
             .await
     }
     /**
-     * List repository access to a self-hosted runner group in an organization.
+     * List repository access to a self-hosted runner group in an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories` endpoint.
      *
@@ -561,10 +561,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
      */
     pub async fn list_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -603,7 +603,7 @@ impl Actions {
             .await
     }
     /**
-     * Set repository access for a self-hosted runner group in an organization.
+     * Set repository access for a self-hosted runner group in an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories` endpoint.
      *
@@ -617,8 +617,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn set_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -645,12 +645,11 @@ impl Actions {
             .await
     }
     /**
-     * Add repository access to a self-hosted runner group in an organization.
+     * Add repository access to a self-hosted runner group in an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}` endpoint.
      *
      * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
-     *
      *
      * Adds a repository to the list of selected repositories that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an organization](#create-a-self-hosted-runner-group-for-an-organization)."
      *
@@ -661,9 +660,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `repository_id: i64`
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `repository_id`
      */
     pub async fn add_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -691,12 +690,11 @@ impl Actions {
             .await
     }
     /**
-     * Remove repository access to a self-hosted runner group in an organization.
+     * Remove repository access to a self-hosted runner group in an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}` endpoint.
      *
      * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
-     *
      *
      * Removes a repository from the list of selected repositories that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an organization](#create-a-self-hosted-runner-group-for-an-organization)."
      *
@@ -706,9 +704,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `repository_id: i64`
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `repository_id`
      */
     pub async fn remove_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -736,7 +734,7 @@ impl Actions {
             .await
     }
     /**
-     * List self-hosted runners in a group for an organization.
+     * List self-hosted runners in a group for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners` endpoint.
      *
@@ -750,10 +748,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_self_hosted_runners_in_group_for_org(
         &self,
@@ -791,7 +789,7 @@ impl Actions {
             .await
     }
     /**
-     * Set self-hosted runners in a group for an organization.
+     * Set self-hosted runners in a group for an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners` endpoint.
      *
@@ -805,8 +803,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
      */
     pub async fn set_self_hosted_runners_in_group_for_org(
         &self,
@@ -833,12 +831,11 @@ impl Actions {
             .await
     }
     /**
-     * Add a self-hosted runner to a group for an organization.
+     * Add a self-hosted runner to a group for an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
      *
      * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
-     *
      *
      * Adds a self-hosted runner to a runner group configured in an organization.
      *
@@ -849,9 +846,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn add_self_hosted_runner_to_group_for_org(
         &self,
@@ -879,12 +876,11 @@ impl Actions {
             .await
     }
     /**
-     * Remove a self-hosted runner from a group for an organization.
+     * Remove a self-hosted runner from a group for an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
      *
      * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
-     *
      *
      * Removes a self-hosted runner from a group configured in an organization. The runner is then returned to the default group.
      *
@@ -894,9 +890,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `org`
+     * * `runner_group_id` -- Unique identifier of the self-hosted runner group.
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn remove_self_hosted_runner_from_group_for_org(
         &self,
@@ -924,7 +920,7 @@ impl Actions {
             .await
     }
     /**
-     * List self-hosted runners for an organization.
+     * List self-hosted runners for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runners` endpoint.
      *
@@ -936,9 +932,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_self_hosted_runners_for_org(
         &self,
@@ -973,7 +969,7 @@ impl Actions {
             .await
     }
     /**
-     * List runner applications for an organization.
+     * List runner applications for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runners/downloads` endpoint.
      *
@@ -985,7 +981,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn list_runner_applications_for_org(
         &self,
@@ -1009,7 +1005,7 @@ impl Actions {
             .await
     }
     /**
-     * List runner applications for an organization.
+     * List runner applications for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runners/downloads` endpoint.
      *
@@ -1043,7 +1039,7 @@ impl Actions {
             .await
     }
     /**
-     * Create a registration token for an organization.
+     * Create a registration token for an organization
      *
      * This function performs a `POST` to the `/orgs/{org}/actions/runners/registration-token` endpoint.
      *
@@ -1063,7 +1059,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create_registration_token_for_org(
         &self,
@@ -1087,7 +1083,7 @@ impl Actions {
             .await
     }
     /**
-     * Create a remove token for an organization.
+     * Create a remove token for an organization
      *
      * This function performs a `POST` to the `/orgs/{org}/actions/runners/remove-token` endpoint.
      *
@@ -1108,7 +1104,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create_remove_token_for_org(
         &self,
@@ -1132,7 +1128,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a self-hosted runner for an organization.
+     * Get a self-hosted runner for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runners/{runner_id}` endpoint.
      *
@@ -1144,8 +1140,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `org`
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn get_self_hosted_runner_for_org(
         &self,
@@ -1171,7 +1167,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete a self-hosted runner from an organization.
+     * Delete a self-hosted runner from an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/actions/runners/{runner_id}` endpoint.
      *
@@ -1183,8 +1179,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `org`
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn delete_self_hosted_runner_from_org(
         &self,
@@ -1210,7 +1206,7 @@ impl Actions {
             .await
     }
     /**
-     * List organization secrets.
+     * List organization secrets
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/secrets` endpoint.
      *
@@ -1220,9 +1216,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_org_secrets(
         &self,
@@ -1257,7 +1253,7 @@ impl Actions {
             .await
     }
     /**
-     * Get an organization public key.
+     * Get an organization public key
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/secrets/public-key` endpoint.
      *
@@ -1267,7 +1263,7 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_org_public_key(
         &self,
@@ -1291,7 +1287,7 @@ impl Actions {
             .await
     }
     /**
-     * Get an organization secret.
+     * Get an organization secret
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/secrets/{secret_name}` endpoint.
      *
@@ -1301,8 +1297,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `org`
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn get_org_secret(
         &self,
@@ -1328,7 +1324,7 @@ impl Actions {
             .await
     }
     /**
-     * Create or update an organization secret.
+     * Create or update an organization secret
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/secrets/{secret_name}` endpoint.
      *
@@ -1359,7 +1355,6 @@ impl Actions {
      *
      * console.log(encrypted);
      * ```
-     *
      *
      * #### Example encrypting a secret using Python
      *
@@ -1412,8 +1407,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `org`
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn create_or_update_org_secret(
         &self,
@@ -1440,7 +1435,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete an organization secret.
+     * Delete an organization secret
      *
      * This function performs a `DELETE` to the `/orgs/{org}/actions/secrets/{secret_name}` endpoint.
      *
@@ -1450,8 +1445,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `org`
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn delete_org_secret(
         &self,
@@ -1477,7 +1472,7 @@ impl Actions {
             .await
     }
     /**
-     * List selected repositories for an organization secret.
+     * List selected repositories for an organization secret
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories` endpoint.
      *
@@ -1487,10 +1482,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `secret_name: &str` -- secret_name parameter.
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
+     * * `org`
+     * * `secret_name` -- secret_name parameter
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
      */
     pub async fn list_selected_repos_for_org_secret(
         &self,
@@ -1528,7 +1523,7 @@ impl Actions {
             .await
     }
     /**
-     * Set selected repositories for an organization secret.
+     * Set selected repositories for an organization secret
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories` endpoint.
      *
@@ -1538,8 +1533,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `org`
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn set_selected_repos_for_org_secret(
         &self,
@@ -1566,7 +1561,7 @@ impl Actions {
             .await
     }
     /**
-     * Add selected repository to an organization secret.
+     * Add selected repository to an organization secret
      *
      * This function performs a `PUT` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}` endpoint.
      *
@@ -1576,9 +1571,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `secret_name: &str` -- secret_name parameter.
-     * * `repository_id: i64`
+     * * `org`
+     * * `secret_name` -- secret_name parameter
+     * * `repository_id`
      */
     pub async fn add_selected_repo_to_org_secret(
         &self,
@@ -1606,7 +1601,7 @@ impl Actions {
             .await
     }
     /**
-     * Remove selected repository from an organization secret.
+     * Remove selected repository from an organization secret
      *
      * This function performs a `DELETE` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}` endpoint.
      *
@@ -1616,9 +1611,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `secret_name: &str` -- secret_name parameter.
-     * * `repository_id: i64`
+     * * `org`
+     * * `secret_name` -- secret_name parameter
+     * * `repository_id`
      */
     pub async fn remove_selected_repo_from_org_secret(
         &self,
@@ -1646,7 +1641,7 @@ impl Actions {
             .await
     }
     /**
-     * List artifacts for a repository.
+     * List artifacts for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/artifacts` endpoint.
      *
@@ -1656,10 +1651,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_artifacts_for_repo(
         &self,
@@ -1696,7 +1691,7 @@ impl Actions {
             .await
     }
     /**
-     * Get an artifact.
+     * Get an artifact
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}` endpoint.
      *
@@ -1706,9 +1701,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `artifact_id: i64` -- artifact_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `artifact_id` -- artifact_id parameter
      */
     pub async fn get_artifact(
         &self,
@@ -1736,7 +1731,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete an artifact.
+     * Delete an artifact
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}` endpoint.
      *
@@ -1746,9 +1741,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `artifact_id: i64` -- artifact_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `artifact_id` -- artifact_id parameter
      */
     pub async fn delete_artifact(
         &self,
@@ -1776,7 +1771,7 @@ impl Actions {
             .await
     }
     /**
-     * Download an artifact.
+     * Download an artifact
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}` endpoint.
      *
@@ -1789,10 +1784,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `artifact_id: i64` -- artifact_id parameter.
-     * * `archive_format: &str`
+     * * `owner`
+     * * `repo`
+     * * `artifact_id` -- artifact_id parameter
+     * * `archive_format`
      */
     pub async fn download_artifact(
         &self,
@@ -1822,7 +1817,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a job for a workflow run.
+     * Get a job for a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/jobs/{job_id}` endpoint.
      *
@@ -1832,9 +1827,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `job_id: i64` -- job_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `job_id` -- job_id parameter
      */
     pub async fn get_job_for_workflow_run(
         &self,
@@ -1862,7 +1857,7 @@ impl Actions {
             .await
     }
     /**
-     * Download job logs for a workflow run.
+     * Download job logs for a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/jobs/{job_id}/logs` endpoint.
      *
@@ -1875,9 +1870,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `job_id: i64` -- job_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `job_id` -- job_id parameter
      */
     pub async fn download_job_logs_for_workflow_run(
         &self,
@@ -1905,7 +1900,7 @@ impl Actions {
             .await
     }
     /**
-     * Get GitHub Actions permissions for a repository.
+     * Get GitHub Actions permissions for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/permissions` endpoint.
      *
@@ -1918,8 +1913,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_github_actions_permissions_repository(
         &self,
@@ -1945,7 +1940,7 @@ impl Actions {
             .await
     }
     /**
-     * Set GitHub Actions permissions for a repository.
+     * Set GitHub Actions permissions for a repository
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/permissions` endpoint.
      *
@@ -1959,8 +1954,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn set_github_actions_permissions_repository(
         &self,
@@ -1987,7 +1982,7 @@ impl Actions {
             .await
     }
     /**
-     * Get allowed actions for a repository.
+     * Get allowed actions for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/permissions/selected-actions` endpoint.
      *
@@ -1999,8 +1994,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_allowed_actions_repository(
         &self,
@@ -2026,7 +2021,7 @@ impl Actions {
             .await
     }
     /**
-     * Set allowed actions for a repository.
+     * Set allowed actions for a repository
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/permissions/selected-actions` endpoint.
      *
@@ -2042,8 +2037,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn set_allowed_actions_repository(
         &self,
@@ -2070,7 +2065,7 @@ impl Actions {
             .await
     }
     /**
-     * List self-hosted runners for a repository.
+     * List self-hosted runners for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners` endpoint.
      *
@@ -2080,10 +2075,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_self_hosted_runners_for_repo(
         &self,
@@ -2120,7 +2115,7 @@ impl Actions {
             .await
     }
     /**
-     * List runner applications for a repository.
+     * List runner applications for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners/downloads` endpoint.
      *
@@ -2132,8 +2127,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn list_runner_applications_for_repo(
         &self,
@@ -2159,7 +2154,7 @@ impl Actions {
             .await
     }
     /**
-     * List runner applications for a repository.
+     * List runner applications for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners/downloads` endpoint.
      *
@@ -2195,7 +2190,7 @@ impl Actions {
             .await
     }
     /**
-     * Create a registration token for a repository.
+     * Create a registration token for a repository
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runners/registration-token` endpoint.
      *
@@ -2203,7 +2198,7 @@ impl Actions {
      * using an access token with the `repo` scope to use this endpoint.
      *
      * #### Example using registration token
-     *  
+     *
      * Configure your self-hosted runner, replacing `TOKEN` with the registration token provided by this endpoint.
      *
      * ```
@@ -2214,8 +2209,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_registration_token_for_repo(
         &self,
@@ -2241,7 +2236,7 @@ impl Actions {
             .await
     }
     /**
-     * Create a remove token for a repository.
+     * Create a remove token for a repository
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runners/remove-token` endpoint.
      *
@@ -2249,7 +2244,7 @@ impl Actions {
      * You must authenticate using an access token with the `repo` scope to use this endpoint.
      *
      * #### Example using remove token
-     *  
+     *
      * To remove your self-hosted runner from a repository, replace TOKEN with the remove token provided by this endpoint.
      *
      * ```
@@ -2260,8 +2255,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_remove_token_for_repo(
         &self,
@@ -2287,7 +2282,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a self-hosted runner for a repository.
+     * Get a self-hosted runner for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners/{runner_id}` endpoint.
      *
@@ -2300,9 +2295,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `owner`
+     * * `repo`
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn get_self_hosted_runner_for_repo(
         &self,
@@ -2330,7 +2325,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete a self-hosted runner from a repository.
+     * Delete a self-hosted runner from a repository
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/runners/{runner_id}` endpoint.
      *
@@ -2343,9 +2338,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
+     * * `owner`
+     * * `repo`
+     * * `runner_id` -- Unique identifier of the self-hosted runner.
      */
     pub async fn delete_self_hosted_runner_from_repo(
         &self,
@@ -2373,7 +2368,7 @@ impl Actions {
             .await
     }
     /**
-     * List workflow runs for a repository.
+     * List workflow runs for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs` endpoint.
      *
@@ -2385,15 +2380,15 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `actor: &str` -- Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
-     * * `branch: &str` -- Returns workflow runs associated with a branch. Use the name of the branch of the `push`.
-     * * `event: &str` -- Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows).".
-     * * `status: crate::types::WorkflowRunStatus` -- Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run).".
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `created: &str`
+     * * `owner`
+     * * `repo`
+     * * `actor` -- Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
+     * * `branch` -- Returns workflow runs associated with a branch. Use the name of the branch of the `push`.
+     * * `event` -- Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)."
+     * * `status` -- Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `created`
      */
     pub async fn list_workflow_runs_for_repo(
         &self,
@@ -2450,7 +2445,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a workflow run.
+     * Get a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}` endpoint.
      *
@@ -2460,9 +2455,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn get_workflow_run(
         &self,
@@ -2490,7 +2485,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete a workflow run.
+     * Delete a workflow run
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/runs/{run_id}` endpoint.
      *
@@ -2502,9 +2497,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn delete_workflow_run(
         &self,
@@ -2532,7 +2527,7 @@ impl Actions {
             .await
     }
     /**
-     * Get the review history for a workflow run.
+     * Get the review history for a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approvals` endpoint.
      *
@@ -2542,9 +2537,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn get_reviews_for_run(
         &self,
@@ -2572,7 +2567,7 @@ impl Actions {
             .await
     }
     /**
-     * Get the review history for a workflow run.
+     * Get the review history for a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approvals` endpoint.
      *
@@ -2608,7 +2603,7 @@ impl Actions {
             .await
     }
     /**
-     * Approve a workflow run for a fork pull request.
+     * Approve a workflow run for a fork pull request
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approve` endpoint.
      *
@@ -2620,9 +2615,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn approve_workflow_run(
         &self,
@@ -2650,7 +2645,7 @@ impl Actions {
             .await
     }
     /**
-     * List workflow run artifacts.
+     * List workflow run artifacts
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts` endpoint.
      *
@@ -2660,11 +2655,11 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_workflow_run_artifacts(
         &self,
@@ -2703,7 +2698,7 @@ impl Actions {
             .await
     }
     /**
-     * Cancel a workflow run.
+     * Cancel a workflow run
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/cancel` endpoint.
      *
@@ -2713,9 +2708,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn cancel_workflow_run(
         &self,
@@ -2743,7 +2738,7 @@ impl Actions {
             .await
     }
     /**
-     * List jobs for a workflow run.
+     * List jobs for a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/jobs` endpoint.
      *
@@ -2753,14 +2748,14 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters jobs by their `completed_at` timestamp. Can be one of:  
-     *  \\* `latest`: Returns jobs from the most recent execution of the workflow run.  
-     *  \\* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
+     * * `filter` -- Filters jobs by their `completed_at` timestamp. Can be one of:
+     *   \* `latest`: Returns jobs from the most recent execution of the workflow run.
+     *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_jobs_for_workflow_run(
         &self,
@@ -2803,7 +2798,7 @@ impl Actions {
             .await
     }
     /**
-     * Download workflow run logs.
+     * Download workflow run logs
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/logs` endpoint.
      *
@@ -2816,9 +2811,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn download_workflow_run_logs(
         &self,
@@ -2846,7 +2841,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete workflow run logs.
+     * Delete workflow run logs
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/logs` endpoint.
      *
@@ -2856,9 +2851,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn delete_workflow_run_logs(
         &self,
@@ -2886,7 +2881,7 @@ impl Actions {
             .await
     }
     /**
-     * Get pending deployments for a workflow run.
+     * Get pending deployments for a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments` endpoint.
      *
@@ -2898,9 +2893,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn get_pending_deployments_for_run(
         &self,
@@ -2928,7 +2923,7 @@ impl Actions {
             .await
     }
     /**
-     * Get pending deployments for a workflow run.
+     * Get pending deployments for a workflow run
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments` endpoint.
      *
@@ -2966,7 +2961,7 @@ impl Actions {
             .await
     }
     /**
-     * Review pending deployments for a workflow run.
+     * Review pending deployments for a workflow run
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments` endpoint.
      *
@@ -2978,9 +2973,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn review_pending_deployments_for_run(
         &self,
@@ -3009,7 +3004,7 @@ impl Actions {
             .await
     }
     /**
-     * Re-run a workflow.
+     * Re-run a workflow
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/rerun` endpoint.
      *
@@ -3019,9 +3014,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn re_run_workflow(
         &self,
@@ -3049,7 +3044,7 @@ impl Actions {
             .await
     }
     /**
-     * Re-run failed jobs from a workflow run.
+     * Re-run failed jobs from a workflow run
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs` endpoint.
      *
@@ -3059,9 +3054,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn re_run_workflow_failed_jobs(
         &self,
@@ -3089,7 +3084,7 @@ impl Actions {
             .await
     }
     /**
-     * Get workflow run usage.
+     * Get workflow run usage
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/timing` endpoint.
      *
@@ -3101,9 +3096,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `run_id: i64` -- The id of the workflow run.
+     * * `owner`
+     * * `repo`
+     * * `run_id` -- The id of the workflow run.
      */
     pub async fn get_workflow_run_usage(
         &self,
@@ -3131,7 +3126,7 @@ impl Actions {
             .await
     }
     /**
-     * List repository secrets.
+     * List repository secrets
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/secrets` endpoint.
      *
@@ -3141,10 +3136,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repo_secrets(
         &self,
@@ -3181,7 +3176,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a repository public key.
+     * Get a repository public key
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/secrets/public-key` endpoint.
      *
@@ -3191,8 +3186,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_repo_public_key(
         &self,
@@ -3218,7 +3213,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a repository secret.
+     * Get a repository secret
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/secrets/{secret_name}` endpoint.
      *
@@ -3228,9 +3223,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `owner`
+     * * `repo`
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn get_repo_secret(
         &self,
@@ -3258,7 +3253,7 @@ impl Actions {
             .await
     }
     /**
-     * Create or update a repository secret.
+     * Create or update a repository secret
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/secrets/{secret_name}` endpoint.
      *
@@ -3289,7 +3284,6 @@ impl Actions {
      *
      * console.log(encrypted);
      * ```
-     *
      *
      * #### Example encrypting a secret using Python
      *
@@ -3342,9 +3336,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `owner`
+     * * `repo`
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn create_or_update_repo_secret(
         &self,
@@ -3373,7 +3367,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete a repository secret.
+     * Delete a repository secret
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/secrets/{secret_name}` endpoint.
      *
@@ -3383,9 +3377,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `owner`
+     * * `repo`
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn delete_repo_secret(
         &self,
@@ -3413,7 +3407,7 @@ impl Actions {
             .await
     }
     /**
-     * List repository workflows.
+     * List repository workflows
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows` endpoint.
      *
@@ -3423,10 +3417,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repo_workflows(
         &self,
@@ -3463,7 +3457,7 @@ impl Actions {
             .await
     }
     /**
-     * Get a workflow.
+     * Get a workflow
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}` endpoint.
      *
@@ -3473,9 +3467,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
+     * * `owner`
+     * * `repo`
+     * * `workflow_id` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn get_workflow(
         &self,
@@ -3503,7 +3497,7 @@ impl Actions {
             .await
     }
     /**
-     * Disable a workflow.
+     * Disable a workflow
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable` endpoint.
      *
@@ -3515,9 +3509,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
+     * * `owner`
+     * * `repo`
+     * * `workflow_id` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn disable_workflow(
         &self,
@@ -3545,7 +3539,7 @@ impl Actions {
             .await
     }
     /**
-     * Create a workflow dispatch event.
+     * Create a workflow dispatch event
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches` endpoint.
      *
@@ -3559,9 +3553,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
+     * * `owner`
+     * * `repo`
+     * * `workflow_id` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn create_workflow_dispatch(
         &self,
@@ -3590,7 +3584,7 @@ impl Actions {
             .await
     }
     /**
-     * Enable a workflow.
+     * Enable a workflow
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable` endpoint.
      *
@@ -3602,9 +3596,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
+     * * `owner`
+     * * `repo`
+     * * `workflow_id` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn enable_workflow(
         &self,
@@ -3632,7 +3626,7 @@ impl Actions {
             .await
     }
     /**
-     * List workflow runs.
+     * List workflow runs
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs` endpoint.
      *
@@ -3644,16 +3638,16 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
-     * * `actor: &str` -- Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
-     * * `branch: &str` -- Returns workflow runs associated with a branch. Use the name of the branch of the `push`.
-     * * `event: &str` -- Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows).".
-     * * `status: crate::types::WorkflowRunStatus` -- Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run).".
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `created: &str`
+     * * `owner`
+     * * `repo`
+     * * `workflow_id` -- The ID of the workflow. You can also pass the workflow file name as a string.
+     * * `actor` -- Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
+     * * `branch` -- Returns workflow runs associated with a branch. Use the name of the branch of the `push`.
+     * * `event` -- Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)."
+     * * `status` -- Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `created`
      */
     pub async fn list_workflow_runs(
         &self,
@@ -3712,7 +3706,7 @@ impl Actions {
             .await
     }
     /**
-     * Get workflow usage.
+     * Get workflow usage
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing` endpoint.
      *
@@ -3724,9 +3718,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
+     * * `owner`
+     * * `repo`
+     * * `workflow_id` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn get_workflow_usage(
         &self,
@@ -3754,7 +3748,7 @@ impl Actions {
             .await
     }
     /**
-     * List environment secrets.
+     * List environment secrets
      *
      * This function performs a `GET` to the `/repositories/{repository_id}/environments/{environment_name}/secrets` endpoint.
      *
@@ -3764,10 +3758,10 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `repository_id: i64`
-     * * `environment_name: &str` -- The name of the environment.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `repository_id`
+     * * `environment_name` -- The name of the environment
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_environment_secrets(
         &self,
@@ -3804,7 +3798,7 @@ impl Actions {
             .await
     }
     /**
-     * Get an environment public key.
+     * Get an environment public key
      *
      * This function performs a `GET` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/public-key` endpoint.
      *
@@ -3814,8 +3808,8 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `repository_id: i64`
-     * * `environment_name: &str` -- The name of the environment.
+     * * `repository_id`
+     * * `environment_name` -- The name of the environment
      */
     pub async fn get_environment_public_key(
         &self,
@@ -3841,7 +3835,7 @@ impl Actions {
             .await
     }
     /**
-     * Get an environment secret.
+     * Get an environment secret
      *
      * This function performs a `GET` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}` endpoint.
      *
@@ -3851,9 +3845,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `repository_id: i64`
-     * * `environment_name: &str` -- The name of the environment.
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `repository_id`
+     * * `environment_name` -- The name of the environment
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn get_environment_secret(
         &self,
@@ -3881,7 +3875,7 @@ impl Actions {
             .await
     }
     /**
-     * Create or update an environment secret.
+     * Create or update an environment secret
      *
      * This function performs a `PUT` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}` endpoint.
      *
@@ -3912,7 +3906,6 @@ impl Actions {
      *
      * console.log(encrypted);
      * ```
-     *
      *
      * #### Example encrypting a secret using Python
      *
@@ -3965,9 +3958,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `repository_id: i64`
-     * * `environment_name: &str` -- The name of the environment.
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `repository_id`
+     * * `environment_name` -- The name of the environment
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn create_or_update_environment_secret(
         &self,
@@ -3996,7 +3989,7 @@ impl Actions {
             .await
     }
     /**
-     * Delete an environment secret.
+     * Delete an environment secret
      *
      * This function performs a `DELETE` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}` endpoint.
      *
@@ -4006,9 +3999,9 @@ impl Actions {
      *
      * **Parameters:**
      *
-     * * `repository_id: i64`
-     * * `environment_name: &str` -- The name of the environment.
-     * * `secret_name: &str` -- secret_name parameter.
+     * * `repository_id`
+     * * `environment_name` -- The name of the environment
+     * * `secret_name` -- secret_name parameter
      */
     pub async fn delete_environment_secret(
         &self,

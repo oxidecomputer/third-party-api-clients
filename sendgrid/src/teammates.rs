@@ -12,7 +12,7 @@ impl Teammates {
     }
 
     /**
-     * Retrieve all teammates.
+     * Retrieve all teammates
      *
      * This function performs a `GET` to the `/teammates` endpoint.
      *
@@ -22,9 +22,9 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `limit: u64` -- Number of items to return.
-     * * `offset: u64` -- Paging offset.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- Number of items to return
+     * * `offset` -- Paging offset
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get(
         &self,
@@ -39,7 +39,7 @@ impl Teammates {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/teammates?{}", query_), None);
+        let url = self.client.url(&format!("/teammates?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -51,7 +51,7 @@ impl Teammates {
             .await
     }
     /**
-     * Invite teammate.
+     * Invite teammate
      *
      * This function performs a `POST` to the `/teammates` endpoint.
      *
@@ -63,7 +63,7 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post(
         &self,
@@ -81,7 +81,7 @@ impl Teammates {
             .await
     }
     /**
-     * Resend teammate invite.
+     * Resend teammate invite
      *
      * This function performs a `POST` to the `/teammates/pending/{token}/resend` endpoint.
      *
@@ -91,7 +91,7 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_pending_token_resend(
         &self,
@@ -115,7 +115,7 @@ impl Teammates {
             .await
     }
     /**
-     * Retrieve access requests.
+     * Retrieve access requests
      *
      * This function performs a `GET` to the `/scopes/requests` endpoint.
      *
@@ -125,8 +125,8 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- Optional field to limit the number of results returned.
-     * * `offset: i64` -- Optional beginning point in the list to retrieve from.
+     * * `limit` -- Optional field to limit the number of results returned.
+     * * `offset` -- Optional beginning point in the list to retrieve from.
      */
     pub async fn get_scopes_requests(
         &self,
@@ -141,9 +141,7 @@ impl Teammates {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/scopes/requests?{}", query_), None);
+        let url = self.client.url(&format!("/scopes/requests?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -155,7 +153,7 @@ impl Teammates {
             .await
     }
     /**
-     * Retrieve access requests.
+     * Retrieve access requests
      *
      * This function performs a `GET` to the `/scopes/requests` endpoint.
      *
@@ -174,9 +172,7 @@ impl Teammates {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/scopes/requests?{}", query_), None);
+        let url = self.client.url(&format!("/scopes/requests?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -188,7 +184,7 @@ impl Teammates {
             .await
     }
     /**
-     * Retrieve all pending teammates.
+     * Retrieve all pending teammates
      *
      * This function performs a `GET` to the `/teammates/pending` endpoint.
      *
@@ -198,7 +194,7 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_pending(
         &self,
@@ -215,7 +211,7 @@ impl Teammates {
             .await
     }
     /**
-     * Retrieve specific teammate.
+     * Retrieve specific teammate
      *
      * This function performs a `GET` to the `/teammates/{username}` endpoint.
      *
@@ -225,7 +221,7 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_username(
         &self,
@@ -249,7 +245,7 @@ impl Teammates {
             .await
     }
     /**
-     * Delete teammate.
+     * Delete teammate
      *
      * This function performs a `DELETE` to the `/teammates/{username}` endpoint.
      *
@@ -259,7 +255,7 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_username(
         &self,
@@ -283,7 +279,7 @@ impl Teammates {
             .await
     }
     /**
-     * Update teammate's permissions.
+     * Update teammate's permissions
      *
      * This function performs a `PATCH` to the `/teammates/{username}` endpoint.
      *
@@ -297,7 +293,7 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_username(
         &self,
@@ -322,7 +318,7 @@ impl Teammates {
             .await
     }
     /**
-     * Approve access request.
+     * Approve access request
      *
      * This function performs a `PATCH` to the `/scopes/requests/{request_id}/approve` endpoint.
      *
@@ -352,7 +348,7 @@ impl Teammates {
             .await
     }
     /**
-     * Deny access request.
+     * Deny access request
      *
      * This function performs a `DELETE` to the `/scopes/requests/{request_id}` endpoint.
      *
@@ -382,7 +378,7 @@ impl Teammates {
             .await
     }
     /**
-     * Delete pending teammate.
+     * Delete pending teammate
      *
      * This function performs a `DELETE` to the `/teammates/pending/{token}` endpoint.
      *
@@ -390,7 +386,7 @@ impl Teammates {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_pending_token(&self, token: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

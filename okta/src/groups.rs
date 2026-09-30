@@ -12,7 +12,7 @@ impl Groups {
     }
 
     /**
-     * List Groups.
+     * List Groups
      *
      * This function performs a `GET` to the `/api/v1/groups` endpoint.
      *
@@ -20,11 +20,11 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `q: &str` -- Searches the name property of groups for matching value.
-     * * `search: &str` -- Filter expression for groups.
-     * * `after: &str` -- Specifies the pagination cursor for the next page of groups.
-     * * `limit: i64` -- Specifies the number of group results in a page.
-     * * `expand: &str` -- If specified, it causes additional metadata to be included in the response.
+     * * `q` -- Searches the name property of groups for matching value
+     * * `search` -- Filter expression for groups
+     * * `after` -- Specifies the pagination cursor for the next page of groups
+     * * `limit` -- Specifies the number of group results in a page
+     * * `expand` -- If specified, it causes additional metadata to be included in the response.
      */
     pub async fn list(
         &self,
@@ -51,7 +51,7 @@ impl Groups {
             query_args.push(("search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/groups?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/groups?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -63,7 +63,7 @@ impl Groups {
             .await
     }
     /**
-     * List Groups.
+     * List Groups
      *
      * This function performs a `GET` to the `/api/v1/groups` endpoint.
      *
@@ -88,7 +88,7 @@ impl Groups {
             query_args.push(("search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/groups?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/groups?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -100,7 +100,7 @@ impl Groups {
             .await
     }
     /**
-     * Add Group.
+     * Add Group
      *
      * This function performs a `POST` to the `/api/v1/groups` endpoint.
      *
@@ -122,7 +122,7 @@ impl Groups {
             .await
     }
     /**
-     * List Group Rules.
+     * List Group Rules
      *
      * This function performs a `GET` to the `/api/v1/groups/rules` endpoint.
      *
@@ -130,10 +130,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- Specifies the number of rule results in a page.
-     * * `after: &str` -- Specifies the pagination cursor for the next page of rules.
-     * * `search: &str` -- Specifies the keyword to search fules for.
-     * * `expand: &str` -- If specified as `groupIdToGroupNameMap`, then show group names.
+     * * `limit` -- Specifies the number of rule results in a page
+     * * `after` -- Specifies the pagination cursor for the next page of rules
+     * * `search` -- Specifies the keyword to search fules for
+     * * `expand` -- If specified as `groupIdToGroupNameMap`, then show group names
      */
     pub async fn list_rules(
         &self,
@@ -158,7 +158,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/groups/rules?{}", query_), None);
+            .url(&format!("/api/v1/groups/rules?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -170,7 +170,7 @@ impl Groups {
             .await
     }
     /**
-     * List Group Rules.
+     * List Group Rules
      *
      * This function performs a `GET` to the `/api/v1/groups/rules` endpoint.
      *
@@ -193,7 +193,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/groups/rules?{}", query_), None);
+            .url(&format!("/api/v1/groups/rules?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -205,7 +205,7 @@ impl Groups {
             .await
     }
     /**
-     * Create Group Rule.
+     * Create Group Rule
      *
      * This function performs a `POST` to the `/api/v1/groups/rules` endpoint.
      *
@@ -227,7 +227,7 @@ impl Groups {
             .await
     }
     /**
-     * Get Group Rule.
+     * Get Group Rule
      *
      * This function performs a `GET` to the `/api/v1/groups/rules/{ruleId}` endpoint.
      *
@@ -235,8 +235,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `rule_id: &str`
-     * * `expand: &str`
+     * * `rule_id`
+     * * `expand`
      */
     pub async fn get_rule(
         &self,
@@ -273,7 +273,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `rule_id: &str`
+     * * `rule_id`
      */
     pub async fn update_rule(
         &self,
@@ -298,7 +298,7 @@ impl Groups {
             .await
     }
     /**
-     * Delete a group Rule.
+     * Delete a group Rule
      *
      * This function performs a `DELETE` to the `/api/v1/groups/rules/{ruleId}` endpoint.
      *
@@ -306,8 +306,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `rule_id: &str`
-     * * `remove_users: bool` -- Indicates whether to keep or remove users from groups assigned by this rule.
+     * * `rule_id`
+     * * `remove_users` -- Indicates whether to keep or remove users from groups assigned by this rule.
      */
     pub async fn delete_rule(
         &self,
@@ -338,7 +338,7 @@ impl Groups {
             .await
     }
     /**
-     * Activate a group Rule.
+     * Activate a group Rule
      *
      * This function performs a `POST` to the `/api/v1/groups/rules/{ruleId}/lifecycle/activate` endpoint.
      *
@@ -346,7 +346,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `rule_id: &str`
+     * * `rule_id`
      */
     pub async fn activate_rule(&self, rule_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -367,7 +367,7 @@ impl Groups {
             .await
     }
     /**
-     * Deactivate a group Rule.
+     * Deactivate a group Rule
      *
      * This function performs a `POST` to the `/api/v1/groups/rules/{ruleId}/lifecycle/deactivate` endpoint.
      *
@@ -375,7 +375,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `rule_id: &str`
+     * * `rule_id`
      */
     pub async fn deactivate_rule(&self, rule_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -396,7 +396,7 @@ impl Groups {
             .await
     }
     /**
-     * List Group Rules.
+     * List Group Rules
      *
      * This function performs a `GET` to the `/api/v1/groups/{groupId}` endpoint.
      *
@@ -404,7 +404,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
+     * * `group_id`
      */
     pub async fn get(&self, group_id: &str) -> ClientResult<crate::Response<crate::types::Group>> {
         let url = self.client.url(
@@ -425,7 +425,7 @@ impl Groups {
             .await
     }
     /**
-     * Update Group.
+     * Update Group
      *
      * This function performs a `PUT` to the `/api/v1/groups/{groupId}` endpoint.
      *
@@ -433,7 +433,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
+     * * `group_id`
      */
     pub async fn update(
         &self,
@@ -458,7 +458,7 @@ impl Groups {
             .await
     }
     /**
-     * Remove Group.
+     * Remove Group
      *
      * This function performs a `DELETE` to the `/api/v1/groups/{groupId}` endpoint.
      *
@@ -466,7 +466,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
+     * * `group_id`
      */
     pub async fn delete(&self, group_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -487,7 +487,7 @@ impl Groups {
             .await
     }
     /**
-     * List Assigned Applications.
+     * List Assigned Applications
      *
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/apps` endpoint.
      *
@@ -495,9 +495,9 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `after: &str` -- Specifies the pagination cursor for the next page of apps.
-     * * `limit: i64` -- Specifies the number of app results for a page.
+     * * `group_id`
+     * * `after` -- Specifies the pagination cursor for the next page of apps
+     * * `limit` -- Specifies the number of app results for a page
      */
     pub async fn list_assigned_applications_fors(
         &self,
@@ -532,7 +532,7 @@ impl Groups {
             .await
     }
     /**
-     * List Assigned Applications.
+     * List Assigned Applications
      *
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/apps` endpoint.
      *
@@ -568,8 +568,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `expand: &str`
+     * * `group_id`
+     * * `expand`
      */
     pub async fn list_assigned_roles(
         &self,
@@ -641,8 +641,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `disable_notifications: &str`
+     * * `group_id`
+     * * `disable_notifications`
      */
     pub async fn assign_role(
         &self,
@@ -683,8 +683,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
+     * * `group_id`
+     * * `role_id`
      */
     pub async fn get_role(
         &self,
@@ -716,8 +716,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
+     * * `group_id`
+     * * `role_id`
      */
     pub async fn remove_role_from(
         &self,
@@ -749,10 +749,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `group_id`
+     * * `role_id`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_application_targets_for_administrator_roles(
         &self,
@@ -825,9 +825,9 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
+     * * `group_id`
+     * * `role_id`
+     * * `app_name`
      */
     pub async fn add_application_target_admin_role_given(
         &self,
@@ -861,9 +861,9 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
+     * * `group_id`
+     * * `role_id`
+     * * `app_name`
      */
     pub async fn remove_application_target_from_administrator_role_given(
         &self,
@@ -891,7 +891,7 @@ impl Groups {
             .await
     }
     /**
-     * Add App Instance Target to App Administrator Role given to a Group.
+     * Add App Instance Target to App Administrator Role given to a Group
      *
      * This function performs a `PUT` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}` endpoint.
      *
@@ -899,10 +899,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
-     * * `application_id: &str`
+     * * `group_id`
+     * * `role_id`
+     * * `app_name`
+     * * `application_id`
      */
     pub async fn add_application_instance_target_app_admin_role_given(
         &self,
@@ -932,7 +932,7 @@ impl Groups {
             .await
     }
     /**
-     * Remove App Instance Target to App Administrator Role given to a Group.
+     * Remove App Instance Target to App Administrator Role given to a Group
      *
      * This function performs a `DELETE` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}` endpoint.
      *
@@ -940,10 +940,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
-     * * `application_id: &str`
+     * * `group_id`
+     * * `role_id`
+     * * `app_name`
+     * * `application_id`
      */
     pub async fn remove_application_target_from_administrator_role_given_groups(
         &self,
@@ -979,10 +979,10 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `group_id`
+     * * `role_id`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_targets_for_roles(
         &self,
@@ -1051,13 +1051,11 @@ impl Groups {
     /**
      * This function performs a `PUT` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/groups/{targetGroupId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `target_group_id: &str`
+     * * `group_id`
+     * * `role_id`
+     * * `target_group_id`
      */
     pub async fn add_target_administrator_role_for(
         &self,
@@ -1087,13 +1085,11 @@ impl Groups {
     /**
      * This function performs a `DELETE` to the `/api/v1/groups/{groupId}/roles/{roleId}/targets/groups/{targetGroupId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `role_id: &str`
-     * * `target_group_id: &str`
+     * * `group_id`
+     * * `role_id`
+     * * `target_group_id`
      */
     pub async fn remove_target_from_administrator_role_given(
         &self,
@@ -1121,7 +1117,7 @@ impl Groups {
             .await
     }
     /**
-     * List Group Members.
+     * List Group Members
      *
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/users` endpoint.
      *
@@ -1129,9 +1125,9 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `after: &str` -- Specifies the pagination cursor for the next page of users.
-     * * `limit: i64` -- Specifies the number of user results in a page.
+     * * `group_id`
+     * * `after` -- Specifies the pagination cursor for the next page of users
+     * * `limit` -- Specifies the number of user results in a page
      */
     pub async fn list_users(
         &self,
@@ -1166,7 +1162,7 @@ impl Groups {
             .await
     }
     /**
-     * List Group Members.
+     * List Group Members
      *
      * This function performs a `GET` to the `/api/v1/groups/{groupId}/users` endpoint.
      *
@@ -1196,7 +1192,7 @@ impl Groups {
             .await
     }
     /**
-     * Add User to Group.
+     * Add User to Group
      *
      * This function performs a `PUT` to the `/api/v1/groups/{groupId}/users/{userId}` endpoint.
      *
@@ -1204,8 +1200,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `user_id: &str`
+     * * `group_id`
+     * * `user_id`
      */
     pub async fn add_user(
         &self,
@@ -1231,7 +1227,7 @@ impl Groups {
             .await
     }
     /**
-     * Remove User from Group.
+     * Remove User from Group
      *
      * This function performs a `DELETE` to the `/api/v1/groups/{groupId}/users/{userId}` endpoint.
      *
@@ -1239,8 +1235,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str`
-     * * `user_id: &str`
+     * * `group_id`
+     * * `user_id`
      */
     pub async fn remove_user_from(
         &self,

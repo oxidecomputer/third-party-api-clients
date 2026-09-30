@@ -18,14 +18,14 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users).
-     * * `domain: &str` -- The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead.
-     * * `max_results: i64` -- Maximum number of results to return. Max allowed value is 200.
-     * * `order_by: crate::types::DirectoryGroupsListOrderBy` -- Column to use for sorting results.
-     * * `page_token: &str` -- Token to specify next page in the list.
-     * * `query: &str` -- Query string search. Should be of the form "". Complete documentation is at https: //developers.google.com/admin-sdk/directory/v1/guides/search-groups.
-     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
-     * * `user_key: &str` -- Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it's an ID, it should match with the ID of the user object.
+     * * `customer` -- The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users)
+     * * `domain` -- The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead.
+     * * `max_results` -- Maximum number of results to return. Max allowed value is 200.
+     * * `order_by` -- Column to use for sorting results
+     * * `page_token` -- Token to specify next page in the list
+     * * `query` -- Query string search. Should be of the form "". Complete documentation is at https: //developers.google.com/admin-sdk/directory/v1/guides/search-groups
+     * * `sort_order` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     * * `user_key` -- Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it's an ID, it should match with the ID of the user object.
      */
     pub async fn list(
         &self,
@@ -66,7 +66,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/directory/v1/groups?{}", query_), None);
+            .url(&format!("/admin/directory/v1/groups?{query_}"), None);
         let resp: crate::Response<crate::types::Groups> = self
             .client
             .get(
@@ -123,7 +123,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/directory/v1/groups?{}", query_), None);
+            .url(&format!("/admin/directory/v1/groups?{query_}"), None);
         let crate::Response::<crate::types::Groups> {
             mut status,
             mut headers,
@@ -152,7 +152,7 @@ impl Groups {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -167,7 +167,7 @@ impl Groups {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -215,7 +215,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn get(&self, group_key: &str) -> ClientResult<crate::Response<crate::types::Group>> {
         let url = self.client.url(
@@ -242,7 +242,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn update(
         &self,
@@ -273,7 +273,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn delete(&self, group_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -300,7 +300,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn patch(
         &self,
@@ -331,7 +331,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn aliases_list(
         &self,
@@ -361,7 +361,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn aliases_insert(
         &self,
@@ -392,8 +392,8 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `alias: &str` -- The alias to be removed.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `alias` -- The alias to be removed
      */
     pub async fn aliases_delete(
         &self,

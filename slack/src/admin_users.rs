@@ -20,7 +20,7 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.users:write`
      */
     pub async fn assign(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.assign", None);
@@ -43,7 +43,7 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.users:write`
      */
     pub async fn invite(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.invite", None);
@@ -66,10 +66,10 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:read`.
-     * * `team_id: &str` -- The ID (`T1234`) of the workspace.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     * * `limit: i64` -- Limit for how many users to be retrieved per page.
+     * * `token` -- Authentication token. Requires scope: `admin.users:read`
+     * * `team_id` -- The ID (`T1234`) of the workspace.
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+     * * `limit` -- Limit for how many users to be retrieved per page
      */
     pub async fn list(
         &self,
@@ -90,7 +90,7 @@ impl AdminUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.users.list?{}", query_), None);
+            .url(&format!("/admin.users.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -110,7 +110,7 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.users:write`
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.remove", None);
@@ -133,7 +133,7 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.users:write`
      */
     pub async fn set(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.setAdmin", None);
@@ -156,7 +156,7 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.users:write`
      */
     pub async fn set_expiration(
         &self,
@@ -181,7 +181,7 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.users:write`
      */
     pub async fn set_owner(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.setOwner", None);
@@ -204,7 +204,7 @@ impl AdminUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.users:write`
      */
     pub async fn set_regular(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.users.setRegular", None);

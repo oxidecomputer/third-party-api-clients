@@ -12,7 +12,7 @@ impl Gitignore {
     }
 
     /**
-     * Get all gitignore templates.
+     * Get all gitignore templates
      *
      * This function performs a `GET` to the `/gitignore/templates` endpoint.
      *
@@ -33,7 +33,7 @@ impl Gitignore {
             .await
     }
     /**
-     * Get all gitignore templates.
+     * Get all gitignore templates
      *
      * This function performs a `GET` to the `/gitignore/templates` endpoint.
      *
@@ -56,7 +56,7 @@ impl Gitignore {
             .await
     }
     /**
-     * Get a gitignore template.
+     * Get a gitignore template
      *
      * This function performs a `GET` to the `/gitignore/templates/{name}` endpoint.
      *
@@ -67,7 +67,7 @@ impl Gitignore {
      *
      * **Parameters:**
      *
-     * * `name: &str`
+     * * `name`
      */
     pub async fn get_template(
         &self,

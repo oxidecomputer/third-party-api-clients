@@ -29,11 +29,10 @@ impl EnvelopeLocks {
      * See [EnvelopeLocks: create](https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/envelopelocks/create/)
      * for a description of the `X-DocuSign-Edit` header.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_get_envelope(
         &self,
@@ -69,7 +68,6 @@ impl EnvelopeLocks {
      * as described in
      * [EnvelopeLocks: create](https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/envelopelocks/create/).
      *
-     *
      * Use this method to change the duration
      * of the lock (`lockDurationInSeconds`)
      * or the `lockedByApp` string.
@@ -85,12 +83,10 @@ impl EnvelopeLocks {
      * }
      * ```
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_put_envelope(
         &self,
@@ -134,7 +130,6 @@ impl EnvelopeLocks {
      * every PUT method (typically a method that updates an envelope)
      * while the envelope is locked.
      *
-     *
      * If you do not provide the `lockToken` when accessing
      * a locked envelope, you will get the following
      * error:
@@ -145,7 +140,6 @@ impl EnvelopeLocks {
      *    "message": "The user is not the owner of the lock. The template is locked by another user or in another application"
      * }
      * ```
-     *
      *
      * ### The X-DocuSign-Edit header
      *
@@ -176,13 +170,10 @@ impl EnvelopeLocks {
      * X-DocuSign-Edit:<DocuSignEdit><LockToken>token-from-response</LockToken><LockDurationInSeconds>600</LockDurationInSeconds></DocuSignEdit>
      * ```
      *
-     *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_post_envelope(
         &self,
@@ -226,15 +217,14 @@ impl EnvelopeLocks {
      * changes made while the envelope was locked
      * are kept or discarded.
      *
-     *
      * | Query Parameter | Description                                                                                                                                                                         |
      * | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
      * | `save_changes`  | (Optional) When set to **true** (the default), any changes made while the lock was active are saved. When set to **false**, any changes made while the envelope was locked are discarded. |
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_delete_envelope(
         &self,

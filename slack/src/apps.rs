@@ -20,9 +20,9 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `client_id: &str` -- Issued when you created your application.
-     * * `client_secret: &str` -- Issued when you created your application.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `client_id` -- Issued when you created your application.
+     * * `client_secret` -- Issued when you created your application.
      */
     pub async fn uninstall(
         &self,
@@ -37,9 +37,7 @@ impl Apps {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/apps.uninstall?{}", query_), None);
+        let url = self.client.url(&format!("/apps.uninstall?{query_}"), None);
         self.client
             .get(
                 &url,

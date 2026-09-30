@@ -12,7 +12,7 @@ impl VerifiedDomains {
     }
 
     /**
-     * Get domain info.
+     * Get domain info
      *
      * This function performs a `GET` to the `/verified-domains/{domain_name}` endpoint.
      *
@@ -20,7 +20,7 @@ impl VerifiedDomains {
      *
      * **Parameters:**
      *
-     * * `domain_name: &str` -- The name of the folder.
+     * * `domain_name` -- The name of the folder.
      */
     pub async fn get(
         &self,
@@ -44,7 +44,7 @@ impl VerifiedDomains {
             .await
     }
     /**
-     * Delete domain.
+     * Delete domain
      *
      * This function performs a `DELETE` to the `/verified-domains/{domain_name}` endpoint.
      *
@@ -52,7 +52,7 @@ impl VerifiedDomains {
      *
      * **Parameters:**
      *
-     * * `domain_name: &str` -- The name of the folder.
+     * * `domain_name` -- The name of the folder.
      */
     pub async fn delete(&self, domain_name: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -73,7 +73,7 @@ impl VerifiedDomains {
             .await
     }
     /**
-     * Verify domain.
+     * Verify domain
      *
      * This function performs a `POST` to the `/verified-domains/{domain_name}/actions/verify` endpoint.
      *
@@ -81,7 +81,7 @@ impl VerifiedDomains {
      *
      * **Parameters:**
      *
-     * * `domain_name: &str` -- The name of the folder.
+     * * `domain_name` -- The name of the folder.
      */
     pub async fn verify_domain(
         &self,
@@ -106,7 +106,7 @@ impl VerifiedDomains {
             .await
     }
     /**
-     * List sending domains.
+     * List sending domains
      *
      * This function performs a `GET` to the `/verified-domains` endpoint.
      *
@@ -127,7 +127,7 @@ impl VerifiedDomains {
             .await
     }
     /**
-     * Add domain to account.
+     * Add domain to account
      *
      * This function performs a `POST` to the `/verified-domains` endpoint.
      *

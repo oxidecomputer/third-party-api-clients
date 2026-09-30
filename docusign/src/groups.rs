@@ -20,12 +20,12 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- Number of records to return. The number must be greater than 1 and less than or equal to 100.
-     * * `group_type: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_usercount: &str` -- When set to **true**, every group returned in the response includes a `userCount` property that contains the total number of users in the group. The default is **true**.
-     * * `search_text: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- Number of records to return. The number must be greater than 1 and less than or equal to 100.
+     * * `group_type` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_usercount` -- When set to **true**, every group returned in the response includes a `userCount` property that contains the total number of users in the group. The default is **true**.
+     * * `search_text` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -83,7 +83,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -118,7 +118,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -162,10 +162,9 @@ impl Groups {
      * }
      * ```
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(
         &self,

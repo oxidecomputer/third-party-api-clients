@@ -12,7 +12,7 @@ impl ChatChannelsAccountLevel {
     }
 
     /**
-     * Get a channel.
+     * Get a channel
      *
      * This function performs a `GET` to the `/chat/users/{userId}/channels/{channelId}` endpoint.
      *
@@ -26,8 +26,8 @@ impl ChatChannelsAccountLevel {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
-     * * `user_id: &str` -- Unique identifier of the user who is the owner of the channel.
+     * * `channel_id` -- Channel ID: Unique Identifier of a channel.
+     * * `user_id` -- Unique identifier of the user who is the owner of the channel.
      */
     pub async fn get_channel(
         &self,
@@ -53,7 +53,7 @@ impl ChatChannelsAccountLevel {
             .await
     }
     /**
-     * Delete a channel.
+     * Delete a channel
      *
      * This function performs a `DELETE` to the `/chat/users/{userId}/channels/{channelId}` endpoint.
      *
@@ -67,7 +67,7 @@ impl ChatChannelsAccountLevel {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
+     * * `channel_id` -- Channel ID: Unique Identifier of a channel.
      */
     pub async fn delete_channel(
         &self,
@@ -93,7 +93,7 @@ impl ChatChannelsAccountLevel {
             .await
     }
     /**
-     * Update a channel.
+     * Update a channel
      *
      * This function performs a `PATCH` to the `/chat/users/{userId}/channels/{channelId}` endpoint.
      *
@@ -107,8 +107,8 @@ impl ChatChannelsAccountLevel {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- User's first name.
-     * * `user_id: &str` -- Unique Identifier of the Zoom user who is the owner of the channel.
+     * * `channel_id` -- User's first name.
+     * * `user_id` -- Unique Identifier of the Zoom user who is the owner of the channel.
      */
     pub async fn update_channel(
         &self,
@@ -135,7 +135,7 @@ impl ChatChannelsAccountLevel {
             .await
     }
     /**
-     * List channel members.
+     * List channel members
      *
      * This function performs a `GET` to the `/chat/users/{userId}/channels/{channelId}/members` endpoint.
      *
@@ -147,10 +147,10 @@ impl ChatChannelsAccountLevel {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- User's first name.
-     * * `page_size: i64` -- The number of records returned with a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `user_id: &str` -- Unique identifier of the user who is the owner of this channel.
+     * * `channel_id` -- User's first name.
+     * * `page_size` -- The number of records returned with a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `user_id` -- Unique identifier of the user who is the owner of this channel.
      */
     pub async fn list_channel_members(
         &self,
@@ -195,7 +195,7 @@ impl ChatChannelsAccountLevel {
         ))
     }
     /**
-     * List channel members.
+     * List channel members
      *
      * This function performs a `GET` to the `/chat/users/{userId}/channels/{channelId}/members` endpoint.
      *
@@ -249,7 +249,7 @@ impl ChatChannelsAccountLevel {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -264,7 +264,7 @@ impl ChatChannelsAccountLevel {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -286,7 +286,7 @@ impl ChatChannelsAccountLevel {
         Ok(crate::Response::new(status, headers, members))
     }
     /**
-     * Invite channel members.
+     * Invite channel members
      *
      * This function performs a `POST` to the `/chat/users/{userId}/channels/{channelId}/members` endpoint.
      *
@@ -298,8 +298,8 @@ impl ChatChannelsAccountLevel {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Channel ID: Unique Identifier of the channel.
-     * * `user_id: &str` -- Unique identifier of the user who is the owner of this channel.
+     * * `channel_id` -- Channel ID: Unique Identifier of the channel.
+     * * `user_id` -- Unique identifier of the user who is the owner of this channel.
      */
     pub async fn invite_channel_members(
         &self,
@@ -326,23 +326,22 @@ impl ChatChannelsAccountLevel {
             .await
     }
     /**
-     * Remove a member.
+     * Remove a member
      *
      * This function performs a `DELETE` to the `/chat/users/{userId}/channels/{channelId}/members/{memberId}` endpoint.
      *
-     *  A [channel](https://support.zoom.us/hc/en-us/articles/200912909-Getting-Started-With-Channels-Group-Messaging-) can have one or multiple members. Use this API to remove a member from a chat channel. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
+     * A [channel](https://support.zoom.us/hc/en-us/articles/200912909-Getting-Started-With-Channels-Group-Messaging-) can have one or multiple members. Use this API to remove a member from a chat channel. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
      *
      * **Scopes:** `chat_channel:write:admin`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium` <br>
-     *  
-     *  
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium` <br>
+     *
      * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note: </b> For an<b> account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, this API can only be used on behalf of a user who is assigned with a <b><a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit."> role</a> that has Edit permission for Chat Channels</b>.</p>
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Unique Identifier of the Channel from where you would like to remove a member. This can be retrieved from the [List Channels API](https://marketplace.zoom.us/docs/api-reference/zoom-api/chat-channels/getchannels).
-     * * `member_id: &str` -- Email address of the member whom you would like to be remove from the channel.
-     * * `user_id: &str` -- Unique identifier of the channel owner.
+     * * `channel_id` -- Unique Identifier of the Channel from where you would like to remove a member. This can be retrieved from the [List Channels API](https://marketplace.zoom.us/docs/api-reference/zoom-api/chat-channels/getchannels).
+     * * `member_id` -- Email address of the member whom you would like to be remove from the channel.
+     * * `user_id` -- Unique identifier of the channel owner.
      */
     pub async fn remove_channel_member(
         &self,

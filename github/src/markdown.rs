@@ -12,11 +12,9 @@ impl Markdown {
     }
 
     /**
-     * Render a Markdown document.
+     * Render a Markdown document
      *
      * This function performs a `POST` to the `/markdown` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/markdown#render-a-markdown-document>
      */
@@ -36,7 +34,7 @@ impl Markdown {
             .await
     }
     /**
-     * Render a Markdown document in raw mode.
+     * Render a Markdown document in raw mode
      *
      * This function performs a `POST` to the `/markdown/raw` endpoint.
      *

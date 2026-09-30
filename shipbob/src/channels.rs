@@ -12,7 +12,7 @@ impl Channels {
     }
 
     /**
-     * Get user-authorized channel info.
+     * Get user-authorized channel info
      *
      * This function performs a `GET` to the `/channel` endpoint.
      */
@@ -29,7 +29,7 @@ impl Channels {
             .await
     }
     /**
-     * Get user-authorized channel info.
+     * Get user-authorized channel info
      *
      * This function performs a `GET` to the `/channel` endpoint.
      *

@@ -62,7 +62,7 @@ impl std::fmt::Display for MediaType {
         match self {
             MediaType::Json => write!(f, "application/vnd.github.v3+json"),
             MediaType::Preview(codename) => {
-                write!(f, "application/vnd.github.{}-preview+json", codename)
+                write!(f, "application/vnd.github.{codename}-preview+json")
             }
         }
     }
@@ -73,11 +73,9 @@ impl From<MediaType> for mime::Mime {
         match media {
             MediaType::Json => "application/vnd.github.v3+json".parse().unwrap(),
             MediaType::Preview(codename) => {
-                format!("application/vnd.github.{}-preview+json", codename)
+                format!("application/vnd.github.{codename}-preview+json")
                     .parse()
-                    .unwrap_or_else(|_| {
-                        panic!("could not parse media type for preview {}", codename)
-                    })
+                    .unwrap_or_else(|_| panic!("could not parse media type for preview {codename}"))
             }
         }
     }
@@ -137,11 +135,10 @@ pub mod date_format {
                 Ok(None)
             } else {
                 // This is standard.
-                match serde_json::from_str::<NaiveDate>(&format!("\"{}\"", s)) {
+                match serde_json::from_str::<NaiveDate>(&format!("\"{s}\"")) {
                     Ok(t) => Ok(Some(t)),
                     Err(e) => Err(serde::de::Error::custom(format!(
-                        "deserializing {} as NaiveDate failed: {}",
-                        s, e
+                        "deserializing {s} as NaiveDate failed: {e}"
                     ))),
                 }
             }
@@ -172,7 +169,7 @@ pub mod date_time_format {
         let s: Option<String> = Option::deserialize(deserializer)?;
         if let Some(mut s) = s {
             // This is standard.
-            match serde_json::from_str::<DateTime<Utc>>(&format!("\"{}\"", s)) {
+            match serde_json::from_str::<DateTime<Utc>>(&format!("\"{s}\"")) {
                 Ok(t) => Ok(Some(t)),
                 Err(_) => {
                     // This is google calendar.
@@ -206,7 +203,7 @@ pub mod date_time_format {
                                                     ),
                                                 )),
                                                 Err(_) => {
-                                                    s = format!("{}+00:00", s);
+                                                    s = format!("{s}+00:00");
                                                     match DateTime::parse_from_str(&s, FORMAT)
                                                         .map(|t| t.with_timezone(&Utc))
                                                     {
@@ -219,8 +216,7 @@ pub mod date_time_format {
                                                                 Err(e) => {
                                                                     Err(serde::de::Error::custom(
                                                                         format!(
-                                                                            "deserializing {} as DateTime<Utc> failed: {}",
-                                                                            s, e
+                                                                            "deserializing {s} as DateTime<Utc> failed: {e}"
                                                                         ),
                                                                     ))
                                                                 }
@@ -266,8 +262,7 @@ pub mod deserialize_empty_url {
                 Ok(u) => return Ok(Some(u)),
                 Err(e) => {
                     return Err(serde::de::Error::custom(format!(
-                        "error url parsing {}: {}",
-                        s, e
+                        "error url parsing {s}: {e}"
                     )));
                 }
             }
@@ -396,11 +391,10 @@ impl Visitor<'_> for I32Visitor {
     where
         E: de::Error,
     {
-        use std::i32;
         if value >= i64::from(i32::MIN) && value <= i64::from(i32::MAX) {
             Ok(value as i32)
         } else {
-            Err(E::custom(format!("i32 out of range: {}", value)))
+            Err(E::custom(format!("i32 out of range: {value}")))
         }
     }
 
@@ -535,11 +529,10 @@ impl Visitor<'_> for F32Visitor {
     where
         E: de::Error,
     {
-        use std::i32;
         if value >= i64::from(i32::MIN) && value <= i64::from(i32::MAX) {
             Ok(value as f32)
         } else {
-            Err(E::custom(format!("f32 out of range: {}", value)))
+            Err(E::custom(format!("f32 out of range: {value}")))
         }
     }
 
@@ -565,7 +558,7 @@ impl Visitor<'_> for F32Visitor {
         if value >= f64::from(f32::MIN) && value <= f64::from(f32::MAX) {
             Ok(value as f32)
         } else {
-            Err(E::custom(format!("f32 out of range: {}", value)))
+            Err(E::custom(format!("f32 out of range: {value}")))
         }
     }
 }

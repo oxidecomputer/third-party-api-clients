@@ -12,7 +12,7 @@ impl Root {
     }
 
     /**
-     * List api root resources.
+     * List api root resources
      *
      * This function performs a `GET` to the `/` endpoint.
      *
@@ -20,8 +20,8 @@ impl Root {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get(
         &self,
@@ -36,7 +36,7 @@ impl Root {
             query_args.push(("fields".to_string(), fields.join(" ")));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("?{}", query_), None);
+        let url = self.client.url(&format!("?{query_}"), None);
         self.client
             .get(
                 &url,

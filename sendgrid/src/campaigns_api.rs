@@ -12,7 +12,7 @@ impl CampaignsApi {
     }
 
     /**
-     * Retrieve all Campaigns.
+     * Retrieve all Campaigns
      *
      * This function performs a `GET` to the `/campaigns` endpoint.
      *
@@ -24,9 +24,9 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- The number of results you would like to receive at a time.
-     * * `offset: i64` -- The index of the first campaign to return, where 0 is the first campaign.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- The number of results you would like to receive at a time.
+     * * `offset` -- The index of the first campaign to return, where 0 is the first campaign.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_campaigns(
         &self,
@@ -41,7 +41,7 @@ impl CampaignsApi {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/campaigns?{}", query_), None);
+        let url = self.client.url(&format!("/campaigns?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -53,7 +53,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Create a Campaign.
+     * Create a Campaign
      *
      * This function performs a `POST` to the `/campaigns` endpoint.
      *
@@ -63,7 +63,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_campaign(
         &self,
@@ -81,7 +81,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Retrieve a single campaign.
+     * Retrieve a single campaign
      *
      * This function performs a `GET` to the `/campaigns/{campaign_id}` endpoint.
      *
@@ -89,7 +89,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_campaigns_campaign(
         &self,
@@ -113,7 +113,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Delete a Campaign.
+     * Delete a Campaign
      *
      * This function performs a `DELETE` to the `/campaigns/{campaign_id}` endpoint.
      *
@@ -121,7 +121,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_campaigns_campaign(
         &self,
@@ -145,7 +145,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Update a Campaign.
+     * Update a Campaign
      *
      * This function performs a `PATCH` to the `/campaigns/{campaign_id}` endpoint.
      *
@@ -155,7 +155,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_campaigns_campaign(
         &self,
@@ -180,7 +180,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Send a Campaign.
+     * Send a Campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/schedules/now` endpoint.
      *
@@ -190,7 +190,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_campaigns_campaign_schedules_now(
         &self,
@@ -214,7 +214,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * View Scheduled Time of a Campaign.
+     * View Scheduled Time of a Campaign
      *
      * This function performs a `GET` to the `/campaigns/{campaign_id}/schedules` endpoint.
      *
@@ -222,7 +222,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_campaigns_campaign_schedule(
         &self,
@@ -246,7 +246,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Schedule a Campaign.
+     * Schedule a Campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/schedules` endpoint.
      *
@@ -256,7 +256,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_campaigns_campaign_schedule(
         &self,
@@ -281,7 +281,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Unschedule a Scheduled Campaign.
+     * Unschedule a Scheduled Campaign
      *
      * This function performs a `DELETE` to the `/campaigns/{campaign_id}/schedules` endpoint.
      *
@@ -292,7 +292,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_campaigns_campaign_schedules(
         &self,
@@ -316,7 +316,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Update a Scheduled Campaign.
+     * Update a Scheduled Campaign
      *
      * This function performs a `PATCH` to the `/campaigns/{campaign_id}/schedules` endpoint.
      *
@@ -324,7 +324,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_campaigns_campaign_schedules(
         &self,
@@ -349,7 +349,7 @@ impl CampaignsApi {
             .await
     }
     /**
-     * Send a Test Campaign.
+     * Send a Test Campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/schedules/test` endpoint.
      *
@@ -359,7 +359,7 @@ impl CampaignsApi {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_campaigns_campaign_schedules_test(
         &self,

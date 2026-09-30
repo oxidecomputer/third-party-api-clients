@@ -18,8 +18,8 @@ impl Members {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the user member in the API request. The value can be the user's primary email address, alias, or unique ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `member_key` -- Identifies the user member in the API request. The value can be the user's primary email address, alias, or unique ID.
      */
     pub async fn has(
         &self,
@@ -51,11 +51,11 @@ impl Members {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `include_derived_membership: bool` -- A Boolean value to indicate whether payload is wanted. Optional.
-     * * `max_results: i64` -- Maximum number of results to return. Max allowed value is 200.
-     * * `page_token: &str` -- Token to specify next page in the list.
-     * * `roles: &str` -- The `roles` query parameter allows you to retrieve group members by role. Allowed values are `OWNER`, `MANAGER`, and `MEMBER`.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `include_derived_membership` -- A Boolean value to indicate whether payload is wanted. Optional.
+     * * `max_results` -- Maximum number of results to return. Max allowed value is 200.
+     * * `page_token` -- Token to specify next page in the list.
+     * * `roles` -- The `roles` query parameter allows you to retrieve group members by role. Allowed values are `OWNER`, `MANAGER`, and `MEMBER`.
      */
     pub async fn list(
         &self,
@@ -168,7 +168,7 @@ impl Members {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -183,7 +183,7 @@ impl Members {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -211,7 +211,7 @@ impl Members {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
     pub async fn insert(
         &self,
@@ -242,8 +242,8 @@ impl Members {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `member_key` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
     pub async fn get(
         &self,
@@ -275,8 +275,8 @@ impl Members {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `member_key` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
     pub async fn update(
         &self,
@@ -309,8 +309,8 @@ impl Members {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `member_key` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
     pub async fn delete(
         &self,
@@ -342,8 +342,8 @@ impl Members {
      *
      * **Parameters:**
      *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+     * * `group_key` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+     * * `member_key` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
     pub async fn patch(
         &self,

@@ -5,9 +5,7 @@ use serde::{Deserialize, Serialize};
 /// Adds a new banded range to the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddBandingRequest {
-    /**
-     * Adds a new banded range to the spreadsheet.
-     */
+    /// Adds a new banded range to the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -19,9 +17,7 @@ pub struct AddBandingRequest {
 /// The result of adding a banded range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddBandingResponse {
-    /**
-     * The result of adding a banded range.
-     */
+    /// The result of adding a banded range.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -33,9 +29,7 @@ pub struct AddBandingResponse {
 /// Adds a chart to a sheet in the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddChartRequest {
-    /**
-     * Adds a chart to a sheet in the spreadsheet.
-     */
+    /// Adds a chart to a sheet in the spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub chart: Option<EmbeddedChart>,
 }
@@ -43,9 +37,7 @@ pub struct AddChartRequest {
 /// The result of adding a chart to a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddChartResponse {
-    /**
-     * The result of adding a chart to a spreadsheet.
-     */
+    /// The result of adding a chart to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub chart: Option<EmbeddedChart>,
 }
@@ -53,18 +45,14 @@ pub struct AddChartResponse {
 /// Adds a new conditional format rule at the given index. All subsequent rules' indexes are incremented.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddConditionalFormatRuleRequest {
-    /**
-     * Adds a new conditional format rule at the given index. All subsequent rules' indexes are incremented.
-     */
+    /// Adds a new conditional format rule at the given index. All subsequent rules' indexes are incremented.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub index: i64,
-    /**
-     * Adds a new conditional format rule at the given index. All subsequent rules' indexes are incremented.
-     */
+    /// Adds a new conditional format rule at the given index. All subsequent rules' indexes are incremented.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rule: Option<ConditionalFormatRule>,
 }
@@ -72,9 +60,7 @@ pub struct AddConditionalFormatRuleRequest {
 /// Adds a data source. After the data source is added successfully, an associated DATA_SOURCE sheet is created and an execution is triggered to refresh the sheet to read data from the data source. The request requires an additional `bigquery.readonly` OAuth scope.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddDataSourceRequest {
-    /**
-     * Adds a data source. After the data source is added successfully, an associated DATA_SOURCE sheet is created and an execution is triggered to refresh the sheet to read data from the data source. The request requires an additional `bigquery.readonly` OAuth scope.
-     */
+    /// Adds a data source. After the data source is added successfully, an associated DATA_SOURCE sheet is created and an execution is triggered to refresh the sheet to read data from the data source. The request requires an additional `bigquery.readonly` OAuth scope.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -86,18 +72,14 @@ pub struct AddDataSourceRequest {
 /// The result of adding a data source.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddDataSourceResponse {
-    /**
-     * The result of adding a data source.
-     */
+    /// The result of adding a data source.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * The result of adding a data source.
-     */
+    /// The result of adding a data source.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -109,9 +91,7 @@ pub struct AddDataSourceResponse {
 /// Creates a group over the specified range. If the requested range is a superset of the range of an existing group G, then the depth of G is incremented and this new group G' has the depth of that group. For example, a group [C:D, depth 1] + [B:E] results in groups [B:E, depth 1] and [C:D, depth 2]. If the requested range is a subset of the range of an existing group G, then the depth of the new group G' becomes one greater than the depth of G. For example, a group [B:E, depth 1] + [C:D] results in groups [B:E, depth 1] and [C:D, depth 2]. If the requested range starts before and ends within, or starts within and ends after, the range of an existing group G, then the range of the existing group G becomes the union of the ranges, and the new group G' has depth one greater than the depth of G and range as the intersection of the ranges. For example, a group [B:D, depth 1] + [C:E] results in groups [B:E, depth 1] and [C:D, depth 2].
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddDimensionGroupRequest {
-    /**
-     * Creates a group over the specified range. If the requested range is a superset of the range of an existing group G, then the depth of G is incremented and this new group G' has the depth of that group. For example, a group [C:D, depth 1] + [B:E] results in groups [B:E, depth 1] and [C:D, depth 2]. If the requested range is a subset of the range of an existing group G, then the depth of the new group G' becomes one greater than the depth of G. For example, a group [B:E, depth 1] + [C:D] results in groups [B:E, depth 1] and [C:D, depth 2]. If the requested range starts before and ends within, or starts within and ends after, the range of an existing group G, then the range of the existing group G becomes the union of the ranges, and the new group G' has depth one greater than the depth of G and range as the intersection of the ranges. For example, a group [B:D, depth 1] + [C:E] results in groups [B:E, depth 1] and [C:D, depth 2].
-     */
+    /// Creates a group over the specified range. If the requested range is a superset of the range of an existing group G, then the depth of G is incremented and this new group G' has the depth of that group. For example, a group [C:D, depth 1] + [B:E] results in groups [B:E, depth 1] and [C:D, depth 2]. If the requested range is a subset of the range of an existing group G, then the depth of the new group G' becomes one greater than the depth of G. For example, a group [B:E, depth 1] + [C:D] results in groups [B:E, depth 1] and [C:D, depth 2]. If the requested range starts before and ends within, or starts within and ends after, the range of an existing group G, then the range of the existing group G becomes the union of the ranges, and the new group G' has depth one greater than the depth of G and range as the intersection of the ranges. For example, a group [B:D, depth 1] + [C:E] results in groups [B:E, depth 1] and [C:D, depth 2].
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<DimensionRange>,
 }
@@ -119,9 +99,7 @@ pub struct AddDimensionGroupRequest {
 /// The result of adding a group.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddDimensionGroupResponse {
-    /**
-     * The result of adding a group.
-     */
+    /// The result of adding a group.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -134,9 +112,7 @@ pub struct AddDimensionGroupResponse {
 /// Adds a filter view.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddFilterViewRequest {
-    /**
-     * Adds a filter view.
-     */
+    /// Adds a filter view.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterView>,
 }
@@ -144,9 +120,7 @@ pub struct AddFilterViewRequest {
 /// The result of adding a filter view.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddFilterViewResponse {
-    /**
-     * The result of adding a filter view.
-     */
+    /// The result of adding a filter view.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterView>,
 }
@@ -154,9 +128,7 @@ pub struct AddFilterViewResponse {
 /// Adds a named range to the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddNamedRangeRequest {
-    /**
-     * Adds a named range to the spreadsheet.
-     */
+    /// Adds a named range to the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -168,9 +140,7 @@ pub struct AddNamedRangeRequest {
 /// The result of adding a named range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddNamedRangeResponse {
-    /**
-     * The result of adding a named range.
-     */
+    /// The result of adding a named range.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -182,9 +152,7 @@ pub struct AddNamedRangeResponse {
 /// Adds a new protected range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddProtectedRangeRequest {
-    /**
-     * Adds a new protected range.
-     */
+    /// Adds a new protected range.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -196,9 +164,7 @@ pub struct AddProtectedRangeRequest {
 /// The result of adding a new protected range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddProtectedRangeResponse {
-    /**
-     * The result of adding a new protected range.
-     */
+    /// The result of adding a new protected range.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -210,9 +176,7 @@ pub struct AddProtectedRangeResponse {
 /// Adds a new sheet. When a sheet is added at a given index, all subsequent sheets' indexes are incremented. To add an object sheet, use AddChartRequest instead and specify EmbeddedObjectPosition.sheetId or EmbeddedObjectPosition.newSheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddSheetRequest {
-    /**
-     * Adds a new sheet. When a sheet is added at a given index, all subsequent sheets' indexes are incremented. To add an object sheet, use AddChartRequest instead and specify EmbeddedObjectPosition.sheetId or EmbeddedObjectPosition.newSheet.
-     */
+    /// Adds a new sheet. When a sheet is added at a given index, all subsequent sheets' indexes are incremented. To add an object sheet, use AddChartRequest instead and specify EmbeddedObjectPosition.sheetId or EmbeddedObjectPosition.newSheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<SheetProperties>,
 }
@@ -220,9 +184,7 @@ pub struct AddSheetRequest {
 /// The result of adding a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddSheetResponse {
-    /**
-     * The result of adding a sheet.
-     */
+    /// The result of adding a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<SheetProperties>,
 }
@@ -230,9 +192,7 @@ pub struct AddSheetResponse {
 /// Adds a slicer to a sheet in the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddSlicerRequest {
-    /**
-     * Adds a slicer to a sheet in the spreadsheet.
-     */
+    /// Adds a slicer to a sheet in the spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub slicer: Option<Slicer>,
 }
@@ -240,9 +200,7 @@ pub struct AddSlicerRequest {
 /// The result of adding a slicer to a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddSlicerResponse {
-    /**
-     * The result of adding a slicer to a spreadsheet.
-     */
+    /// The result of adding a slicer to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub slicer: Option<Slicer>,
 }
@@ -250,27 +208,21 @@ pub struct AddSlicerResponse {
 /// Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppendCellsRequest {
-    /**
-     * Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
-     */
+    /// Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
-     */
+    /// Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub rows: Vec<RowData>,
-    /**
-     * Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
-     */
+    /// Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -320,23 +272,17 @@ impl Dimension {
 /// Appends rows or columns to the end of a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppendDimensionRequest {
-    /**
-     * Appends rows or columns to the end of a sheet.
-     */
+    /// Appends rows or columns to the end of a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dimension: Option<Dimension>,
-    /**
-     * Appends rows or columns to the end of a sheet.
-     */
+    /// Appends rows or columns to the end of a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub length: i64,
-    /**
-     * Appends rows or columns to the end of a sheet.
-     */
+    /// Appends rows or columns to the end of a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -349,9 +295,7 @@ pub struct AppendDimensionRequest {
 /// The response when updating a range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppendValuesResponse {
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -359,9 +303,7 @@ pub struct AppendValuesResponse {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -369,9 +311,7 @@ pub struct AppendValuesResponse {
         rename = "tableRange"
     )]
     pub table_range: String,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub updates: Option<UpdateValuesResponse>,
 }
@@ -379,23 +319,17 @@ pub struct AppendValuesResponse {
 /// Fills in more data based on existing data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutoFillRequest {
-    /**
-     * Fills in more data based on existing data.
-     */
+    /// Fills in more data based on existing data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Fills in more data based on existing data.
-     */
+    /// Fills in more data based on existing data.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "sourceAndDestination"
     )]
     pub source_and_destination: Option<SourceDestination>,
-    /**
-     * Fills in more data based on existing data.
-     */
+    /// Fills in more data based on existing data.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -407,18 +341,14 @@ pub struct AutoFillRequest {
 /// Automatically resizes one or more dimensions based on the contents of the cells in that dimension.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AutoResizeDimensionsRequest {
-    /**
-     * Automatically resizes one or more dimensions based on the contents of the cells in that dimension.
-     */
+    /// Automatically resizes one or more dimensions based on the contents of the cells in that dimension.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceSheetDimensions"
     )]
     pub data_source_sheet_dimensions: Option<DataSourceSheetDimensionRange>,
-    /**
-     * Automatically resizes one or more dimensions based on the contents of the cells in that dimension.
-     */
+    /// Automatically resizes one or more dimensions based on the contents of the cells in that dimension.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dimensions: Option<DimensionRange>,
 }
@@ -426,9 +356,7 @@ pub struct AutoResizeDimensionsRequest {
 /// A banded (alternating colors) range in a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BandedRange {
-    /**
-     * A banded (alternating colors) range in a sheet.
-     */
+    /// A banded (alternating colors) range in a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -436,23 +364,17 @@ pub struct BandedRange {
         rename = "bandedRangeId"
     )]
     pub banded_range_id: i64,
-    /**
-     * A banded (alternating colors) range in a sheet.
-     */
+    /// A banded (alternating colors) range in a sheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "columnProperties"
     )]
     pub column_properties: Option<BandingProperties>,
-    /**
-     * A banded (alternating colors) range in a sheet.
-     */
+    /// A banded (alternating colors) range in a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * A banded (alternating colors) range in a sheet.
-     */
+    /// A banded (alternating colors) range in a sheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -464,72 +386,56 @@ pub struct BandedRange {
 /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BandingProperties {
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "firstBandColor"
     )]
     pub first_band_color: Option<Color>,
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "firstBandColorStyle"
     )]
     pub first_band_color_style: Option<ColorStyle>,
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "footerColor"
     )]
     pub footer_color: Option<Color>,
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "footerColorStyle"
     )]
     pub footer_color_style: Option<ColorStyle>,
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "headerColor"
     )]
     pub header_color: Option<Color>,
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "headerColorStyle"
     )]
     pub header_color_style: Option<ColorStyle>,
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "secondBandColor"
     )]
     pub second_band_color: Option<Color>,
-    /**
-     * Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: \* header_color and footer_color take priority over band colors. \* first_band_color takes priority over second_band_color. \* row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
-     */
+    /// Properties referring a single dimension (either row or column). If both BandedRange.row_properties and BandedRange.column_properties are set, the fill colors are applied to cells according to the following rules: * header_color and footer_color take priority over band colors. * first_band_color takes priority over second_band_color. * row_properties takes priority over column_properties. For example, the first row color takes priority over the first column color, but the first column color takes priority over the second row color. Similarly, the row header takes priority over the column header in the top left cell, but the column header takes priority over the first row color if the row header is not set.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -578,68 +484,52 @@ impl ComparisonType {
 /// Formatting options for baseline value.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BaselineValueFormat {
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "comparisonType"
     )]
     pub comparison_type: Option<ComparisonType>,
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "negativeColor"
     )]
     pub negative_color: Option<Color>,
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "negativeColorStyle"
     )]
     pub negative_color_style: Option<ColorStyle>,
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub position: Option<TextPosition>,
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "positiveColor"
     )]
     pub positive_color: Option<Color>,
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "positiveColorStyle"
     )]
     pub positive_color_style: Option<ColorStyle>,
-    /**
-     * Formatting options for baseline value.
-     */
+    /// Formatting options for baseline value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -691,37 +581,27 @@ impl Position {
 /// An axis of the chart. A chart may not have more than one axis per axis position.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BasicChartAxis {
-    /**
-     * An axis of the chart. A chart may not have more than one axis per axis position.
-     */
+    /// An axis of the chart. A chart may not have more than one axis per axis position.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub format: Option<TextFormat>,
-    /**
-     * An axis of the chart. A chart may not have more than one axis per axis position.
-     */
+    /// An axis of the chart. A chart may not have more than one axis per axis position.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub position: Option<Position>,
-    /**
-     * An axis of the chart. A chart may not have more than one axis per axis position.
-     */
+    /// An axis of the chart. A chart may not have more than one axis per axis position.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * An axis of the chart. A chart may not have more than one axis per axis position.
-     */
+    /// An axis of the chart. A chart may not have more than one axis per axis position.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "titleTextPosition"
     )]
     pub title_text_position: Option<TextPosition>,
-    /**
-     * An axis of the chart. A chart may not have more than one axis per axis position.
-     */
+    /// An axis of the chart. A chart may not have more than one axis per axis position.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -733,14 +613,10 @@ pub struct BasicChartAxis {
 /// The domain of a chart. For example, if charting stock prices over time, this would be the date.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BasicChartDomain {
-    /**
-     * The domain of a chart. For example, if charting stock prices over time, this would be the date.
-     */
+    /// The domain of a chart. For example, if charting stock prices over time, this would be the date.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub domain: Option<ChartData>,
-    /**
-     * The domain of a chart. For example, if charting stock prices over time, this would be the date.
-     */
+    /// The domain of a chart. For example, if charting stock prices over time, this would be the date.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -803,47 +679,33 @@ impl Type {
 /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BasicChartSeries {
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub color: Option<Color>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "colorStyle"
     )]
     pub color_style: Option<ColorStyle>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "dataLabel")]
     pub data_label: Option<DataLabel>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "lineStyle")]
     pub line_style: Option<LineStyle>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "pointStyle"
     )]
     pub point_style: Option<PointStyle>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub series: Option<ChartData>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -851,18 +713,14 @@ pub struct BasicChartSeries {
         rename = "styleOverrides"
     )]
     pub style_overrides: Vec<BasicSeriesDataPointStyleOverride>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "targetAxis"
     )]
     pub target_axis: Option<Position>,
-    /**
-     * A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
-     */
+    /// A single series of data in a chart. For example, if charting stock prices over time, multiple series may exist, one for the "Open Price", "High Price", "Low Price" and "Close Price".
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<Type>,
 }
@@ -995,41 +853,31 @@ impl StackedType {
 /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BasicChartSpec {
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub axis: Vec<BasicChartAxis>,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "chartType")]
     pub chart_type: Option<Type>,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "compareMode"
     )]
     pub compare_mode: Option<CompareMode>,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub domains: Vec<BasicChartDomain>,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1037,63 +885,49 @@ pub struct BasicChartSpec {
         rename = "headerCount"
     )]
     pub header_count: i64,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "interpolateNulls"
     )]
     pub interpolate_nulls: bool,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "legendPosition"
     )]
     pub legend_position: Option<LegendPosition>,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "lineSmoothing"
     )]
     pub line_smoothing: bool,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub series: Vec<BasicChartSeries>,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "stackedType"
     )]
     pub stacked_type: Option<StackedType>,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "threeDimensional"
     )]
     pub three_dimensional: bool,
-    /**
-     * The specification for a basic chart. See BasicChartType for the list of charts this supports.
-     */
+    /// The specification for a basic chart. See BasicChartType for the list of charts this supports.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1105,14 +939,10 @@ pub struct BasicChartSpec {
 /// The default filter associated with a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BasicFilter {
-    /**
-     * The default filter associated with a sheet.
-     */
+    /// The default filter associated with a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub criteria: Option<FilterCriteria>,
-    /**
-     * The default filter associated with a sheet.
-     */
+    /// The default filter associated with a sheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1120,14 +950,10 @@ pub struct BasicFilter {
         rename = "filterSpecs"
     )]
     pub filter_specs: Vec<FilterSpec>,
-    /**
-     * The default filter associated with a sheet.
-     */
+    /// The default filter associated with a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * The default filter associated with a sheet.
-     */
+    /// The default filter associated with a sheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1140,32 +966,24 @@ pub struct BasicFilter {
 /// Style override settings for a single series data point.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BasicSeriesDataPointStyleOverride {
-    /**
-     * Style override settings for a single series data point.
-     */
+    /// Style override settings for a single series data point.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub color: Option<Color>,
-    /**
-     * Style override settings for a single series data point.
-     */
+    /// Style override settings for a single series data point.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "colorStyle"
     )]
     pub color_style: Option<ColorStyle>,
-    /**
-     * Style override settings for a single series data point.
-     */
+    /// Style override settings for a single series data point.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub index: i64,
-    /**
-     * Style override settings for a single series data point.
-     */
+    /// Style override settings for a single series data point.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1177,9 +995,7 @@ pub struct BasicSeriesDataPointStyleOverride {
 /// The request for clearing more than one range selected by a DataFilter in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchClearValuesByDataFilterRequest {
-    /**
-     * The request for clearing more than one range selected by a DataFilter in a spreadsheet.
-     */
+    /// The request for clearing more than one range selected by a DataFilter in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1192,9 +1008,7 @@ pub struct BatchClearValuesByDataFilterRequest {
 /// The response when clearing a range of values selected with DataFilters in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchClearValuesByDataFilterResponse {
-    /**
-     * The response when clearing a range of values selected with DataFilters in a spreadsheet.
-     */
+    /// The response when clearing a range of values selected with DataFilters in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1202,9 +1016,7 @@ pub struct BatchClearValuesByDataFilterResponse {
         rename = "clearedRanges"
     )]
     pub cleared_ranges: Vec<String>,
-    /**
-     * The response when clearing a range of values selected with DataFilters in a spreadsheet.
-     */
+    /// The response when clearing a range of values selected with DataFilters in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1217,9 +1029,7 @@ pub struct BatchClearValuesByDataFilterResponse {
 /// The request for clearing more than one range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchClearValuesRequest {
-    /**
-     * The request for clearing more than one range of values in a spreadsheet.
-     */
+    /// The request for clearing more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1231,9 +1041,7 @@ pub struct BatchClearValuesRequest {
 /// The response when clearing a range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchClearValuesResponse {
-    /**
-     * The response when clearing a range of values in a spreadsheet.
-     */
+    /// The response when clearing a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1241,9 +1049,7 @@ pub struct BatchClearValuesResponse {
         rename = "clearedRanges"
     )]
     pub cleared_ranges: Vec<String>,
-    /**
-     * The response when clearing a range of values in a spreadsheet.
-     */
+    /// The response when clearing a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1327,9 +1133,7 @@ impl ValueRenderOption {
 /// The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchGetValuesByDataFilterRequest {
-    /**
-     * The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
-     */
+    /// The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1337,27 +1141,21 @@ pub struct BatchGetValuesByDataFilterRequest {
         rename = "dataFilters"
     )]
     pub data_filters: Vec<DataFilter>,
-    /**
-     * The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
-     */
+    /// The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dateTimeRenderOption"
     )]
     pub date_time_render_option: Option<DateTimeRenderOption>,
-    /**
-     * The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
-     */
+    /// The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "majorDimension"
     )]
     pub major_dimension: Option<Dimension>,
-    /**
-     * The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
-     */
+    /// The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1369,9 +1167,7 @@ pub struct BatchGetValuesByDataFilterRequest {
 /// The response when retrieving more than one range of values in a spreadsheet selected by DataFilters.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchGetValuesByDataFilterResponse {
-    /**
-     * The response when retrieving more than one range of values in a spreadsheet selected by DataFilters.
-     */
+    /// The response when retrieving more than one range of values in a spreadsheet selected by DataFilters.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1379,9 +1175,7 @@ pub struct BatchGetValuesByDataFilterResponse {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * The response when retrieving more than one range of values in a spreadsheet selected by DataFilters.
-     */
+    /// The response when retrieving more than one range of values in a spreadsheet selected by DataFilters.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1394,9 +1188,7 @@ pub struct BatchGetValuesByDataFilterResponse {
 /// The response when retrieving more than one range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchGetValuesResponse {
-    /**
-     * The response when retrieving more than one range of values in a spreadsheet.
-     */
+    /// The response when retrieving more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1404,9 +1196,7 @@ pub struct BatchGetValuesResponse {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * The response when retrieving more than one range of values in a spreadsheet.
-     */
+    /// The response when retrieving more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1419,36 +1209,28 @@ pub struct BatchGetValuesResponse {
 /// The request for updating any aspect of a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateSpreadsheetRequest {
-    /**
-     * The request for updating any aspect of a spreadsheet.
-     */
+    /// The request for updating any aspect of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "includeSpreadsheetInResponse"
     )]
     pub include_spreadsheet_in_response: Option<bool>,
-    /**
-     * The request for updating any aspect of a spreadsheet.
-     */
+    /// The request for updating any aspect of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub requests: Vec<Request>,
-    /**
-     * The request for updating any aspect of a spreadsheet.
-     */
+    /// The request for updating any aspect of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "responseIncludeGridData"
     )]
     pub response_include_grid_data: Option<bool>,
-    /**
-     * The request for updating any aspect of a spreadsheet.
-     */
+    /// The request for updating any aspect of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1461,18 +1243,14 @@ pub struct BatchUpdateSpreadsheetRequest {
 /// The reply for batch updating a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateSpreadsheetResponse {
-    /**
-     * The reply for batch updating a spreadsheet.
-     */
+    /// The reply for batch updating a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub replies: Vec<Response>,
-    /**
-     * The reply for batch updating a spreadsheet.
-     */
+    /// The reply for batch updating a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1480,9 +1258,7 @@ pub struct BatchUpdateSpreadsheetResponse {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * The reply for batch updating a spreadsheet.
-     */
+    /// The reply for batch updating a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1531,45 +1307,35 @@ impl ValueInputOption {
 /// The request for updating more than one range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateValuesByDataFilterRequest {
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<DataFilterValueRange>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "includeValuesInResponse"
     )]
     pub include_values_in_response: Option<bool>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "responseDateTimeRenderOption"
     )]
     pub response_date_time_render_option: Option<DateTimeRenderOption>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "responseValueRenderOption"
     )]
     pub response_value_render_option: Option<ValueRenderOption>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1581,18 +1347,14 @@ pub struct BatchUpdateValuesByDataFilterRequest {
 /// The response when updating a range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateValuesByDataFilterResponse {
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub responses: Vec<UpdateValuesByDataFilterResponse>,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1600,9 +1362,7 @@ pub struct BatchUpdateValuesByDataFilterResponse {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1610,9 +1370,7 @@ pub struct BatchUpdateValuesByDataFilterResponse {
         rename = "totalUpdatedCells"
     )]
     pub total_updated_cells: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1620,9 +1378,7 @@ pub struct BatchUpdateValuesByDataFilterResponse {
         rename = "totalUpdatedColumns"
     )]
     pub total_updated_columns: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1630,9 +1386,7 @@ pub struct BatchUpdateValuesByDataFilterResponse {
         rename = "totalUpdatedRows"
     )]
     pub total_updated_rows: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1645,45 +1399,35 @@ pub struct BatchUpdateValuesByDataFilterResponse {
 /// The request for updating more than one range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateValuesRequest {
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<ValueRange>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "includeValuesInResponse"
     )]
     pub include_values_in_response: Option<bool>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "responseDateTimeRenderOption"
     )]
     pub response_date_time_render_option: Option<DateTimeRenderOption>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "responseValueRenderOption"
     )]
     pub response_value_render_option: Option<ValueRenderOption>,
-    /**
-     * The request for updating more than one range of values in a spreadsheet.
-     */
+    /// The request for updating more than one range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -1695,18 +1439,14 @@ pub struct BatchUpdateValuesRequest {
 /// The response when updating a range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchUpdateValuesResponse {
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub responses: Vec<UpdateValuesResponse>,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1714,9 +1454,7 @@ pub struct BatchUpdateValuesResponse {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1724,9 +1462,7 @@ pub struct BatchUpdateValuesResponse {
         rename = "totalUpdatedCells"
     )]
     pub total_updated_cells: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1734,9 +1470,7 @@ pub struct BatchUpdateValuesResponse {
         rename = "totalUpdatedColumns"
     )]
     pub total_updated_columns: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1744,9 +1478,7 @@ pub struct BatchUpdateValuesResponse {
         rename = "totalUpdatedRows"
     )]
     pub total_updated_rows: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1759,9 +1491,7 @@ pub struct BatchUpdateValuesResponse {
 /// The specification of a BigQuery data source that's connected to a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BigQueryDataSourceSpec {
-    /**
-     * The specification of a BigQuery data source that's connected to a sheet.
-     */
+    /// The specification of a BigQuery data source that's connected to a sheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1769,14 +1499,10 @@ pub struct BigQueryDataSourceSpec {
         rename = "projectId"
     )]
     pub project_id: String,
-    /**
-     * The specification of a BigQuery data source that's connected to a sheet.
-     */
+    /// The specification of a BigQuery data source that's connected to a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "querySpec")]
     pub query_spec: Option<BigQuerySpec>,
-    /**
-     * The specification of a BigQuery data source that's connected to a sheet.
-     */
+    /// The specification of a BigQuery data source that's connected to a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "tableSpec")]
     pub table_spec: Option<BigQueryTableSpec>,
 }
@@ -1784,9 +1510,7 @@ pub struct BigQueryDataSourceSpec {
 /// Specifies a custom BigQuery query.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BigQuerySpec {
-    /**
-     * Specifies a custom BigQuery query.
-     */
+    /// Specifies a custom BigQuery query.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1799,9 +1523,7 @@ pub struct BigQuerySpec {
 /// Specifies a BigQuery table definition. Only [native tables](https://cloud.google.com/bigquery/docs/tables-intro) is allowed.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BigQueryTableSpec {
-    /**
-     * Specifies a BigQuery table definition. Only [native tables](https://cloud.google.com/bigquery/docs/tables-intro) is allowed.
-     */
+    /// Specifies a BigQuery table definition. Only [native tables](https://cloud.google.com/bigquery/docs/tables-intro) is allowed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1809,9 +1531,7 @@ pub struct BigQueryTableSpec {
         rename = "datasetId"
     )]
     pub dataset_id: String,
-    /**
-     * Specifies a BigQuery table definition. Only [native tables](https://cloud.google.com/bigquery/docs/tables-intro) is allowed.
-     */
+    /// Specifies a BigQuery table definition. Only [native tables](https://cloud.google.com/bigquery/docs/tables-intro) is allowed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1819,9 +1539,7 @@ pub struct BigQueryTableSpec {
         rename = "tableId"
     )]
     pub table_id: String,
-    /**
-     * Specifies a BigQuery table definition. Only [native tables](https://cloud.google.com/bigquery/docs/tables-intro) is allowed.
-     */
+    /// Specifies a BigQuery table definition. Only [native tables](https://cloud.google.com/bigquery/docs/tables-intro) is allowed.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1958,14 +1676,10 @@ impl BooleanConditionType {
 /// A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BooleanCondition {
-    /**
-     * A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
-     */
+    /// A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<BooleanConditionType>,
-    /**
-     * A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
-     */
+    /// A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -1977,14 +1691,10 @@ pub struct BooleanCondition {
 /// A rule that may or may not match, depending on the condition.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BooleanRule {
-    /**
-     * A rule that may or may not match, depending on the condition.
-     */
+    /// A rule that may or may not match, depending on the condition.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition: Option<BooleanCondition>,
-    /**
-     * A rule that may or may not match, depending on the condition.
-     */
+    /// A rule that may or may not match, depending on the condition.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub format: Option<CellFormat>,
 }
@@ -2044,28 +1754,20 @@ impl Style {
 /// A border along a cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Border {
-    /**
-     * A border along a cell.
-     */
+    /// A border along a cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub color: Option<Color>,
-    /**
-     * A border along a cell.
-     */
+    /// A border along a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "colorStyle"
     )]
     pub color_style: Option<ColorStyle>,
-    /**
-     * A border along a cell.
-     */
+    /// A border along a cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub style: Option<Style>,
-    /**
-     * A border along a cell.
-     */
+    /// A border along a cell.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2077,24 +1779,16 @@ pub struct Border {
 /// The borders of the cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Borders {
-    /**
-     * The borders of the cell.
-     */
+    /// The borders of the cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bottom: Option<Border>,
-    /**
-     * The borders of the cell.
-     */
+    /// The borders of the cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub left: Option<Border>,
-    /**
-     * The borders of the cell.
-     */
+    /// The borders of the cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub right: Option<Border>,
-    /**
-     * The borders of the cell.
-     */
+    /// The borders of the cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub top: Option<Border>,
 }
@@ -2153,36 +1847,28 @@ impl BubbleChartSpecLegendPosition {
 /// A bubble chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BubbleChartSpec {
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "bubbleBorderColor"
     )]
     pub bubble_border_color: Option<Color>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "bubbleBorderColorStyle"
     )]
     pub bubble_border_color_style: Option<ColorStyle>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "bubbleLabels"
     )]
     pub bubble_labels: Option<ChartData>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2190,9 +1876,7 @@ pub struct BubbleChartSpec {
         rename = "bubbleMaxRadiusSize"
     )]
     pub bubble_max_radius_size: i64,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2200,9 +1884,7 @@ pub struct BubbleChartSpec {
         rename = "bubbleMinRadiusSize"
     )]
     pub bubble_min_radius_size: i64,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -2210,46 +1892,34 @@ pub struct BubbleChartSpec {
         rename = "bubbleOpacity"
     )]
     pub bubble_opacity: f64,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "bubbleSizes"
     )]
     pub bubble_sizes: Option<ChartData>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "bubbleTextStyle"
     )]
     pub bubble_text_style: Option<TextFormat>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub domain: Option<ChartData>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "groupIds")]
     pub group_ids: Option<ChartData>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "legendPosition"
     )]
     pub legend_position: Option<BubbleChartSpecLegendPosition>,
-    /**
-     * A bubble chart.
-     */
+    /// A bubble chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub series: Option<ChartData>,
 }
@@ -2257,18 +1927,14 @@ pub struct BubbleChartSpec {
 /// A candlestick chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CandlestickChartSpec {
-    /**
-     * A candlestick chart.
-     */
+    /// A candlestick chart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<CandlestickData>,
-    /**
-     * A candlestick chart.
-     */
+    /// A candlestick chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub domain: Option<CandlestickDomain>,
 }
@@ -2276,32 +1942,24 @@ pub struct CandlestickChartSpec {
 /// The Candlestick chart data, each containing the low, open, close, and high values for a series.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CandlestickData {
-    /**
-     * The Candlestick chart data, each containing the low, open, close, and high values for a series.
-     */
+    /// The Candlestick chart data, each containing the low, open, close, and high values for a series.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "closeSeries"
     )]
     pub close_series: Option<CandlestickSeries>,
-    /**
-     * The Candlestick chart data, each containing the low, open, close, and high values for a series.
-     */
+    /// The Candlestick chart data, each containing the low, open, close, and high values for a series.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "highSeries"
     )]
     pub high_series: Option<CandlestickSeries>,
-    /**
-     * The Candlestick chart data, each containing the low, open, close, and high values for a series.
-     */
+    /// The Candlestick chart data, each containing the low, open, close, and high values for a series.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "lowSeries")]
     pub low_series: Option<CandlestickSeries>,
-    /**
-     * The Candlestick chart data, each containing the low, open, close, and high values for a series.
-     */
+    /// The Candlestick chart data, each containing the low, open, close, and high values for a series.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -2313,14 +1971,10 @@ pub struct CandlestickData {
 /// The domain of a CandlestickChart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CandlestickDomain {
-    /**
-     * The domain of a CandlestickChart.
-     */
+    /// The domain of a CandlestickChart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<ChartData>,
-    /**
-     * The domain of a CandlestickChart.
-     */
+    /// The domain of a CandlestickChart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -2331,9 +1985,7 @@ pub struct CandlestickDomain {
 /// The series of a CandlestickData.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CandlestickSeries {
-    /**
-     * The series of a CandlestickData.
-     */
+    /// The series of a CandlestickData.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<ChartData>,
 }
@@ -2341,54 +1993,42 @@ pub struct CandlestickSeries {
 /// Data about a specific cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CellData {
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceFormula"
     )]
     pub data_source_formula: Option<DataSourceFormula>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceTable"
     )]
     pub data_source_table: Option<DataSourceTable>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataValidation"
     )]
     pub data_validation: Option<DataValidationRule>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "effectiveFormat"
     )]
     pub effective_format: Option<CellFormat>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "effectiveValue"
     )]
     pub effective_value: Option<ExtendedValue>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2396,36 +2036,28 @@ pub struct CellData {
         rename = "formattedValue"
     )]
     pub formatted_value: String,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub hyperlink: String,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub note: String,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "pivotTable"
     )]
     pub pivot_table: Option<PivotTable>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -2433,18 +2065,14 @@ pub struct CellData {
         rename = "textFormatRuns"
     )]
     pub text_format_runs: Vec<TextFormatRun>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "userEnteredFormat"
     )]
     pub user_entered_format: Option<CellFormat>,
-    /**
-     * Data about a specific cell.
-     */
+    /// Data about a specific cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -2655,100 +2283,76 @@ impl WrapStrategy {
 /// The format of a cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CellFormat {
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColor"
     )]
     pub background_color: Option<Color>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColorStyle"
     )]
     pub background_color_style: Option<ColorStyle>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub borders: Option<Borders>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "horizontalAlignment"
     )]
     pub horizontal_alignment: Option<HorizontalAlignment>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "hyperlinkDisplayType"
     )]
     pub hyperlink_display_type: Option<HyperlinkDisplayType>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "numberFormat"
     )]
     pub number_format: Option<NumberFormat>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub padding: Option<Padding>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "textDirection"
     )]
     pub text_direction: Option<TextDirection>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "textFormat"
     )]
     pub text_format: Option<TextFormat>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "textRotation"
     )]
     pub text_rotation: Option<TextRotation>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "verticalAlignment"
     )]
     pub vertical_alignment: Option<VerticalAlignment>,
-    /**
-     * The format of a cell.
-     */
+    /// The format of a cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -2800,9 +2404,7 @@ impl ViewWindowMode {
 /// The options that define a "view window" for a chart (such as the visible values in an axis).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartAxisViewWindowOptions {
-    /**
-     * The options that define a "view window" for a chart (such as the visible values in an axis).
-     */
+    /// The options that define a "view window" for a chart (such as the visible values in an axis).
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -2810,9 +2412,7 @@ pub struct ChartAxisViewWindowOptions {
         rename = "viewWindowMax"
     )]
     pub view_window_max: f64,
-    /**
-     * The options that define a "view window" for a chart (such as the visible values in an axis).
-     */
+    /// The options that define a "view window" for a chart (such as the visible values in an axis).
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -2820,9 +2420,7 @@ pub struct ChartAxisViewWindowOptions {
         rename = "viewWindowMin"
     )]
     pub view_window_min: f64,
-    /**
-     * The options that define a "view window" for a chart (such as the visible values in an axis).
-     */
+    /// The options that define a "view window" for a chart (such as the visible values in an axis).
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -2834,18 +2432,14 @@ pub struct ChartAxisViewWindowOptions {
 /// Custom number formatting options for chart attributes.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartCustomNumberFormatOptions {
-    /**
-     * Custom number formatting options for chart attributes.
-     */
+    /// Custom number formatting options for chart attributes.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub prefix: String,
-    /**
-     * Custom number formatting options for chart attributes.
-     */
+    /// Custom number formatting options for chart attributes.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2906,32 +2500,24 @@ impl AggregateType {
 /// The data included in a domain or series.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartData {
-    /**
-     * The data included in a domain or series.
-     */
+    /// The data included in a domain or series.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "aggregateType"
     )]
     pub aggregate_type: Option<AggregateType>,
-    /**
-     * The data included in a domain or series.
-     */
+    /// The data included in a domain or series.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "columnReference"
     )]
     pub column_reference: Option<DataSourceColumnReference>,
-    /**
-     * The data included in a domain or series.
-     */
+    /// The data included in a domain or series.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "groupRule")]
     pub group_rule: Option<ChartGroupRule>,
-    /**
-     * The data included in a domain or series.
-     */
+    /// The data included in a domain or series.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3021,9 +2607,7 @@ impl ChartDateTimeRuleType {
 /// Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartDateTimeRule {
-    /**
-     * Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values.
-     */
+    /// Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<ChartDateTimeRuleType>,
 }
@@ -3031,18 +2615,14 @@ pub struct ChartDateTimeRule {
 /// An optional setting on the ChartData of the domain of a data source chart that defines buckets for the values in the domain rather than breaking out each individual value. For example, when plotting a data source chart, you can specify a histogram rule on the domain (it should only contain numeric values), grouping its values into buckets. Any values of a chart series that fall into the same bucket are aggregated based on the aggregate_type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartGroupRule {
-    /**
-     * An optional setting on the ChartData of the domain of a data source chart that defines buckets for the values in the domain rather than breaking out each individual value. For example, when plotting a data source chart, you can specify a histogram rule on the domain (it should only contain numeric values), grouping its values into buckets. Any values of a chart series that fall into the same bucket are aggregated based on the aggregate_type.
-     */
+    /// An optional setting on the ChartData of the domain of a data source chart that defines buckets for the values in the domain rather than breaking out each individual value. For example, when plotting a data source chart, you can specify a histogram rule on the domain (it should only contain numeric values), grouping its values into buckets. Any values of a chart series that fall into the same bucket are aggregated based on the aggregate_type.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dateTimeRule"
     )]
     pub date_time_rule: Option<ChartDateTimeRule>,
-    /**
-     * An optional setting on the ChartData of the domain of a data source chart that defines buckets for the values in the domain rather than breaking out each individual value. For example, when plotting a data source chart, you can specify a histogram rule on the domain (it should only contain numeric values), grouping its values into buckets. Any values of a chart series that fall into the same bucket are aggregated based on the aggregate_type.
-     */
+    /// An optional setting on the ChartData of the domain of a data source chart that defines buckets for the values in the domain rather than breaking out each individual value. For example, when plotting a data source chart, you can specify a histogram rule on the domain (it should only contain numeric values), grouping its values into buckets. Any values of a chart series that fall into the same bucket are aggregated based on the aggregate_type.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3054,9 +2634,7 @@ pub struct ChartGroupRule {
 /// Allows you to organize numeric values in a source data column into buckets of constant size.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartHistogramRule {
-    /**
-     * Allows you to organize numeric values in a source data column into buckets of constant size.
-     */
+    /// Allows you to organize numeric values in a source data column into buckets of constant size.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3064,9 +2642,7 @@ pub struct ChartHistogramRule {
         rename = "intervalSize"
     )]
     pub interval_size: f64,
-    /**
-     * Allows you to organize numeric values in a source data column into buckets of constant size.
-     */
+    /// Allows you to organize numeric values in a source data column into buckets of constant size.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3074,9 +2650,7 @@ pub struct ChartHistogramRule {
         rename = "maxValue"
     )]
     pub max_value: f64,
-    /**
-     * Allows you to organize numeric values in a source data column into buckets of constant size.
-     */
+    /// Allows you to organize numeric values in a source data column into buckets of constant size.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3089,9 +2663,7 @@ pub struct ChartHistogramRule {
 /// Source ranges for a chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartSourceRange {
-    /**
-     * Source ranges for a chart.
-     */
+    /// Source ranges for a chart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3148,9 +2720,7 @@ impl HiddenDimensionStrategy {
 /// The specifications of a chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChartSpec {
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3158,63 +2728,49 @@ pub struct ChartSpec {
         rename = "altText"
     )]
     pub alt_text: String,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColor"
     )]
     pub background_color: Option<Color>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColorStyle"
     )]
     pub background_color_style: Option<ColorStyle>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "basicChart"
     )]
     pub basic_chart: Option<BasicChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "bubbleChart"
     )]
     pub bubble_chart: Option<BubbleChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "candlestickChart"
     )]
     pub candlestick_chart: Option<CandlestickChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceChartProperties"
     )]
     pub data_source_chart_properties: Option<DataSourceChartProperties>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3222,9 +2778,7 @@ pub struct ChartSpec {
         rename = "filterSpecs"
     )]
     pub filter_specs: Vec<FilterSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3232,54 +2786,40 @@ pub struct ChartSpec {
         rename = "fontName"
     )]
     pub font_name: String,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "hiddenDimensionStrategy"
     )]
     pub hidden_dimension_strategy: Option<HiddenDimensionStrategy>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "histogramChart"
     )]
     pub histogram_chart: Option<HistogramChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub maximized: bool,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "orgChart")]
     pub org_chart: Option<OrgChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "pieChart")]
     pub pie_chart: Option<PieChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "scorecardChart"
     )]
     pub scorecard_chart: Option<ScorecardChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3287,72 +2827,56 @@ pub struct ChartSpec {
         rename = "sortSpecs"
     )]
     pub sort_specs: Vec<SortSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub subtitle: String,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "subtitleTextFormat"
     )]
     pub subtitle_text_format: Option<TextFormat>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "subtitleTextPosition"
     )]
     pub subtitle_text_position: Option<TextPosition>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "titleTextFormat"
     )]
     pub title_text_format: Option<TextFormat>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "titleTextPosition"
     )]
     pub title_text_position: Option<TextPosition>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "treemapChart"
     )]
     pub treemap_chart: Option<TreemapChartSpec>,
-    /**
-     * The specifications of a chart.
-     */
+    /// The specifications of a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3364,9 +2888,7 @@ pub struct ChartSpec {
 /// Clears the basic filter, if any exists on the sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClearBasicFilterRequest {
-    /**
-     * Clears the basic filter, if any exists on the sheet.
-     */
+    /// Clears the basic filter, if any exists on the sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3383,9 +2905,7 @@ pub struct ClearValuesRequest {}
 /// The response when clearing a range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ClearValuesResponse {
-    /**
-     * The response when clearing a range of values in a spreadsheet.
-     */
+    /// The response when clearing a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3393,9 +2913,7 @@ pub struct ClearValuesResponse {
         rename = "clearedRange"
     )]
     pub cleared_range: String,
-    /**
-     * The response when clearing a range of values in a spreadsheet.
-     */
+    /// The response when clearing a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3408,36 +2926,28 @@ pub struct ClearValuesResponse {
 /// Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Color {
-    /**
-     * Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor\* fromProto(Color\* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue\* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color\* toProto(UIColor\* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color\* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac \* 255); var green = Math.floor(greenFrac \* 255); var blue = Math.floor(blueFrac \* 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
-     */
+    /// Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub alpha: f64,
-    /**
-     * Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor\* fromProto(Color\* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue\* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color\* toProto(UIColor\* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color\* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac \* 255); var green = Math.floor(greenFrac \* 255); var blue = Math.floor(blueFrac \* 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
-     */
+    /// Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub blue: f64,
-    /**
-     * Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor\* fromProto(Color\* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue\* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color\* toProto(UIColor\* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color\* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac \* 255); var green = Math.floor(greenFrac \* 255); var blue = Math.floor(blueFrac \* 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
-     */
+    /// Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub green: f64,
-    /**
-     * Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor\* fromProto(Color\* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue\* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color\* toProto(UIColor\* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color\* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac \* 255); var green = Math.floor(greenFrac \* 255); var blue = Math.floor(blueFrac \* 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
-     */
+    /// Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -3507,14 +3017,10 @@ impl ColorType {
 /// A color value.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ColorStyle {
-    /**
-     * A color value.
-     */
+    /// A color value.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "rgbColor")]
     pub rgb_color: Option<Color>,
-    /**
-     * A color value.
-     */
+    /// A color value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3575,18 +3081,14 @@ impl RelativeDate {
 /// The value of the condition.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConditionValue {
-    /**
-     * The value of the condition.
-     */
+    /// The value of the condition.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "relativeDate"
     )]
     pub relative_date: Option<RelativeDate>,
-    /**
-     * The value of the condition.
-     */
+    /// The value of the condition.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3599,27 +3101,21 @@ pub struct ConditionValue {
 /// A rule describing a conditional format.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConditionalFormatRule {
-    /**
-     * A rule describing a conditional format.
-     */
+    /// A rule describing a conditional format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "booleanRule"
     )]
     pub boolean_rule: Option<BooleanRule>,
-    /**
-     * A rule describing a conditional format.
-     */
+    /// A rule describing a conditional format.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "gradientRule"
     )]
     pub gradient_rule: Option<GradientRule>,
-    /**
-     * A rule describing a conditional format.
-     */
+    /// A rule describing a conditional format.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -3714,28 +3210,20 @@ impl PasteType {
 /// Copies data from the source to the destination.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CopyPasteRequest {
-    /**
-     * Copies data from the source to the destination.
-     */
+    /// Copies data from the source to the destination.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub destination: Option<GridRange>,
-    /**
-     * Copies data from the source to the destination.
-     */
+    /// Copies data from the source to the destination.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "pasteOrientation"
     )]
     pub paste_orientation: Option<PasteOrientation>,
-    /**
-     * Copies data from the source to the destination.
-     */
+    /// Copies data from the source to the destination.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "pasteType")]
     pub paste_type: Option<PasteType>,
-    /**
-     * Copies data from the source to the destination.
-     */
+    /// Copies data from the source to the destination.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<GridRange>,
 }
@@ -3743,9 +3231,7 @@ pub struct CopyPasteRequest {
 /// The request to copy a sheet across spreadsheets.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CopySheetAnotherSpreadsheetRequest {
-    /**
-     * The request to copy a sheet across spreadsheets.
-     */
+    /// The request to copy a sheet across spreadsheets.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3758,9 +3244,7 @@ pub struct CopySheetAnotherSpreadsheetRequest {
 /// A request to create developer metadata.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateDeveloperMetadataRequest {
-    /**
-     * A request to create developer metadata.
-     */
+    /// A request to create developer metadata.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3772,9 +3256,7 @@ pub struct CreateDeveloperMetadataRequest {
 /// The response from creating developer metadata.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateDeveloperMetadataResponse {
-    /**
-     * The response from creating developer metadata.
-     */
+    /// The response from creating developer metadata.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3786,19 +3268,13 @@ pub struct CreateDeveloperMetadataResponse {
 /// Moves data from the source to the destination.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CutPasteRequest {
-    /**
-     * Moves data from the source to the destination.
-     */
+    /// Moves data from the source to the destination.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub destination: Option<GridCoordinate>,
-    /**
-     * Moves data from the source to the destination.
-     */
+    /// Moves data from the source to the destination.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "pasteType")]
     pub paste_type: Option<PasteType>,
-    /**
-     * Moves data from the source to the destination.
-     */
+    /// Moves data from the source to the destination.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<GridRange>,
 }
@@ -3931,14 +3407,10 @@ impl State {
 /// The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataExecutionStatus {
-    /**
-     * The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: \* Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. \* Updating a data source creates a data execution to refresh the associated data source sheet similarly. \* You can send refresh request to explicitly refresh one or multiple data source objects.
-     */
+    /// The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "errorCode")]
     pub error_code: Option<ErrorCode>,
-    /**
-     * The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: \* Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. \* Updating a data source creates a data execution to refresh the associated data source sheet similarly. \* You can send refresh request to explicitly refresh one or multiple data source objects.
-     */
+    /// The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3946,9 +3418,7 @@ pub struct DataExecutionStatus {
         rename = "errorMessage"
     )]
     pub error_message: String,
-    /**
-     * The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: \* Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. \* Updating a data source creates a data execution to refresh the associated data source sheet similarly. \* You can send refresh request to explicitly refresh one or multiple data source objects.
-     */
+    /// The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3956,9 +3426,7 @@ pub struct DataExecutionStatus {
         rename = "lastRefreshTime"
     )]
     pub last_refresh_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: \* Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. \* Updating a data source creates a data execution to refresh the associated data source sheet similarly. \* You can send refresh request to explicitly refresh one or multiple data source objects.
-     */
+    /// The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
 }
@@ -3966,9 +3434,7 @@ pub struct DataExecutionStatus {
 /// Filter that describes what data should be selected or returned from a request.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataFilter {
-    /**
-     * Filter that describes what data should be selected or returned from a request.
-     */
+    /// Filter that describes what data should be selected or returned from a request.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3976,18 +3442,14 @@ pub struct DataFilter {
         rename = "a1Range"
     )]
     pub a_1_range: String,
-    /**
-     * Filter that describes what data should be selected or returned from a request.
-     */
+    /// Filter that describes what data should be selected or returned from a request.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "developerMetadataLookup"
     )]
     pub developer_metadata_lookup: Option<DeveloperMetadataLookup>,
-    /**
-     * Filter that describes what data should be selected or returned from a request.
-     */
+    /// Filter that describes what data should be selected or returned from a request.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "gridRange")]
     pub grid_range: Option<GridRange>,
 }
@@ -3995,27 +3457,21 @@ pub struct DataFilter {
 /// A range of values whose location is specified by a DataFilter.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataFilterValueRange {
-    /**
-     * A range of values whose location is specified by a DataFilter.
-     */
+    /// A range of values whose location is specified by a DataFilter.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataFilter"
     )]
     pub data_filter: Option<DataFilter>,
-    /**
-     * A range of values whose location is specified by a DataFilter.
-     */
+    /// A range of values whose location is specified by a DataFilter.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "majorDimension"
     )]
     pub major_dimension: Option<Dimension>,
-    /**
-     * A range of values whose location is specified by a DataFilter.
-     */
+    /// A range of values whose location is specified by a DataFilter.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4122,32 +3578,24 @@ impl DataLabelType {
 /// Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataLabel {
-    /**
-     * Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
-     */
+    /// Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "customLabelData"
     )]
     pub custom_label_data: Option<ChartData>,
-    /**
-     * Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
-     */
+    /// Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub placement: Option<Placement>,
-    /**
-     * Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
-     */
+    /// Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "textFormat"
     )]
     pub text_format: Option<TextFormat>,
-    /**
-     * Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
-     */
+    /// Settings for one set of data labels. Data labels are annotations that appear next to a set of data, such as the points on a line chart, and provide additional information about what the data represents, such as a text representation of the value behind that point on the graph.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DataLabelType>,
 }
@@ -4155,9 +3603,7 @@ pub struct DataLabel {
 /// Information about an external data source in the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSource {
-    /**
-     * Information about an external data source in the spreadsheet.
-     */
+    /// Information about an external data source in the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4165,9 +3611,7 @@ pub struct DataSource {
         rename = "calculatedColumns"
     )]
     pub calculated_columns: Vec<DataSourceColumn>,
-    /**
-     * Information about an external data source in the spreadsheet.
-     */
+    /// Information about an external data source in the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4175,9 +3619,7 @@ pub struct DataSource {
         rename = "dataSourceId"
     )]
     pub data_source_id: String,
-    /**
-     * Information about an external data source in the spreadsheet.
-     */
+    /// Information about an external data source in the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4185,9 +3627,7 @@ pub struct DataSource {
         rename = "sheetId"
     )]
     pub sheet_id: i64,
-    /**
-     * Information about an external data source in the spreadsheet.
-     */
+    /// Information about an external data source in the spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spec: Option<DataSourceSpec>,
 }
@@ -4195,18 +3635,14 @@ pub struct DataSource {
 /// Properties of a data source chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceChartProperties {
-    /**
-     * Properties of a data source chart.
-     */
+    /// Properties of a data source chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * Properties of a data source chart.
-     */
+    /// Properties of a data source chart.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4219,18 +3655,14 @@ pub struct DataSourceChartProperties {
 /// A column in a data source.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceColumn {
-    /**
-     * A column in a data source.
-     */
+    /// A column in a data source.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub formula: String,
-    /**
-     * A column in a data source.
-     */
+    /// A column in a data source.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reference: Option<DataSourceColumnReference>,
 }
@@ -4238,9 +3670,7 @@ pub struct DataSourceColumn {
 /// An unique identifier that references a data source column.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceColumnReference {
-    /**
-     * An unique identifier that references a data source column.
-     */
+    /// An unique identifier that references a data source column.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4252,18 +3682,14 @@ pub struct DataSourceColumnReference {
 /// A data source formula.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceFormula {
-    /**
-     * A data source formula.
-     */
+    /// A data source formula.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * A data source formula.
-     */
+    /// A data source formula.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4276,9 +3702,7 @@ pub struct DataSourceFormula {
 /// Reference to a data source object.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceObjectReference {
-    /**
-     * Reference to a data source object.
-     */
+    /// Reference to a data source object.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4286,36 +3710,28 @@ pub struct DataSourceObjectReference {
         rename = "chartId"
     )]
     pub chart_id: i64,
-    /**
-     * Reference to a data source object.
-     */
+    /// Reference to a data source object.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceFormulaCell"
     )]
     pub data_source_formula_cell: Option<GridCoordinate>,
-    /**
-     * Reference to a data source object.
-     */
+    /// Reference to a data source object.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourcePivotTableAnchorCell"
     )]
     pub data_source_pivot_table_anchor_cell: Option<GridCoordinate>,
-    /**
-     * Reference to a data source object.
-     */
+    /// Reference to a data source object.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceTableAnchorCell"
     )]
     pub data_source_table_anchor_cell: Option<GridCoordinate>,
-    /**
-     * Reference to a data source object.
-     */
+    /// Reference to a data source object.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4328,9 +3744,7 @@ pub struct DataSourceObjectReference {
 /// A list of references to data source objects.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceObjectReferences {
-    /**
-     * A list of references to data source objects.
-     */
+    /// A list of references to data source objects.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4342,18 +3756,14 @@ pub struct DataSourceObjectReferences {
 /// A parameter in a data source's query. The parameter allows the user to pass in values from the spreadsheet into a query.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceParameter {
-    /**
-     * A parameter in a data source's query. The parameter allows the user to pass in values from the spreadsheet into a query.
-     */
+    /// A parameter in a data source's query. The parameter allows the user to pass in values from the spreadsheet into a query.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A parameter in a data source's query. The parameter allows the user to pass in values from the spreadsheet into a query.
-     */
+    /// A parameter in a data source's query. The parameter allows the user to pass in values from the spreadsheet into a query.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4361,9 +3771,7 @@ pub struct DataSourceParameter {
         rename = "namedRangeId"
     )]
     pub named_range_id: String,
-    /**
-     * A parameter in a data source's query. The parameter allows the user to pass in values from the spreadsheet into a query.
-     */
+    /// A parameter in a data source's query. The parameter allows the user to pass in values from the spreadsheet into a query.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -4371,9 +3779,7 @@ pub struct DataSourceParameter {
 /// A schedule for data to refresh every day in a given time interval.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceRefreshDailySchedule {
-    /**
-     * A schedule for data to refresh every day in a given time interval.
-     */
+    /// A schedule for data to refresh every day in a given time interval.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "startTime")]
     pub start_time: Option<TimeOfDay>,
 }
@@ -4381,9 +3787,7 @@ pub struct DataSourceRefreshDailySchedule {
 /// A monthly schedule for data to refresh on specific days in the month in a given time interval.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceRefreshMonthlySchedule {
-    /**
-     * A monthly schedule for data to refresh on specific days in the month in a given time interval.
-     */
+    /// A monthly schedule for data to refresh on specific days in the month in a given time interval.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4391,9 +3795,7 @@ pub struct DataSourceRefreshMonthlySchedule {
         rename = "daysOfMonth"
     )]
     pub days_of_month: Vec<i64>,
-    /**
-     * A monthly schedule for data to refresh on specific days in the month in a given time interval.
-     */
+    /// A monthly schedule for data to refresh on specific days in the month in a given time interval.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "startTime")]
     pub start_time: Option<TimeOfDay>,
 }
@@ -4437,49 +3839,37 @@ impl RefreshScope {
 /// Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceRefreshSchedule {
-    /**
-     * Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
-     */
+    /// Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dailySchedule"
     )]
     pub daily_schedule: Option<DataSourceRefreshDailySchedule>,
-    /**
-     * Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
-     */
+    /// Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    /**
-     * Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
-     */
+    /// Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "monthlySchedule"
     )]
     pub monthly_schedule: Option<DataSourceRefreshMonthlySchedule>,
-    /**
-     * Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
-     */
+    /// Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "nextRun")]
     pub next_run: Option<Interval>,
-    /**
-     * Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
-     */
+    /// Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "refreshScope"
     )]
     pub refresh_scope: Option<RefreshScope>,
-    /**
-     * Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
-     */
+    /// Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -4540,9 +3930,7 @@ impl DaysOfWeek {
 /// A weekly schedule for data to refresh on specific days in a given time interval.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceRefreshWeeklySchedule {
-    /**
-     * A weekly schedule for data to refresh on specific days in a given time interval.
-     */
+    /// A weekly schedule for data to refresh on specific days in a given time interval.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4550,9 +3938,7 @@ pub struct DataSourceRefreshWeeklySchedule {
         rename = "daysOfWeek"
     )]
     pub days_of_week: Vec<DaysOfWeek>,
-    /**
-     * A weekly schedule for data to refresh on specific days in a given time interval.
-     */
+    /// A weekly schedule for data to refresh on specific days in a given time interval.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "startTime")]
     pub start_time: Option<TimeOfDay>,
 }
@@ -4560,9 +3946,7 @@ pub struct DataSourceRefreshWeeklySchedule {
 /// A range along a single dimension on a DATA_SOURCE sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceSheetDimensionRange {
-    /**
-     * A range along a single dimension on a DATA_SOURCE sheet.
-     */
+    /// A range along a single dimension on a DATA_SOURCE sheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4570,9 +3954,7 @@ pub struct DataSourceSheetDimensionRange {
         rename = "columnReferences"
     )]
     pub column_references: Vec<DataSourceColumnReference>,
-    /**
-     * A range along a single dimension on a DATA_SOURCE sheet.
-     */
+    /// A range along a single dimension on a DATA_SOURCE sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4585,27 +3967,21 @@ pub struct DataSourceSheetDimensionRange {
 /// Additional properties of a DATA_SOURCE sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceSheetProperties {
-    /**
-     * Additional properties of a DATA_SOURCE sheet.
-     */
+    /// Additional properties of a DATA_SOURCE sheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub columns: Vec<DataSourceColumn>,
-    /**
-     * Additional properties of a DATA_SOURCE sheet.
-     */
+    /// Additional properties of a DATA_SOURCE sheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * Additional properties of a DATA_SOURCE sheet.
-     */
+    /// Additional properties of a DATA_SOURCE sheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4618,14 +3994,10 @@ pub struct DataSourceSheetProperties {
 /// This specifies the details of the data source. For example, for BigQuery, this specifies information about the BigQuery source.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceSpec {
-    /**
-     * This specifies the details of the data source. For example, for BigQuery, this specifies information about the BigQuery source.
-     */
+    /// This specifies the details of the data source. For example, for BigQuery, this specifies information about the BigQuery source.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "bigQuery")]
     pub big_query: Option<BigQueryDataSourceSpec>,
-    /**
-     * This specifies the details of the data source. For example, for BigQuery, this specifies information about the BigQuery source.
-     */
+    /// This specifies the details of the data source. For example, for BigQuery, this specifies information about the BigQuery source.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4676,36 +4048,28 @@ impl ColumnSelectionType {
 /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataSourceTable {
-    /**
-     * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
-     */
+    /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "columnSelectionType"
     )]
     pub column_selection_type: Option<ColumnSelectionType>,
-    /**
-     * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
-     */
+    /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub columns: Vec<DataSourceColumnReference>,
-    /**
-     * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
-     */
+    /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
-     */
+    /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4713,9 +4077,7 @@ pub struct DataSourceTable {
         rename = "dataSourceId"
     )]
     pub data_source_id: String,
-    /**
-     * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
-     */
+    /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4723,9 +4085,7 @@ pub struct DataSourceTable {
         rename = "filterSpecs"
     )]
     pub filter_specs: Vec<FilterSpec>,
-    /**
-     * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
-     */
+    /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4733,9 +4093,7 @@ pub struct DataSourceTable {
         rename = "rowLimit"
     )]
     pub row_limit: i64,
-    /**
-     * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
-     */
+    /// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4748,14 +4106,10 @@ pub struct DataSourceTable {
 /// A data validation rule.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DataValidationRule {
-    /**
-     * A data validation rule.
-     */
+    /// A data validation rule.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition: Option<BooleanCondition>,
-    /**
-     * A data validation rule.
-     */
+    /// A data validation rule.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4763,18 +4117,14 @@ pub struct DataValidationRule {
         rename = "inputMessage"
     )]
     pub input_message: String,
-    /**
-     * A data validation rule.
-     */
+    /// A data validation rule.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "showCustomUi"
     )]
     pub show_custom_ui: bool,
-    /**
-     * A data validation rule.
-     */
+    /// A data validation rule.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4861,9 +4211,7 @@ impl DateTimeRuleType {
 /// Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values. For example, consider a pivot table showing sales transactions by date: +----------+--------------+ | Date | SUM of Sales | +----------+--------------+ | 1/1/2017 | $621.14 | | 2/3/2017 | $708.84 | | 5/8/2017 | $326.84 | ... +----------+--------------+ Applying a date-time group rule with a DateTimeRuleType of YEAR_MONTH results in the following pivot table. +--------------+--------------+ | Grouped Date | SUM of Sales | +--------------+--------------+ | 2017-Jan | $53,731.78 | | 2017-Feb | $83,475.32 | | 2017-Mar | $94,385.05 | ... +--------------+--------------+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateTimeRule {
-    /**
-     * Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values. For example, consider a pivot table showing sales transactions by date: +----------+--------------+ | Date | SUM of Sales | +----------+--------------+ | 1/1/2017 | $621.14 | | 2/3/2017 | $708.84 | | 5/8/2017 | $326.84 | ... +----------+--------------+ Applying a date-time group rule with a DateTimeRuleType of YEAR_MONTH results in the following pivot table. +--------------+--------------+ | Grouped Date | SUM of Sales | +--------------+--------------+ | 2017-Jan | $53,731.78 | | 2017-Feb | $83,475.32 | | 2017-Mar | $94,385.05 | ... +--------------+--------------+
-     */
+    /// Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values. For example, consider a pivot table showing sales transactions by date: +----------+--------------+ | Date | SUM of Sales | +----------+--------------+ | 1/1/2017 | $621.14 | | 2/3/2017 | $708.84 | | 5/8/2017 | $326.84 | ... +----------+--------------+ Applying a date-time group rule with a DateTimeRuleType of YEAR_MONTH results in the following pivot table. +--------------+--------------+ | Grouped Date | SUM of Sales | +--------------+--------------+ | 2017-Jan | $53,731.78 | | 2017-Feb | $83,475.32 | | 2017-Mar | $94,385.05 | ... +--------------+--------------+
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DateTimeRuleType>,
 }
@@ -4871,9 +4219,7 @@ pub struct DateTimeRule {
 /// Removes the banded range with the given ID from the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteBandingRequest {
-    /**
-     * Removes the banded range with the given ID from the spreadsheet.
-     */
+    /// Removes the banded range with the given ID from the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4886,18 +4232,14 @@ pub struct DeleteBandingRequest {
 /// Deletes a conditional format rule at the given index. All subsequent rules' indexes are decremented.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteConditionalFormatRuleRequest {
-    /**
-     * Deletes a conditional format rule at the given index. All subsequent rules' indexes are decremented.
-     */
+    /// Deletes a conditional format rule at the given index. All subsequent rules' indexes are decremented.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub index: i64,
-    /**
-     * Deletes a conditional format rule at the given index. All subsequent rules' indexes are decremented.
-     */
+    /// Deletes a conditional format rule at the given index. All subsequent rules' indexes are decremented.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -4910,9 +4252,7 @@ pub struct DeleteConditionalFormatRuleRequest {
 /// The result of deleting a conditional format rule.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteConditionalFormatRuleResponse {
-    /**
-     * The result of deleting a conditional format rule.
-     */
+    /// The result of deleting a conditional format rule.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rule: Option<ConditionalFormatRule>,
 }
@@ -4920,9 +4260,7 @@ pub struct DeleteConditionalFormatRuleResponse {
 /// Deletes a data source. The request also deletes the associated data source sheet, and unlinks all associated data source objects.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDataSourceRequest {
-    /**
-     * Deletes a data source. The request also deletes the associated data source sheet, and unlinks all associated data source objects.
-     */
+    /// Deletes a data source. The request also deletes the associated data source sheet, and unlinks all associated data source objects.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4935,9 +4273,7 @@ pub struct DeleteDataSourceRequest {
 /// A request to delete developer metadata.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDeveloperMetadataRequest {
-    /**
-     * A request to delete developer metadata.
-     */
+    /// A request to delete developer metadata.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -4949,9 +4285,7 @@ pub struct DeleteDeveloperMetadataRequest {
 /// The response from deleting developer metadata.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDeveloperMetadataResponse {
-    /**
-     * The response from deleting developer metadata.
-     */
+    /// The response from deleting developer metadata.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4964,9 +4298,7 @@ pub struct DeleteDeveloperMetadataResponse {
 /// Deletes a group over the specified range by decrementing the depth of the dimensions in the range. For example, assume the sheet has a depth-1 group over B:E and a depth-2 group over C:D. Deleting a group over D:E leaves the sheet with a depth-1 group over B:D and a depth-2 group over C:C.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDimensionGroupRequest {
-    /**
-     * Deletes a group over the specified range by decrementing the depth of the dimensions in the range. For example, assume the sheet has a depth-1 group over B:E and a depth-2 group over C:D. Deleting a group over D:E leaves the sheet with a depth-1 group over B:D and a depth-2 group over C:C.
-     */
+    /// Deletes a group over the specified range by decrementing the depth of the dimensions in the range. For example, assume the sheet has a depth-1 group over B:E and a depth-2 group over C:D. Deleting a group over D:E leaves the sheet with a depth-1 group over B:D and a depth-2 group over C:C.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<DimensionRange>,
 }
@@ -4974,9 +4306,7 @@ pub struct DeleteDimensionGroupRequest {
 /// The result of deleting a group.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDimensionGroupResponse {
-    /**
-     * The result of deleting a group.
-     */
+    /// The result of deleting a group.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -4989,9 +4319,7 @@ pub struct DeleteDimensionGroupResponse {
 /// Deletes the dimensions from the sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDimensionRequest {
-    /**
-     * Deletes the dimensions from the sheet.
-     */
+    /// Deletes the dimensions from the sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<DimensionRange>,
 }
@@ -4999,9 +4327,7 @@ pub struct DeleteDimensionRequest {
 /// Removes rows within this range that contain values in the specified columns that are duplicates of values in any previous row. Rows with identical values but different letter cases, formatting, or formulas are considered to be duplicates. This request also removes duplicate rows hidden from view (for example, due to a filter). When removing duplicates, the first instance of each duplicate row scanning from the top downwards is kept in the resulting range. Content outside of the specified range isn't removed, and rows considered duplicates do not have to be adjacent to each other in the range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDuplicatesRequest {
-    /**
-     * Removes rows within this range that contain values in the specified columns that are duplicates of values in any previous row. Rows with identical values but different letter cases, formatting, or formulas are considered to be duplicates. This request also removes duplicate rows hidden from view (for example, due to a filter). When removing duplicates, the first instance of each duplicate row scanning from the top downwards is kept in the resulting range. Content outside of the specified range isn't removed, and rows considered duplicates do not have to be adjacent to each other in the range.
-     */
+    /// Removes rows within this range that contain values in the specified columns that are duplicates of values in any previous row. Rows with identical values but different letter cases, formatting, or formulas are considered to be duplicates. This request also removes duplicate rows hidden from view (for example, due to a filter). When removing duplicates, the first instance of each duplicate row scanning from the top downwards is kept in the resulting range. Content outside of the specified range isn't removed, and rows considered duplicates do not have to be adjacent to each other in the range.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5009,9 +4335,7 @@ pub struct DeleteDuplicatesRequest {
         rename = "comparisonColumns"
     )]
     pub comparison_columns: Vec<DimensionRange>,
-    /**
-     * Removes rows within this range that contain values in the specified columns that are duplicates of values in any previous row. Rows with identical values but different letter cases, formatting, or formulas are considered to be duplicates. This request also removes duplicate rows hidden from view (for example, due to a filter). When removing duplicates, the first instance of each duplicate row scanning from the top downwards is kept in the resulting range. Content outside of the specified range isn't removed, and rows considered duplicates do not have to be adjacent to each other in the range.
-     */
+    /// Removes rows within this range that contain values in the specified columns that are duplicates of values in any previous row. Rows with identical values but different letter cases, formatting, or formulas are considered to be duplicates. This request also removes duplicate rows hidden from view (for example, due to a filter). When removing duplicates, the first instance of each duplicate row scanning from the top downwards is kept in the resulting range. Content outside of the specified range isn't removed, and rows considered duplicates do not have to be adjacent to each other in the range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -5019,9 +4343,7 @@ pub struct DeleteDuplicatesRequest {
 /// The result of removing duplicates in a range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteDuplicatesResponse {
-    /**
-     * The result of removing duplicates in a range.
-     */
+    /// The result of removing duplicates in a range.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5034,9 +4356,7 @@ pub struct DeleteDuplicatesResponse {
 /// Deletes the embedded object with the given ID.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteEmbeddedObjectRequest {
-    /**
-     * Deletes the embedded object with the given ID.
-     */
+    /// Deletes the embedded object with the given ID.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5049,9 +4369,7 @@ pub struct DeleteEmbeddedObjectRequest {
 /// Deletes a particular filter view.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteFilterViewRequest {
-    /**
-     * Deletes a particular filter view.
-     */
+    /// Deletes a particular filter view.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5064,9 +4382,7 @@ pub struct DeleteFilterViewRequest {
 /// Removes the named range with the given ID from the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteNamedRangeRequest {
-    /**
-     * Removes the named range with the given ID from the spreadsheet.
-     */
+    /// Removes the named range with the given ID from the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5079,9 +4395,7 @@ pub struct DeleteNamedRangeRequest {
 /// Deletes the protected range with the given ID.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteProtectedRangeRequest {
-    /**
-     * Deletes the protected range with the given ID.
-     */
+    /// Deletes the protected range with the given ID.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5094,14 +4408,10 @@ pub struct DeleteProtectedRangeRequest {
 /// Deletes a range of cells, shifting other cells into the deleted area.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteRangeRequest {
-    /**
-     * Deletes a range of cells, shifting other cells into the deleted area.
-     */
+    /// Deletes a range of cells, shifting other cells into the deleted area.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Deletes a range of cells, shifting other cells into the deleted area.
-     */
+    /// Deletes a range of cells, shifting other cells into the deleted area.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -5113,9 +4423,7 @@ pub struct DeleteRangeRequest {
 /// Deletes the requested sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteSheetRequest {
-    /**
-     * Deletes the requested sheet.
-     */
+    /// Deletes the requested sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5167,14 +4475,10 @@ impl Visibility {
 /// Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeveloperMetadata {
-    /**
-     * Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
-     */
+    /// Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub location: Option<DeveloperMetadataLocation>,
-    /**
-     * Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
-     */
+    /// Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5182,9 +4486,7 @@ pub struct DeveloperMetadata {
         rename = "metadataId"
     )]
     pub metadata_id: i64,
-    /**
-     * Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
-     */
+    /// Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5192,9 +4494,7 @@ pub struct DeveloperMetadata {
         rename = "metadataKey"
     )]
     pub metadata_key: String,
-    /**
-     * Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
-     */
+    /// Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5202,9 +4502,7 @@ pub struct DeveloperMetadata {
         rename = "metadataValue"
     )]
     pub metadata_value: String,
-    /**
-     * Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
-     */
+    /// Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
 }
@@ -5257,27 +4555,21 @@ impl LocationType {
 /// A location where metadata may be associated in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeveloperMetadataLocation {
-    /**
-     * A location where metadata may be associated in a spreadsheet.
-     */
+    /// A location where metadata may be associated in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dimensionRange"
     )]
     pub dimension_range: Option<DimensionRange>,
-    /**
-     * A location where metadata may be associated in a spreadsheet.
-     */
+    /// A location where metadata may be associated in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "locationType"
     )]
     pub location_type: Option<LocationType>,
-    /**
-     * A location where metadata may be associated in a spreadsheet.
-     */
+    /// A location where metadata may be associated in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5285,9 +4577,7 @@ pub struct DeveloperMetadataLocation {
         rename = "sheetId"
     )]
     pub sheet_id: i64,
-    /**
-     * A location where metadata may be associated in a spreadsheet.
-     */
+    /// A location where metadata may be associated in a spreadsheet.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5337,27 +4627,21 @@ impl LocationMatchingStrategy {
 /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeveloperMetadataLookup {
-    /**
-     * Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
-     */
+    /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "locationMatchingStrategy"
     )]
     pub location_matching_strategy: Option<LocationMatchingStrategy>,
-    /**
-     * Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
-     */
+    /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "locationType"
     )]
     pub location_type: Option<LocationType>,
-    /**
-     * Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
-     */
+    /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5365,9 +4649,7 @@ pub struct DeveloperMetadataLookup {
         rename = "metadataId"
     )]
     pub metadata_id: i64,
-    /**
-     * Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
-     */
+    /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5375,18 +4657,14 @@ pub struct DeveloperMetadataLookup {
         rename = "metadataKey"
     )]
     pub metadata_key: String,
-    /**
-     * Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
-     */
+    /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "metadataLocation"
     )]
     pub metadata_location: Option<DeveloperMetadataLocation>,
-    /**
-     * Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
-     */
+    /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5394,9 +4672,7 @@ pub struct DeveloperMetadataLookup {
         rename = "metadataValue"
     )]
     pub metadata_value: String,
-    /**
-     * Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
-     */
+    /// Selects DeveloperMetadata that matches all of the specified fields. For example, if only a metadata ID is specified this considers the DeveloperMetadata with that particular unique ID. If a metadata key is specified, this considers all developer metadata with that key. If a key, visibility, and location type are all specified, this considers all developer metadata with that key and visibility that are associated with a location of that type. In general, this selects all DeveloperMetadata that matches the intersection of all the specified fields; any field or combination of fields may be specified.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visibility: Option<Visibility>,
 }
@@ -5404,26 +4680,20 @@ pub struct DeveloperMetadataLookup {
 /// A group over an interval of rows or columns on a sheet, which can contain or be contained within other groups. A group can be collapsed or expanded as a unit on the sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DimensionGroup {
-    /**
-     * A group over an interval of rows or columns on a sheet, which can contain or be contained within other groups. A group can be collapsed or expanded as a unit on the sheet.
-     */
+    /// A group over an interval of rows or columns on a sheet, which can contain or be contained within other groups. A group can be collapsed or expanded as a unit on the sheet.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub collapsed: bool,
-    /**
-     * A group over an interval of rows or columns on a sheet, which can contain or be contained within other groups. A group can be collapsed or expanded as a unit on the sheet.
-     */
+    /// A group over an interval of rows or columns on a sheet, which can contain or be contained within other groups. A group can be collapsed or expanded as a unit on the sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub depth: i64,
-    /**
-     * A group over an interval of rows or columns on a sheet, which can contain or be contained within other groups. A group can be collapsed or expanded as a unit on the sheet.
-     */
+    /// A group over an interval of rows or columns on a sheet, which can contain or be contained within other groups. A group can be collapsed or expanded as a unit on the sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<DimensionRange>,
 }
@@ -5431,18 +4701,14 @@ pub struct DimensionGroup {
 /// Properties about a dimension.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DimensionProperties {
-    /**
-     * Properties about a dimension.
-     */
+    /// Properties about a dimension.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceColumnReference"
     )]
     pub data_source_column_reference: Option<DataSourceColumnReference>,
-    /**
-     * Properties about a dimension.
-     */
+    /// Properties about a dimension.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5450,27 +4716,21 @@ pub struct DimensionProperties {
         rename = "developerMetadata"
     )]
     pub developer_metadata: Vec<DeveloperMetadata>,
-    /**
-     * Properties about a dimension.
-     */
+    /// Properties about a dimension.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "hiddenByFilter"
     )]
     pub hidden_by_filter: bool,
-    /**
-     * Properties about a dimension.
-     */
+    /// Properties about a dimension.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "hiddenByUser"
     )]
     pub hidden_by_user: bool,
-    /**
-     * Properties about a dimension.
-     */
+    /// Properties about a dimension.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5483,14 +4743,10 @@ pub struct DimensionProperties {
 /// A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DimensionRange {
-    /**
-     * A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
-     */
+    /// A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dimension: Option<Dimension>,
-    /**
-     * A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
-     */
+    /// A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5498,9 +4754,7 @@ pub struct DimensionRange {
         rename = "endIndex"
     )]
     pub end_index: i64,
-    /**
-     * A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
-     */
+    /// A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5508,9 +4762,7 @@ pub struct DimensionRange {
         rename = "sheetId"
     )]
     pub sheet_id: i64,
-    /**
-     * A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
-     */
+    /// A range along a single dimension on a sheet. All indexes are zero-based. Indexes are half open: the start index is inclusive and the end index is exclusive. Missing indexes indicate the range is unbounded on that side.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5523,9 +4775,7 @@ pub struct DimensionRange {
 /// Duplicates a particular filter view.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DuplicateFilterViewRequest {
-    /**
-     * Duplicates a particular filter view.
-     */
+    /// Duplicates a particular filter view.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5538,9 +4788,7 @@ pub struct DuplicateFilterViewRequest {
 /// The result of a filter view being duplicated.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DuplicateFilterViewResponse {
-    /**
-     * The result of a filter view being duplicated.
-     */
+    /// The result of a filter view being duplicated.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterView>,
 }
@@ -5548,9 +4796,7 @@ pub struct DuplicateFilterViewResponse {
 /// Duplicates the contents of a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DuplicateSheetRequest {
-    /**
-     * Duplicates the contents of a sheet.
-     */
+    /// Duplicates the contents of a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5558,9 +4804,7 @@ pub struct DuplicateSheetRequest {
         rename = "insertSheetIndex"
     )]
     pub insert_sheet_index: i64,
-    /**
-     * Duplicates the contents of a sheet.
-     */
+    /// Duplicates the contents of a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5568,9 +4812,7 @@ pub struct DuplicateSheetRequest {
         rename = "newSheetId"
     )]
     pub new_sheet_id: i64,
-    /**
-     * Duplicates the contents of a sheet.
-     */
+    /// Duplicates the contents of a sheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5578,9 +4820,7 @@ pub struct DuplicateSheetRequest {
         rename = "newSheetName"
     )]
     pub new_sheet_name: String,
-    /**
-     * Duplicates the contents of a sheet.
-     */
+    /// Duplicates the contents of a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5593,9 +4833,7 @@ pub struct DuplicateSheetRequest {
 /// The result of duplicating a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DuplicateSheetResponse {
-    /**
-     * The result of duplicating a sheet.
-     */
+    /// The result of duplicating a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<SheetProperties>,
 }
@@ -5603,27 +4841,21 @@ pub struct DuplicateSheetResponse {
 /// The editors of a protected range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Editors {
-    /**
-     * The editors of a protected range.
-     */
+    /// The editors of a protected range.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "domainUsersCanEdit"
     )]
     pub domain_users_can_edit: bool,
-    /**
-     * The editors of a protected range.
-     */
+    /// The editors of a protected range.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub groups: Vec<String>,
-    /**
-     * The editors of a protected range.
-     */
+    /// The editors of a protected range.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5635,14 +4867,10 @@ pub struct Editors {
 /// A chart embedded in a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmbeddedChart {
-    /**
-     * A chart embedded in a sheet.
-     */
+    /// A chart embedded in a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub border: Option<EmbeddedObjectBorder>,
-    /**
-     * A chart embedded in a sheet.
-     */
+    /// A chart embedded in a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5650,14 +4878,10 @@ pub struct EmbeddedChart {
         rename = "chartId"
     )]
     pub chart_id: i64,
-    /**
-     * A chart embedded in a sheet.
-     */
+    /// A chart embedded in a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub position: Option<EmbeddedObjectPosition>,
-    /**
-     * A chart embedded in a sheet.
-     */
+    /// A chart embedded in a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spec: Option<ChartSpec>,
 }
@@ -5665,14 +4889,10 @@ pub struct EmbeddedChart {
 /// A border along an embedded object.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmbeddedObjectBorder {
-    /**
-     * A border along an embedded object.
-     */
+    /// A border along an embedded object.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub color: Option<Color>,
-    /**
-     * A border along an embedded object.
-     */
+    /// A border along an embedded object.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -5684,27 +4904,21 @@ pub struct EmbeddedObjectBorder {
 /// The position of an embedded object such as a chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmbeddedObjectPosition {
-    /**
-     * The position of an embedded object such as a chart.
-     */
+    /// The position of an embedded object such as a chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "newSheet"
     )]
     pub new_sheet: bool,
-    /**
-     * The position of an embedded object such as a chart.
-     */
+    /// The position of an embedded object such as a chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "overlayPosition"
     )]
     pub overlay_position: Option<OverlayPosition>,
-    /**
-     * The position of an embedded object such as a chart.
-     */
+    /// The position of an embedded object such as a chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5775,18 +4989,14 @@ impl ErrorValueType {
 /// An error in a cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ErrorValue {
-    /**
-     * An error in a cell.
-     */
+    /// An error in a cell.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    /**
-     * An error in a cell.
-     */
+    /// An error in a cell.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<ErrorValueType>,
 }
@@ -5794,27 +5004,21 @@ pub struct ErrorValue {
 /// The kinds of value that a cell in a spreadsheet can have.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExtendedValue {
-    /**
-     * The kinds of value that a cell in a spreadsheet can have.
-     */
+    /// The kinds of value that a cell in a spreadsheet can have.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "boolValue"
     )]
     pub bool_value: bool,
-    /**
-     * The kinds of value that a cell in a spreadsheet can have.
-     */
+    /// The kinds of value that a cell in a spreadsheet can have.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "errorValue"
     )]
     pub error_value: Option<ErrorValue>,
-    /**
-     * The kinds of value that a cell in a spreadsheet can have.
-     */
+    /// The kinds of value that a cell in a spreadsheet can have.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5822,9 +5026,7 @@ pub struct ExtendedValue {
         rename = "formulaValue"
     )]
     pub formula_value: String,
-    /**
-     * The kinds of value that a cell in a spreadsheet can have.
-     */
+    /// The kinds of value that a cell in a spreadsheet can have.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -5832,9 +5034,7 @@ pub struct ExtendedValue {
         rename = "numberValue"
     )]
     pub number_value: f64,
-    /**
-     * The kinds of value that a cell in a spreadsheet can have.
-     */
+    /// The kinds of value that a cell in a spreadsheet can have.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5847,14 +5047,10 @@ pub struct ExtendedValue {
 /// Criteria for showing/hiding rows in a filter or filter view.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FilterCriteria {
-    /**
-     * Criteria for showing/hiding rows in a filter or filter view.
-     */
+    /// Criteria for showing/hiding rows in a filter or filter view.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition: Option<BooleanCondition>,
-    /**
-     * Criteria for showing/hiding rows in a filter or filter view.
-     */
+    /// Criteria for showing/hiding rows in a filter or filter view.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5862,36 +5058,28 @@ pub struct FilterCriteria {
         rename = "hiddenValues"
     )]
     pub hidden_values: Vec<String>,
-    /**
-     * Criteria for showing/hiding rows in a filter or filter view.
-     */
+    /// Criteria for showing/hiding rows in a filter or filter view.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "visibleBackgroundColor"
     )]
     pub visible_background_color: Option<Color>,
-    /**
-     * Criteria for showing/hiding rows in a filter or filter view.
-     */
+    /// Criteria for showing/hiding rows in a filter or filter view.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "visibleBackgroundColorStyle"
     )]
     pub visible_background_color_style: Option<ColorStyle>,
-    /**
-     * Criteria for showing/hiding rows in a filter or filter view.
-     */
+    /// Criteria for showing/hiding rows in a filter or filter view.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "visibleForegroundColor"
     )]
     pub visible_foreground_color: Option<Color>,
-    /**
-     * Criteria for showing/hiding rows in a filter or filter view.
-     */
+    /// Criteria for showing/hiding rows in a filter or filter view.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -5903,9 +5091,7 @@ pub struct FilterCriteria {
 /// The filter criteria associated with a specific column.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FilterSpec {
-    /**
-     * The filter criteria associated with a specific column.
-     */
+    /// The filter criteria associated with a specific column.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5913,18 +5099,14 @@ pub struct FilterSpec {
         rename = "columnIndex"
     )]
     pub column_index: i64,
-    /**
-     * The filter criteria associated with a specific column.
-     */
+    /// The filter criteria associated with a specific column.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceColumnReference"
     )]
     pub data_source_column_reference: Option<DataSourceColumnReference>,
-    /**
-     * The filter criteria associated with a specific column.
-     */
+    /// The filter criteria associated with a specific column.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -5936,14 +5118,10 @@ pub struct FilterSpec {
 /// A filter view.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FilterView {
-    /**
-     * A filter view.
-     */
+    /// A filter view.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub criteria: Option<FilterCriteria>,
-    /**
-     * A filter view.
-     */
+    /// A filter view.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5951,9 +5129,7 @@ pub struct FilterView {
         rename = "filterSpecs"
     )]
     pub filter_specs: Vec<FilterSpec>,
-    /**
-     * A filter view.
-     */
+    /// A filter view.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5961,9 +5137,7 @@ pub struct FilterView {
         rename = "filterViewId"
     )]
     pub filter_view_id: i64,
-    /**
-     * A filter view.
-     */
+    /// A filter view.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5971,14 +5145,10 @@ pub struct FilterView {
         rename = "namedRangeId"
     )]
     pub named_range_id: String,
-    /**
-     * A filter view.
-     */
+    /// A filter view.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * A filter view.
-     */
+    /// A filter view.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -5986,9 +5156,7 @@ pub struct FilterView {
         rename = "sortSpecs"
     )]
     pub sort_specs: Vec<SortSpec>,
-    /**
-     * A filter view.
-     */
+    /// A filter view.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6000,69 +5168,51 @@ pub struct FilterView {
 /// Finds and replaces data in cells over a range, sheet, or all sheets.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FindReplaceRequest {
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "allSheets")]
     pub all_sheets: Option<bool>,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub find: String,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "includeFormulas"
     )]
     pub include_formulas: Option<bool>,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "matchCase")]
     pub match_case: Option<bool>,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "matchEntireCell"
     )]
     pub match_entire_cell: Option<bool>,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub replacement: String,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "searchByRegex"
     )]
     pub search_by_regex: Option<bool>,
-    /**
-     * Finds and replaces data in cells over a range, sheet, or all sheets.
-     */
+    /// Finds and replaces data in cells over a range, sheet, or all sheets.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6075,9 +5225,7 @@ pub struct FindReplaceRequest {
 /// The result of the find/replace.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FindReplaceResponse {
-    /**
-     * The result of the find/replace.
-     */
+    /// The result of the find/replace.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6085,9 +5233,7 @@ pub struct FindReplaceResponse {
         rename = "formulasChanged"
     )]
     pub formulas_changed: i64,
-    /**
-     * The result of the find/replace.
-     */
+    /// The result of the find/replace.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6095,9 +5241,7 @@ pub struct FindReplaceResponse {
         rename = "occurrencesChanged"
     )]
     pub occurrences_changed: i64,
-    /**
-     * The result of the find/replace.
-     */
+    /// The result of the find/replace.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6105,9 +5249,7 @@ pub struct FindReplaceResponse {
         rename = "rowsChanged"
     )]
     pub rows_changed: i64,
-    /**
-     * The result of the find/replace.
-     */
+    /// The result of the find/replace.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6115,9 +5257,7 @@ pub struct FindReplaceResponse {
         rename = "sheetsChanged"
     )]
     pub sheets_changed: i64,
-    /**
-     * The result of the find/replace.
-     */
+    /// The result of the find/replace.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6130,9 +5270,7 @@ pub struct FindReplaceResponse {
 /// The request for retrieving a Spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSpreadsheetByDataFilterRequest {
-    /**
-     * The request for retrieving a Spreadsheet.
-     */
+    /// The request for retrieving a Spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6140,9 +5278,7 @@ pub struct GetSpreadsheetByDataFilterRequest {
         rename = "dataFilters"
     )]
     pub data_filters: Vec<DataFilter>,
-    /**
-     * The request for retrieving a Spreadsheet.
-     */
+    /// The request for retrieving a Spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6154,19 +5290,13 @@ pub struct GetSpreadsheetByDataFilterRequest {
 /// A rule that applies a gradient color scale format, based on the interpolation points listed. The format of a cell will vary based on its contents as compared to the values of the interpolation points.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GradientRule {
-    /**
-     * A rule that applies a gradient color scale format, based on the interpolation points listed. The format of a cell will vary based on its contents as compared to the values of the interpolation points.
-     */
+    /// A rule that applies a gradient color scale format, based on the interpolation points listed. The format of a cell will vary based on its contents as compared to the values of the interpolation points.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub maxpoint: Option<InterpolationPoint>,
-    /**
-     * A rule that applies a gradient color scale format, based on the interpolation points listed. The format of a cell will vary based on its contents as compared to the values of the interpolation points.
-     */
+    /// A rule that applies a gradient color scale format, based on the interpolation points listed. The format of a cell will vary based on its contents as compared to the values of the interpolation points.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub midpoint: Option<InterpolationPoint>,
-    /**
-     * A rule that applies a gradient color scale format, based on the interpolation points listed. The format of a cell will vary based on its contents as compared to the values of the interpolation points.
-     */
+    /// A rule that applies a gradient color scale format, based on the interpolation points listed. The format of a cell will vary based on its contents as compared to the values of the interpolation points.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub minpoint: Option<InterpolationPoint>,
 }
@@ -6174,9 +5304,7 @@ pub struct GradientRule {
 /// A coordinate in a sheet. All indexes are zero-based.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GridCoordinate {
-    /**
-     * A coordinate in a sheet. All indexes are zero-based.
-     */
+    /// A coordinate in a sheet. All indexes are zero-based.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6184,9 +5312,7 @@ pub struct GridCoordinate {
         rename = "columnIndex"
     )]
     pub column_index: i64,
-    /**
-     * A coordinate in a sheet. All indexes are zero-based.
-     */
+    /// A coordinate in a sheet. All indexes are zero-based.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6194,9 +5320,7 @@ pub struct GridCoordinate {
         rename = "rowIndex"
     )]
     pub row_index: i64,
-    /**
-     * A coordinate in a sheet. All indexes are zero-based.
-     */
+    /// A coordinate in a sheet. All indexes are zero-based.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6209,9 +5333,7 @@ pub struct GridCoordinate {
 /// Data in the grid, as well as metadata about the dimensions.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GridData {
-    /**
-     * Data in the grid, as well as metadata about the dimensions.
-     */
+    /// Data in the grid, as well as metadata about the dimensions.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6219,9 +5341,7 @@ pub struct GridData {
         rename = "columnMetadata"
     )]
     pub column_metadata: Vec<DimensionProperties>,
-    /**
-     * Data in the grid, as well as metadata about the dimensions.
-     */
+    /// Data in the grid, as well as metadata about the dimensions.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6229,9 +5349,7 @@ pub struct GridData {
         rename = "rowData"
     )]
     pub row_data: Vec<RowData>,
-    /**
-     * Data in the grid, as well as metadata about the dimensions.
-     */
+    /// Data in the grid, as well as metadata about the dimensions.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6239,9 +5357,7 @@ pub struct GridData {
         rename = "rowMetadata"
     )]
     pub row_metadata: Vec<DimensionProperties>,
-    /**
-     * Data in the grid, as well as metadata about the dimensions.
-     */
+    /// Data in the grid, as well as metadata about the dimensions.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6249,9 +5365,7 @@ pub struct GridData {
         rename = "startColumn"
     )]
     pub start_column: i64,
-    /**
-     * Data in the grid, as well as metadata about the dimensions.
-     */
+    /// Data in the grid, as well as metadata about the dimensions.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6264,9 +5378,7 @@ pub struct GridData {
 /// Properties of a grid.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GridProperties {
-    /**
-     * Properties of a grid.
-     */
+    /// Properties of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6274,18 +5386,14 @@ pub struct GridProperties {
         rename = "columnCount"
     )]
     pub column_count: i64,
-    /**
-     * Properties of a grid.
-     */
+    /// Properties of a grid.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "columnGroupControlAfter"
     )]
     pub column_group_control_after: bool,
-    /**
-     * Properties of a grid.
-     */
+    /// Properties of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6293,9 +5401,7 @@ pub struct GridProperties {
         rename = "frozenColumnCount"
     )]
     pub frozen_column_count: i64,
-    /**
-     * Properties of a grid.
-     */
+    /// Properties of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6303,18 +5409,14 @@ pub struct GridProperties {
         rename = "frozenRowCount"
     )]
     pub frozen_row_count: i64,
-    /**
-     * Properties of a grid.
-     */
+    /// Properties of a grid.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "hideGridlines"
     )]
     pub hide_gridlines: bool,
-    /**
-     * Properties of a grid.
-     */
+    /// Properties of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6322,9 +5424,7 @@ pub struct GridProperties {
         rename = "rowCount"
     )]
     pub row_count: i64,
-    /**
-     * Properties of a grid.
-     */
+    /// Properties of a grid.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -6336,9 +5436,7 @@ pub struct GridProperties {
 /// A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GridRange {
-    /**
-     * A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
-     */
+    /// A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6346,9 +5444,7 @@ pub struct GridRange {
         rename = "endColumnIndex"
     )]
     pub end_column_index: i64,
-    /**
-     * A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
-     */
+    /// A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6356,9 +5452,7 @@ pub struct GridRange {
         rename = "endRowIndex"
     )]
     pub end_row_index: i64,
-    /**
-     * A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
-     */
+    /// A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6366,9 +5460,7 @@ pub struct GridRange {
         rename = "sheetId"
     )]
     pub sheet_id: i64,
-    /**
-     * A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
-     */
+    /// A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6376,9 +5468,7 @@ pub struct GridRange {
         rename = "startColumnIndex"
     )]
     pub start_column_index: i64,
-    /**
-     * A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
-     */
+    /// A range on a sheet. All indexes are zero-based. Indexes are half open, i.e. the start index is inclusive and the end index is exclusive -- [start_index, end_index). Missing indexes indicate the range is unbounded on that side. For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id: 0, start_row_index: 0, end_row_index: 1, start_column_index: 0, end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2, end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B == sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B == sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1 == sheet_id:0` The start index must always be less than or equal to the end index. If the start index equals the end index, then the range is empty. Empty ranges are typically not meaningful and are usually rendered in the UI as `#REF!`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6442,9 +5532,7 @@ impl HistogramChartSpecLegendPosition {
 /// A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct HistogramChartSpec {
-    /**
-     * A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
-     */
+    /// A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -6452,18 +5540,14 @@ pub struct HistogramChartSpec {
         rename = "bucketSize"
     )]
     pub bucket_size: f64,
-    /**
-     * A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
-     */
+    /// A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "legendPosition"
     )]
     pub legend_position: Option<HistogramChartSpecLegendPosition>,
-    /**
-     * A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
-     */
+    /// A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -6471,18 +5555,14 @@ pub struct HistogramChartSpec {
         rename = "outlierPercentile"
     )]
     pub outlier_percentile: f64,
-    /**
-     * A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
-     */
+    /// A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub series: Vec<HistogramSeries>,
-    /**
-     * A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
-     */
+    /// A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -6494,27 +5574,21 @@ pub struct HistogramChartSpec {
 /// Allows you to organize the numeric values in a source data column into buckets of a constant size. All values from HistogramRule.start to HistogramRule.end are placed into groups of size HistogramRule.interval. In addition, all values below HistogramRule.start are placed in one group, and all values above HistogramRule.end are placed in another. Only HistogramRule.interval is required, though if HistogramRule.start and HistogramRule.end are both provided, HistogramRule.start must be less than HistogramRule.end. For example, a pivot table showing average purchase amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18 | $20.15 | ... +-----+-------------------+ could be turned into a pivot table that looks like the one below by applying a histogram group rule with a HistogramRule.start of 25, an HistogramRule.interval of 20, and an HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age | AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | | 25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 | +-------------+-------------------+ | Grand Total | $29.12 | +-------------+-------------------+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct HistogramRule {
-    /**
-     * Allows you to organize the numeric values in a source data column into buckets of a constant size. All values from HistogramRule.start to HistogramRule.end are placed into groups of size HistogramRule.interval. In addition, all values below HistogramRule.start are placed in one group, and all values above HistogramRule.end are placed in another. Only HistogramRule.interval is required, though if HistogramRule.start and HistogramRule.end are both provided, HistogramRule.start must be less than HistogramRule.end. For example, a pivot table showing average purchase amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18 | $20.15 | ... +-----+-------------------+ could be turned into a pivot table that looks like the one below by applying a histogram group rule with a HistogramRule.start of 25, an HistogramRule.interval of 20, and an HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age | AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | | 25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 | +-------------+-------------------+ | Grand Total | $29.12 | +-------------+-------------------+
-     */
+    /// Allows you to organize the numeric values in a source data column into buckets of a constant size. All values from HistogramRule.start to HistogramRule.end are placed into groups of size HistogramRule.interval. In addition, all values below HistogramRule.start are placed in one group, and all values above HistogramRule.end are placed in another. Only HistogramRule.interval is required, though if HistogramRule.start and HistogramRule.end are both provided, HistogramRule.start must be less than HistogramRule.end. For example, a pivot table showing average purchase amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18 | $20.15 | ... +-----+-------------------+ could be turned into a pivot table that looks like the one below by applying a histogram group rule with a HistogramRule.start of 25, an HistogramRule.interval of 20, and an HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age | AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | | 25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 | +-------------+-------------------+ | Grand Total | $29.12 | +-------------+-------------------+
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub end: f64,
-    /**
-     * Allows you to organize the numeric values in a source data column into buckets of a constant size. All values from HistogramRule.start to HistogramRule.end are placed into groups of size HistogramRule.interval. In addition, all values below HistogramRule.start are placed in one group, and all values above HistogramRule.end are placed in another. Only HistogramRule.interval is required, though if HistogramRule.start and HistogramRule.end are both provided, HistogramRule.start must be less than HistogramRule.end. For example, a pivot table showing average purchase amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18 | $20.15 | ... +-----+-------------------+ could be turned into a pivot table that looks like the one below by applying a histogram group rule with a HistogramRule.start of 25, an HistogramRule.interval of 20, and an HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age | AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | | 25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 | +-------------+-------------------+ | Grand Total | $29.12 | +-------------+-------------------+
-     */
+    /// Allows you to organize the numeric values in a source data column into buckets of a constant size. All values from HistogramRule.start to HistogramRule.end are placed into groups of size HistogramRule.interval. In addition, all values below HistogramRule.start are placed in one group, and all values above HistogramRule.end are placed in another. Only HistogramRule.interval is required, though if HistogramRule.start and HistogramRule.end are both provided, HistogramRule.start must be less than HistogramRule.end. For example, a pivot table showing average purchase amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18 | $20.15 | ... +-----+-------------------+ could be turned into a pivot table that looks like the one below by applying a histogram group rule with a HistogramRule.start of 25, an HistogramRule.interval of 20, and an HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age | AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | | 25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 | +-------------+-------------------+ | Grand Total | $29.12 | +-------------+-------------------+
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub interval: f64,
-    /**
-     * Allows you to organize the numeric values in a source data column into buckets of a constant size. All values from HistogramRule.start to HistogramRule.end are placed into groups of size HistogramRule.interval. In addition, all values below HistogramRule.start are placed in one group, and all values above HistogramRule.end are placed in another. Only HistogramRule.interval is required, though if HistogramRule.start and HistogramRule.end are both provided, HistogramRule.start must be less than HistogramRule.end. For example, a pivot table showing average purchase amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18 | $20.15 | ... +-----+-------------------+ could be turned into a pivot table that looks like the one below by applying a histogram group rule with a HistogramRule.start of 25, an HistogramRule.interval of 20, and an HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age | AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | | 25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 | +-------------+-------------------+ | Grand Total | $29.12 | +-------------+-------------------+
-     */
+    /// Allows you to organize the numeric values in a source data column into buckets of a constant size. All values from HistogramRule.start to HistogramRule.end are placed into groups of size HistogramRule.interval. In addition, all values below HistogramRule.start are placed in one group, and all values above HistogramRule.end are placed in another. Only HistogramRule.interval is required, though if HistogramRule.start and HistogramRule.end are both provided, HistogramRule.start must be less than HistogramRule.end. For example, a pivot table showing average purchase amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18 | $20.15 | ... +-----+-------------------+ could be turned into a pivot table that looks like the one below by applying a histogram group rule with a HistogramRule.start of 25, an HistogramRule.interval of 20, and an HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age | AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | | 25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 | +-------------+-------------------+ | Grand Total | $29.12 | +-------------+-------------------+
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -6526,23 +5600,17 @@ pub struct HistogramRule {
 /// A histogram series containing the series color and data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct HistogramSeries {
-    /**
-     * A histogram series containing the series color and data.
-     */
+    /// A histogram series containing the series color and data.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "barColor")]
     pub bar_color: Option<Color>,
-    /**
-     * A histogram series containing the series color and data.
-     */
+    /// A histogram series containing the series color and data.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "barColorStyle"
     )]
     pub bar_color_style: Option<ColorStyle>,
-    /**
-     * A histogram series containing the series color and data.
-     */
+    /// A histogram series containing the series color and data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<ChartData>,
 }
@@ -6550,18 +5618,14 @@ pub struct HistogramSeries {
 /// Inserts rows or columns in a sheet at a particular index.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InsertDimensionRequest {
-    /**
-     * Inserts rows or columns in a sheet at a particular index.
-     */
+    /// Inserts rows or columns in a sheet at a particular index.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "inheritFromBefore"
     )]
     pub inherit_from_before: Option<bool>,
-    /**
-     * Inserts rows or columns in a sheet at a particular index.
-     */
+    /// Inserts rows or columns in a sheet at a particular index.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<DimensionRange>,
 }
@@ -6569,14 +5633,10 @@ pub struct InsertDimensionRequest {
 /// Inserts cells into a range, shifting the existing cells over or down.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InsertRangeRequest {
-    /**
-     * Inserts cells into a range, shifting the existing cells over or down.
-     */
+    /// Inserts cells into a range, shifting the existing cells over or down.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Inserts cells into a range, shifting the existing cells over or down.
-     */
+    /// Inserts cells into a range, shifting the existing cells over or down.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6636,28 +5696,20 @@ impl InterpolationPointType {
 /// A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InterpolationPoint {
-    /**
-     * A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
-     */
+    /// A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub color: Option<Color>,
-    /**
-     * A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
-     */
+    /// A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "colorStyle"
     )]
     pub color_style: Option<ColorStyle>,
-    /**
-     * A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
-     */
+    /// A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<InterpolationPointType>,
-    /**
-     * A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
-     */
+    /// A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6669,9 +5721,7 @@ pub struct InterpolationPoint {
 /// Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Interval {
-    /**
-     * Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
-     */
+    /// Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6679,9 +5729,7 @@ pub struct Interval {
         rename = "endTime"
     )]
     pub end_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
-     */
+    /// Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6694,9 +5742,7 @@ pub struct Interval {
 /// Settings to control how circular dependencies are resolved with iterative calculation.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IterativeCalculationSettings {
-    /**
-     * Settings to control how circular dependencies are resolved with iterative calculation.
-     */
+    /// Settings to control how circular dependencies are resolved with iterative calculation.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -6704,9 +5750,7 @@ pub struct IterativeCalculationSettings {
         rename = "convergenceThreshold"
     )]
     pub convergence_threshold: f64,
-    /**
-     * Settings to control how circular dependencies are resolved with iterative calculation.
-     */
+    /// Settings to control how circular dependencies are resolved with iterative calculation.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6719,14 +5763,10 @@ pub struct IterativeCalculationSettings {
 /// Formatting options for key value.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct KeyValueFormat {
-    /**
-     * Formatting options for key value.
-     */
+    /// Formatting options for key value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub position: Option<TextPosition>,
-    /**
-     * Formatting options for key value.
-     */
+    /// Formatting options for key value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6793,14 +5833,10 @@ impl LineStyleType {
 /// Properties that describe the style of a line.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LineStyle {
-    /**
-     * Properties that describe the style of a line.
-     */
+    /// Properties that describe the style of a line.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<LineStyleType>,
-    /**
-     * Properties that describe the style of a line.
-     */
+    /// Properties that describe the style of a line.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6812,9 +5848,7 @@ pub struct LineStyle {
 /// An external or local reference.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Link {
-    /**
-     * An external or local reference.
-     */
+    /// An external or local reference.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6826,9 +5860,7 @@ pub struct Link {
 /// Allows you to manually organize the values in a source data column into buckets with names of your choosing. For example, a pivot table that aggregates population by state: +-------+-------------------+ | State | SUM of Population | +-------+-------------------+ | AK | 0.7 | | AL | 4.8 | | AR | 2.9 | ... +-------+-------------------+ could be turned into a pivot table that aggregates population by time zone by providing a list of groups (for example, groupName = 'Central', items = ['AL', 'AR', 'IA', ...]) to a manual group rule. Note that a similar effect could be achieved by adding a time zone column to the source data and adjusting the pivot table. +-----------+-------------------+ | Time Zone | SUM of Population | +-----------+-------------------+ | Central | 106.3 | | Eastern | 151.9 | | Mountain | 17.4 | ... +-----------+-------------------+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ManualRule {
-    /**
-     * Allows you to manually organize the values in a source data column into buckets with names of your choosing. For example, a pivot table that aggregates population by state: +-------+-------------------+ | State | SUM of Population | +-------+-------------------+ | AK | 0.7 | | AL | 4.8 | | AR | 2.9 | ... +-------+-------------------+ could be turned into a pivot table that aggregates population by time zone by providing a list of groups (for example, groupName = 'Central', items = ['AL', 'AR', 'IA', ...]) to a manual group rule. Note that a similar effect could be achieved by adding a time zone column to the source data and adjusting the pivot table. +-----------+-------------------+ | Time Zone | SUM of Population | +-----------+-------------------+ | Central | 106.3 | | Eastern | 151.9 | | Mountain | 17.4 | ... +-----------+-------------------+
-     */
+    /// Allows you to manually organize the values in a source data column into buckets with names of your choosing. For example, a pivot table that aggregates population by state: +-------+-------------------+ | State | SUM of Population | +-------+-------------------+ | AK | 0.7 | | AL | 4.8 | | AR | 2.9 | ... +-------+-------------------+ could be turned into a pivot table that aggregates population by time zone by providing a list of groups (for example, groupName = 'Central', items = ['AL', 'AR', 'IA', ...]) to a manual group rule. Note that a similar effect could be achieved by adding a time zone column to the source data and adjusting the pivot table. +-----------+-------------------+ | Time Zone | SUM of Population | +-----------+-------------------+ | Central | 106.3 | | Eastern | 151.9 | | Mountain | 17.4 | ... +-----------+-------------------+
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6840,14 +5872,10 @@ pub struct ManualRule {
 /// A group name and a list of items from the source data that should be placed in the group with this name.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ManualRuleGroup {
-    /**
-     * A group name and a list of items from the source data that should be placed in the group with this name.
-     */
+    /// A group name and a list of items from the source data that should be placed in the group with this name.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "groupName")]
     pub group_name: Option<ExtendedValue>,
-    /**
-     * A group name and a list of items from the source data that should be placed in the group with this name.
-     */
+    /// A group name and a list of items from the source data that should be placed in the group with this name.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6859,9 +5887,7 @@ pub struct ManualRuleGroup {
 /// A developer metadata entry and the data filters specified in the original request that matched it.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MatchedDeveloperMetadata {
-    /**
-     * A developer metadata entry and the data filters specified in the original request that matched it.
-     */
+    /// A developer metadata entry and the data filters specified in the original request that matched it.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6869,9 +5895,7 @@ pub struct MatchedDeveloperMetadata {
         rename = "dataFilters"
     )]
     pub data_filters: Vec<DataFilter>,
-    /**
-     * A developer metadata entry and the data filters specified in the original request that matched it.
-     */
+    /// A developer metadata entry and the data filters specified in the original request that matched it.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6883,9 +5907,7 @@ pub struct MatchedDeveloperMetadata {
 /// A value range that was matched by one or more data filers.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MatchedValueRange {
-    /**
-     * A value range that was matched by one or more data filers.
-     */
+    /// A value range that was matched by one or more data filers.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -6893,9 +5915,7 @@ pub struct MatchedValueRange {
         rename = "dataFilters"
     )]
     pub data_filters: Vec<DataFilter>,
-    /**
-     * A value range that was matched by one or more data filers.
-     */
+    /// A value range that was matched by one or more data filers.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -6944,14 +5964,10 @@ impl MergeType {
 /// Merges all cells in the range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeCellsRequest {
-    /**
-     * Merges all cells in the range.
-     */
+    /// Merges all cells in the range.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "mergeType")]
     pub merge_type: Option<MergeType>,
-    /**
-     * Merges all cells in the range.
-     */
+    /// Merges all cells in the range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -6959,9 +5975,7 @@ pub struct MergeCellsRequest {
 /// Moves one or more rows or columns.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MoveDimensionRequest {
-    /**
-     * Moves one or more rows or columns.
-     */
+    /// Moves one or more rows or columns.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6969,9 +5983,7 @@ pub struct MoveDimensionRequest {
         rename = "destinationIndex"
     )]
     pub destination_index: i64,
-    /**
-     * Moves one or more rows or columns.
-     */
+    /// Moves one or more rows or columns.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<DimensionRange>,
 }
@@ -6979,18 +5991,14 @@ pub struct MoveDimensionRequest {
 /// A named range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NamedRange {
-    /**
-     * A named range.
-     */
+    /// A named range.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * A named range.
-     */
+    /// A named range.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6998,9 +6006,7 @@ pub struct NamedRange {
         rename = "namedRangeId"
     )]
     pub named_range_id: String,
-    /**
-     * A named range.
-     */
+    /// A named range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -7063,18 +6069,14 @@ impl NumberFormatType {
 /// The number format of a cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NumberFormat {
-    /**
-     * The number format of a cell.
-     */
+    /// The number format of a cell.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pattern: String,
-    /**
-     * The number format of a cell.
-     */
+    /// The number format of a cell.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<NumberFormatType>,
 }
@@ -7122,60 +6124,44 @@ impl NodeSize {
 /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OrgChartSpec {
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub labels: Option<ChartData>,
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "nodeColor")]
     pub node_color: Option<Color>,
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "nodeColorStyle"
     )]
     pub node_color_style: Option<ColorStyle>,
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "nodeSize")]
     pub node_size: Option<NodeSize>,
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "parentLabels"
     )]
     pub parent_labels: Option<ChartData>,
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "selectedNodeColor"
     )]
     pub selected_node_color: Option<Color>,
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "selectedNodeColorStyle"
     )]
     pub selected_node_color_style: Option<ColorStyle>,
-    /**
-     * An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
-     */
+    /// An org chart. Org charts require a unique set of labels in labels and may optionally include parent_labels and tooltips. parent_labels contain, for each node, the label identifying the parent node. tooltips contain, for each node, an optional tooltip. For example, to describe an OrgChart with Alice as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of Sales (also reporting to Alice), have labels contain "Alice", "Bob", "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain "CEO", "President", "VP Sales".
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tooltips: Option<ChartData>,
 }
@@ -7183,18 +6169,14 @@ pub struct OrgChartSpec {
 /// The location an object is overlaid on top of a grid.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OverlayPosition {
-    /**
-     * The location an object is overlaid on top of a grid.
-     */
+    /// The location an object is overlaid on top of a grid.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "anchorCell"
     )]
     pub anchor_cell: Option<GridCoordinate>,
-    /**
-     * The location an object is overlaid on top of a grid.
-     */
+    /// The location an object is overlaid on top of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7202,9 +6184,7 @@ pub struct OverlayPosition {
         rename = "heightPixels"
     )]
     pub height_pixels: i64,
-    /**
-     * The location an object is overlaid on top of a grid.
-     */
+    /// The location an object is overlaid on top of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7212,9 +6192,7 @@ pub struct OverlayPosition {
         rename = "offsetXPixels"
     )]
     pub offset_x_pixels: i64,
-    /**
-     * The location an object is overlaid on top of a grid.
-     */
+    /// The location an object is overlaid on top of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7222,9 +6200,7 @@ pub struct OverlayPosition {
         rename = "offsetYPixels"
     )]
     pub offset_y_pixels: i64,
-    /**
-     * The location an object is overlaid on top of a grid.
-     */
+    /// The location an object is overlaid on top of a grid.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7237,36 +6213,28 @@ pub struct OverlayPosition {
 /// The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Padding {
-    /**
-     * The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
-     */
+    /// The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub bottom: i64,
-    /**
-     * The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
-     */
+    /// The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub left: i64,
-    /**
-     * The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
-     */
+    /// The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub right: i64,
-    /**
-     * The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
-     */
+    /// The amount of padding around the cell, in pixels. When updating padding, every field must be specified.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7278,37 +6246,27 @@ pub struct Padding {
 /// Inserts data into the spreadsheet starting at the specified coordinate.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PasteDataRequest {
-    /**
-     * Inserts data into the spreadsheet starting at the specified coordinate.
-     */
+    /// Inserts data into the spreadsheet starting at the specified coordinate.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub coordinate: Option<GridCoordinate>,
-    /**
-     * Inserts data into the spreadsheet starting at the specified coordinate.
-     */
+    /// Inserts data into the spreadsheet starting at the specified coordinate.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub data: String,
-    /**
-     * Inserts data into the spreadsheet starting at the specified coordinate.
-     */
+    /// Inserts data into the spreadsheet starting at the specified coordinate.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub delimiter: String,
-    /**
-     * Inserts data into the spreadsheet starting at the specified coordinate.
-     */
+    /// Inserts data into the spreadsheet starting at the specified coordinate.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub html: Option<bool>,
-    /**
-     * Inserts data into the spreadsheet starting at the specified coordinate.
-     */
+    /// Inserts data into the spreadsheet starting at the specified coordinate.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<PasteType>,
 }
@@ -7367,23 +6325,17 @@ impl PieChartSpecLegendPosition {
 /// A pie chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PieChartSpec {
-    /**
-     * A pie chart.
-     */
+    /// A pie chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub domain: Option<ChartData>,
-    /**
-     * A pie chart.
-     */
+    /// A pie chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "legendPosition"
     )]
     pub legend_position: Option<PieChartSpecLegendPosition>,
-    /**
-     * A pie chart.
-     */
+    /// A pie chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -7391,14 +6343,10 @@ pub struct PieChartSpec {
         rename = "pieHole"
     )]
     pub pie_hole: f64,
-    /**
-     * A pie chart.
-     */
+    /// A pie chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub series: Option<ChartData>,
-    /**
-     * A pie chart.
-     */
+    /// A pie chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -7410,23 +6358,17 @@ pub struct PieChartSpec {
 /// Criteria for showing/hiding rows in a pivot table.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotFilterCriteria {
-    /**
-     * Criteria for showing/hiding rows in a pivot table.
-     */
+    /// Criteria for showing/hiding rows in a pivot table.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub condition: Option<BooleanCondition>,
-    /**
-     * Criteria for showing/hiding rows in a pivot table.
-     */
+    /// Criteria for showing/hiding rows in a pivot table.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "visibleByDefault"
     )]
     pub visible_by_default: bool,
-    /**
-     * Criteria for showing/hiding rows in a pivot table.
-     */
+    /// Criteria for showing/hiding rows in a pivot table.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7439,9 +6381,7 @@ pub struct PivotFilterCriteria {
 /// The pivot table filter criteria associated with a specific source column offset.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotFilterSpec {
-    /**
-     * The pivot table filter criteria associated with a specific source column offset.
-     */
+    /// The pivot table filter criteria associated with a specific source column offset.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7449,18 +6389,14 @@ pub struct PivotFilterSpec {
         rename = "columnOffsetIndex"
     )]
     pub column_offset_index: i64,
-    /**
-     * The pivot table filter criteria associated with a specific source column offset.
-     */
+    /// The pivot table filter criteria associated with a specific source column offset.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceColumnReference"
     )]
     pub data_source_column_reference: Option<DataSourceColumnReference>,
-    /**
-     * The pivot table filter criteria associated with a specific source column offset.
-     */
+    /// The pivot table filter criteria associated with a specific source column offset.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -7509,64 +6445,48 @@ impl SortOrder {
 /// A single grouping (either row or column) in a pivot table.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotGroup {
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceColumnReference"
     )]
     pub data_source_column_reference: Option<DataSourceColumnReference>,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "groupLimit"
     )]
     pub group_limit: Option<PivotGroupLimit>,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "groupRule")]
     pub group_rule: Option<PivotGroupRule>,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub label: String,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "repeatHeadings"
     )]
     pub repeat_headings: bool,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "showTotals"
     )]
     pub show_totals: bool,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "sortOrder")]
     pub sort_order: Option<SortOrder>,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7574,18 +6494,14 @@ pub struct PivotGroup {
         rename = "sourceColumnOffset"
     )]
     pub source_column_offset: i64,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "valueBucket"
     )]
     pub value_bucket: Option<PivotGroupSortValueBucket>,
-    /**
-     * A single grouping (either row or column) in a pivot table.
-     */
+    /// A single grouping (either row or column) in a pivot table.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7598,9 +6514,7 @@ pub struct PivotGroup {
 /// The count limit on rows or columns in the pivot group.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotGroupLimit {
-    /**
-     * The count limit on rows or columns in the pivot group.
-     */
+    /// The count limit on rows or columns in the pivot group.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7608,9 +6522,7 @@ pub struct PivotGroupLimit {
         rename = "applyOrder"
     )]
     pub apply_order: i64,
-    /**
-     * The count limit on rows or columns in the pivot group.
-     */
+    /// The count limit on rows or columns in the pivot group.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7623,27 +6535,21 @@ pub struct PivotGroupLimit {
 /// An optional setting on a PivotGroup that defines buckets for the values in the source data column rather than breaking out each individual value. Only one PivotGroup with a group rule may be added for each column in the source data, though on any given column you may add both a PivotGroup that has a rule and a PivotGroup that does not.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotGroupRule {
-    /**
-     * An optional setting on a PivotGroup that defines buckets for the values in the source data column rather than breaking out each individual value. Only one PivotGroup with a group rule may be added for each column in the source data, though on any given column you may add both a PivotGroup that has a rule and a PivotGroup that does not.
-     */
+    /// An optional setting on a PivotGroup that defines buckets for the values in the source data column rather than breaking out each individual value. Only one PivotGroup with a group rule may be added for each column in the source data, though on any given column you may add both a PivotGroup that has a rule and a PivotGroup that does not.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dateTimeRule"
     )]
     pub date_time_rule: Option<DateTimeRule>,
-    /**
-     * An optional setting on a PivotGroup that defines buckets for the values in the source data column rather than breaking out each individual value. Only one PivotGroup with a group rule may be added for each column in the source data, though on any given column you may add both a PivotGroup that has a rule and a PivotGroup that does not.
-     */
+    /// An optional setting on a PivotGroup that defines buckets for the values in the source data column rather than breaking out each individual value. Only one PivotGroup with a group rule may be added for each column in the source data, though on any given column you may add both a PivotGroup that has a rule and a PivotGroup that does not.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "histogramRule"
     )]
     pub histogram_rule: Option<HistogramRule>,
-    /**
-     * An optional setting on a PivotGroup that defines buckets for the values in the source data column rather than breaking out each individual value. Only one PivotGroup with a group rule may be added for each column in the source data, though on any given column you may add both a PivotGroup that has a rule and a PivotGroup that does not.
-     */
+    /// An optional setting on a PivotGroup that defines buckets for the values in the source data column rather than breaking out each individual value. Only one PivotGroup with a group rule may be added for each column in the source data, though on any given column you may add both a PivotGroup that has a rule and a PivotGroup that does not.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -7655,18 +6561,14 @@ pub struct PivotGroupRule {
 /// Information about which values in a pivot group should be used for sorting.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotGroupSortValueBucket {
-    /**
-     * Information about which values in a pivot group should be used for sorting.
-     */
+    /// Information about which values in a pivot group should be used for sorting.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub buckets: Vec<ExtendedValue>,
-    /**
-     * Information about which values in a pivot group should be used for sorting.
-     */
+    /// Information about which values in a pivot group should be used for sorting.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7679,17 +6581,13 @@ pub struct PivotGroupSortValueBucket {
 /// Metadata about a value in a pivot grouping.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotGroupValueMetadata {
-    /**
-     * Metadata about a value in a pivot grouping.
-     */
+    /// Metadata about a value in a pivot grouping.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub collapsed: bool,
-    /**
-     * Metadata about a value in a pivot grouping.
-     */
+    /// Metadata about a value in a pivot grouping.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub value: Option<ExtendedValue>,
 }
@@ -7731,32 +6629,24 @@ impl ValueLayout {
 /// A pivot table.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotTable {
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub columns: Vec<PivotGroup>,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub criteria: Option<PivotFilterCriteria>,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7764,9 +6654,7 @@ pub struct PivotTable {
         rename = "dataSourceId"
     )]
     pub data_source_id: String,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7774,32 +6662,24 @@ pub struct PivotTable {
         rename = "filterSpecs"
     )]
     pub filter_specs: Vec<PivotFilterSpec>,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub rows: Vec<PivotGroup>,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<GridRange>,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "valueLayout"
     )]
     pub value_layout: Option<ValueLayout>,
-    /**
-     * A pivot table.
-     */
+    /// A pivot table.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -7928,45 +6808,35 @@ impl SummarizeFunction {
 /// The definition of how a value in a pivot table should be calculated.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PivotValue {
-    /**
-     * The definition of how a value in a pivot table should be calculated.
-     */
+    /// The definition of how a value in a pivot table should be calculated.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "calculatedDisplayType"
     )]
     pub calculated_display_type: Option<CalculatedDisplayType>,
-    /**
-     * The definition of how a value in a pivot table should be calculated.
-     */
+    /// The definition of how a value in a pivot table should be calculated.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceColumnReference"
     )]
     pub data_source_column_reference: Option<DataSourceColumnReference>,
-    /**
-     * The definition of how a value in a pivot table should be calculated.
-     */
+    /// The definition of how a value in a pivot table should be calculated.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub formula: String,
-    /**
-     * The definition of how a value in a pivot table should be calculated.
-     */
+    /// The definition of how a value in a pivot table should be calculated.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    /**
-     * The definition of how a value in a pivot table should be calculated.
-     */
+    /// The definition of how a value in a pivot table should be calculated.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7974,9 +6844,7 @@ pub struct PivotValue {
         rename = "sourceColumnOffset"
     )]
     pub source_column_offset: i64,
-    /**
-     * The definition of how a value in a pivot table should be calculated.
-     */
+    /// The definition of how a value in a pivot table should be calculated.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -8043,14 +6911,10 @@ impl Shape {
 /// The style of a point on the chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PointStyle {
-    /**
-     * The style of a point on the chart.
-     */
+    /// The style of a point on the chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub shape: Option<Shape>,
-    /**
-     * The style of a point on the chart.
-     */
+    /// The style of a point on the chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -8062,23 +6926,17 @@ pub struct PointStyle {
 /// A protected range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProtectedRange {
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub editors: Option<Editors>,
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8086,9 +6944,7 @@ pub struct ProtectedRange {
         rename = "namedRangeId"
     )]
     pub named_range_id: String,
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -8096,23 +6952,17 @@ pub struct ProtectedRange {
         rename = "protectedRangeId"
     )]
     pub protected_range_id: i64,
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "requestingUserCanEdit"
     )]
     pub requesting_user_can_edit: bool,
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8120,9 +6970,7 @@ pub struct ProtectedRange {
         rename = "unprotectedRanges"
     )]
     pub unprotected_ranges: Vec<GridRange>,
-    /**
-     * A protected range.
-     */
+    /// A protected range.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
@@ -8134,9 +6982,7 @@ pub struct ProtectedRange {
 /// Randomizes the order of the rows in a range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RandomizeRangeRequest {
-    /**
-     * Randomizes the order of the rows in a range.
-     */
+    /// Randomizes the order of the rows in a range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -8144,18 +6990,14 @@ pub struct RandomizeRangeRequest {
 /// The execution status of refreshing one data source object.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RefreshDataSourceObjectExecutionStatus {
-    /**
-     * The execution status of refreshing one data source object.
-     */
+    /// The execution status of refreshing one data source object.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * The execution status of refreshing one data source object.
-     */
+    /// The execution status of refreshing one data source object.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reference: Option<DataSourceObjectReference>,
 }
@@ -8163,9 +7005,7 @@ pub struct RefreshDataSourceObjectExecutionStatus {
 /// Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RefreshDataSourceRequest {
-    /**
-     * Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
-     */
+    /// Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8173,19 +7013,13 @@ pub struct RefreshDataSourceRequest {
         rename = "dataSourceId"
     )]
     pub data_source_id: String,
-    /**
-     * Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
-     */
+    /// Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub force: Option<bool>,
-    /**
-     * Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
-     */
+    /// Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "isAll")]
     pub is_all: Option<bool>,
-    /**
-     * Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
-     */
+    /// Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub references: Option<DataSourceObjectReferences>,
 }
@@ -8193,9 +7027,7 @@ pub struct RefreshDataSourceRequest {
 /// The response from refreshing one or multiple data source objects.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RefreshDataSourceResponse {
-    /**
-     * The response from refreshing one or multiple data source objects.
-     */
+    /// The response from refreshing one or multiple data source objects.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -8207,23 +7039,17 @@ pub struct RefreshDataSourceResponse {
 /// Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula's ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula's ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RepeatCellRequest {
-    /**
-     * Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula's ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula's ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing.
-     */
+    /// Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula's ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula's ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub cell: Option<CellData>,
-    /**
-     * Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula's ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula's ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing.
-     */
+    /// Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula's ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula's ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula's ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula's ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing.
-     */
+    /// Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula's ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula's ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -8231,553 +7057,423 @@ pub struct RepeatCellRequest {
 /// A single kind of update to apply to a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Request {
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addBanding"
     )]
     pub add_banding: Option<AddBandingRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "addChart")]
     pub add_chart: Option<AddChartRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addConditionalFormatRule"
     )]
     pub add_conditional_format_rule: Option<AddConditionalFormatRuleRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addDataSource"
     )]
     pub add_data_source: Option<AddDataSourceRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addDimensionGroup"
     )]
     pub add_dimension_group: Option<AddDimensionGroupRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addFilterView"
     )]
     pub add_filter_view: Option<AddFilterViewRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addNamedRange"
     )]
     pub add_named_range: Option<AddNamedRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addProtectedRange"
     )]
     pub add_protected_range: Option<AddProtectedRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "addSheet")]
     pub add_sheet: Option<AddSheetRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "addSlicer")]
     pub add_slicer: Option<AddSlicerRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "appendCells"
     )]
     pub append_cells: Option<AppendCellsRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "appendDimension"
     )]
     pub append_dimension: Option<AppendDimensionRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "autoFill")]
     pub auto_fill: Option<AutoFillRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "autoResizeDimensions"
     )]
     pub auto_resize_dimensions: Option<AutoResizeDimensionsRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "clearBasicFilter"
     )]
     pub clear_basic_filter: Option<ClearBasicFilterRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "copyPaste")]
     pub copy_paste: Option<CopyPasteRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "createDeveloperMetadata"
     )]
     pub create_developer_metadata: Option<CreateDeveloperMetadataRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "cutPaste")]
     pub cut_paste: Option<CutPasteRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteBanding"
     )]
     pub delete_banding: Option<DeleteBandingRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteConditionalFormatRule"
     )]
     pub delete_conditional_format_rule: Option<DeleteConditionalFormatRuleRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDataSource"
     )]
     pub delete_data_source: Option<DeleteDataSourceRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDeveloperMetadata"
     )]
     pub delete_developer_metadata: Option<DeleteDeveloperMetadataRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDimension"
     )]
     pub delete_dimension: Option<DeleteDimensionRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDimensionGroup"
     )]
     pub delete_dimension_group: Option<DeleteDimensionGroupRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDuplicates"
     )]
     pub delete_duplicates: Option<DeleteDuplicatesRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteEmbeddedObject"
     )]
     pub delete_embedded_object: Option<DeleteEmbeddedObjectRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteFilterView"
     )]
     pub delete_filter_view: Option<DeleteFilterViewRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteNamedRange"
     )]
     pub delete_named_range: Option<DeleteNamedRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteProtectedRange"
     )]
     pub delete_protected_range: Option<DeleteProtectedRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteRange"
     )]
     pub delete_range: Option<DeleteRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteSheet"
     )]
     pub delete_sheet: Option<DeleteSheetRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "duplicateFilterView"
     )]
     pub duplicate_filter_view: Option<DuplicateFilterViewRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "duplicateSheet"
     )]
     pub duplicate_sheet: Option<DuplicateSheetRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "findReplace"
     )]
     pub find_replace: Option<FindReplaceRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "insertDimension"
     )]
     pub insert_dimension: Option<InsertDimensionRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "insertRange"
     )]
     pub insert_range: Option<InsertRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "mergeCells"
     )]
     pub merge_cells: Option<MergeCellsRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "moveDimension"
     )]
     pub move_dimension: Option<MoveDimensionRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "pasteData")]
     pub paste_data: Option<PasteDataRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "randomizeRange"
     )]
     pub randomize_range: Option<RandomizeRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "refreshDataSource"
     )]
     pub refresh_data_source: Option<RefreshDataSourceRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "repeatCell"
     )]
     pub repeat_cell: Option<RepeatCellRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "setBasicFilter"
     )]
     pub set_basic_filter: Option<SetBasicFilterRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "setDataValidation"
     )]
     pub set_data_validation: Option<SetDataValidationRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "sortRange")]
     pub sort_range: Option<SortRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "textToColumns"
     )]
     pub text_to_columns: Option<TextColumnsRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "trimWhitespace"
     )]
     pub trim_whitespace: Option<TrimWhitespaceRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "unmergeCells"
     )]
     pub unmerge_cells: Option<UnmergeCellsRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateBanding"
     )]
     pub update_banding: Option<UpdateBandingRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateBorders"
     )]
     pub update_borders: Option<UpdateBordersRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateCells"
     )]
     pub update_cells: Option<UpdateCellsRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateChartSpec"
     )]
     pub update_chart_spec: Option<UpdateChartSpecRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateConditionalFormatRule"
     )]
     pub update_conditional_format_rule: Option<UpdateConditionalFormatRuleRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateDataSource"
     )]
     pub update_data_source: Option<UpdateDataSourceRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateDeveloperMetadata"
     )]
     pub update_developer_metadata: Option<UpdateDeveloperMetadataRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateDimensionGroup"
     )]
     pub update_dimension_group: Option<UpdateDimensionGroupRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateDimensionProperties"
     )]
     pub update_dimension_properties: Option<UpdateDimensionPropertiesRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateEmbeddedObjectBorder"
     )]
     pub update_embedded_object_border: Option<UpdateEmbeddedObjectBorderRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateEmbeddedObjectPosition"
     )]
     pub update_embedded_object_position: Option<UpdateEmbeddedObjectPositionRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateFilterView"
     )]
     pub update_filter_view: Option<UpdateFilterViewRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateNamedRange"
     )]
     pub update_named_range: Option<UpdateNamedRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateProtectedRange"
     )]
     pub update_protected_range: Option<UpdateProtectedRangeRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateSheetProperties"
     )]
     pub update_sheet_properties: Option<UpdateSheetPropertiesRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateSlicerSpec"
     )]
     pub update_slicer_spec: Option<UpdateSlicerSpecRequest>,
-    /**
-     * A single kind of update to apply to a spreadsheet.
-     */
+    /// A single kind of update to apply to a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -8789,195 +7485,149 @@ pub struct Request {
 /// A single response from an update.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Response {
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addBanding"
     )]
     pub add_banding: Option<AddBandingResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "addChart")]
     pub add_chart: Option<AddChartResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addDataSource"
     )]
     pub add_data_source: Option<AddDataSourceResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addDimensionGroup"
     )]
     pub add_dimension_group: Option<AddDimensionGroupResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addFilterView"
     )]
     pub add_filter_view: Option<AddFilterViewResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addNamedRange"
     )]
     pub add_named_range: Option<AddNamedRangeResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "addProtectedRange"
     )]
     pub add_protected_range: Option<AddProtectedRangeResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "addSheet")]
     pub add_sheet: Option<AddSheetResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "addSlicer")]
     pub add_slicer: Option<AddSlicerResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "createDeveloperMetadata"
     )]
     pub create_developer_metadata: Option<CreateDeveloperMetadataResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteConditionalFormatRule"
     )]
     pub delete_conditional_format_rule: Option<DeleteConditionalFormatRuleResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDeveloperMetadata"
     )]
     pub delete_developer_metadata: Option<DeleteDeveloperMetadataResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDimensionGroup"
     )]
     pub delete_dimension_group: Option<DeleteDimensionGroupResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "deleteDuplicates"
     )]
     pub delete_duplicates: Option<DeleteDuplicatesResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "duplicateFilterView"
     )]
     pub duplicate_filter_view: Option<DuplicateFilterViewResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "duplicateSheet"
     )]
     pub duplicate_sheet: Option<DuplicateSheetResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "findReplace"
     )]
     pub find_replace: Option<FindReplaceResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "refreshDataSource"
     )]
     pub refresh_data_source: Option<RefreshDataSourceResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "trimWhitespace"
     )]
     pub trim_whitespace: Option<TrimWhitespaceResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateConditionalFormatRule"
     )]
     pub update_conditional_format_rule: Option<UpdateConditionalFormatRuleResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateDataSource"
     )]
     pub update_data_source: Option<UpdateDataSourceResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updateDeveloperMetadata"
     )]
     pub update_developer_metadata: Option<UpdateDeveloperMetadataResponse>,
-    /**
-     * A single response from an update.
-     */
+    /// A single response from an update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -8989,9 +7639,7 @@ pub struct Response {
 /// Data about each cell in a row.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RowData {
-    /**
-     * Data about each cell in a row.
-     */
+    /// Data about each cell in a row.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9042,72 +7690,56 @@ impl NumberFormatSource {
 /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScorecardChartSpec {
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "aggregateType"
     )]
     pub aggregate_type: Option<AggregateType>,
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "baselineValueData"
     )]
     pub baseline_value_data: Option<ChartData>,
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "baselineValueFormat"
     )]
     pub baseline_value_format: Option<BaselineValueFormat>,
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "customFormatOptions"
     )]
     pub custom_format_options: Option<ChartCustomNumberFormatOptions>,
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "keyValueData"
     )]
     pub key_value_data: Option<ChartData>,
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "keyValueFormat"
     )]
     pub key_value_format: Option<KeyValueFormat>,
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "numberFormatSource"
     )]
     pub number_format_source: Option<NumberFormatSource>,
-    /**
-     * A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
-     */
+    /// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -9120,9 +7752,7 @@ pub struct ScorecardChartSpec {
 /// A request to retrieve all developer metadata matching the set of specified criteria.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SearchDeveloperMetadataRequest {
-    /**
-     * A request to retrieve all developer metadata matching the set of specified criteria.
-     */
+    /// A request to retrieve all developer metadata matching the set of specified criteria.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9135,9 +7765,7 @@ pub struct SearchDeveloperMetadataRequest {
 /// A reply to a developer metadata search request.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SearchDeveloperMetadataResponse {
-    /**
-     * A reply to a developer metadata search request.
-     */
+    /// A reply to a developer metadata search request.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9150,9 +7778,7 @@ pub struct SearchDeveloperMetadataResponse {
 /// Sets the basic filter associated with a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SetBasicFilterRequest {
-    /**
-     * Sets the basic filter associated with a sheet.
-     */
+    /// Sets the basic filter associated with a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<BasicFilter>,
 }
@@ -9160,14 +7786,10 @@ pub struct SetBasicFilterRequest {
 /// Sets a data validation rule to every cell in the range. To clear validation in a range, call this with no rule specified.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SetDataValidationRequest {
-    /**
-     * Sets a data validation rule to every cell in the range. To clear validation in a range, call this with no rule specified.
-     */
+    /// Sets a data validation rule to every cell in the range. To clear validation in a range, call this with no rule specified.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Sets a data validation rule to every cell in the range. To clear validation in a range, call this with no rule specified.
-     */
+    /// Sets a data validation rule to every cell in the range. To clear validation in a range, call this with no rule specified.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rule: Option<DataValidationRule>,
 }
@@ -9175,9 +7797,7 @@ pub struct SetDataValidationRequest {
 /// A sheet in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Sheet {
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9185,27 +7805,21 @@ pub struct Sheet {
         rename = "bandedRanges"
     )]
     pub banded_ranges: Vec<BandedRange>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "basicFilter"
     )]
     pub basic_filter: Option<BasicFilter>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub charts: Vec<EmbeddedChart>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9213,9 +7827,7 @@ pub struct Sheet {
         rename = "columnGroups"
     )]
     pub column_groups: Vec<DimensionGroup>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9223,18 +7835,14 @@ pub struct Sheet {
         rename = "conditionalFormats"
     )]
     pub conditional_formats: Vec<ConditionalFormatRule>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<GridData>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9242,9 +7850,7 @@ pub struct Sheet {
         rename = "developerMetadata"
     )]
     pub developer_metadata: Vec<DeveloperMetadata>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9252,23 +7858,17 @@ pub struct Sheet {
         rename = "filterViews"
     )]
     pub filter_views: Vec<FilterView>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub merges: Vec<GridRange>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<SheetProperties>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9276,9 +7876,7 @@ pub struct Sheet {
         rename = "protectedRanges"
     )]
     pub protected_ranges: Vec<ProtectedRange>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9286,9 +7884,7 @@ pub struct Sheet {
         rename = "rowGroups"
     )]
     pub row_groups: Vec<DimensionGroup>,
-    /**
-     * A sheet in a spreadsheet.
-     */
+    /// A sheet in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9340,53 +7936,41 @@ impl SheetType {
 /// Properties of a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SheetProperties {
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceSheetProperties"
     )]
     pub data_source_sheet_properties: Option<DataSourceSheetProperties>,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "gridProperties"
     )]
     pub grid_properties: Option<GridProperties>,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub hidden: bool,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub index: i64,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "rightToLeft"
     )]
     pub right_to_left: bool,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9394,28 +7978,20 @@ pub struct SheetProperties {
         rename = "sheetId"
     )]
     pub sheet_id: i64,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "sheetType")]
     pub sheet_type: Option<SheetType>,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "tabColor")]
     pub tab_color: Option<Color>,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "tabColorStyle"
     )]
     pub tab_color_style: Option<ColorStyle>,
-    /**
-     * Properties of a sheet.
-     */
+    /// Properties of a sheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9427,14 +8003,10 @@ pub struct SheetProperties {
 /// A slicer in a sheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Slicer {
-    /**
-     * A slicer in a sheet.
-     */
+    /// A slicer in a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub position: Option<EmbeddedObjectPosition>,
-    /**
-     * A slicer in a sheet.
-     */
+    /// A slicer in a sheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9442,9 +8014,7 @@ pub struct Slicer {
         rename = "slicerId"
     )]
     pub slicer_id: i64,
-    /**
-     * A slicer in a sheet.
-     */
+    /// A slicer in a sheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spec: Option<SlicerSpec>,
 }
@@ -9452,36 +8022,28 @@ pub struct Slicer {
 /// The specifications of a slicer.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SlicerSpec {
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "applyToPivotTables"
     )]
     pub apply_to_pivot_tables: bool,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColor"
     )]
     pub background_color: Option<Color>,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColorStyle"
     )]
     pub background_color_style: Option<ColorStyle>,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9489,41 +8051,31 @@ pub struct SlicerSpec {
         rename = "columnIndex"
     )]
     pub column_index: i64,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "dataRange")]
     pub data_range: Option<GridRange>,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "filterCriteria"
     )]
     pub filter_criteria: Option<FilterCriteria>,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "horizontalAlignment"
     )]
     pub horizontal_alignment: Option<HorizontalAlignment>,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "textFormat"
     )]
     pub text_format: Option<TextFormat>,
-    /**
-     * The specifications of a slicer.
-     */
+    /// The specifications of a slicer.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9535,14 +8087,10 @@ pub struct SlicerSpec {
 /// Sorts data in rows based on a sort order per column.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SortRangeRequest {
-    /**
-     * Sorts data in rows based on a sort order per column.
-     */
+    /// Sorts data in rows based on a sort order per column.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Sorts data in rows based on a sort order per column.
-     */
+    /// Sorts data in rows based on a sort order per column.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9555,36 +8103,28 @@ pub struct SortRangeRequest {
 /// A sort order associated with a specific column or row.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SortSpec {
-    /**
-     * A sort order associated with a specific column or row.
-     */
+    /// A sort order associated with a specific column or row.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColor"
     )]
     pub background_color: Option<Color>,
-    /**
-     * A sort order associated with a specific column or row.
-     */
+    /// A sort order associated with a specific column or row.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "backgroundColorStyle"
     )]
     pub background_color_style: Option<ColorStyle>,
-    /**
-     * A sort order associated with a specific column or row.
-     */
+    /// A sort order associated with a specific column or row.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceColumnReference"
     )]
     pub data_source_column_reference: Option<DataSourceColumnReference>,
-    /**
-     * A sort order associated with a specific column or row.
-     */
+    /// A sort order associated with a specific column or row.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9592,27 +8132,21 @@ pub struct SortSpec {
         rename = "dimensionIndex"
     )]
     pub dimension_index: i64,
-    /**
-     * A sort order associated with a specific column or row.
-     */
+    /// A sort order associated with a specific column or row.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "foregroundColor"
     )]
     pub foreground_color: Option<Color>,
-    /**
-     * A sort order associated with a specific column or row.
-     */
+    /// A sort order associated with a specific column or row.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "foregroundColorStyle"
     )]
     pub foreground_color_style: Option<ColorStyle>,
-    /**
-     * A sort order associated with a specific column or row.
-     */
+    /// A sort order associated with a specific column or row.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "sortOrder")]
     pub sort_order: Option<SortOrder>,
 }
@@ -9620,14 +8154,10 @@ pub struct SortSpec {
 /// A combination of a source range and how to extend that source.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SourceDestination {
-    /**
-     * A combination of a source range and how to extend that source.
-     */
+    /// A combination of a source range and how to extend that source.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dimension: Option<Dimension>,
-    /**
-     * A combination of a source range and how to extend that source.
-     */
+    /// A combination of a source range and how to extend that source.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9635,9 +8165,7 @@ pub struct SourceDestination {
         rename = "fillLength"
     )]
     pub fill_length: i64,
-    /**
-     * A combination of a source range and how to extend that source.
-     */
+    /// A combination of a source range and how to extend that source.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<GridRange>,
 }
@@ -9645,9 +8173,7 @@ pub struct SourceDestination {
 /// Resource that represents a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Spreadsheet {
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9655,9 +8181,7 @@ pub struct Spreadsheet {
         rename = "dataSourceSchedules"
     )]
     pub data_source_schedules: Vec<DataSourceRefreshSchedule>,
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9665,9 +8189,7 @@ pub struct Spreadsheet {
         rename = "dataSources"
     )]
     pub data_sources: Vec<DataSource>,
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9675,9 +8197,7 @@ pub struct Spreadsheet {
         rename = "developerMetadata"
     )]
     pub developer_metadata: Vec<DeveloperMetadata>,
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9685,23 +8205,17 @@ pub struct Spreadsheet {
         rename = "namedRanges"
     )]
     pub named_ranges: Vec<NamedRange>,
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<SpreadsheetProperties>,
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub sheets: Vec<Sheet>,
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9709,9 +8223,7 @@ pub struct Spreadsheet {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * Resource that represents a spreadsheet.
-     */
+    /// Resource that represents a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9764,54 +8276,42 @@ impl AutoRecalc {
 /// Properties of a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SpreadsheetProperties {
-    /**
-     * Properties of a spreadsheet.
-     */
+    /// Properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "autoRecalc"
     )]
     pub auto_recalc: Option<AutoRecalc>,
-    /**
-     * Properties of a spreadsheet.
-     */
+    /// Properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "defaultFormat"
     )]
     pub default_format: Option<CellFormat>,
-    /**
-     * Properties of a spreadsheet.
-     */
+    /// Properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "iterativeCalculationSettings"
     )]
     pub iterative_calculation_settings: Option<IterativeCalculationSettings>,
-    /**
-     * Properties of a spreadsheet.
-     */
+    /// Properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub locale: String,
-    /**
-     * Properties of a spreadsheet.
-     */
+    /// Properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "spreadsheetTheme"
     )]
     pub spreadsheet_theme: Option<SpreadsheetTheme>,
-    /**
-     * Properties of a spreadsheet.
-     */
+    /// Properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9819,9 +8319,7 @@ pub struct SpreadsheetProperties {
         rename = "timeZone"
     )]
     pub time_zone: String,
-    /**
-     * Properties of a spreadsheet.
-     */
+    /// Properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9833,9 +8331,7 @@ pub struct SpreadsheetProperties {
 /// Represents spreadsheet theme
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SpreadsheetTheme {
-    /**
-     * Represents spreadsheet theme
-     */
+    /// Represents spreadsheet theme
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9843,9 +8339,7 @@ pub struct SpreadsheetTheme {
         rename = "primaryFontFamily"
     )]
     pub primary_font_family: String,
-    /**
-     * Represents spreadsheet theme
-     */
+    /// Represents spreadsheet theme
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -9858,17 +8352,13 @@ pub struct SpreadsheetTheme {
 /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextFormat {
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub bold: bool,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9876,9 +8366,7 @@ pub struct TextFormat {
         rename = "fontFamily"
     )]
     pub font_family: String,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9886,48 +8374,36 @@ pub struct TextFormat {
         rename = "fontSize"
     )]
     pub font_size: i64,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "foregroundColor"
     )]
     pub foreground_color: Option<Color>,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "foregroundColorStyle"
     )]
     pub foreground_color_style: Option<ColorStyle>,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub italic: bool,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub link: Option<Link>,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub strikethrough: bool,
-    /**
-     * The format of a run of text in a cell. Absent values indicate that the field isn't specified.
-     */
+    /// The format of a run of text in a cell. Absent values indicate that the field isn't specified.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -9938,14 +8414,10 @@ pub struct TextFormat {
 /// A run of a text format. The format of this run continues until the start index of the next run. When updating, all fields must be set.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextFormatRun {
-    /**
-     * A run of a text format. The format of this run continues until the start index of the next run. When updating, all fields must be set.
-     */
+    /// A run of a text format. The format of this run continues until the start index of the next run. When updating, all fields must be set.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub format: Option<TextFormat>,
-    /**
-     * A run of a text format. The format of this run continues until the start index of the next run. When updating, all fields must be set.
-     */
+    /// A run of a text format. The format of this run continues until the start index of the next run. When updating, all fields must be set.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -9958,9 +8430,7 @@ pub struct TextFormatRun {
 /// Position settings for text.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextPosition {
-    /**
-     * Position settings for text.
-     */
+    /// Position settings for text.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -9972,18 +8442,14 @@ pub struct TextPosition {
 /// The rotation applied to text in a cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextRotation {
-    /**
-     * The rotation applied to text in a cell.
-     */
+    /// The rotation applied to text in a cell.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub angle: i64,
-    /**
-     * The rotation applied to text in a cell.
-     */
+    /// The rotation applied to text in a cell.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -10043,27 +8509,21 @@ impl DelimiterType {
 /// Splits a column of text into multiple columns, based on a delimiter in each cell.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextColumnsRequest {
-    /**
-     * Splits a column of text into multiple columns, based on a delimiter in each cell.
-     */
+    /// Splits a column of text into multiple columns, based on a delimiter in each cell.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub delimiter: String,
-    /**
-     * Splits a column of text into multiple columns, based on a delimiter in each cell.
-     */
+    /// Splits a column of text into multiple columns, based on a delimiter in each cell.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "delimiterType"
     )]
     pub delimiter_type: Option<DelimiterType>,
-    /**
-     * Splits a column of text into multiple columns, based on a delimiter in each cell.
-     */
+    /// Splits a column of text into multiple columns, based on a delimiter in each cell.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<GridRange>,
 }
@@ -10071,14 +8531,10 @@ pub struct TextColumnsRequest {
 /// A pair mapping a spreadsheet theme color type to the concrete color it represents.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ThemeColorPair {
-    /**
-     * A pair mapping a spreadsheet theme color type to the concrete color it represents.
-     */
+    /// A pair mapping a spreadsheet theme color type to the concrete color it represents.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub color: Option<ColorStyle>,
-    /**
-     * A pair mapping a spreadsheet theme color type to the concrete color it represents.
-     */
+    /// A pair mapping a spreadsheet theme color type to the concrete color it represents.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "colorType")]
     pub color_type: Option<ColorType>,
 }
@@ -10086,36 +8542,28 @@ pub struct ThemeColorPair {
 /// Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimeOfDay {
-    /**
-     * Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
-     */
+    /// Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub hours: i64,
-    /**
-     * Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
-     */
+    /// Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub minutes: i64,
-    /**
-     * Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
-     */
+    /// Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub nanos: i64,
-    /**
-     * Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
-     */
+    /// Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10127,72 +8575,56 @@ pub struct TimeOfDay {
 /// A color scale for a treemap chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TreemapChartColorScale {
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "maxValueColor"
     )]
     pub max_value_color: Option<Color>,
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "maxValueColorStyle"
     )]
     pub max_value_color_style: Option<ColorStyle>,
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "midValueColor"
     )]
     pub mid_value_color: Option<Color>,
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "midValueColorStyle"
     )]
     pub mid_value_color_style: Option<ColorStyle>,
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "minValueColor"
     )]
     pub min_value_color: Option<Color>,
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "minValueColorStyle"
     )]
     pub min_value_color_style: Option<ColorStyle>,
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "noDataColor"
     )]
     pub no_data_color: Option<Color>,
-    /**
-     * A color scale for a treemap chart.
-     */
+    /// A color scale for a treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -10204,50 +8636,38 @@ pub struct TreemapChartColorScale {
 /// A Treemap chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TreemapChartSpec {
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "colorData")]
     pub color_data: Option<ChartData>,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "colorScale"
     )]
     pub color_scale: Option<TreemapChartColorScale>,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "headerColor"
     )]
     pub header_color: Option<Color>,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "headerColorStyle"
     )]
     pub header_color_style: Option<ColorStyle>,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "hideTooltips"
     )]
     pub hide_tooltips: bool,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10255,23 +8675,17 @@ pub struct TreemapChartSpec {
         rename = "hintedLevels"
     )]
     pub hinted_levels: i64,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub labels: Option<ChartData>,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub levels: i64,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -10279,9 +8693,7 @@ pub struct TreemapChartSpec {
         rename = "maxValue"
     )]
     pub max_value: f64,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -10289,23 +8701,17 @@ pub struct TreemapChartSpec {
         rename = "minValue"
     )]
     pub min_value: f64,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "parentLabels"
     )]
     pub parent_labels: Option<ChartData>,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "sizeData")]
     pub size_data: Option<ChartData>,
-    /**
-     * A Treemap chart.
-     */
+    /// A Treemap chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -10317,9 +8723,7 @@ pub struct TreemapChartSpec {
 /// Trims the whitespace (such as spaces, tabs, or new lines) in every cell in the specified range. This request removes all whitespace from the start and end of each cell's text, and reduces any subsequence of remaining whitespace characters to a single space. If the resulting trimmed text starts with a '+' or '=' character, the text remains as a string value and isn't interpreted as a formula.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrimWhitespaceRequest {
-    /**
-     * Trims the whitespace (such as spaces, tabs, or new lines) in every cell in the specified range. This request removes all whitespace from the start and end of each cell's text, and reduces any subsequence of remaining whitespace characters to a single space. If the resulting trimmed text starts with a '+' or '=' character, the text remains as a string value and isn't interpreted as a formula.
-     */
+    /// Trims the whitespace (such as spaces, tabs, or new lines) in every cell in the specified range. This request removes all whitespace from the start and end of each cell's text, and reduces any subsequence of remaining whitespace characters to a single space. If the resulting trimmed text starts with a '+' or '=' character, the text remains as a string value and isn't interpreted as a formula.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -10327,9 +8731,7 @@ pub struct TrimWhitespaceRequest {
 /// The result of trimming whitespace in cells.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TrimWhitespaceResponse {
-    /**
-     * The result of trimming whitespace in cells.
-     */
+    /// The result of trimming whitespace in cells.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10342,9 +8744,7 @@ pub struct TrimWhitespaceResponse {
 /// Unmerges cells in the given range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UnmergeCellsRequest {
-    /**
-     * Unmerges cells in the given range.
-     */
+    /// Unmerges cells in the given range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
 }
@@ -10352,18 +8752,14 @@ pub struct UnmergeCellsRequest {
 /// Updates properties of the supplied banded range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateBandingRequest {
-    /**
-     * Updates properties of the supplied banded range.
-     */
+    /// Updates properties of the supplied banded range.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "bandedRange"
     )]
     pub banded_range: Option<BandedRange>,
-    /**
-     * Updates properties of the supplied banded range.
-     */
+    /// Updates properties of the supplied banded range.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10375,47 +8771,33 @@ pub struct UpdateBandingRequest {
 /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateBordersRequest {
-    /**
-     * Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
-     */
+    /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bottom: Option<Border>,
-    /**
-     * Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
-     */
+    /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "innerHorizontal"
     )]
     pub inner_horizontal: Option<Border>,
-    /**
-     * Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
-     */
+    /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "innerVertical"
     )]
     pub inner_vertical: Option<Border>,
-    /**
-     * Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
-     */
+    /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub left: Option<Border>,
-    /**
-     * Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
-     */
+    /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
-     */
+    /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub right: Option<Border>,
-    /**
-     * Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
-     */
+    /// Updates the borders of a range. If a field is not set in the request, that means the border remains as-is. For example, with two subsequent UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2. range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border, explicitly set the style to NONE.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub top: Option<Border>,
 }
@@ -10423,32 +8805,24 @@ pub struct UpdateBordersRequest {
 /// Updates all cells in a range with new data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateCellsRequest {
-    /**
-     * Updates all cells in a range with new data.
-     */
+    /// Updates all cells in a range with new data.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates all cells in a range with new data.
-     */
+    /// Updates all cells in a range with new data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<GridRange>,
-    /**
-     * Updates all cells in a range with new data.
-     */
+    /// Updates all cells in a range with new data.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub rows: Vec<RowData>,
-    /**
-     * Updates all cells in a range with new data.
-     */
+    /// Updates all cells in a range with new data.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start: Option<GridCoordinate>,
 }
@@ -10456,9 +8830,7 @@ pub struct UpdateCellsRequest {
 /// Updates a chart's specifications. (This does not move or resize a chart. To move or resize a chart, use UpdateEmbeddedObjectPositionRequest.)
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateChartSpecRequest {
-    /**
-     * Updates a chart's specifications. (This does not move or resize a chart. To move or resize a chart, use UpdateEmbeddedObjectPositionRequest.)
-     */
+    /// Updates a chart's specifications. (This does not move or resize a chart. To move or resize a chart, use UpdateEmbeddedObjectPositionRequest.)
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10466,9 +8838,7 @@ pub struct UpdateChartSpecRequest {
         rename = "chartId"
     )]
     pub chart_id: i64,
-    /**
-     * Updates a chart's specifications. (This does not move or resize a chart. To move or resize a chart, use UpdateEmbeddedObjectPositionRequest.)
-     */
+    /// Updates a chart's specifications. (This does not move or resize a chart. To move or resize a chart, use UpdateEmbeddedObjectPositionRequest.)
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spec: Option<ChartSpec>,
 }
@@ -10476,18 +8846,14 @@ pub struct UpdateChartSpecRequest {
 /// Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateConditionalFormatRuleRequest {
-    /**
-     * Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
-     */
+    /// Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub index: i64,
-    /**
-     * Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
-     */
+    /// Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10495,14 +8861,10 @@ pub struct UpdateConditionalFormatRuleRequest {
         rename = "newIndex"
     )]
     pub new_index: i64,
-    /**
-     * Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
-     */
+    /// Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rule: Option<ConditionalFormatRule>,
-    /**
-     * Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
-     */
+    /// Updates a conditional format rule at the given index, or moves a conditional format rule to another index.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10515,9 +8877,7 @@ pub struct UpdateConditionalFormatRuleRequest {
 /// The result of updating a conditional format rule.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateConditionalFormatRuleResponse {
-    /**
-     * The result of updating a conditional format rule.
-     */
+    /// The result of updating a conditional format rule.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10525,14 +8885,10 @@ pub struct UpdateConditionalFormatRuleResponse {
         rename = "newIndex"
     )]
     pub new_index: i64,
-    /**
-     * The result of updating a conditional format rule.
-     */
+    /// The result of updating a conditional format rule.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "newRule")]
     pub new_rule: Option<ConditionalFormatRule>,
-    /**
-     * The result of updating a conditional format rule.
-     */
+    /// The result of updating a conditional format rule.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10540,9 +8896,7 @@ pub struct UpdateConditionalFormatRuleResponse {
         rename = "oldIndex"
     )]
     pub old_index: i64,
-    /**
-     * The result of updating a conditional format rule.
-     */
+    /// The result of updating a conditional format rule.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "oldRule")]
     pub old_rule: Option<ConditionalFormatRule>,
 }
@@ -10550,18 +8904,14 @@ pub struct UpdateConditionalFormatRuleResponse {
 /// Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional `bigquery.readonly` OAuth scope.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateDataSourceRequest {
-    /**
-     * Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional `bigquery.readonly` OAuth scope.
-     */
+    /// Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional `bigquery.readonly` OAuth scope.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSource"
     )]
     pub data_source: Option<DataSource>,
-    /**
-     * Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional `bigquery.readonly` OAuth scope.
-     */
+    /// Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional `bigquery.readonly` OAuth scope.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10573,18 +8923,14 @@ pub struct UpdateDataSourceRequest {
 /// The response from updating data source.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateDataSourceResponse {
-    /**
-     * The response from updating data source.
-     */
+    /// The response from updating data source.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataExecutionStatus"
     )]
     pub data_execution_status: Option<DataExecutionStatus>,
-    /**
-     * The response from updating data source.
-     */
+    /// The response from updating data source.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -10596,9 +8942,7 @@ pub struct UpdateDataSourceResponse {
 /// A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateDeveloperMetadataRequest {
-    /**
-     * A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
-     */
+    /// A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -10606,18 +8950,14 @@ pub struct UpdateDeveloperMetadataRequest {
         rename = "dataFilters"
     )]
     pub data_filters: Vec<DataFilter>,
-    /**
-     * A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
-     */
+    /// A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "developerMetadata"
     )]
     pub developer_metadata: Option<DeveloperMetadata>,
-    /**
-     * A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
-     */
+    /// A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10629,9 +8969,7 @@ pub struct UpdateDeveloperMetadataRequest {
 /// The response from updating developer metadata.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateDeveloperMetadataResponse {
-    /**
-     * The response from updating developer metadata.
-     */
+    /// The response from updating developer metadata.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -10644,18 +8982,14 @@ pub struct UpdateDeveloperMetadataResponse {
 /// Updates the state of the specified group.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateDimensionGroupRequest {
-    /**
-     * Updates the state of the specified group.
-     */
+    /// Updates the state of the specified group.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dimensionGroup"
     )]
     pub dimension_group: Option<DimensionGroup>,
-    /**
-     * Updates the state of the specified group.
-     */
+    /// Updates the state of the specified group.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10667,32 +9001,24 @@ pub struct UpdateDimensionGroupRequest {
 /// Updates properties of dimensions within the specified range.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateDimensionPropertiesRequest {
-    /**
-     * Updates properties of dimensions within the specified range.
-     */
+    /// Updates properties of dimensions within the specified range.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataSourceSheetRange"
     )]
     pub data_source_sheet_range: Option<DataSourceSheetDimensionRange>,
-    /**
-     * Updates properties of dimensions within the specified range.
-     */
+    /// Updates properties of dimensions within the specified range.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates properties of dimensions within the specified range.
-     */
+    /// Updates properties of dimensions within the specified range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<DimensionProperties>,
-    /**
-     * Updates properties of dimensions within the specified range.
-     */
+    /// Updates properties of dimensions within the specified range.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub range: Option<DimensionRange>,
 }
@@ -10700,23 +9026,17 @@ pub struct UpdateDimensionPropertiesRequest {
 /// Updates an embedded object's border property.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateEmbeddedObjectBorderRequest {
-    /**
-     * Updates an embedded object's border property.
-     */
+    /// Updates an embedded object's border property.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub border: Option<EmbeddedObjectBorder>,
-    /**
-     * Updates an embedded object's border property.
-     */
+    /// Updates an embedded object's border property.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates an embedded object's border property.
-     */
+    /// Updates an embedded object's border property.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10729,27 +9049,21 @@ pub struct UpdateEmbeddedObjectBorderRequest {
 /// Update an embedded object's position (such as a moving or resizing a chart or image).
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateEmbeddedObjectPositionRequest {
-    /**
-     * Update an embedded object's position (such as a moving or resizing a chart or image).
-     */
+    /// Update an embedded object's position (such as a moving or resizing a chart or image).
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Update an embedded object's position (such as a moving or resizing a chart or image).
-     */
+    /// Update an embedded object's position (such as a moving or resizing a chart or image).
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "newPosition"
     )]
     pub new_position: Option<EmbeddedObjectPosition>,
-    /**
-     * Update an embedded object's position (such as a moving or resizing a chart or image).
-     */
+    /// Update an embedded object's position (such as a moving or resizing a chart or image).
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10762,9 +9076,7 @@ pub struct UpdateEmbeddedObjectPositionRequest {
 /// The result of updating an embedded object's position.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateEmbeddedObjectPositionResponse {
-    /**
-     * The result of updating an embedded object's position.
-     */
+    /// The result of updating an embedded object's position.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub position: Option<EmbeddedObjectPosition>,
 }
@@ -10772,18 +9084,14 @@ pub struct UpdateEmbeddedObjectPositionResponse {
 /// Updates properties of the filter view.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateFilterViewRequest {
-    /**
-     * Updates properties of the filter view.
-     */
+    /// Updates properties of the filter view.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates properties of the filter view.
-     */
+    /// Updates properties of the filter view.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub filter: Option<FilterView>,
 }
@@ -10791,18 +9099,14 @@ pub struct UpdateFilterViewRequest {
 /// Updates properties of the named range with the specified namedRangeId.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateNamedRangeRequest {
-    /**
-     * Updates properties of the named range with the specified namedRangeId.
-     */
+    /// Updates properties of the named range with the specified namedRangeId.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates properties of the named range with the specified namedRangeId.
-     */
+    /// Updates properties of the named range with the specified namedRangeId.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -10814,18 +9118,14 @@ pub struct UpdateNamedRangeRequest {
 /// Updates an existing protected range with the specified protectedRangeId.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateProtectedRangeRequest {
-    /**
-     * Updates an existing protected range with the specified protectedRangeId.
-     */
+    /// Updates an existing protected range with the specified protectedRangeId.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates an existing protected range with the specified protectedRangeId.
-     */
+    /// Updates an existing protected range with the specified protectedRangeId.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -10837,18 +9137,14 @@ pub struct UpdateProtectedRangeRequest {
 /// Updates properties of the sheet with the specified sheetId.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSheetPropertiesRequest {
-    /**
-     * Updates properties of the sheet with the specified sheetId.
-     */
+    /// Updates properties of the sheet with the specified sheetId.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates properties of the sheet with the specified sheetId.
-     */
+    /// Updates properties of the sheet with the specified sheetId.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<SheetProperties>,
 }
@@ -10856,18 +9152,14 @@ pub struct UpdateSheetPropertiesRequest {
 /// Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSlicerSpecRequest {
-    /**
-     * Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
-     */
+    /// Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
-     */
+    /// Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10875,9 +9167,7 @@ pub struct UpdateSlicerSpecRequest {
         rename = "slicerId"
     )]
     pub slicer_id: i64,
-    /**
-     * Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
-     */
+    /// Updates a slicer's specifications. (This does not move or resize a slicer. To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spec: Option<SlicerSpec>,
 }
@@ -10885,18 +9175,14 @@ pub struct UpdateSlicerSpecRequest {
 /// Updates properties of a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateSpreadsheetPropertiesRequest {
-    /**
-     * Updates properties of a spreadsheet.
-     */
+    /// Updates properties of a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fields: String,
-    /**
-     * Updates properties of a spreadsheet.
-     */
+    /// Updates properties of a spreadsheet.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub properties: Option<SpreadsheetProperties>,
 }
@@ -10904,18 +9190,14 @@ pub struct UpdateSpreadsheetPropertiesRequest {
 /// The response when updating a range of values by a data filter in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateValuesByDataFilterResponse {
-    /**
-     * The response when updating a range of values by a data filter in a spreadsheet.
-     */
+    /// The response when updating a range of values by a data filter in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "dataFilter"
     )]
     pub data_filter: Option<DataFilter>,
-    /**
-     * The response when updating a range of values by a data filter in a spreadsheet.
-     */
+    /// The response when updating a range of values by a data filter in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10923,9 +9205,7 @@ pub struct UpdateValuesByDataFilterResponse {
         rename = "updatedCells"
     )]
     pub updated_cells: i64,
-    /**
-     * The response when updating a range of values by a data filter in a spreadsheet.
-     */
+    /// The response when updating a range of values by a data filter in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10933,18 +9213,14 @@ pub struct UpdateValuesByDataFilterResponse {
         rename = "updatedColumns"
     )]
     pub updated_columns: i64,
-    /**
-     * The response when updating a range of values by a data filter in a spreadsheet.
-     */
+    /// The response when updating a range of values by a data filter in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updatedData"
     )]
     pub updated_data: Option<ValueRange>,
-    /**
-     * The response when updating a range of values by a data filter in a spreadsheet.
-     */
+    /// The response when updating a range of values by a data filter in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10952,9 +9228,7 @@ pub struct UpdateValuesByDataFilterResponse {
         rename = "updatedRange"
     )]
     pub updated_range: String,
-    /**
-     * The response when updating a range of values by a data filter in a spreadsheet.
-     */
+    /// The response when updating a range of values by a data filter in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10967,9 +9241,7 @@ pub struct UpdateValuesByDataFilterResponse {
 /// The response when updating a range of values in a spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UpdateValuesResponse {
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10977,9 +9249,7 @@ pub struct UpdateValuesResponse {
         rename = "spreadsheetId"
     )]
     pub spreadsheet_id: String,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10987,9 +9257,7 @@ pub struct UpdateValuesResponse {
         rename = "updatedCells"
     )]
     pub updated_cells: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -10997,18 +9265,14 @@ pub struct UpdateValuesResponse {
         rename = "updatedColumns"
     )]
     pub updated_columns: i64,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "updatedData"
     )]
     pub updated_data: Option<ValueRange>,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11016,9 +9280,7 @@ pub struct UpdateValuesResponse {
         rename = "updatedRange"
     )]
     pub updated_range: String,
-    /**
-     * The response when updating a range of values in a spreadsheet.
-     */
+    /// The response when updating a range of values in a spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -11031,27 +9293,21 @@ pub struct UpdateValuesResponse {
 /// Data within a range of the spreadsheet.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ValueRange {
-    /**
-     * Data within a range of the spreadsheet.
-     */
+    /// Data within a range of the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "majorDimension"
     )]
     pub major_dimension: Option<Dimension>,
-    /**
-     * Data within a range of the spreadsheet.
-     */
+    /// Data within a range of the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub range: String,
-    /**
-     * Data within a range of the spreadsheet.
-     */
+    /// Data within a range of the spreadsheet.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11063,23 +9319,17 @@ pub struct ValueRange {
 /// Styles for a waterfall chart column.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WaterfallChartColumnStyle {
-    /**
-     * Styles for a waterfall chart column.
-     */
+    /// Styles for a waterfall chart column.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub color: Option<Color>,
-    /**
-     * Styles for a waterfall chart column.
-     */
+    /// Styles for a waterfall chart column.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "colorStyle"
     )]
     pub color_style: Option<ColorStyle>,
-    /**
-     * Styles for a waterfall chart column.
-     */
+    /// Styles for a waterfall chart column.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11091,27 +9341,21 @@ pub struct WaterfallChartColumnStyle {
 /// A custom subtotal column for a waterfall chart series.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WaterfallChartCustomSubtotal {
-    /**
-     * A custom subtotal column for a waterfall chart series.
-     */
+    /// A custom subtotal column for a waterfall chart series.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "dataIsSubtotal"
     )]
     pub data_is_subtotal: bool,
-    /**
-     * A custom subtotal column for a waterfall chart series.
-     */
+    /// A custom subtotal column for a waterfall chart series.
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub label: String,
-    /**
-     * A custom subtotal column for a waterfall chart series.
-     */
+    /// A custom subtotal column for a waterfall chart series.
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -11124,14 +9368,10 @@ pub struct WaterfallChartCustomSubtotal {
 /// The domain of a waterfall chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WaterfallChartDomain {
-    /**
-     * The domain of a waterfall chart.
-     */
+    /// The domain of a waterfall chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<ChartData>,
-    /**
-     * The domain of a waterfall chart.
-     */
+    /// The domain of a waterfall chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -11142,9 +9382,7 @@ pub struct WaterfallChartDomain {
 /// A single series of data for a waterfall chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WaterfallChartSeries {
-    /**
-     * A single series of data for a waterfall chart.
-     */
+    /// A single series of data for a waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
@@ -11152,46 +9390,34 @@ pub struct WaterfallChartSeries {
         rename = "customSubtotals"
     )]
     pub custom_subtotals: Vec<WaterfallChartCustomSubtotal>,
-    /**
-     * A single series of data for a waterfall chart.
-     */
+    /// A single series of data for a waterfall chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<ChartData>,
-    /**
-     * A single series of data for a waterfall chart.
-     */
+    /// A single series of data for a waterfall chart.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "dataLabel")]
     pub data_label: Option<DataLabel>,
-    /**
-     * A single series of data for a waterfall chart.
-     */
+    /// A single series of data for a waterfall chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "hideTrailingSubtotal"
     )]
     pub hide_trailing_subtotal: bool,
-    /**
-     * A single series of data for a waterfall chart.
-     */
+    /// A single series of data for a waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "negativeColumnsStyle"
     )]
     pub negative_columns_style: Option<WaterfallChartColumnStyle>,
-    /**
-     * A single series of data for a waterfall chart.
-     */
+    /// A single series of data for a waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "positiveColumnsStyle"
     )]
     pub positive_columns_style: Option<WaterfallChartColumnStyle>,
-    /**
-     * A single series of data for a waterfall chart.
-     */
+    /// A single series of data for a waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -11242,59 +9468,45 @@ impl WaterfallChartSpecStackedType {
 /// A waterfall chart.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WaterfallChartSpec {
-    /**
-     * A waterfall chart.
-     */
+    /// A waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "connectorLineStyle"
     )]
     pub connector_line_style: Option<LineStyle>,
-    /**
-     * A waterfall chart.
-     */
+    /// A waterfall chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub domain: Option<WaterfallChartDomain>,
-    /**
-     * A waterfall chart.
-     */
+    /// A waterfall chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "firstValueIsTotal"
     )]
     pub first_value_is_total: bool,
-    /**
-     * A waterfall chart.
-     */
+    /// A waterfall chart.
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
         rename = "hideConnectorLines"
     )]
     pub hide_connector_lines: bool,
-    /**
-     * A waterfall chart.
-     */
+    /// A waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub series: Vec<WaterfallChartSeries>,
-    /**
-     * A waterfall chart.
-     */
+    /// A waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "stackedType"
     )]
     pub stacked_type: Option<WaterfallChartSpecStackedType>,
-    /**
-     * A waterfall chart.
-     */
+    /// A waterfall chart.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",

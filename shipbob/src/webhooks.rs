@@ -12,7 +12,7 @@ impl Webhooks {
     }
 
     /**
-     * Get Webhooks.
+     * Get Webhooks
      *
      * This function performs a `GET` to the `/webhook` endpoint.
      *
@@ -20,9 +20,9 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `topic: crate::types::WebhooksTopics` -- Topic of the webhooks requested.
-     * * `page: u64` -- Unique id of the channel.
-     * * `limit: i64` -- Amount of Webhooks per page to request.
+     * * `topic` -- Topic of the webhooks requested
+     * * `page` -- Unique id of the channel
+     * * `limit` -- Amount of Webhooks per page to request
      */
     pub async fn get_page(
         &self,
@@ -41,7 +41,7 @@ impl Webhooks {
             query_args.push(("Topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/webhook?{}", query_), None);
+        let url = self.client.url(&format!("/webhook?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -53,7 +53,7 @@ impl Webhooks {
             .await
     }
     /**
-     * Get Webhooks.
+     * Get Webhooks
      *
      * This function performs a `GET` to the `/webhook` endpoint.
      *
@@ -70,7 +70,7 @@ impl Webhooks {
             query_args.push(("Topic".to_string(), topic.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/webhook?{}", query_), None);
+        let url = self.client.url(&format!("/webhook?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -82,13 +82,13 @@ impl Webhooks {
             .await
     }
     /**
-     * Create a new webhook subscription.
+     * Create a new webhook subscription
      *
      * This function performs a `POST` to the `/webhook` endpoint.
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post(
         &self,
@@ -106,13 +106,13 @@ impl Webhooks {
             .await
     }
     /**
-     * Delete an existing webhook subscription.
+     * Delete an existing webhook subscription
      *
      * This function performs a `DELETE` to the `/webhook/{id}` endpoint.
      *
      * **Parameters:**
      *
-     * * `id: i64` -- Unique id of the channel.
+     * * `id` -- Unique id of the channel
      */
     pub async fn delete(&self, id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

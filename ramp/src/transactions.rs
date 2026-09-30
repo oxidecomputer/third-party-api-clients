@@ -12,7 +12,7 @@ impl Transactions {
     }
 
     /**
-     * List transactions.
+     * List transactions
      *
      * This function performs a `GET` to the `/transactions` endpoint.
      *
@@ -20,23 +20,23 @@ impl Transactions {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
-     * * `department_id: &str` -- The OAuth2 token header.
-     * * `location_id: &str` -- The OAuth2 token header.
-     * * `from_date: chrono::DateTime<chrono::Utc>`
-     * * `to_date: chrono::DateTime<chrono::Utc>`
-     * * `merchant_id: &str` -- The OAuth2 token header.
-     * * `sk_category_id: &str` -- The OAuth2 token header.
-     * * `order_by_date_desc: bool`
-     * * `order_by_date_asc: bool`
-     * * `order_by_amount_desc: bool`
-     * * `order_by_amount_asc: bool`
-     * * `state: &str` -- The OAuth2 token header.
-     * * `min_amount: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `max_amount: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `requires_memo: bool` -- Filters for transactions which require a memo, but do not have one. This can only be set to true.
+     * * `authorization` -- The OAuth2 token header
+     * * `department_id` -- The OAuth2 token header
+     * * `location_id` -- The OAuth2 token header
+     * * `from_date`
+     * * `to_date`
+     * * `merchant_id` -- The OAuth2 token header
+     * * `sk_category_id` -- The OAuth2 token header
+     * * `order_by_date_desc`
+     * * `order_by_date_asc`
+     * * `order_by_amount_desc`
+     * * `order_by_amount_asc`
+     * * `state` -- The OAuth2 token header
+     * * `min_amount` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `max_amount` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `start` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `requires_memo` -- Filters for transactions which require a memo, but do not have one. This can only be set to true.
      */
     pub async fn get_page(
         &self,
@@ -119,7 +119,7 @@ impl Transactions {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/transactions?{}", query_), None);
+        let url = self.client.url(&format!("/transactions?{query_}"), None);
         let resp: crate::Response<crate::types::GetTransactionResponse> = self
             .client
             .get(
@@ -139,7 +139,7 @@ impl Transactions {
         ))
     }
     /**
-     * List transactions.
+     * List transactions
      *
      * This function performs a `GET` to the `/transactions` endpoint.
      *
@@ -220,7 +220,7 @@ impl Transactions {
             query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/transactions?{}", query_), None);
+        let url = self.client.url(&format!("/transactions?{query_}"), None);
         let crate::Response::<crate::types::GetTransactionResponse> {
             mut status,
             mut headers,
@@ -277,15 +277,13 @@ impl Transactions {
         Ok(crate::Response::new(status, headers, data))
     }
     /**
-     * GET a transaction.
+     * GET a transaction
      *
      * This function performs a `GET` to the `/transactions/{id}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get_resource(
         &self,

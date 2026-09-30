@@ -18,9 +18,9 @@ impl Customer {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable. Immutable ID of the Google Workspace account.
-     * * `device_id: &str` -- Immutable. Immutable ID of Chrome OS Device.
-     * * `command_id: &str` -- Immutable. Immutable ID of Chrome OS Device Command.
+     * * `customer_id` -- Immutable. Immutable ID of the Google Workspace account.
+     * * `device_id` -- Immutable. Immutable ID of Chrome OS Device.
+     * * `command_id` -- Immutable. Immutable ID of Chrome OS Device Command.
      */
     pub async fn admin_devices_chromeos_commands_get(
         &self,
@@ -54,8 +54,8 @@ impl Customer {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable. Immutable ID of the Google Workspace account.
-     * * `device_id: &str` -- Immutable. Immutable ID of Chrome OS Device.
+     * * `customer_id` -- Immutable. Immutable ID of the Google Workspace account.
+     * * `device_id` -- Immutable. Immutable ID of Chrome OS Device.
      */
     pub async fn admin_devices_chromeos_issue_command(
         &self,

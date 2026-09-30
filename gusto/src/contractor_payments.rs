@@ -12,7 +12,7 @@ impl ContractorPayments {
     }
 
     /**
-     * Get contractor payments for a company.
+     * Get contractor payments for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/contractor_payments` endpoint.
      *
@@ -20,8 +20,8 @@ impl ContractorPayments {
      *
      * **Parameters:**
      *
-     * * `start_date: &str` -- The time period for which to retrieve contractor payments.
-     * * `end_date: &str` -- The time period for which to retrieve contractor payments.
+     * * `start_date` -- The time period for which to retrieve contractor payments
+     * * `end_date` -- The time period for which to retrieve contractor payments
      */
     pub async fn get_company(
         &self,
@@ -56,7 +56,7 @@ impl ContractorPayments {
             .await
     }
     /**
-     * Create a contractor payment (Beta).
+     * Create a contractor payment (Beta)
      *
      * This function performs a `POST` to the `/v1/companies/{company_id}/contractor_payments` endpoint.
      *
@@ -66,12 +66,12 @@ impl ContractorPayments {
      *
      * **Parameters:**
      *
-     * * `date: &str` -- A unique identifier of the employee in Gusto.
-     * * `contractor_id: f64` -- The contractor receiving the payment.
-     * * `wage: f64` -- If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked.
-     * * `hours: f64` -- If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment.
-     * * `bonus: f64` -- If the contractor is on an hourly wage, this is the bonus the contractor earned.
-     * * `reimbursement: f64` -- Reimbursed wages for the contractor .
+     * * `date` -- A unique identifier of the employee in Gusto.
+     * * `contractor_id` -- The contractor receiving the payment
+     * * `wage` -- If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked.
+     * * `hours` -- If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment.
+     * * `bonus` -- If the contractor is on an hourly wage, this is the bonus the contractor earned.
+     * * `reimbursement` -- Reimbursed wages for the contractor .
      */
     pub async fn post_company(
         &self,
@@ -122,7 +122,7 @@ impl ContractorPayments {
             .await
     }
     /**
-     * Get a single contractor payment.
+     * Get a single contractor payment
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/contractor_payments/{contractor_payment_id_or_uuid}` endpoint.
      *
@@ -152,7 +152,7 @@ impl ContractorPayments {
             .await
     }
     /**
-     * Cancel a contractor payment (Beta).
+     * Cancel a contractor payment (Beta)
      *
      * This function performs a `DELETE` to the `/v1/companies/{company_id}/contractor_payments/{contractor_payment_id_or_uuid}` endpoint.
      *

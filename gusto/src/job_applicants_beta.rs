@@ -12,7 +12,7 @@ impl JobApplicantsBeta {
     }
 
     /**
-     * Get all job applicants for a company.
+     * Get all job applicants for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/job_applicants` endpoint.
      *
@@ -42,7 +42,7 @@ impl JobApplicantsBeta {
             .await
     }
     /**
-     * Get all job applicants for a company.
+     * Get all job applicants for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/job_applicants` endpoint.
      *
@@ -74,7 +74,7 @@ impl JobApplicantsBeta {
             .await
     }
     /**
-     * Create a job applicant.
+     * Create a job applicant
      *
      * This function performs a `POST` to the `/v1/companies/{company_id}/job_applicants` endpoint.
      *
@@ -105,7 +105,7 @@ impl JobApplicantsBeta {
             .await
     }
     /**
-     * Get a job applicant.
+     * Get a job applicant
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/job_applicants/{job_applicant_uuid}` endpoint.
      *
@@ -137,7 +137,7 @@ impl JobApplicantsBeta {
             .await
     }
     /**
-     * Update a job applicant.
+     * Update a job applicant
      *
      * This function performs a `PUT` to the `/v1/companies/{company_id}/job_applicants/{job_applicant_uuid}` endpoint.
      *
@@ -170,7 +170,7 @@ impl JobApplicantsBeta {
             .await
     }
     /**
-     * Delete a job applicant.
+     * Delete a job applicant
      *
      * This function performs a `DELETE` to the `/v1/companies/{company_id}/job_applicants/{job_applicant_uuid}` endpoint.
      *

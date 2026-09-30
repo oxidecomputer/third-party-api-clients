@@ -12,14 +12,14 @@ impl Reimbursements {
     }
 
     /**
-     * List Reimbursements.
+     * List Reimbursements
      *
      * This function performs a `GET` to the `/reimbursements` endpoint.
      *
      * **Parameters:**
      *
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `start` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     pub async fn get_page(
         &self,
@@ -34,9 +34,7 @@ impl Reimbursements {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/reimbursements?{}", query_), None);
+        let url = self.client.url(&format!("/reimbursements?{query_}"), None);
         let resp: crate::Response<crate::types::GetReimbursementsResponse> = self
             .client
             .get(
@@ -56,7 +54,7 @@ impl Reimbursements {
         ))
     }
     /**
-     * List Reimbursements.
+     * List Reimbursements
      *
      * This function performs a `GET` to the `/reimbursements` endpoint.
      *
@@ -120,7 +118,7 @@ impl Reimbursements {
         Ok(crate::Response::new(status, headers, data))
     }
     /**
-     * Get details for one reimbursement.
+     * Get details for one reimbursement
      *
      * This function performs a `GET` to the `/reimbursements/{id}` endpoint.
      */

@@ -12,7 +12,7 @@ impl Campaigns {
     }
 
     /**
-     * List campaigns.
+     * List campaigns
      *
      * This function performs a `GET` to the `/campaigns` endpoint.
      *
@@ -20,21 +20,21 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `type_: crate::types::CampaignType` -- There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
-     * * `status: crate::types::GetCampaignsStatus` -- The status of the campaign.
-     * * `before_send_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns sent before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_send_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns sent after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_create_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_create_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `list_id: &str` -- The unique id for the list.
-     * * `folder_id: &str` -- The name of the folder.
-     * * `member_id: &str` -- Retrieve campaigns sent to a particular list member. Member ID is The MD5 hash of the lowercase version of the list member’s email address.
-     * * `sort_field: crate::types::SortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `type_` -- There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
+     * * `status` -- The status of the campaign.
+     * * `before_send_time` -- Restrict the response to campaigns sent before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_send_time` -- Restrict the response to campaigns sent after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_create_time` -- Restrict the response to campaigns created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_create_time` -- Restrict the response to campaigns created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `list_id` -- The unique id for the list.
+     * * `folder_id` -- The name of the folder.
+     * * `member_id` -- Retrieve campaigns sent to a particular list member. Member ID is The MD5 hash of the lowercase version of the list member’s email address.
+     * * `sort_field` -- Returns files sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
      */
     pub async fn get(
         &self,
@@ -101,7 +101,7 @@ impl Campaigns {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/campaigns?{}", query_), None);
+        let url = self.client.url(&format!("/campaigns?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -113,7 +113,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Add campaign.
+     * Add campaign
      *
      * This function performs a `POST` to the `/campaigns` endpoint.
      *
@@ -135,7 +135,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Get campaign info.
+     * Get campaign info
      *
      * This function performs a `GET` to the `/campaigns/{campaign_id}` endpoint.
      *
@@ -143,9 +143,9 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn get_campaigns(
         &self,
@@ -180,7 +180,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Delete campaign.
+     * Delete campaign
      *
      * This function performs a `DELETE` to the `/campaigns/{campaign_id}` endpoint.
      *
@@ -188,7 +188,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn delete(&self, campaign_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -209,7 +209,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Update campaign settings.
+     * Update campaign settings
      *
      * This function performs a `PATCH` to the `/campaigns/{campaign_id}` endpoint.
      *
@@ -217,7 +217,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn patch(
         &self,
@@ -242,7 +242,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Cancel campaign.
+     * Cancel campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/cancel-send` endpoint.
      *
@@ -250,7 +250,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_cancel_send(
         &self,
@@ -274,7 +274,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Replicate campaign.
+     * Replicate campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/replicate` endpoint.
      *
@@ -282,7 +282,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_replicate(
         &self,
@@ -306,7 +306,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Send campaign.
+     * Send campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/send` endpoint.
      *
@@ -314,7 +314,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_send(&self, campaign_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -335,7 +335,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Schedule campaign.
+     * Schedule campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/schedule` endpoint.
      *
@@ -343,7 +343,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_schedule(
         &self,
@@ -368,7 +368,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Unschedule campaign.
+     * Unschedule campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/unschedule` endpoint.
      *
@@ -376,7 +376,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_unschedule(
         &self,
@@ -400,7 +400,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Send test email.
+     * Send test email
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/test` endpoint.
      *
@@ -408,7 +408,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_test(
         &self,
@@ -433,7 +433,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Pause rss campaign.
+     * Pause rss campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/pause` endpoint.
      *
@@ -441,7 +441,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_pause(&self, campaign_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -462,7 +462,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Resume rss campaign.
+     * Resume rss campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/resume` endpoint.
      *
@@ -470,7 +470,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_resume(
         &self,
@@ -494,7 +494,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Resend campaign.
+     * Resend campaign
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/actions/create-resend` endpoint.
      *
@@ -502,7 +502,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_actions_create_resend(
         &self,
@@ -526,7 +526,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Get campaign content.
+     * Get campaign content
      *
      * This function performs a `GET` to the `/campaigns/{campaign_id}/content` endpoint.
      *
@@ -534,9 +534,9 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn get_content(
         &self,
@@ -571,7 +571,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Set campaign content.
+     * Set campaign content
      *
      * This function performs a `PUT` to the `/campaigns/{campaign_id}/content` endpoint.
      *
@@ -579,7 +579,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn put_content(
         &self,
@@ -604,7 +604,7 @@ impl Campaigns {
             .await
     }
     /**
-     * List campaign feedback.
+     * List campaign feedback
      *
      * This function performs a `GET` to the `/campaigns/{campaign_id}/feedback` endpoint.
      *
@@ -612,9 +612,9 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn get_feedback(
         &self,
@@ -649,7 +649,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Add campaign feedback.
+     * Add campaign feedback
      *
      * This function performs a `POST` to the `/campaigns/{campaign_id}/feedback` endpoint.
      *
@@ -657,7 +657,7 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn post_feedback(
         &self,
@@ -682,7 +682,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Get campaign feedback message.
+     * Get campaign feedback message
      *
      * This function performs a `GET` to the `/campaigns/{campaign_id}/feedback/{feedback_id}` endpoint.
      *
@@ -690,10 +690,10 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `campaign_id: &str` -- The unique id for the campaign.
-     * * `feedback_id: &str` -- The unique id for the feedback message.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id` -- The unique id for the campaign.
+     * * `feedback_id` -- The unique id for the feedback message.
      */
     pub async fn get_feedback_campaigns(
         &self,
@@ -730,7 +730,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Delete campaign feedback message.
+     * Delete campaign feedback message
      *
      * This function performs a `DELETE` to the `/campaigns/{campaign_id}/feedback/{feedback_id}` endpoint.
      *
@@ -738,8 +738,8 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
-     * * `feedback_id: &str` -- The unique id for the feedback message.
+     * * `campaign_id` -- The unique id for the campaign.
+     * * `feedback_id` -- The unique id for the feedback message.
      */
     pub async fn delete_feedback(
         &self,
@@ -765,7 +765,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Update campaign feedback message.
+     * Update campaign feedback message
      *
      * This function performs a `PATCH` to the `/campaigns/{campaign_id}/feedback/{feedback_id}` endpoint.
      *
@@ -773,8 +773,8 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `campaign_id: &str` -- The unique id for the campaign.
-     * * `feedback_id: &str` -- The unique id for the feedback message.
+     * * `campaign_id` -- The unique id for the campaign.
+     * * `feedback_id` -- The unique id for the feedback message.
      */
     pub async fn patch_feedback(
         &self,
@@ -801,7 +801,7 @@ impl Campaigns {
             .await
     }
     /**
-     * Get campaign send checklist.
+     * Get campaign send checklist
      *
      * This function performs a `GET` to the `/campaigns/{campaign_id}/send-checklist` endpoint.
      *
@@ -809,9 +809,9 @@ impl Campaigns {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id` -- The unique id for the campaign.
      */
     pub async fn get_send_checklist(
         &self,

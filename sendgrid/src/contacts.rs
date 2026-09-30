@@ -12,7 +12,7 @@ impl Contacts {
     }
 
     /**
-     * Get Sample Contacts.
+     * Get Sample Contacts
      *
      * This function performs a `GET` to the `/marketing/contacts` endpoint.
      *
@@ -39,7 +39,7 @@ impl Contacts {
             .await
     }
     /**
-     * Add or Update a Contact.
+     * Add or Update a Contact
      *
      * This function performs a `PUT` to the `/marketing/contacts` endpoint.
      *
@@ -71,7 +71,7 @@ impl Contacts {
             .await
     }
     /**
-     * Delete Contacts.
+     * Delete Contacts
      *
      * This function performs a `DELETE` to the `/marketing/contacts` endpoint.
      *
@@ -87,8 +87,8 @@ impl Contacts {
      *
      * **Parameters:**
      *
-     * * `delete_all_contacts: &str` -- The license key provided with your New Relic account.
-     * * `ids: &str` -- The license key provided with your New Relic account.
+     * * `delete_all_contacts` -- The license key provided with your New Relic account.
+     * * `ids` -- The license key provided with your New Relic account.
      */
     pub async fn delete_mc(
         &self,
@@ -108,7 +108,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/marketing/contacts?{}", query_), None);
+            .url(&format!("/marketing/contacts?{query_}"), None);
         self.client
             .delete(
                 &url,
@@ -120,7 +120,7 @@ impl Contacts {
             .await
     }
     /**
-     * Get Total Contact Count.
+     * Get Total Contact Count
      *
      * This function performs a `GET` to the `/marketing/contacts/count` endpoint.
      *
@@ -141,7 +141,7 @@ impl Contacts {
             .await
     }
     /**
-     * Get All Existing Exports.
+     * Get All Existing Exports
      *
      * This function performs a `GET` to the `/marketing/contacts/exports` endpoint.
      *
@@ -168,7 +168,7 @@ impl Contacts {
             .await
     }
     /**
-     * Export Contacts.
+     * Export Contacts
      *
      * This function performs a `POST` to the `/marketing/contacts/exports` endpoint.
      *
@@ -200,7 +200,7 @@ impl Contacts {
             .await
     }
     /**
-     * Get a Contact by ID.
+     * Get a Contact by ID
      *
      * This function performs a `GET` to the `/marketing/contacts/{id}` endpoint.
      *
@@ -230,7 +230,7 @@ impl Contacts {
             .await
     }
     /**
-     * Search Contacts.
+     * Search Contacts
      *
      * This function performs a `POST` to the `/marketing/contacts/search` endpoint.
      *
@@ -262,7 +262,7 @@ impl Contacts {
             .await
     }
     /**
-     * Import Contacts.
+     * Import Contacts
      *
      * This function performs a `PUT` to the `/marketing/contacts/imports` endpoint.
      *
@@ -300,7 +300,7 @@ impl Contacts {
             .await
     }
     /**
-     * Import Contacts Status.
+     * Import Contacts Status
      *
      * This function performs a `GET` to the `/marketing/contacts/imports/{id}` endpoint.
      *
@@ -338,7 +338,7 @@ impl Contacts {
             .await
     }
     /**
-     * Export Contacts Status.
+     * Export Contacts Status
      *
      * This function performs a `GET` to the `/marketing/contacts/exports/{id}` endpoint.
      *
@@ -370,7 +370,7 @@ impl Contacts {
             .await
     }
     /**
-     * Get Batched Contacts by IDs.
+     * Get Batched Contacts by IDs
      *
      * This function performs a `POST` to the `/marketing/contacts/batch` endpoint.
      *
@@ -396,7 +396,7 @@ impl Contacts {
             .await
     }
     /**
-     * Get Contacts by Emails.
+     * Get Contacts by Emails
      *
      * This function performs a `POST` to the `/marketing/contacts/search/emails` endpoint.
      *

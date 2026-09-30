@@ -20,7 +20,7 @@ impl AdminUsergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.usergroups:write`
      */
     pub async fn add_channels(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.usergroups.addChannels", None);
@@ -43,7 +43,7 @@ impl AdminUsergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.teams:write`
      */
     pub async fn add_teams(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.usergroups.addTeams", None);
@@ -66,10 +66,10 @@ impl AdminUsergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:read`.
-     * * `usergroup_id: &str` -- ID of the IDP group to list default channels for.
-     * * `team_id: &str` -- ID of the the workspace.
-     * * `include_num_members: bool` -- Flag to include or exclude the count of members per channel.
+     * * `token` -- Authentication token. Requires scope: `admin.usergroups:read`
+     * * `usergroup_id` -- ID of the IDP group to list default channels for.
+     * * `team_id` -- ID of the the workspace.
+     * * `include_num_members` -- Flag to include or exclude the count of members per channel.
      */
     pub async fn list_channel(
         &self,
@@ -93,7 +93,7 @@ impl AdminUsergroups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.usergroups.listChannels?{}", query_), None);
+            .url(&format!("/admin.usergroups.listChannels?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -113,7 +113,7 @@ impl AdminUsergroups {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.usergroups:write`
      */
     pub async fn remove_channels(
         &self,

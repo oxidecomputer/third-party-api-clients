@@ -12,7 +12,7 @@ impl WorkspaceItems {
     }
 
     /**
-     * List workspace folder contents.
+     * List workspace folder contents
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/workspaces/{workspaceId}/folders/{folderId}` endpoint.
      *
@@ -20,16 +20,16 @@ impl WorkspaceItems {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_files: &str` -- When set to **true**, the response includes file information (in addition to folder information). The default is **false**.
-     * * `include_sub_folders: &str` -- When set to **true**, the response includes information about the sub-folders of the current folder. The default is **false**.
-     * * `include_thumbnails: &str` -- When set to **true**, the response returns thumbnails.  The default is **false**.
-     * * `include_user_detail: &str` -- When set to **true**, the response includes extended details about the user. The default is **false**.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values.
-     * * `workspace_user_id: &str` -- If set, the response only includes results associated with the `userId` that you specify.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_files` -- When set to **true**, the response includes file information (in addition to folder information). The default is **false**.
+     * * `include_sub_folders` -- When set to **true**, the response includes information about the sub-folders of the current folder. The default is **false**.
+     * * `include_thumbnails` -- When set to **true**, the response returns thumbnails.  The default is **false**.
+     * * `include_user_detail` -- When set to **true**, the response includes extended details about the user. The default is **false**.
+     * * `start_position` -- The position within the total result set from which to start returning values.
+     * * `workspace_user_id` -- If set, the response only includes results associated with the `userId` that you specify.
      */
     pub async fn workspace_folder_get(
         &self,
@@ -110,9 +110,9 @@ impl WorkspaceItems {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn workspace_folder_delete_items(
         &self,
@@ -149,9 +149,9 @@ impl WorkspaceItems {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn workspace_file_post_files(
         &self,
@@ -179,7 +179,7 @@ impl WorkspaceItems {
             .await
     }
     /**
-     * Gets a workspace file.
+     * Gets a workspace file
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/workspaces/{workspaceId}/folders/{folderId}/files/{fileId}` endpoint.
      *
@@ -187,12 +187,12 @@ impl WorkspaceItems {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `file_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `is_download: &str` -- When set to **true**, the `Content-Disposition` header is set in the response. The value of the header provides the filename of the file. The default is **false**.
-     * * `pdf_version: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `file_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `is_download` -- When set to **true**, the `Content-Disposition` header is set in the response. The value of the header provides the filename of the file. The default is **false**.
+     * * `pdf_version` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn workspace_file_get(
         &self,
@@ -233,7 +233,7 @@ impl WorkspaceItems {
             .await
     }
     /**
-     * Update workspace file or folder metadata.
+     * Update workspace file or folder metadata
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/workspaces/{workspaceId}/folders/{folderId}/files/{fileId}` endpoint.
      *
@@ -241,10 +241,10 @@ impl WorkspaceItems {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `file_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `file_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn workspace_file_put(
         &self,
@@ -274,7 +274,7 @@ impl WorkspaceItems {
             .await
     }
     /**
-     * List File Pages.
+     * List File Pages
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/workspaces/{workspaceId}/folders/{folderId}/files/{fileId}/pages` endpoint.
      *
@@ -282,15 +282,15 @@ impl WorkspaceItems {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `file_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `dpi: &str` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
-     * * `max_height: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `max_width: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `file_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `folder_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `dpi` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
+     * * `max_height` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `max_width` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
      */
     pub async fn workspace_file_pages_get(
         &self,

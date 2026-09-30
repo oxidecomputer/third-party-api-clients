@@ -18,7 +18,7 @@ impl TestHelpers {
      *
      * **Parameters:**
      *
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn post_terminal_readers_reader_present_payment_method(
         &self,
@@ -48,10 +48,9 @@ impl TestHelpers {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_clocks(
         &self,
@@ -72,7 +71,7 @@ impl TestHelpers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/test_helpers/test_clocks?{}", query_), None);
+            .url(&format!("/v1/test_helpers/test_clocks?{query_}"), None);
         let resp: crate::Response<crate::types::GetTestHelpersClocksResponse> = self
             .client
             .get(
@@ -141,7 +140,7 @@ impl TestHelpers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -156,7 +155,7 @@ impl TestHelpers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -197,8 +196,7 @@ impl TestHelpers {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `test_clock: &str` -- The account's country.
+     * * `test_clock` -- The account's country.
      */
     pub async fn get_clocks_clock(
         &self,
@@ -228,7 +226,7 @@ impl TestHelpers {
      *
      * **Parameters:**
      *
-     * * `test_clock: &str` -- The account's country.
+     * * `test_clock` -- The account's country.
      */
     pub async fn delete_clocks_clock(
         &self,
@@ -258,7 +256,7 @@ impl TestHelpers {
      *
      * **Parameters:**
      *
-     * * `test_clock: &str` -- The account's country.
+     * * `test_clock` -- The account's country.
      */
     pub async fn post_clocks_clock_advance(
         &self,

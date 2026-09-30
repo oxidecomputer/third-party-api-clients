@@ -12,7 +12,7 @@ impl BillingPlans {
     }
 
     /**
-     * Get Account Billing Plan.
+     * Get Account Billing Plan
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/billing_plan` endpoint.
      *
@@ -26,13 +26,12 @@ impl BillingPlans {
      *
      * **Note**: When credit card number information displays, a mask is applied to the response so that only the last 4 digits of the card number are visible.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_credit_card_information: &str` -- When set to **true**, payment information including credit card information will show in the return.
-     * * `include_metadata: &str` -- When set to **true**, the `canUpgrade` and `renewalStatus` properities are included the response and an array of `supportedCountries` is added to the `billingAddress` information. .
-     * * `include_successor_plans: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_credit_card_information` -- When set to **true**, payment information including credit card information will show in the return.
+     * * `include_metadata` -- When set to **true**, the `canUpgrade` and `renewalStatus` properities are included the response and an array of `supportedCountries` is added to the `billingAddress` information.
+     * * `include_successor_plans` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -85,8 +84,8 @@ impl BillingPlans {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `preview_billing_plan: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `preview_billing_plan` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -121,7 +120,7 @@ impl BillingPlans {
             .await
     }
     /**
-     * Get credit card information.
+     * Get credit card information
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/billing_plan/credit_card` endpoint.
      *
@@ -129,7 +128,7 @@ impl BillingPlans {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get_credit_card_info(
         &self,
@@ -157,11 +156,9 @@ impl BillingPlans {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/billing_plan/downgrade` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get_downgrade_request_info(
         &self,
@@ -189,11 +186,9 @@ impl BillingPlans {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/billing_plan/downgrade` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put_downgrade_account(
         &self,
@@ -226,7 +221,7 @@ impl BillingPlans {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn purchased_envelopes_put(
         &self,
@@ -280,7 +275,7 @@ impl BillingPlans {
      *
      * **Parameters:**
      *
-     * * `billing_plan_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `billing_plan_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get_plan(
         &self,

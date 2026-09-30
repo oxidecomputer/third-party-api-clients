@@ -18,17 +18,14 @@ impl ApplicationFees {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- Only return application fees for the charge specified by this charge ID.
-     * * `created: &str`
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `charge` -- Only return application fees for the charge specified by this charge ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
         charge: &str,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -49,7 +46,7 @@ impl ApplicationFees {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/application_fees?{}", query_), None);
+            .url(&format!("/v1/application_fees?{query_}"), None);
         let resp: crate::Response<crate::types::GetApplicationFeesResponse> = self
             .client
             .get(
@@ -78,7 +75,6 @@ impl ApplicationFees {
     pub async fn get_all(
         &self,
         charge: &str,
-        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::PlatformFee>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
@@ -87,7 +83,7 @@ impl ApplicationFees {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/application_fees?{}", query_), None);
+            .url(&format!("/v1/application_fees?{query_}"), None);
         let crate::Response::<crate::types::GetApplicationFeesResponse> {
             mut status,
             mut headers,
@@ -127,7 +123,7 @@ impl ApplicationFees {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -142,7 +138,7 @@ impl ApplicationFees {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -166,9 +162,8 @@ impl ApplicationFees {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `fee: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `fee` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get_fee_refund(
         &self,
@@ -202,8 +197,8 @@ impl ApplicationFees {
      *
      * **Parameters:**
      *
-     * * `fee: &str` -- The account's country.
-     * * `id: &str` -- The account's country.
+     * * `fee` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_fee_refund(
         &self,
@@ -235,8 +230,7 @@ impl ApplicationFees {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::PlatformFee>> {
         let url = self.client.url(
@@ -259,11 +253,9 @@ impl ApplicationFees {
     /**
      * This function performs a `POST` to the `/v1/application_fees/{id}/refund` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_refund(
         &self,
@@ -293,11 +285,10 @@ impl ApplicationFees {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `id` -- The account's country.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_refunds(
         &self,
@@ -400,7 +391,7 @@ impl ApplicationFees {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -415,7 +406,7 @@ impl ApplicationFees {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -447,7 +438,7 @@ impl ApplicationFees {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_refund_application_fees(
         &self,

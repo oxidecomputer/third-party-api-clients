@@ -20,8 +20,8 @@ impl AdminTeamsSettings {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:read`.
-     * * `team_id: &str`
+     * * `token` -- Authentication token. Requires scope: `admin.teams:read`
+     * * `team_id`
      */
     pub async fn info(
         &self,
@@ -34,7 +34,7 @@ impl AdminTeamsSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.teams.settings.info?{}", query_), None);
+            .url(&format!("/admin.teams.settings.info?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -77,7 +77,7 @@ impl AdminTeamsSettings {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.teams:write`
      */
     pub async fn set_description(
         &self,
@@ -104,7 +104,7 @@ impl AdminTeamsSettings {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.teams:write`
      */
     pub async fn set_discoverability(
         &self,
@@ -150,7 +150,7 @@ impl AdminTeamsSettings {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
+     * * `token` -- Authentication token. Requires scope: `admin.teams:write`
      */
     pub async fn set_name(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/admin.teams.settings.setName", None);

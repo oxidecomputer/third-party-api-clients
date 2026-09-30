@@ -18,7 +18,7 @@ impl InlineHooks {
      *
      * **Parameters:**
      *
-     * * `type_: &str`
+     * * `type_`
      */
     pub async fn list(
         &self,
@@ -31,7 +31,7 @@ impl InlineHooks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/inlineHooks?{}", query_), None);
+            .url(&format!("/api/v1/inlineHooks?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -60,7 +60,7 @@ impl InlineHooks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/inlineHooks?{}", query_), None);
+            .url(&format!("/api/v1/inlineHooks?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -98,7 +98,7 @@ impl InlineHooks {
      *
      * **Parameters:**
      *
-     * * `inline_hook_id: &str`
+     * * `inline_hook_id`
      */
     pub async fn get(
         &self,
@@ -128,7 +128,7 @@ impl InlineHooks {
      *
      * **Parameters:**
      *
-     * * `inline_hook_id: &str`
+     * * `inline_hook_id`
      */
     pub async fn update(
         &self,
@@ -159,7 +159,7 @@ impl InlineHooks {
      *
      * **Parameters:**
      *
-     * * `inline_hook_id: &str`
+     * * `inline_hook_id`
      */
     pub async fn delete(&self, inline_hook_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -186,7 +186,7 @@ impl InlineHooks {
      *
      * **Parameters:**
      *
-     * * `inline_hook_id: &str`
+     * * `inline_hook_id`
      */
     pub async fn execute(
         &self,
@@ -217,7 +217,7 @@ impl InlineHooks {
      *
      * **Parameters:**
      *
-     * * `inline_hook_id: &str`
+     * * `inline_hook_id`
      */
     pub async fn activate(
         &self,
@@ -247,7 +247,7 @@ impl InlineHooks {
      *
      * **Parameters:**
      *
-     * * `inline_hook_id: &str`
+     * * `inline_hook_id`
      */
     pub async fn deactivate(
         &self,

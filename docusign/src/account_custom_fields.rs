@@ -20,7 +20,7 @@ impl AccountCustomFields {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -52,8 +52,8 @@ impl AccountCustomFields {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `apply_to_templates: &str` -- (Optional) When set to **true**, the new custom field is applied to all of the templates on the account.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `apply_to_templates` -- (Optional) When set to **true**, the new custom field is applied to all of the templates on the account.
      */
     pub async fn post(
         &self,
@@ -96,9 +96,9 @@ impl AccountCustomFields {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_field_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `apply_to_templates: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_field_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `apply_to_templates` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -143,9 +143,9 @@ impl AccountCustomFields {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_field_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `apply_to_templates: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_field_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `apply_to_templates` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(
         &self,

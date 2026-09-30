@@ -12,7 +12,7 @@ impl SearchCampaigns {
     }
 
     /**
-     * Search campaigns.
+     * Search campaigns
      *
      * This function performs a `GET` to the `/search-campaigns` endpoint.
      *
@@ -20,9 +20,9 @@ impl SearchCampaigns {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `query: &str` -- The search query used to filter results.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `query` -- The search query used to filter results.
      */
     pub async fn get(
         &self,
@@ -43,7 +43,7 @@ impl SearchCampaigns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/search-campaigns?{}", query_), None);
+            .url(&format!("/search-campaigns?{query_}"), None);
         self.client
             .get(
                 &url,

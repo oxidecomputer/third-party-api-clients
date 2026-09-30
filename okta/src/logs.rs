@@ -20,13 +20,13 @@ impl Logs {
      *
      * **Parameters:**
      *
-     * * `since: chrono::DateTime<chrono::Utc>`
-     * * `until: chrono::DateTime<chrono::Utc>`
-     * * `filter: &str`
-     * * `q: &str`
-     * * `limit: i64`
-     * * `sort_order: &str`
-     * * `after: &str`
+     * * `since`
+     * * `until`
+     * * `filter`
+     * * `q`
+     * * `limit`
+     * * `sort_order`
+     * * `after`
      */
     pub async fn get_page(
         &self,
@@ -61,7 +61,7 @@ impl Logs {
             query_args.push(("until".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/logs?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/logs?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -106,7 +106,7 @@ impl Logs {
             query_args.push(("until".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/logs?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/logs?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,

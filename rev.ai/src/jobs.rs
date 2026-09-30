@@ -12,7 +12,7 @@ impl Jobs {
     }
 
     /**
-     * Get List of Jobs.
+     * Get List of Jobs
      *
      * This function performs a `GET` to the `/jobs` endpoint.
      *
@@ -20,8 +20,8 @@ impl Jobs {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- Limits the number of jobs returned, default is 100, max is 1000.
-     * * `starting_after: &str` -- If specified, returns transcription jobs submitted before the job with this id, exclusive (job with this id is not included).
+     * * `limit` -- Limits the number of jobs returned, default is 100, max is 1000
+     * * `starting_after` -- If specified, returns transcription jobs submitted before the job with this id, exclusive (job with this id is not included)
      */
     pub async fn get_list_of(
         &self,
@@ -36,7 +36,7 @@ impl Jobs {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/jobs?{}", query_), None);
+        let url = self.client.url(&format!("/jobs?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -48,7 +48,7 @@ impl Jobs {
             .await
     }
     /**
-     * Get List of Jobs.
+     * Get List of Jobs
      *
      * This function performs a `GET` to the `/jobs` endpoint.
      *
@@ -65,7 +65,7 @@ impl Jobs {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/jobs?{}", query_), None);
+        let url = self.client.url(&format!("/jobs?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -77,7 +77,7 @@ impl Jobs {
             .await
     }
     /**
-     * Submit Transcription Job.
+     * Submit Transcription Job
      *
      * This function performs a `POST` to the `/jobs` endpoint.
      *
@@ -99,7 +99,7 @@ impl Jobs {
             .await
     }
     /**
-     * Get Job By Id.
+     * Get Job By Id
      *
      * This function performs a `GET` to the `/jobs/{id}` endpoint.
      *
@@ -121,7 +121,7 @@ impl Jobs {
             .await
     }
     /**
-     * Delete Job by Id.
+     * Delete Job by Id
      *
      * This function performs a `DELETE` to the `/jobs/{id}` endpoint.
      *

@@ -12,7 +12,7 @@ impl Apps {
     }
 
     /**
-     * Get the authenticated app.
+     * Get the authenticated app
      *
      * This function performs a `GET` to the `/app` endpoint.
      *
@@ -37,7 +37,7 @@ impl Apps {
             .await
     }
     /**
-     * Create a GitHub App from a manifest.
+     * Create a GitHub App from a manifest
      *
      * This function performs a `POST` to the `/app-manifests/{code}/conversions` endpoint.
      *
@@ -47,7 +47,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `code: &str`
+     * * `code`
      */
     pub async fn create_from_manifest(
         &self,
@@ -71,7 +71,7 @@ impl Apps {
             .await
     }
     /**
-     * Get a webhook configuration for an app.
+     * Get a webhook configuration for an app
      *
      * This function performs a `GET` to the `/app/hook/config` endpoint.
      *
@@ -96,7 +96,7 @@ impl Apps {
             .await
     }
     /**
-     * Update a webhook configuration for an app.
+     * Update a webhook configuration for an app
      *
      * This function performs a `PATCH` to the `/app/hook/config` endpoint.
      *
@@ -122,7 +122,7 @@ impl Apps {
             .await
     }
     /**
-     * List deliveries for an app webhook.
+     * List deliveries for an app webhook
      *
      * This function performs a `GET` to the `/app/hook/deliveries` endpoint.
      *
@@ -134,8 +134,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `cursor: &str` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+     * * `per_page` -- Results per page (max 100)
+     * * `cursor` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
      */
     pub async fn list_webhook_deliveries(
         &self,
@@ -152,7 +152,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/app/hook/deliveries?{}", query_), None);
+            .url(&format!("/app/hook/deliveries?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -164,7 +164,7 @@ impl Apps {
             .await
     }
     /**
-     * List deliveries for an app webhook.
+     * List deliveries for an app webhook
      *
      * This function performs a `GET` to the `/app/hook/deliveries` endpoint.
      *
@@ -187,7 +187,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/app/hook/deliveries?{}", query_), None);
+            .url(&format!("/app/hook/deliveries?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -199,7 +199,7 @@ impl Apps {
             .await
     }
     /**
-     * Get a delivery for an app webhook.
+     * Get a delivery for an app webhook
      *
      * This function performs a `GET` to the `/app/hook/deliveries/{delivery_id}` endpoint.
      *
@@ -211,7 +211,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `delivery_id: i64`
+     * * `delivery_id`
      */
     pub async fn get_webhook_delivery(
         &self,
@@ -235,7 +235,7 @@ impl Apps {
             .await
     }
     /**
-     * Redeliver a delivery for an app webhook.
+     * Redeliver a delivery for an app webhook
      *
      * This function performs a `POST` to the `/app/hook/deliveries/{delivery_id}/attempts` endpoint.
      *
@@ -247,7 +247,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `delivery_id: i64`
+     * * `delivery_id`
      */
     pub async fn redeliver_webhook_delivery(
         &self,
@@ -271,7 +271,7 @@ impl Apps {
             .await
     }
     /**
-     * List installations for the authenticated app.
+     * List installations for the authenticated app
      *
      * This function performs a `GET` to the `/app/installations` endpoint.
      *
@@ -283,10 +283,10 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `outdated: &str`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `outdated`
      */
     pub async fn list_installations(
         &self,
@@ -311,7 +311,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/app/installations?{}", query_), None);
+            .url(&format!("/app/installations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -323,7 +323,7 @@ impl Apps {
             .await
     }
     /**
-     * List installations for the authenticated app.
+     * List installations for the authenticated app
      *
      * This function performs a `GET` to the `/app/installations` endpoint.
      *
@@ -350,7 +350,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/app/installations?{}", query_), None);
+            .url(&format!("/app/installations?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -362,7 +362,7 @@ impl Apps {
             .await
     }
     /**
-     * Get an installation for the authenticated app.
+     * Get an installation for the authenticated app
      *
      * This function performs a `GET` to the `/app/installations/{installation_id}` endpoint.
      *
@@ -374,7 +374,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
+     * * `installation_id` -- installation_id parameter
      */
     pub async fn get_installation(
         &self,
@@ -398,7 +398,7 @@ impl Apps {
             .await
     }
     /**
-     * Delete an installation for the authenticated app.
+     * Delete an installation for the authenticated app
      *
      * This function performs a `DELETE` to the `/app/installations/{installation_id}` endpoint.
      *
@@ -410,7 +410,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
+     * * `installation_id` -- installation_id parameter
      */
     pub async fn delete_installation(
         &self,
@@ -434,7 +434,7 @@ impl Apps {
             .await
     }
     /**
-     * Create an installation access token for an app.
+     * Create an installation access token for an app
      *
      * This function performs a `POST` to the `/app/installations/{installation_id}/access_tokens` endpoint.
      *
@@ -446,7 +446,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
+     * * `installation_id` -- installation_id parameter
      */
     #[async_recursion::async_recursion]
     pub async fn create_installation_access_token(
@@ -474,7 +474,7 @@ impl Apps {
             .await
     }
     /**
-     * Suspend an app installation.
+     * Suspend an app installation
      *
      * This function performs a `PUT` to the `/app/installations/{installation_id}/suspended` endpoint.
      *
@@ -486,7 +486,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
+     * * `installation_id` -- installation_id parameter
      */
     pub async fn suspend_installation(
         &self,
@@ -510,7 +510,7 @@ impl Apps {
             .await
     }
     /**
-     * Unsuspend an app installation.
+     * Unsuspend an app installation
      *
      * This function performs a `DELETE` to the `/app/installations/{installation_id}/suspended` endpoint.
      *
@@ -522,7 +522,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
+     * * `installation_id` -- installation_id parameter
      */
     pub async fn unsuspend_installation(
         &self,
@@ -546,7 +546,7 @@ impl Apps {
             .await
     }
     /**
-     * Delete an app authorization.
+     * Delete an app authorization
      *
      * This function performs a `DELETE` to the `/applications/{client_id}/grant` endpoint.
      *
@@ -557,7 +557,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn delete_authorization(
         &self,
@@ -582,7 +582,7 @@ impl Apps {
             .await
     }
     /**
-     * Revoke a grant for an application.
+     * Revoke a grant for an application
      *
      * This function performs a `DELETE` to the `/applications/{client_id}/grants/{access_token}` endpoint.
      *
@@ -596,8 +596,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
-     * * `access_token: &str`
+     * * `client_id` -- The client ID of your GitHub app.
+     * * `access_token`
      */
     pub async fn revoke_grant_for_application(
         &self,
@@ -623,7 +623,7 @@ impl Apps {
             .await
     }
     /**
-     * Check a token.
+     * Check a token
      *
      * This function performs a `POST` to the `/applications/{client_id}/token` endpoint.
      *
@@ -633,7 +633,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn check_token(
         &self,
@@ -658,7 +658,7 @@ impl Apps {
             .await
     }
     /**
-     * Delete an app token.
+     * Delete an app token
      *
      * This function performs a `DELETE` to the `/applications/{client_id}/token` endpoint.
      *
@@ -668,7 +668,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn delete_token(
         &self,
@@ -693,7 +693,7 @@ impl Apps {
             .await
     }
     /**
-     * Reset a token.
+     * Reset a token
      *
      * This function performs a `PATCH` to the `/applications/{client_id}/token` endpoint.
      *
@@ -703,7 +703,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn reset_token(
         &self,
@@ -728,7 +728,7 @@ impl Apps {
             .await
     }
     /**
-     * Create a scoped access token.
+     * Create a scoped access token
      *
      * This function performs a `POST` to the `/applications/{client_id}/token/scoped` endpoint.
      *
@@ -738,7 +738,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
+     * * `client_id` -- The client ID of your GitHub app.
      */
     pub async fn scope_token(
         &self,
@@ -763,7 +763,7 @@ impl Apps {
             .await
     }
     /**
-     * Check an authorization.
+     * Check an authorization
      *
      * This function performs a `GET` to the `/applications/{client_id}/tokens/{access_token}` endpoint.
      *
@@ -775,8 +775,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
-     * * `access_token: &str`
+     * * `client_id` -- The client ID of your GitHub app.
+     * * `access_token`
      */
     pub async fn check_authorization(
         &self,
@@ -802,7 +802,7 @@ impl Apps {
             .await
     }
     /**
-     * Reset an authorization.
+     * Reset an authorization
      *
      * This function performs a `POST` to the `/applications/{client_id}/tokens/{access_token}` endpoint.
      *
@@ -814,8 +814,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
-     * * `access_token: &str`
+     * * `client_id` -- The client ID of your GitHub app.
+     * * `access_token`
      */
     pub async fn reset_authorization(
         &self,
@@ -841,7 +841,7 @@ impl Apps {
             .await
     }
     /**
-     * Revoke an authorization for an application.
+     * Revoke an authorization for an application
      *
      * This function performs a `DELETE` to the `/applications/{client_id}/tokens/{access_token}` endpoint.
      *
@@ -853,8 +853,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `client_id: &str` -- The client ID of your GitHub app.
-     * * `access_token: &str`
+     * * `client_id` -- The client ID of your GitHub app.
+     * * `access_token`
      */
     pub async fn revoke_authorization_for_application(
         &self,
@@ -880,7 +880,7 @@ impl Apps {
             .await
     }
     /**
-     * Get an app.
+     * Get an app
      *
      * This function performs a `GET` to the `/apps/{app_slug}` endpoint.
      *
@@ -892,7 +892,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `app_slug: &str`
+     * * `app_slug`
      */
     pub async fn get_by_slug(
         &self,
@@ -913,7 +913,7 @@ impl Apps {
             .await
     }
     /**
-     * List repositories accessible to the app installation.
+     * List repositories accessible to the app installation
      *
      * This function performs a `GET` to the `/installation/repositories` endpoint.
      *
@@ -925,8 +925,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_accessible_to_installation(
         &self,
@@ -943,7 +943,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/installation/repositories?{}", query_), None);
+            .url(&format!("/installation/repositories?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -955,7 +955,7 @@ impl Apps {
             .await
     }
     /**
-     * Revoke an installation access token.
+     * Revoke an installation access token
      *
      * This function performs a `DELETE` to the `/installation/token` endpoint.
      *
@@ -980,7 +980,7 @@ impl Apps {
             .await
     }
     /**
-     * Get a subscription plan for an account.
+     * Get a subscription plan for an account
      *
      * This function performs a `GET` to the `/marketplace_listing/accounts/{account_id}` endpoint.
      *
@@ -992,7 +992,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `account_id: i64` -- account_id parameter.
+     * * `account_id` -- account_id parameter
      */
     pub async fn get_subscription_plan_for_account(
         &self,
@@ -1016,7 +1016,7 @@ impl Apps {
             .await
     }
     /**
-     * List plans.
+     * List plans
      *
      * This function performs a `GET` to the `/marketplace_listing/plans` endpoint.
      *
@@ -1028,8 +1028,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_plans(
         &self,
@@ -1046,7 +1046,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/marketplace_listing/plans?{}", query_), None);
+            .url(&format!("/marketplace_listing/plans?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1058,7 +1058,7 @@ impl Apps {
             .await
     }
     /**
-     * List plans.
+     * List plans
      *
      * This function performs a `GET` to the `/marketplace_listing/plans` endpoint.
      *
@@ -1085,7 +1085,7 @@ impl Apps {
             .await
     }
     /**
-     * List accounts for a plan.
+     * List accounts for a plan
      *
      * This function performs a `GET` to the `/marketplace_listing/plans/{plan_id}/accounts` endpoint.
      *
@@ -1097,13 +1097,13 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `plan_id: i64` -- plan_id parameter.
-     * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `plan_id` -- plan_id parameter
+     * * `sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_accounts_for_plan(
         &self,
@@ -1146,7 +1146,7 @@ impl Apps {
             .await
     }
     /**
-     * List accounts for a plan.
+     * List accounts for a plan
      *
      * This function performs a `GET` to the `/marketplace_listing/plans/{plan_id}/accounts` endpoint.
      *
@@ -1191,7 +1191,7 @@ impl Apps {
             .await
     }
     /**
-     * Get a subscription plan for an account (stubbed).
+     * Get a subscription plan for an account (stubbed)
      *
      * This function performs a `GET` to the `/marketplace_listing/stubbed/accounts/{account_id}` endpoint.
      *
@@ -1203,7 +1203,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `account_id: i64` -- account_id parameter.
+     * * `account_id` -- account_id parameter
      */
     pub async fn get_subscription_plan_for_account_stubbed(
         &self,
@@ -1227,7 +1227,7 @@ impl Apps {
             .await
     }
     /**
-     * List plans (stubbed).
+     * List plans (stubbed)
      *
      * This function performs a `GET` to the `/marketplace_listing/stubbed/plans` endpoint.
      *
@@ -1239,8 +1239,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_plans_stubbed(
         &self,
@@ -1256,7 +1256,7 @@ impl Apps {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/marketplace_listing/stubbed/plans?{}", query_),
+            &format!("/marketplace_listing/stubbed/plans?{query_}"),
             None,
         );
         self.client
@@ -1270,7 +1270,7 @@ impl Apps {
             .await
     }
     /**
-     * List plans (stubbed).
+     * List plans (stubbed)
      *
      * This function performs a `GET` to the `/marketplace_listing/stubbed/plans` endpoint.
      *
@@ -1297,7 +1297,7 @@ impl Apps {
             .await
     }
     /**
-     * List accounts for a plan (stubbed).
+     * List accounts for a plan (stubbed)
      *
      * This function performs a `GET` to the `/marketplace_listing/stubbed/plans/{plan_id}/accounts` endpoint.
      *
@@ -1309,13 +1309,13 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `plan_id: i64` -- plan_id parameter.
-     * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `plan_id` -- plan_id parameter
+     * * `sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_accounts_for_plan_stubbed(
         &self,
@@ -1358,7 +1358,7 @@ impl Apps {
             .await
     }
     /**
-     * List accounts for a plan (stubbed).
+     * List accounts for a plan (stubbed)
      *
      * This function performs a `GET` to the `/marketplace_listing/stubbed/plans/{plan_id}/accounts` endpoint.
      *
@@ -1403,7 +1403,7 @@ impl Apps {
             .await
     }
     /**
-     * Get an organization installation for the authenticated app.
+     * Get an organization installation for the authenticated app
      *
      * This function performs a `GET` to the `/orgs/{org}/installation` endpoint.
      *
@@ -1415,7 +1415,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_org_installation(
         &self,
@@ -1439,7 +1439,7 @@ impl Apps {
             .await
     }
     /**
-     * Create a content attachment.
+     * Create a content attachment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/content_references/{content_reference_id}/attachments` endpoint.
      *
@@ -1453,9 +1453,9 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `owner: &str` -- The owner of the repository. Determined from the `repository` `full_name` of the `content_reference` event.
-     * * `repo: &str` -- The name of the repository. Determined from the `repository` `full_name` of the `content_reference` event.
-     * * `content_reference_id: i64` -- The `id` of the `content_reference` event.
+     * * `owner` -- The owner of the repository. Determined from the `repository` `full_name` of the `content_reference` event.
+     * * `repo` -- The name of the repository. Determined from the `repository` `full_name` of the `content_reference` event.
+     * * `content_reference_id` -- The `id` of the `content_reference` event.
      */
     pub async fn create_content_attachment(
         &self,
@@ -1484,7 +1484,7 @@ impl Apps {
             .await
     }
     /**
-     * Get a repository installation for the authenticated app.
+     * Get a repository installation for the authenticated app
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/installation` endpoint.
      *
@@ -1496,8 +1496,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_repo_installation(
         &self,
@@ -1523,7 +1523,7 @@ impl Apps {
             .await
     }
     /**
-     * List app installations accessible to the user access token.
+     * List app installations accessible to the user access token
      *
      * This function performs a `GET` to the `/user/installations` endpoint.
      *
@@ -1539,8 +1539,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_installations_for_authenticated_user(
         &self,
@@ -1557,7 +1557,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/installations?{}", query_), None);
+            .url(&format!("/user/installations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1569,7 +1569,7 @@ impl Apps {
             .await
     }
     /**
-     * List repositories accessible to the user access token.
+     * List repositories accessible to the user access token
      *
      * This function performs a `GET` to the `/user/installations/{installation_id}/repositories` endpoint.
      *
@@ -1585,9 +1585,9 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `installation_id` -- installation_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_installation_repos_for_authenticated_user(
         &self,
@@ -1622,7 +1622,7 @@ impl Apps {
             .await
     }
     /**
-     * Add a repository to an app installation.
+     * Add a repository to an app installation
      *
      * This function performs a `PUT` to the `/user/installations/{installation_id}/repositories/{repository_id}` endpoint.
      *
@@ -1634,8 +1634,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
-     * * `repository_id: i64`
+     * * `installation_id` -- installation_id parameter
+     * * `repository_id`
      */
     pub async fn add_repo_to_installation(
         &self,
@@ -1661,7 +1661,7 @@ impl Apps {
             .await
     }
     /**
-     * Remove a repository from an app installation.
+     * Remove a repository from an app installation
      *
      * This function performs a `DELETE` to the `/user/installations/{installation_id}/repositories/{repository_id}` endpoint.
      *
@@ -1673,8 +1673,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `installation_id: i64` -- installation_id parameter.
-     * * `repository_id: i64`
+     * * `installation_id` -- installation_id parameter
+     * * `repository_id`
      */
     pub async fn remove_repo_from_installation(
         &self,
@@ -1700,7 +1700,7 @@ impl Apps {
             .await
     }
     /**
-     * List subscriptions for the authenticated user.
+     * List subscriptions for the authenticated user
      *
      * This function performs a `GET` to the `/user/marketplace_purchases` endpoint.
      *
@@ -1710,8 +1710,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_subscriptions_for_authenticated_user(
         &self,
@@ -1728,7 +1728,7 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/marketplace_purchases?{}", query_), None);
+            .url(&format!("/user/marketplace_purchases?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1740,7 +1740,7 @@ impl Apps {
             .await
     }
     /**
-     * List subscriptions for the authenticated user.
+     * List subscriptions for the authenticated user
      *
      * This function performs a `GET` to the `/user/marketplace_purchases` endpoint.
      *
@@ -1765,7 +1765,7 @@ impl Apps {
             .await
     }
     /**
-     * List subscriptions for the authenticated user (stubbed).
+     * List subscriptions for the authenticated user (stubbed)
      *
      * This function performs a `GET` to the `/user/marketplace_purchases/stubbed` endpoint.
      *
@@ -1775,8 +1775,8 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_subscriptions_for_authenticated_user_stubbed(
         &self,
@@ -1792,7 +1792,7 @@ impl Apps {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/user/marketplace_purchases/stubbed?{}", query_),
+            &format!("/user/marketplace_purchases/stubbed?{query_}"),
             None,
         );
         self.client
@@ -1806,7 +1806,7 @@ impl Apps {
             .await
     }
     /**
-     * List subscriptions for the authenticated user (stubbed).
+     * List subscriptions for the authenticated user (stubbed)
      *
      * This function performs a `GET` to the `/user/marketplace_purchases/stubbed` endpoint.
      *
@@ -1831,7 +1831,7 @@ impl Apps {
             .await
     }
     /**
-     * Get a user installation for the authenticated app.
+     * Get a user installation for the authenticated app
      *
      * This function performs a `GET` to the `/users/{username}/installation` endpoint.
      *
@@ -1843,7 +1843,7 @@ impl Apps {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn get_user_installation(
         &self,

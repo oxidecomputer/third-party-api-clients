@@ -20,7 +20,7 @@ impl TransactionalTemplatesVersions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_templates_template_version(
         &self,
@@ -53,7 +53,7 @@ impl TransactionalTemplatesVersions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_templates_template_versions_version_activate(
         &self,
@@ -87,7 +87,7 @@ impl TransactionalTemplatesVersions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_templates_template_versions_version(
         &self,
@@ -121,7 +121,7 @@ impl TransactionalTemplatesVersions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_templates_template_versions_version(
         &self,
@@ -155,7 +155,7 @@ impl TransactionalTemplatesVersions {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_templates_template_versions_version(
         &self,

@@ -12,7 +12,7 @@ impl SalesChannels {
     }
 
     /**
-     * Creates a checkout.
+     * Creates a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-01/checkouts.json` endpoint.
      *
@@ -34,7 +34,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a checkout.
+     * Creates a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-04/checkouts.json` endpoint.
      *
@@ -56,7 +56,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a checkout.
+     * Creates a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-07/checkouts.json` endpoint.
      *
@@ -78,7 +78,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a checkout.
+     * Creates a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-10/checkouts.json` endpoint.
      *
@@ -100,7 +100,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a checkout.
+     * Creates a checkout
      *
      * This function performs a `POST` to the `/admin/api/2021-01/checkouts.json` endpoint.
      *
@@ -122,7 +122,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a checkout.
+     * Creates a checkout
      *
      * This function performs a `POST` to the `/admin/api/unstable/checkouts.json` endpoint.
      *
@@ -144,7 +144,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Completes a checkout.
+     * Completes a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-01/checkouts/{token}/complete.json` endpoint.
      *
@@ -152,7 +152,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_checkouts_param_token_complete(
         &self,
@@ -177,7 +177,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a checkout.
+     * Retrieves a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}.json` endpoint.
      *
@@ -185,7 +185,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_checkouts_param_token(
         &self,
@@ -209,7 +209,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Modifies an existing checkout.
+     * Modifies an existing checkout
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/checkouts/{token}.json` endpoint.
      *
@@ -217,7 +217,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_checkouts_param_token(
         &self,
@@ -242,18 +242,18 @@ impl SalesChannels {
             .await
     }
     /**
-    * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/shipping_rates.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
+     * Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+     * To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/shipping_rates.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
@@ -276,7 +276,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Completes a checkout.
+     * Completes a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-04/checkouts/{token}/complete.json` endpoint.
      *
@@ -284,7 +284,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_checkouts_param_token_complete(
         &self,
@@ -309,7 +309,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a checkout.
+     * Retrieves a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}.json` endpoint.
      *
@@ -317,7 +317,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_checkouts_param_token(
         &self,
@@ -341,7 +341,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Modifies an existing checkout.
+     * Modifies an existing checkout
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/checkouts/{token}.json` endpoint.
      *
@@ -349,7 +349,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_checkouts_param_token(
         &self,
@@ -374,18 +374,18 @@ impl SalesChannels {
             .await
     }
     /**
-    * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/shipping_rates.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
+     * Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+     * To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/shipping_rates.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
@@ -408,7 +408,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Completes a checkout.
+     * Completes a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-07/checkouts/{token}/complete.json` endpoint.
      *
@@ -416,7 +416,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_create_checkouts_param_token_complete(
         &self,
@@ -441,7 +441,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a checkout.
+     * Retrieves a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}.json` endpoint.
      *
@@ -449,7 +449,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_checkouts_param_token(
         &self,
@@ -473,7 +473,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Modifies an existing checkout.
+     * Modifies an existing checkout
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/checkouts/{token}.json` endpoint.
      *
@@ -481,7 +481,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_checkouts_param_token(
         &self,
@@ -506,18 +506,18 @@ impl SalesChannels {
             .await
     }
     /**
-    * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/shipping_rates.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
+     * Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+     * To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/shipping_rates.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
@@ -540,7 +540,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Completes a checkout.
+     * Completes a checkout
      *
      * This function performs a `POST` to the `/admin/api/2020-10/checkouts/{token}/complete.json` endpoint.
      *
@@ -548,7 +548,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn create_checkouts_param_token_complete(
         &self,
@@ -573,7 +573,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a checkout.
+     * Retrieves a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}.json` endpoint.
      *
@@ -581,7 +581,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn get_checkouts_param_token(
         &self,
@@ -605,7 +605,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Modifies an existing checkout.
+     * Modifies an existing checkout
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/checkouts/{token}.json` endpoint.
      *
@@ -613,7 +613,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn update_checkouts_param_token(
         &self,
@@ -638,18 +638,18 @@ impl SalesChannels {
             .await
     }
     /**
-    * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/shipping_rates.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
+     * Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+     * To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/shipping_rates.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token` -- storefront_access_token_id
+     */
     pub async fn get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
@@ -672,7 +672,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Completes a checkout.
+     * Completes a checkout
      *
      * This function performs a `POST` to the `/admin/api/2021-01/checkouts/{token}/complete.json` endpoint.
      *
@@ -680,7 +680,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_create_checkouts_param_token_complete(
         &self,
@@ -705,7 +705,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a checkout.
+     * Retrieves a checkout
      *
      * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}.json` endpoint.
      *
@@ -713,7 +713,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_checkouts_param_token(
         &self,
@@ -737,7 +737,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Modifies an existing checkout.
+     * Modifies an existing checkout
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/checkouts/{token}.json` endpoint.
      *
@@ -745,7 +745,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_checkouts_param_token(
         &self,
@@ -770,18 +770,18 @@ impl SalesChannels {
             .await
     }
     /**
-    * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/shipping_rates.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
+     * Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+     * To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/shipping_rates.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
@@ -804,7 +804,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Completes a checkout.
+     * Completes a checkout
      *
      * This function performs a `POST` to the `/admin/api/unstable/checkouts/{token}/complete.json` endpoint.
      *
@@ -812,7 +812,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_create_checkouts_param_token_complete(
         &self,
@@ -837,7 +837,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a checkout.
+     * Retrieves a checkout
      *
      * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}.json` endpoint.
      *
@@ -845,7 +845,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_checkouts_param_token(
         &self,
@@ -869,7 +869,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Modifies an existing checkout.
+     * Modifies an existing checkout
      *
      * This function performs a `PUT` to the `/admin/api/unstable/checkouts/{token}.json` endpoint.
      *
@@ -877,7 +877,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_checkouts_param_token(
         &self,
@@ -902,18 +902,18 @@ impl SalesChannels {
             .await
     }
     /**
-    * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
-       Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
-       To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/shipping_rates.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of available shipping rates for the specified checkout. Implementers need to poll this endpoint until rates become available.
+     * Each shipping rate contains the checkout's new subtotal price, total tax, and total price in the event that this shipping rate is selected. This can be used to update the UI without performing further API requests.
+     * To apply a shipping rate, update the checkout's shipping line with the handle of the selected rate.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/shipping_rates.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#shipping_rates-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_get_checkouts_param_token_shipping_rate(
         &self,
         token: &str,
@@ -944,8 +944,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202001_get_collection_listing(
         &self,
@@ -957,7 +957,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/collection_listings.json?{}", query_),
+            &format!("/admin/api/2020-01/collection_listings.json?{query_}"),
             None,
         );
         self.client
@@ -979,9 +979,9 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `collection_listing_id` -- storefront_access_token_id
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202001_get_collection_listings_param_listing_product_id(
         &self,
@@ -1012,7 +1012,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific collection listing that is published to your app.
+     * Retrieve a specific collection listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1020,7 +1020,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_collection_listings_param_listing(
         &self,
@@ -1044,7 +1044,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a collection listing to publish a collection to your app.
+     * Create a collection listing to publish a collection to your app
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1052,7 +1052,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_collection_listings_param_listing(
         &self,
@@ -1077,7 +1077,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a collection listing to unpublish a collection from your app.
+     * Delete a collection listing to unpublish a collection from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1085,7 +1085,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_collection_listings_param_listing(
         &self,
@@ -1117,8 +1117,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202004_get_collection_listing(
         &self,
@@ -1130,7 +1130,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/collection_listings.json?{}", query_),
+            &format!("/admin/api/2020-04/collection_listings.json?{query_}"),
             None,
         );
         self.client
@@ -1152,9 +1152,9 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `collection_listing_id` -- storefront_access_token_id
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202004_get_collection_listings_param_listing_product_id(
         &self,
@@ -1185,7 +1185,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific collection listing that is published to your app.
+     * Retrieve a specific collection listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1193,7 +1193,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_collection_listings_param_listing(
         &self,
@@ -1217,7 +1217,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a collection listing to publish a collection to your app.
+     * Create a collection listing to publish a collection to your app
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1225,7 +1225,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_collection_listings_param_listing(
         &self,
@@ -1250,7 +1250,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a collection listing to unpublish a collection from your app.
+     * Delete a collection listing to unpublish a collection from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1258,7 +1258,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_collection_listings_param_listing(
         &self,
@@ -1290,8 +1290,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202007_get_collection_listing(
         &self,
@@ -1303,7 +1303,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/collection_listings.json?{}", query_),
+            &format!("/admin/api/2020-07/collection_listings.json?{query_}"),
             None,
         );
         self.client
@@ -1325,9 +1325,9 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `collection_listing_id` -- storefront_access_token_id
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202007_get_collection_listings_param_listing_product_id(
         &self,
@@ -1358,7 +1358,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific collection listing that is published to your app.
+     * Retrieve a specific collection listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1366,7 +1366,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_collection_listings_param_listing(
         &self,
@@ -1390,7 +1390,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a collection listing to publish a collection to your app.
+     * Create a collection listing to publish a collection to your app
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1398,7 +1398,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_collection_listings_param_listing(
         &self,
@@ -1423,7 +1423,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a collection listing to unpublish a collection from your app.
+     * Delete a collection listing to unpublish a collection from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1431,7 +1431,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_collection_listings_param_listing(
         &self,
@@ -1463,8 +1463,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn get_collection_listing(&self, limit: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1473,7 +1473,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/collection_listings.json?{}", query_),
+            &format!("/admin/api/2020-10/collection_listings.json?{query_}"),
             None,
         );
         self.client
@@ -1495,9 +1495,9 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `collection_listing_id` -- storefront_access_token_id
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn get_collection_listings_param_listing_product_id(
         &self,
@@ -1528,7 +1528,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific collection listing that is published to your app.
+     * Retrieve a specific collection listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1536,7 +1536,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn get_collection_listings_param_listing(
         &self,
@@ -1560,7 +1560,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a collection listing to publish a collection to your app.
+     * Create a collection listing to publish a collection to your app
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1568,7 +1568,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn update_collection_listings_param_listing(
         &self,
@@ -1593,7 +1593,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a collection listing to unpublish a collection from your app.
+     * Delete a collection listing to unpublish a collection from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1601,7 +1601,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn delete_collection_listings_param_listing(
         &self,
@@ -1633,8 +1633,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202101_get_collection_listing(
         &self,
@@ -1646,7 +1646,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/collection_listings.json?{}", query_),
+            &format!("/admin/api/2021-01/collection_listings.json?{query_}"),
             None,
         );
         self.client
@@ -1668,9 +1668,9 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `collection_listing_id` -- storefront_access_token_id
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202101_get_collection_listings_param_listing_product_id(
         &self,
@@ -1701,7 +1701,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific collection listing that is published to your app.
+     * Retrieve a specific collection listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1709,7 +1709,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_collection_listings_param_listing(
         &self,
@@ -1733,7 +1733,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a collection listing to publish a collection to your app.
+     * Create a collection listing to publish a collection to your app
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1741,7 +1741,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_collection_listings_param_listing(
         &self,
@@ -1766,7 +1766,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a collection listing to unpublish a collection from your app.
+     * Delete a collection listing to unpublish a collection from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1774,7 +1774,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_collection_listings_param_listing(
         &self,
@@ -1806,8 +1806,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_unstable_get_collection_listing(
         &self,
@@ -1819,7 +1819,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/collection_listings.json?{}", query_),
+            &format!("/admin/api/unstable/collection_listings.json?{query_}"),
             None,
         );
         self.client
@@ -1841,9 +1841,9 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `collection_listing_id` -- storefront_access_token_id
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_unstable_get_collection_listings_param_listing_product_id(
         &self,
@@ -1874,7 +1874,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific collection listing that is published to your app.
+     * Retrieve a specific collection listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1882,7 +1882,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_collection_listings_param_listing(
         &self,
@@ -1906,7 +1906,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a collection listing to publish a collection to your app.
+     * Create a collection listing to publish a collection to your app
      *
      * This function performs a `PUT` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1914,7 +1914,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_collection_listings_param_listing(
         &self,
@@ -1939,7 +1939,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a collection listing to unpublish a collection from your app.
+     * Delete a collection listing to unpublish a collection from your app
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
      *
@@ -1947,7 +1947,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `collection_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_collection_listings_param_listing(
         &self,
@@ -1971,7 +1971,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a list of payments on a particular checkout.
+     * Retrieves a list of payments on a particular checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments.json` endpoint.
      *
@@ -1979,7 +1979,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_checkouts_param_token_payment(
         &self,
@@ -2003,7 +2003,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a payment on a checkout using the session ID returned by the card vault.
+     * Creates a payment on a checkout using the session ID returned by the card vault
      *
      * This function performs a `POST` to the `/admin/api/2020-01/checkouts/{token}/payments.json` endpoint.
      *
@@ -2011,16 +2011,16 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `amount_required: &str` -- The amount of the payment.
-     * * `request_details_required: &str` -- The details of the request, including the following attributes:
-     *                       
-     *                           ip_address: The IP address of the customer.
-     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-     *   
-     *                           user_agent: The user agent string for the customer's device.
-     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     * * `token` -- storefront_access_token_id
+     * * `amount_required` -- The amount of the payment.
+     * * `request_details_required` -- The details of the request, including the following attributes:
+     *
+     *   ip_address: The IP address of the customer.
+     *   accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *
+     *   user_agent: The user agent string for the customer's device.
+     * * `session_required` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
      */
     pub async fn deprecated_202001_create_checkouts_param_token_payments(
         &self,
@@ -2084,7 +2084,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves the payment information for an existing payment.
+     * Retrieves the payment information for an existing payment
      *
      * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments/{payment_id}.json` endpoint.
      *
@@ -2092,8 +2092,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `payment_id: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
+     * * `payment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_checkouts_param_token_payments_payment(
         &self,
@@ -2119,7 +2119,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Counts the number of payments attempted on a checkout.
+     * Counts the number of payments attempted on a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments/count.json` endpoint.
      *
@@ -2127,7 +2127,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_checkouts_param_token_payments_count(
         &self,
@@ -2151,7 +2151,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a list of payments on a particular checkout.
+     * Retrieves a list of payments on a particular checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments.json` endpoint.
      *
@@ -2159,7 +2159,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_checkouts_param_token_payment(
         &self,
@@ -2183,7 +2183,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a payment on a checkout using the session ID returned by the card vault.
+     * Creates a payment on a checkout using the session ID returned by the card vault
      *
      * This function performs a `POST` to the `/admin/api/2020-04/checkouts/{token}/payments.json` endpoint.
      *
@@ -2191,16 +2191,16 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `amount_required: &str` -- The amount of the payment.
-     * * `request_details_required: &str` -- The details of the request, including the following attributes:
-     *                       
-     *                           ip_address: The IP address of the customer.
-     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-     *   
-     *                           user_agent: The user agent string for the customer's device.
-     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     * * `token` -- storefront_access_token_id
+     * * `amount_required` -- The amount of the payment.
+     * * `request_details_required` -- The details of the request, including the following attributes:
+     *
+     *   ip_address: The IP address of the customer.
+     *   accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *
+     *   user_agent: The user agent string for the customer's device.
+     * * `session_required` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
      */
     pub async fn deprecated_202004_create_checkouts_param_token_payments(
         &self,
@@ -2264,7 +2264,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves the payment information for an existing payment.
+     * Retrieves the payment information for an existing payment
      *
      * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments/{payment_id}.json` endpoint.
      *
@@ -2272,8 +2272,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `payment_id: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
+     * * `payment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_checkouts_param_token_payments_payment(
         &self,
@@ -2299,7 +2299,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Counts the number of payments attempted on a checkout.
+     * Counts the number of payments attempted on a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments/count.json` endpoint.
      *
@@ -2307,7 +2307,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_checkouts_param_token_payments_count(
         &self,
@@ -2331,7 +2331,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a list of payments on a particular checkout.
+     * Retrieves a list of payments on a particular checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments.json` endpoint.
      *
@@ -2339,7 +2339,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_checkouts_param_token_payment(
         &self,
@@ -2363,7 +2363,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a payment on a checkout using the session ID returned by the card vault.
+     * Creates a payment on a checkout using the session ID returned by the card vault
      *
      * This function performs a `POST` to the `/admin/api/2020-07/checkouts/{token}/payments.json` endpoint.
      *
@@ -2371,16 +2371,16 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `amount_required: &str` -- The amount of the payment.
-     * * `request_details_required: &str` -- The details of the request, including the following attributes:
-     *                       
-     *                           ip_address: The IP address of the customer.
-     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-     *   
-     *                           user_agent: The user agent string for the customer's device.
-     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     * * `token` -- storefront_access_token_id
+     * * `amount_required` -- The amount of the payment.
+     * * `request_details_required` -- The details of the request, including the following attributes:
+     *
+     *   ip_address: The IP address of the customer.
+     *   accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *
+     *   user_agent: The user agent string for the customer's device.
+     * * `session_required` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
      */
     pub async fn deprecated_202007_create_checkouts_param_token_payments(
         &self,
@@ -2444,7 +2444,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves the payment information for an existing payment.
+     * Retrieves the payment information for an existing payment
      *
      * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments/{payment_id}.json` endpoint.
      *
@@ -2452,8 +2452,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `payment_id: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
+     * * `payment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_checkouts_param_token_payments_payment(
         &self,
@@ -2479,7 +2479,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Counts the number of payments attempted on a checkout.
+     * Counts the number of payments attempted on a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments/count.json` endpoint.
      *
@@ -2487,7 +2487,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_checkouts_param_token_payments_count(
         &self,
@@ -2511,7 +2511,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a list of payments on a particular checkout.
+     * Retrieves a list of payments on a particular checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments.json` endpoint.
      *
@@ -2519,7 +2519,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn get_checkouts_param_token_payment(
         &self,
@@ -2543,7 +2543,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a payment on a checkout using the session ID returned by the card vault.
+     * Creates a payment on a checkout using the session ID returned by the card vault
      *
      * This function performs a `POST` to the `/admin/api/2020-10/checkouts/{token}/payments.json` endpoint.
      *
@@ -2551,16 +2551,16 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `amount_required: &str` -- The amount of the payment.
-     * * `request_details_required: &str` -- The details of the request, including the following attributes:
-     *                       
-     *                           ip_address: The IP address of the customer.
-     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-     *   
-     *                           user_agent: The user agent string for the customer's device.
-     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     * * `token` -- storefront_access_token_id
+     * * `amount_required` -- The amount of the payment.
+     * * `request_details_required` -- The details of the request, including the following attributes:
+     *
+     *   ip_address: The IP address of the customer.
+     *   accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *
+     *   user_agent: The user agent string for the customer's device.
+     * * `session_required` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
      */
     pub async fn create_checkouts_param_token_payments(
         &self,
@@ -2624,7 +2624,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves the payment information for an existing payment.
+     * Retrieves the payment information for an existing payment
      *
      * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments/{payment_id}.json` endpoint.
      *
@@ -2632,8 +2632,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `payment_id: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
+     * * `payment_id` -- storefront_access_token_id
      */
     pub async fn get_checkouts_param_token_payments_payment(
         &self,
@@ -2659,7 +2659,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Counts the number of payments attempted on a checkout.
+     * Counts the number of payments attempted on a checkout
      *
      * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments/count.json` endpoint.
      *
@@ -2667,7 +2667,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn get_checkouts_param_token_payments_count(
         &self,
@@ -2691,7 +2691,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a list of payments on a particular checkout.
+     * Retrieves a list of payments on a particular checkout
      *
      * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments.json` endpoint.
      *
@@ -2699,7 +2699,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_checkouts_param_token_payment(
         &self,
@@ -2723,7 +2723,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a payment on a checkout using the session ID returned by the card vault.
+     * Creates a payment on a checkout using the session ID returned by the card vault
      *
      * This function performs a `POST` to the `/admin/api/2021-01/checkouts/{token}/payments.json` endpoint.
      *
@@ -2731,16 +2731,16 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `amount_required: &str` -- The amount of the payment.
-     * * `request_details_required: &str` -- The details of the request, including the following attributes:
-     *                       
-     *                           ip_address: The IP address of the customer.
-     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-     *   
-     *                           user_agent: The user agent string for the customer's device.
-     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     * * `token` -- storefront_access_token_id
+     * * `amount_required` -- The amount of the payment.
+     * * `request_details_required` -- The details of the request, including the following attributes:
+     *
+     *   ip_address: The IP address of the customer.
+     *   accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *
+     *   user_agent: The user agent string for the customer's device.
+     * * `session_required` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
      */
     pub async fn deprecated_202101_create_checkouts_param_token_payments(
         &self,
@@ -2804,7 +2804,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves the payment information for an existing payment.
+     * Retrieves the payment information for an existing payment
      *
      * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments/{payment_id}.json` endpoint.
      *
@@ -2812,8 +2812,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `payment_id: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
+     * * `payment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_checkouts_param_token_payments_payment(
         &self,
@@ -2839,7 +2839,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Counts the number of payments attempted on a checkout.
+     * Counts the number of payments attempted on a checkout
      *
      * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments/count.json` endpoint.
      *
@@ -2847,7 +2847,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_checkouts_param_token_payments_count(
         &self,
@@ -2871,7 +2871,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves a list of payments on a particular checkout.
+     * Retrieves a list of payments on a particular checkout
      *
      * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments.json` endpoint.
      *
@@ -2879,7 +2879,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_checkouts_param_token_payment(
         &self,
@@ -2903,7 +2903,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Creates a payment on a checkout using the session ID returned by the card vault.
+     * Creates a payment on a checkout using the session ID returned by the card vault
      *
      * This function performs a `POST` to the `/admin/api/unstable/checkouts/{token}/payments.json` endpoint.
      *
@@ -2911,16 +2911,16 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `amount_required: &str` -- The amount of the payment.
-     * * `request_details_required: &str` -- The details of the request, including the following attributes:
-     *                       
-     *                           ip_address: The IP address of the customer.
-     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-     *   
-     *                           user_agent: The user agent string for the customer's device.
-     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     * * `token` -- storefront_access_token_id
+     * * `amount_required` -- The amount of the payment.
+     * * `request_details_required` -- The details of the request, including the following attributes:
+     *
+     *   ip_address: The IP address of the customer.
+     *   accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *
+     *   user_agent: The user agent string for the customer's device.
+     * * `session_required` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
      */
     pub async fn deprecated_unstable_create_checkouts_param_token_payments(
         &self,
@@ -2984,7 +2984,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieves the payment information for an existing payment.
+     * Retrieves the payment information for an existing payment
      *
      * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments/{payment_id}.json` endpoint.
      *
@@ -2992,8 +2992,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
-     * * `payment_id: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
+     * * `payment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_checkouts_param_token_payments_payment(
         &self,
@@ -3019,7 +3019,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Counts the number of payments attempted on a checkout.
+     * Counts the number of payments attempted on a checkout
      *
      * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments/count.json` endpoint.
      *
@@ -3027,7 +3027,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- storefront_access_token_id.
+     * * `token` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_checkouts_param_token_payments_count(
         &self,
@@ -3059,12 +3059,12 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_ids: &str` -- A comma-separated list of product ids.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
-     * * `collection_id: &str` -- Filter by products belonging to a particular collection.
-     * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
-     * * `handle: &str` -- Filter by product handle.
+     * * `product_ids` -- A comma-separated list of product ids
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
+     * * `collection_id` -- Filter by products belonging to a particular collection
+     * * `updated_at_min` -- Filter by products last updated after a certain date and time (formatted in ISO 8601)
+     * * `handle` -- Filter by product handle
      */
     pub async fn deprecated_202001_get_product_listing(
         &self,
@@ -3092,7 +3092,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/product_listings.json?{}", query_),
+            &format!("/admin/api/2020-01/product_listings.json?{query_}"),
             None,
         );
         self.client
@@ -3114,8 +3114,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202001_get_product_listings_id(
         &self,
@@ -3127,10 +3127,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/product_listings/product_ids.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/product_listings/product_ids.json?{query_}"),
             None,
         );
         self.client
@@ -3144,7 +3141,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a count of products that are published to your app.
+     * Retrieve a count of products that are published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-01/product_listings/count.json` endpoint.
      *
@@ -3167,7 +3164,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific product listing that is published to your app.
+     * Retrieve a specific product listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3175,7 +3172,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_product_listings_param_listing(
         &self,
@@ -3199,7 +3196,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a product listing to publish a product to your app.
+     * Create a product listing to publish a product to your app
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3207,7 +3204,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_product_listings_param_listing(
         &self,
@@ -3232,7 +3229,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a product listing to unpublish a product from your app.
+     * Delete a product listing to unpublish a product from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3240,7 +3237,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_product_listings_param_listing(
         &self,
@@ -3272,12 +3269,12 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_ids: &str` -- A comma-separated list of product ids.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
-     * * `collection_id: &str` -- Filter by products belonging to a particular collection.
-     * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
-     * * `handle: &str` -- Filter by product handle.
+     * * `product_ids` -- A comma-separated list of product ids
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
+     * * `collection_id` -- Filter by products belonging to a particular collection
+     * * `updated_at_min` -- Filter by products last updated after a certain date and time (formatted in ISO 8601)
+     * * `handle` -- Filter by product handle
      */
     pub async fn deprecated_202004_get_product_listing(
         &self,
@@ -3305,7 +3302,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/product_listings.json?{}", query_),
+            &format!("/admin/api/2020-04/product_listings.json?{query_}"),
             None,
         );
         self.client
@@ -3327,8 +3324,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202004_get_product_listings_id(
         &self,
@@ -3340,10 +3337,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-04/product_listings/product_ids.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-04/product_listings/product_ids.json?{query_}"),
             None,
         );
         self.client
@@ -3357,7 +3351,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a count of products that are published to your app.
+     * Retrieve a count of products that are published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-04/product_listings/count.json` endpoint.
      *
@@ -3380,7 +3374,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific product listing that is published to your app.
+     * Retrieve a specific product listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3388,7 +3382,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_product_listings_param_listing(
         &self,
@@ -3412,7 +3406,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a product listing to publish a product to your app.
+     * Create a product listing to publish a product to your app
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3420,7 +3414,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_product_listings_param_listing(
         &self,
@@ -3445,7 +3439,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a product listing to unpublish a product from your app.
+     * Delete a product listing to unpublish a product from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3453,7 +3447,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_product_listings_param_listing(
         &self,
@@ -3485,12 +3479,12 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_ids: &str` -- A comma-separated list of product ids.
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
-     * * `collection_id: &str` -- Filter by products belonging to a particular collection.
-     * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
-     * * `handle: &str` -- Filter by product handle.
+     * * `product_ids` -- A comma-separated list of product ids
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
+     * * `collection_id` -- Filter by products belonging to a particular collection
+     * * `updated_at_min` -- Filter by products last updated after a certain date and time (formatted in ISO 8601)
+     * * `handle` -- Filter by product handle
      */
     pub async fn deprecated_202007_get_product_listing(
         &self,
@@ -3518,7 +3512,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/product_listings.json?{}", query_),
+            &format!("/admin/api/2020-07/product_listings.json?{query_}"),
             None,
         );
         self.client
@@ -3540,8 +3534,8 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- Amount of results
-     *                     (default: 50, maximum: 1000).
+     * * `limit` -- Amount of results
+     *   (default: 50, maximum: 1000)
      */
     pub async fn deprecated_202007_get_product_listings_id(
         &self,
@@ -3553,10 +3547,7 @@ impl SalesChannels {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-07/product_listings/product_ids.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-07/product_listings/product_ids.json?{query_}"),
             None,
         );
         self.client
@@ -3570,7 +3561,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a count of products that are published to your app.
+     * Retrieve a count of products that are published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-07/product_listings/count.json` endpoint.
      *
@@ -3593,7 +3584,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Retrieve a specific product listing that is published to your app.
+     * Retrieve a specific product listing that is published to your app
      *
      * This function performs a `GET` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3601,7 +3592,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_product_listings_param_listing(
         &self,
@@ -3625,7 +3616,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Create a product listing to publish a product to your app.
+     * Create a product listing to publish a product to your app
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3633,7 +3624,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_product_listings_param_listing(
         &self,
@@ -3658,7 +3649,7 @@ impl SalesChannels {
             .await
     }
     /**
-     * Delete a product listing to unpublish a product from your app.
+     * Delete a product listing to unpublish a product from your app
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
      *
@@ -3666,7 +3657,7 @@ impl SalesChannels {
      *
      * **Parameters:**
      *
-     * * `product_listing_id: &str` -- storefront_access_token_id.
+     * * `product_listing_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_product_listings_param_listing(
         &self,

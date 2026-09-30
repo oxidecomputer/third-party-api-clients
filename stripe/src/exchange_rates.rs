@@ -18,10 +18,9 @@ impl ExchangeRates {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with the exchange rate for currency X your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with the exchange rate for currency X, your subsequent call can include `starting_after=X` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with the exchange rate for currency X your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with the exchange rate for currency X, your subsequent call can include `starting_after=X` in order to fetch the next page of the list.
      */
     pub async fn get_page(
         &self,
@@ -42,7 +41,7 @@ impl ExchangeRates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/exchange_rates?{}", query_), None);
+            .url(&format!("/v1/exchange_rates?{query_}"), None);
         let resp: crate::Response<crate::types::GetExchangeRatesResponse> = self
             .client
             .get(
@@ -109,7 +108,7 @@ impl ExchangeRates {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -124,7 +123,7 @@ impl ExchangeRates {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -148,8 +147,7 @@ impl ExchangeRates {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `rate_id: &str` -- The account's country.
+     * * `rate_id` -- The account's country.
      */
     pub async fn get_rate(
         &self,

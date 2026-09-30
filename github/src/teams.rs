@@ -12,7 +12,7 @@ impl Teams {
     }
 
     /**
-     * List IdP groups for an organization.
+     * List IdP groups for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/team-sync/groups` endpoint.
      *
@@ -26,9 +26,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: &str` -- Page token.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page token
      */
     pub async fn list_idp_groups_for_org(
         &self,
@@ -63,7 +63,7 @@ impl Teams {
             .await
     }
     /**
-     * List teams.
+     * List teams
      *
      * This function performs a `GET` to the `/orgs/{org}/teams` endpoint.
      *
@@ -73,9 +73,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list(
         &self,
@@ -110,7 +110,7 @@ impl Teams {
             .await
     }
     /**
-     * List teams.
+     * List teams
      *
      * This function performs a `GET` to the `/orgs/{org}/teams` endpoint.
      *
@@ -142,7 +142,7 @@ impl Teams {
             .await
     }
     /**
-     * Create a team.
+     * Create a team
      *
      * This function performs a `POST` to the `/orgs/{org}/teams` endpoint.
      *
@@ -154,7 +154,7 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create(
         &self,
@@ -179,7 +179,7 @@ impl Teams {
             .await
     }
     /**
-     * Get a team by name.
+     * Get a team by name
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}` endpoint.
      *
@@ -191,8 +191,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
      */
     pub async fn get_by_name(
         &self,
@@ -218,7 +218,7 @@ impl Teams {
             .await
     }
     /**
-     * Delete a team.
+     * Delete a team
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}` endpoint.
      *
@@ -232,8 +232,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
      */
     pub async fn delete_in_org(
         &self,
@@ -259,7 +259,7 @@ impl Teams {
             .await
     }
     /**
-     * Update a team.
+     * Update a team
      *
      * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}` endpoint.
      *
@@ -271,8 +271,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
      */
     pub async fn update_in_org(
         &self,
@@ -299,7 +299,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussions.
+     * List discussions
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions` endpoint.
      *
@@ -311,14 +311,14 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `pinned: &str` -- Pinned discussions only filter.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `pinned` -- Pinned discussions only filter
      */
     pub async fn list_discussions_in_org(
         &self,
@@ -363,7 +363,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussions.
+     * List discussions
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions` endpoint.
      *
@@ -410,7 +410,7 @@ impl Teams {
             .await
     }
     /**
-     * Create a discussion.
+     * Create a discussion
      *
      * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions` endpoint.
      *
@@ -424,8 +424,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
      */
     pub async fn create_discussion_in_org(
         &self,
@@ -452,7 +452,7 @@ impl Teams {
             .await
     }
     /**
-     * Get a discussion.
+     * Get a discussion
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}` endpoint.
      *
@@ -464,9 +464,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
      */
     pub async fn get_discussion_in_org(
         &self,
@@ -494,7 +494,7 @@ impl Teams {
             .await
     }
     /**
-     * Delete a discussion.
+     * Delete a discussion
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}` endpoint.
      *
@@ -506,9 +506,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
      */
     pub async fn delete_discussion_in_org(
         &self,
@@ -536,7 +536,7 @@ impl Teams {
             .await
     }
     /**
-     * Update a discussion.
+     * Update a discussion
      *
      * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}` endpoint.
      *
@@ -548,9 +548,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
      */
     pub async fn update_discussion_in_org(
         &self,
@@ -579,7 +579,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussion comments.
+     * List discussion comments
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments` endpoint.
      *
@@ -591,14 +591,14 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_discussion_comments_in_org(
         &self,
@@ -641,7 +641,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussion comments.
+     * List discussion comments
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments` endpoint.
      *
@@ -686,7 +686,7 @@ impl Teams {
             .await
     }
     /**
-     * Create a discussion comment.
+     * Create a discussion comment
      *
      * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments` endpoint.
      *
@@ -700,9 +700,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
      */
     pub async fn create_discussion_comment_in_org(
         &self,
@@ -731,7 +731,7 @@ impl Teams {
             .await
     }
     /**
-     * Get a discussion comment.
+     * Get a discussion comment
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
      *
@@ -743,10 +743,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn get_discussion_comment_in_org(
         &self,
@@ -776,7 +776,7 @@ impl Teams {
             .await
     }
     /**
-     * Delete a discussion comment.
+     * Delete a discussion comment
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
      *
@@ -788,10 +788,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn delete_discussion_comment_in_org(
         &self,
@@ -821,7 +821,7 @@ impl Teams {
             .await
     }
     /**
-     * Update a discussion comment.
+     * Update a discussion comment
      *
      * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
      *
@@ -833,10 +833,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn update_discussion_comment_in_org(
         &self,
@@ -867,7 +867,7 @@ impl Teams {
             .await
     }
     /**
-     * List pending team invitations.
+     * List pending team invitations
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/invitations` endpoint.
      *
@@ -879,10 +879,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_pending_invitations_in_org(
         &self,
@@ -919,7 +919,7 @@ impl Teams {
             .await
     }
     /**
-     * List pending team invitations.
+     * List pending team invitations
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/invitations` endpoint.
      *
@@ -955,7 +955,7 @@ impl Teams {
             .await
     }
     /**
-     * List team members.
+     * List team members
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
      *
@@ -967,14 +967,14 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `role: crate::types::TeamsListMembersInOrgRole` -- Filters members returned by their role in the team. Can be one of:  
-     *  \\* `member` - normal members of the team.  
-     *  \\* `maintainer` - team maintainers.  
-     *  \\* `all` - all members of the team.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `role` -- Filters members returned by their role in the team. Can be one of:
+     *   \* `member` - normal members of the team.
+     *   \* `maintainer` - team maintainers.
+     *   \* `all` - all members of the team.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_members_in_org(
         &self,
@@ -1015,7 +1015,7 @@ impl Teams {
             .await
     }
     /**
-     * List team members.
+     * List team members
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
      *
@@ -1058,7 +1058,7 @@ impl Teams {
             .await
     }
     /**
-     * Get team membership for a user.
+     * Get team membership for a user
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/memberships/{username}` endpoint.
      *
@@ -1077,9 +1077,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `username: &str`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `username`
      */
     pub async fn get_membership_for_user_in_org(
         &self,
@@ -1107,7 +1107,7 @@ impl Teams {
             .await
     }
     /**
-     * Add or update team membership for a user.
+     * Add or update team membership for a user
      *
      * This function performs a `PUT` to the `/orgs/{org}/teams/{team_slug}/memberships/{username}` endpoint.
      *
@@ -1127,9 +1127,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `username: &str`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `username`
      */
     pub async fn add_or_update_membership_for_user_in_org(
         &self,
@@ -1158,7 +1158,7 @@ impl Teams {
             .await
     }
     /**
-     * Remove team membership for a user.
+     * Remove team membership for a user
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/memberships/{username}` endpoint.
      *
@@ -1174,9 +1174,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `username: &str`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `username`
      */
     pub async fn remove_membership_for_user_in_org(
         &self,
@@ -1204,7 +1204,7 @@ impl Teams {
             .await
     }
     /**
-     * List team projects.
+     * List team projects
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects` endpoint.
      *
@@ -1216,10 +1216,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_projects_in_org(
         &self,
@@ -1256,7 +1256,7 @@ impl Teams {
             .await
     }
     /**
-     * List team projects.
+     * List team projects
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects` endpoint.
      *
@@ -1292,7 +1292,7 @@ impl Teams {
             .await
     }
     /**
-     * Check team permissions for a project.
+     * Check team permissions for a project
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects/{project_id}` endpoint.
      *
@@ -1304,9 +1304,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `project_id: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `project_id`
      */
     pub async fn check_permissions_for_project_in_org(
         &self,
@@ -1334,7 +1334,7 @@ impl Teams {
             .await
     }
     /**
-     * Add or update team project permissions.
+     * Add or update team project permissions
      *
      * This function performs a `PUT` to the `/orgs/{org}/teams/{team_slug}/projects/{project_id}` endpoint.
      *
@@ -1346,9 +1346,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `project_id: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `project_id`
      */
     pub async fn add_or_update_project_permissions_in_org(
         &self,
@@ -1377,7 +1377,7 @@ impl Teams {
             .await
     }
     /**
-     * Remove a project from a team.
+     * Remove a project from a team
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/projects/{project_id}` endpoint.
      *
@@ -1389,9 +1389,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `project_id: i64`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `project_id`
      */
     pub async fn remove_project_in_org(
         &self,
@@ -1419,7 +1419,7 @@ impl Teams {
             .await
     }
     /**
-     * List team repositories.
+     * List team repositories
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/repos` endpoint.
      *
@@ -1431,10 +1431,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_in_org(
         &self,
@@ -1471,7 +1471,7 @@ impl Teams {
             .await
     }
     /**
-     * List team repositories.
+     * List team repositories
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/repos` endpoint.
      *
@@ -1507,7 +1507,7 @@ impl Teams {
             .await
     }
     /**
-     * Check team permissions for a repository.
+     * Check team permissions for a repository
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}` endpoint.
      *
@@ -1523,10 +1523,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `owner`
+     * * `repo`
      */
     pub async fn check_permissions_for_repo_in_org(
         &self,
@@ -1556,7 +1556,7 @@ impl Teams {
             .await
     }
     /**
-     * Add or update team repository permissions.
+     * Add or update team repository permissions
      *
      * This function performs a `PUT` to the `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}` endpoint.
      *
@@ -1570,10 +1570,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `owner`
+     * * `repo`
      */
     pub async fn add_or_update_repo_permissions_in_org(
         &self,
@@ -1604,7 +1604,7 @@ impl Teams {
             .await
     }
     /**
-     * Remove a repository from a team.
+     * Remove a repository from a team
      *
      * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}` endpoint.
      *
@@ -1616,10 +1616,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `owner`
+     * * `repo`
      */
     pub async fn remove_repo_in_org(
         &self,
@@ -1649,7 +1649,7 @@ impl Teams {
             .await
     }
     /**
-     * List IdP groups for a team.
+     * List IdP groups for a team
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/team-sync/group-mappings` endpoint.
      *
@@ -1663,8 +1663,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
      */
     pub async fn list_idp_groups_in_org(
         &self,
@@ -1690,7 +1690,7 @@ impl Teams {
             .await
     }
     /**
-     * Create or update IdP group connections.
+     * Create or update IdP group connections
      *
      * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}/team-sync/group-mappings` endpoint.
      *
@@ -1704,8 +1704,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
      */
     pub async fn create_or_update_idp_group_connections_in_org(
         &self,
@@ -1732,7 +1732,7 @@ impl Teams {
             .await
     }
     /**
-     * List child teams.
+     * List child teams
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/teams` endpoint.
      *
@@ -1744,10 +1744,10 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `team_slug: &str` -- team_slug parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `team_slug` -- team_slug parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_child_in_org(
         &self,
@@ -1784,7 +1784,7 @@ impl Teams {
             .await
     }
     /**
-     * List child teams.
+     * List child teams
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/teams` endpoint.
      *
@@ -1820,7 +1820,7 @@ impl Teams {
             .await
     }
     /**
-     * Get a team (Legacy).
+     * Get a team (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}` endpoint.
      *
@@ -1830,7 +1830,7 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
+     * * `team_id`
      */
     pub async fn get_legacy(
         &self,
@@ -1854,7 +1854,7 @@ impl Teams {
             .await
     }
     /**
-     * Delete a team (Legacy).
+     * Delete a team (Legacy)
      *
      * This function performs a `DELETE` to the `/teams/{team_id}` endpoint.
      *
@@ -1868,7 +1868,7 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
+     * * `team_id`
      */
     pub async fn delete_legacy(&self, team_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1889,7 +1889,7 @@ impl Teams {
             .await
     }
     /**
-     * Update a team (Legacy).
+     * Update a team (Legacy)
      *
      * This function performs a `PATCH` to the `/teams/{team_id}` endpoint.
      *
@@ -1903,7 +1903,7 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
+     * * `team_id`
      */
     pub async fn update_legacy(
         &self,
@@ -1928,7 +1928,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussions (Legacy).
+     * List discussions (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions` endpoint.
      *
@@ -1940,12 +1940,12 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_discussions_legacy(
         &self,
@@ -1984,7 +1984,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussions (Legacy).
+     * List discussions (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions` endpoint.
      *
@@ -2025,7 +2025,7 @@ impl Teams {
             .await
     }
     /**
-     * Create a discussion (Legacy).
+     * Create a discussion (Legacy)
      *
      * This function performs a `POST` to the `/teams/{team_id}/discussions` endpoint.
      *
@@ -2039,7 +2039,7 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
+     * * `team_id`
      */
     pub async fn create_discussion_legacy(
         &self,
@@ -2064,7 +2064,7 @@ impl Teams {
             .await
     }
     /**
-     * Get a discussion (Legacy).
+     * Get a discussion (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}` endpoint.
      *
@@ -2076,8 +2076,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
+     * * `team_id`
+     * * `discussion_number`
      */
     pub async fn get_discussion_legacy(
         &self,
@@ -2103,7 +2103,7 @@ impl Teams {
             .await
     }
     /**
-     * Delete a discussion (Legacy).
+     * Delete a discussion (Legacy)
      *
      * This function performs a `DELETE` to the `/teams/{team_id}/discussions/{discussion_number}` endpoint.
      *
@@ -2115,8 +2115,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
+     * * `team_id`
+     * * `discussion_number`
      */
     pub async fn delete_discussion_legacy(
         &self,
@@ -2142,7 +2142,7 @@ impl Teams {
             .await
     }
     /**
-     * Update a discussion (Legacy).
+     * Update a discussion (Legacy)
      *
      * This function performs a `PATCH` to the `/teams/{team_id}/discussions/{discussion_number}` endpoint.
      *
@@ -2154,8 +2154,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
+     * * `team_id`
+     * * `discussion_number`
      */
     pub async fn update_discussion_legacy(
         &self,
@@ -2182,7 +2182,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussion comments (Legacy).
+     * List discussion comments (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments` endpoint.
      *
@@ -2194,13 +2194,13 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `discussion_number`
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_discussion_comments_legacy(
         &self,
@@ -2241,7 +2241,7 @@ impl Teams {
             .await
     }
     /**
-     * List discussion comments (Legacy).
+     * List discussion comments (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments` endpoint.
      *
@@ -2284,7 +2284,7 @@ impl Teams {
             .await
     }
     /**
-     * Create a discussion comment (Legacy).
+     * Create a discussion comment (Legacy)
      *
      * This function performs a `POST` to the `/teams/{team_id}/discussions/{discussion_number}/comments` endpoint.
      *
@@ -2298,8 +2298,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
+     * * `team_id`
+     * * `discussion_number`
      */
     pub async fn create_discussion_comment_legacy(
         &self,
@@ -2326,7 +2326,7 @@ impl Teams {
             .await
     }
     /**
-     * Get a discussion comment (Legacy).
+     * Get a discussion comment (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
      *
@@ -2338,9 +2338,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `team_id`
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn get_discussion_comment_legacy(
         &self,
@@ -2368,7 +2368,7 @@ impl Teams {
             .await
     }
     /**
-     * Delete a discussion comment (Legacy).
+     * Delete a discussion comment (Legacy)
      *
      * This function performs a `DELETE` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
      *
@@ -2380,9 +2380,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `team_id`
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn delete_discussion_comment_legacy(
         &self,
@@ -2410,7 +2410,7 @@ impl Teams {
             .await
     }
     /**
-     * Update a discussion comment (Legacy).
+     * Update a discussion comment (Legacy)
      *
      * This function performs a `PATCH` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
      *
@@ -2422,9 +2422,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `discussion_number: i64`
-     * * `comment_number: i64`
+     * * `team_id`
+     * * `discussion_number`
+     * * `comment_number`
      */
     pub async fn update_discussion_comment_legacy(
         &self,
@@ -2453,7 +2453,7 @@ impl Teams {
             .await
     }
     /**
-     * List pending team invitations (Legacy).
+     * List pending team invitations (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/invitations` endpoint.
      *
@@ -2465,9 +2465,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_pending_invitations_legacy(
         &self,
@@ -2502,7 +2502,7 @@ impl Teams {
             .await
     }
     /**
-     * List pending team invitations (Legacy).
+     * List pending team invitations (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/invitations` endpoint.
      *
@@ -2536,7 +2536,7 @@ impl Teams {
             .await
     }
     /**
-     * List team members (Legacy).
+     * List team members (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
      *
@@ -2548,13 +2548,13 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `role: crate::types::TeamsListMembersInOrgRole` -- Filters members returned by their role in the team. Can be one of:  
-     *  \\* `member` - normal members of the team.  
-     *  \\* `maintainer` - team maintainers.  
-     *  \\* `all` - all members of the team.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `role` -- Filters members returned by their role in the team. Can be one of:
+     *   \* `member` - normal members of the team.
+     *   \* `maintainer` - team maintainers.
+     *   \* `all` - all members of the team.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_members_legacy(
         &self,
@@ -2593,7 +2593,7 @@ impl Teams {
             .await
     }
     /**
-     * List team members (Legacy).
+     * List team members (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
      *
@@ -2634,7 +2634,7 @@ impl Teams {
             .await
     }
     /**
-     * Get team member (Legacy).
+     * Get team member (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/members/{username}` endpoint.
      *
@@ -2648,8 +2648,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `username: &str`
+     * * `team_id`
+     * * `username`
      */
     pub async fn get_member_legacy(
         &self,
@@ -2675,7 +2675,7 @@ impl Teams {
             .await
     }
     /**
-     * Add team member (Legacy).
+     * Add team member (Legacy)
      *
      * This function performs a `PUT` to the `/teams/{team_id}/members/{username}` endpoint.
      *
@@ -2695,8 +2695,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `username: &str`
+     * * `team_id`
+     * * `username`
      */
     pub async fn add_member_legacy(
         &self,
@@ -2722,7 +2722,7 @@ impl Teams {
             .await
     }
     /**
-     * Remove team member (Legacy).
+     * Remove team member (Legacy)
      *
      * This function performs a `DELETE` to the `/teams/{team_id}/members/{username}` endpoint.
      *
@@ -2740,8 +2740,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `username: &str`
+     * * `team_id`
+     * * `username`
      */
     pub async fn remove_member_legacy(
         &self,
@@ -2767,7 +2767,7 @@ impl Teams {
             .await
     }
     /**
-     * Get team membership for a user (Legacy).
+     * Get team membership for a user (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/memberships/{username}` endpoint.
      *
@@ -2786,8 +2786,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `username: &str`
+     * * `team_id`
+     * * `username`
      */
     pub async fn get_membership_for_user_legacy(
         &self,
@@ -2813,7 +2813,7 @@ impl Teams {
             .await
     }
     /**
-     * Add or update team membership for a user (Legacy).
+     * Add or update team membership for a user (Legacy)
      *
      * This function performs a `PUT` to the `/teams/{team_id}/memberships/{username}` endpoint.
      *
@@ -2833,8 +2833,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `username: &str`
+     * * `team_id`
+     * * `username`
      */
     pub async fn add_or_update_membership_for_user_legacy(
         &self,
@@ -2861,7 +2861,7 @@ impl Teams {
             .await
     }
     /**
-     * Remove team membership for a user (Legacy).
+     * Remove team membership for a user (Legacy)
      *
      * This function performs a `DELETE` to the `/teams/{team_id}/memberships/{username}` endpoint.
      *
@@ -2877,8 +2877,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `username: &str`
+     * * `team_id`
+     * * `username`
      */
     pub async fn remove_membership_for_user_legacy(
         &self,
@@ -2904,7 +2904,7 @@ impl Teams {
             .await
     }
     /**
-     * List team projects (Legacy).
+     * List team projects (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/projects` endpoint.
      *
@@ -2916,9 +2916,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_projects_legacy(
         &self,
@@ -2953,7 +2953,7 @@ impl Teams {
             .await
     }
     /**
-     * List team projects (Legacy).
+     * List team projects (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/projects` endpoint.
      *
@@ -2987,7 +2987,7 @@ impl Teams {
             .await
     }
     /**
-     * Check team permissions for a project (Legacy).
+     * Check team permissions for a project (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/projects/{project_id}` endpoint.
      *
@@ -2999,8 +2999,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `project_id: i64`
+     * * `team_id`
+     * * `project_id`
      */
     pub async fn check_permissions_for_project_legacy(
         &self,
@@ -3026,7 +3026,7 @@ impl Teams {
             .await
     }
     /**
-     * Add or update team project permissions (Legacy).
+     * Add or update team project permissions (Legacy)
      *
      * This function performs a `PUT` to the `/teams/{team_id}/projects/{project_id}` endpoint.
      *
@@ -3038,8 +3038,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `project_id: i64`
+     * * `team_id`
+     * * `project_id`
      */
     pub async fn add_or_update_project_permissions_legacy(
         &self,
@@ -3066,7 +3066,7 @@ impl Teams {
             .await
     }
     /**
-     * Remove a project from a team (Legacy).
+     * Remove a project from a team (Legacy)
      *
      * This function performs a `DELETE` to the `/teams/{team_id}/projects/{project_id}` endpoint.
      *
@@ -3078,8 +3078,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `project_id: i64`
+     * * `team_id`
+     * * `project_id`
      */
     pub async fn remove_project_legacy(
         &self,
@@ -3105,7 +3105,7 @@ impl Teams {
             .await
     }
     /**
-     * List team repositories (Legacy).
+     * List team repositories (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/repos` endpoint.
      *
@@ -3115,9 +3115,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_legacy(
         &self,
@@ -3152,7 +3152,7 @@ impl Teams {
             .await
     }
     /**
-     * List team repositories (Legacy).
+     * List team repositories (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/repos` endpoint.
      *
@@ -3184,7 +3184,7 @@ impl Teams {
             .await
     }
     /**
-     * Check team permissions for a repository (Legacy).
+     * Check team permissions for a repository (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/repos/{owner}/{repo}` endpoint.
      *
@@ -3198,9 +3198,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `team_id`
+     * * `owner`
+     * * `repo`
      */
     pub async fn check_permissions_for_repo_legacy(
         &self,
@@ -3228,7 +3228,7 @@ impl Teams {
             .await
     }
     /**
-     * Add or update team repository permissions (Legacy).
+     * Add or update team repository permissions (Legacy)
      *
      * This function performs a `PUT` to the `/teams/{team_id}/repos/{owner}/{repo}` endpoint.
      *
@@ -3242,9 +3242,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `team_id`
+     * * `owner`
+     * * `repo`
      */
     pub async fn add_or_update_repo_permissions_legacy(
         &self,
@@ -3273,7 +3273,7 @@ impl Teams {
             .await
     }
     /**
-     * Remove a repository from a team (Legacy).
+     * Remove a repository from a team (Legacy)
      *
      * This function performs a `DELETE` to the `/teams/{team_id}/repos/{owner}/{repo}` endpoint.
      *
@@ -3285,9 +3285,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `team_id`
+     * * `owner`
+     * * `repo`
      */
     pub async fn remove_repo_legacy(
         &self,
@@ -3315,7 +3315,7 @@ impl Teams {
             .await
     }
     /**
-     * List IdP groups for a team (Legacy).
+     * List IdP groups for a team (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/team-sync/group-mappings` endpoint.
      *
@@ -3329,7 +3329,7 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
+     * * `team_id`
      */
     pub async fn list_idp_groups_for_legacy(
         &self,
@@ -3353,7 +3353,7 @@ impl Teams {
             .await
     }
     /**
-     * Create or update IdP group connections (Legacy).
+     * Create or update IdP group connections (Legacy)
      *
      * This function performs a `PATCH` to the `/teams/{team_id}/team-sync/group-mappings` endpoint.
      *
@@ -3367,7 +3367,7 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
+     * * `team_id`
      */
     pub async fn create_or_update_idp_group_connections_legacy(
         &self,
@@ -3392,7 +3392,7 @@ impl Teams {
             .await
     }
     /**
-     * List child teams (Legacy).
+     * List child teams (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/teams` endpoint.
      *
@@ -3402,9 +3402,9 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `team_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `team_id`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_child_legacy(
         &self,
@@ -3439,7 +3439,7 @@ impl Teams {
             .await
     }
     /**
-     * List child teams (Legacy).
+     * List child teams (Legacy)
      *
      * This function performs a `GET` to the `/teams/{team_id}/teams` endpoint.
      *
@@ -3471,7 +3471,7 @@ impl Teams {
             .await
     }
     /**
-     * List teams for the authenticated user.
+     * List teams for the authenticated user
      *
      * This function performs a `GET` to the `/user/teams` endpoint.
      *
@@ -3481,8 +3481,8 @@ impl Teams {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_authenticated_user(
         &self,
@@ -3497,7 +3497,7 @@ impl Teams {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/teams?{}", query_), None);
+        let url = self.client.url(&format!("/user/teams?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -3509,7 +3509,7 @@ impl Teams {
             .await
     }
     /**
-     * List teams for the authenticated user.
+     * List teams for the authenticated user
      *
      * This function performs a `GET` to the `/user/teams` endpoint.
      *

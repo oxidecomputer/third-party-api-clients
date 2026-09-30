@@ -20,7 +20,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_price_rules_param_rule_code(
         &self,
@@ -44,7 +44,7 @@ impl Discounts {
             .await
     }
     /**
-     * Creates a discount code.
+     * Creates a discount code
      *
      * This function performs a `POST` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
      *
@@ -52,7 +52,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_price_rules_param_rule_codes(
         &self,
@@ -77,7 +77,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a single discount code.
+     * Retrieves a single discount code
      *
      * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -85,8 +85,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_price_rules_param_rule_codes_code(
         &self,
@@ -112,7 +112,7 @@ impl Discounts {
             .await
     }
     /**
-     * Updates an existing discount code.
+     * Updates an existing discount code
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -120,8 +120,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_price_rules_param_rule_codes_code(
         &self,
@@ -148,7 +148,7 @@ impl Discounts {
             .await
     }
     /**
-     * Deletes a discount code.
+     * Deletes a discount code
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -156,8 +156,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_price_rules_param_rule_codes_code(
         &self,
@@ -183,18 +183,18 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves the location of a discount code.
-             The discount code's location is returned in the location header, not in the DiscountCode object itself.
-               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/discount_codes/lookup.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `code: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves the location of a discount code.
+     * The discount code's location is returned in the location header, not in the DiscountCode object itself.
+     * Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/discount_codes/lookup.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `code` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202001_get_codes_lookup(
         &self,
         code: i64,
@@ -205,7 +205,7 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/discount_codes/lookup.json?{}", query_),
+            &format!("/admin/api/2020-01/discount_codes/lookup.json?{query_}"),
             None,
         );
         self.client
@@ -219,33 +219,33 @@ impl Discounts {
             .await
     }
     /**
-    * Creates a discount code creation job.
-             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-             enqueues and returns a discount_code_creation object that can be monitored for completion.
-             Response fields that are specific to the batch endpoint include:
-
-               status: The state of the discount code creation job. Possible values are:
-
-                   queued: The job is acknowledged, but not started.
-                   running: The job is in process.
-                   completed: The job has finished.
-
-               codes_count: The number of discount codes to create.
-               imported_count: The number of discount codes created successfully.
-               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
-
-                   "Price rule target selection can't be blank"
-                   "Price rule allocation method can't be blank".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code creation job.
+     * The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+     * enqueues and returns a discount_code_creation object that can be monitored for completion.
+     * Response fields that are specific to the batch endpoint include:
+     *
+     * status: The state of the discount code creation job. Possible values are:
+     *
+     * queued: The job is acknowledged, but not started.
+     * running: The job is in process.
+     * completed: The job has finished.
+     *
+     * codes_count: The number of discount codes to create.
+     * imported_count: The number of discount codes created successfully.
+     * failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+     * logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+     *
+     * "Price rule target selection can't be blank"
+     * "Price rule allocation method can't be blank"
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_create_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -269,7 +269,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a discount code creation job.
+     * Retrieves a discount code creation job
      *
      * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
      *
@@ -277,8 +277,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `batch_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_price_rules_param_rule_batch(
         &self,
@@ -304,19 +304,19 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves a list of discount codes for a discount code creation job.
-             Discount codes that have been successfully created include a populated id field. Discount codes that
-             encountered errors during the creation process include a populated errors field.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of discount codes for a discount code creation job.
+     * Discount codes that have been successfully created include a populated id field. Discount codes that
+     * encountered errors during the creation process include a populated errors field.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_get_price_rules_param_rule_batch_code(
         &self,
         price_rule_id: &str,
@@ -349,7 +349,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_price_rules_param_rule_code(
         &self,
@@ -373,7 +373,7 @@ impl Discounts {
             .await
     }
     /**
-     * Creates a discount code.
+     * Creates a discount code
      *
      * This function performs a `POST` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes.json` endpoint.
      *
@@ -381,7 +381,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_price_rules_param_rule_codes(
         &self,
@@ -406,7 +406,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a single discount code.
+     * Retrieves a single discount code
      *
      * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -414,8 +414,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_price_rules_param_rule_codes_code(
         &self,
@@ -441,7 +441,7 @@ impl Discounts {
             .await
     }
     /**
-     * Updates an existing discount code.
+     * Updates an existing discount code
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -449,8 +449,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_price_rules_param_rule_codes_code(
         &self,
@@ -477,7 +477,7 @@ impl Discounts {
             .await
     }
     /**
-     * Deletes a discount code.
+     * Deletes a discount code
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -485,8 +485,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_price_rules_param_rule_codes_code(
         &self,
@@ -512,18 +512,18 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves the location of a discount code.
-             The discount code's location is returned in the location header, not in the DiscountCode object itself.
-               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/discount_codes/lookup.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `code: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves the location of a discount code.
+     * The discount code's location is returned in the location header, not in the DiscountCode object itself.
+     * Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/discount_codes/lookup.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `code` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202004_get_codes_lookup(
         &self,
         code: i64,
@@ -534,7 +534,7 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/discount_codes/lookup.json?{}", query_),
+            &format!("/admin/api/2020-04/discount_codes/lookup.json?{query_}"),
             None,
         );
         self.client
@@ -548,33 +548,33 @@ impl Discounts {
             .await
     }
     /**
-    * Creates a discount code creation job.
-             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-             enqueues and returns a discount_code_creation object that can be monitored for completion.
-             Response fields that are specific to the batch endpoint include:
-
-               status: The state of the discount code creation job. Possible values are:
-
-                   queued: The job is acknowledged, but not started.
-                   running: The job is in process.
-                   completed: The job has finished.
-
-               codes_count: The number of discount codes to create.
-               imported_count: The number of discount codes created successfully.
-               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
-
-                   "Price rule target selection can't be blank"
-                   "Price rule allocation method can't be blank".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code creation job.
+     * The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+     * enqueues and returns a discount_code_creation object that can be monitored for completion.
+     * Response fields that are specific to the batch endpoint include:
+     *
+     * status: The state of the discount code creation job. Possible values are:
+     *
+     * queued: The job is acknowledged, but not started.
+     * running: The job is in process.
+     * completed: The job has finished.
+     *
+     * codes_count: The number of discount codes to create.
+     * imported_count: The number of discount codes created successfully.
+     * failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+     * logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+     *
+     * "Price rule target selection can't be blank"
+     * "Price rule allocation method can't be blank"
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_create_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -598,7 +598,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a discount code creation job.
+     * Retrieves a discount code creation job
      *
      * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
      *
@@ -606,8 +606,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `batch_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_price_rules_param_rule_batch(
         &self,
@@ -633,19 +633,19 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves a list of discount codes for a discount code creation job.
-             Discount codes that have been successfully created include a populated id field. Discount codes that
-             encountered errors during the creation process include a populated errors field.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of discount codes for a discount code creation job.
+     * Discount codes that have been successfully created include a populated id field. Discount codes that
+     * encountered errors during the creation process include a populated errors field.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_get_price_rules_param_rule_batch_code(
         &self,
         price_rule_id: &str,
@@ -678,7 +678,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_price_rules_param_rule_code(
         &self,
@@ -702,7 +702,7 @@ impl Discounts {
             .await
     }
     /**
-     * Creates a discount code.
+     * Creates a discount code
      *
      * This function performs a `POST` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes.json` endpoint.
      *
@@ -710,7 +710,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_create_price_rules_param_rule_codes(
         &self,
@@ -735,7 +735,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a single discount code.
+     * Retrieves a single discount code
      *
      * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -743,8 +743,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_price_rules_param_rule_codes_code(
         &self,
@@ -770,7 +770,7 @@ impl Discounts {
             .await
     }
     /**
-     * Updates an existing discount code.
+     * Updates an existing discount code
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -778,8 +778,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_price_rules_param_rule_codes_code(
         &self,
@@ -806,7 +806,7 @@ impl Discounts {
             .await
     }
     /**
-     * Deletes a discount code.
+     * Deletes a discount code
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -814,8 +814,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_price_rules_param_rule_codes_code(
         &self,
@@ -841,18 +841,18 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves the location of a discount code.
-             The discount code's location is returned in the location header, not in the DiscountCode object itself.
-               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/discount_codes/lookup.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `code: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves the location of a discount code.
+     * The discount code's location is returned in the location header, not in the DiscountCode object itself.
+     * Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/discount_codes/lookup.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `code` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202007_get_codes_lookup(
         &self,
         code: i64,
@@ -863,7 +863,7 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/discount_codes/lookup.json?{}", query_),
+            &format!("/admin/api/2020-07/discount_codes/lookup.json?{query_}"),
             None,
         );
         self.client
@@ -877,33 +877,33 @@ impl Discounts {
             .await
     }
     /**
-    * Creates a discount code creation job.
-             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-             enqueues and returns a discount_code_creation object that can be monitored for completion.
-             Response fields that are specific to the batch endpoint include:
-
-               status: The state of the discount code creation job. Possible values are:
-
-                   queued: The job is acknowledged, but not started.
-                   running: The job is in process.
-                   completed: The job has finished.
-
-               codes_count: The number of discount codes to create.
-               imported_count: The number of discount codes created successfully.
-               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
-
-                   "Price rule target selection can't be blank"
-                   "Price rule allocation method can't be blank".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code creation job.
+     * The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+     * enqueues and returns a discount_code_creation object that can be monitored for completion.
+     * Response fields that are specific to the batch endpoint include:
+     *
+     * status: The state of the discount code creation job. Possible values are:
+     *
+     * queued: The job is acknowledged, but not started.
+     * running: The job is in process.
+     * completed: The job has finished.
+     *
+     * codes_count: The number of discount codes to create.
+     * imported_count: The number of discount codes created successfully.
+     * failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+     * logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+     *
+     * "Price rule target selection can't be blank"
+     * "Price rule allocation method can't be blank"
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_create_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -927,7 +927,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a discount code creation job.
+     * Retrieves a discount code creation job
      *
      * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
      *
@@ -935,8 +935,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `batch_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_price_rules_param_rule_batch(
         &self,
@@ -962,19 +962,19 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves a list of discount codes for a discount code creation job.
-             Discount codes that have been successfully created include a populated id field. Discount codes that
-             encountered errors during the creation process include a populated errors field.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of discount codes for a discount code creation job.
+     * Discount codes that have been successfully created include a populated id field. Discount codes that
+     * encountered errors during the creation process include a populated errors field.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_get_price_rules_param_rule_batch_code(
         &self,
         price_rule_id: &str,
@@ -1007,7 +1007,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn get_price_rules_param_rule_code(
         &self,
@@ -1031,7 +1031,7 @@ impl Discounts {
             .await
     }
     /**
-     * Creates a discount code.
+     * Creates a discount code
      *
      * This function performs a `POST` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes.json` endpoint.
      *
@@ -1039,7 +1039,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn create_price_rules_param_rule_codes(
         &self,
@@ -1064,7 +1064,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a single discount code.
+     * Retrieves a single discount code
      *
      * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1072,8 +1072,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn get_price_rules_param_rule_codes_code(
         &self,
@@ -1099,7 +1099,7 @@ impl Discounts {
             .await
     }
     /**
-     * Updates an existing discount code.
+     * Updates an existing discount code
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1107,8 +1107,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn update_price_rules_param_rule_codes_code(
         &self,
@@ -1135,7 +1135,7 @@ impl Discounts {
             .await
     }
     /**
-     * Deletes a discount code.
+     * Deletes a discount code
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1143,8 +1143,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn delete_price_rules_param_rule_codes_code(
         &self,
@@ -1170,18 +1170,18 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves the location of a discount code.
-             The discount code's location is returned in the location header, not in the DiscountCode object itself.
-               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/discount_codes/lookup.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `code: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves the location of a discount code.
+     * The discount code's location is returned in the location header, not in the DiscountCode object itself.
+     * Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/discount_codes/lookup.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `code` -- recurring_application_charge[capped_amount]
+     */
     pub async fn get_codes_lookup(&self, code: i64) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if code > 0 {
@@ -1189,7 +1189,7 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/discount_codes/lookup.json?{}", query_),
+            &format!("/admin/api/2020-10/discount_codes/lookup.json?{query_}"),
             None,
         );
         self.client
@@ -1203,33 +1203,33 @@ impl Discounts {
             .await
     }
     /**
-    * Creates a discount code creation job.
-             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-             enqueues and returns a discount_code_creation object that can be monitored for completion.
-             Response fields that are specific to the batch endpoint include:
-
-               status: The state of the discount code creation job. Possible values are:
-
-                   queued: The job is acknowledged, but not started.
-                   running: The job is in process.
-                   completed: The job has finished.
-
-               codes_count: The number of discount codes to create.
-               imported_count: The number of discount codes created successfully.
-               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
-
-                   "Price rule target selection can't be blank"
-                   "Price rule allocation method can't be blank".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code creation job.
+     * The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+     * enqueues and returns a discount_code_creation object that can be monitored for completion.
+     * Response fields that are specific to the batch endpoint include:
+     *
+     * status: The state of the discount code creation job. Possible values are:
+     *
+     * queued: The job is acknowledged, but not started.
+     * running: The job is in process.
+     * completed: The job has finished.
+     *
+     * codes_count: The number of discount codes to create.
+     * imported_count: The number of discount codes created successfully.
+     * failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+     * logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+     *
+     * "Price rule target selection can't be blank"
+     * "Price rule allocation method can't be blank"
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     */
     pub async fn create_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -1253,7 +1253,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a discount code creation job.
+     * Retrieves a discount code creation job
      *
      * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
      *
@@ -1261,8 +1261,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `batch_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
      */
     pub async fn get_price_rules_param_rule_batch(
         &self,
@@ -1288,19 +1288,19 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves a list of discount codes for a discount code creation job.
-             Discount codes that have been successfully created include a populated id field. Discount codes that
-             encountered errors during the creation process include a populated errors field.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of discount codes for a discount code creation job.
+     * Discount codes that have been successfully created include a populated id field. Discount codes that
+     * encountered errors during the creation process include a populated errors field.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
+     */
     pub async fn get_price_rules_param_rule_batch_code(
         &self,
         price_rule_id: &str,
@@ -1333,7 +1333,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_price_rules_param_rule_code(
         &self,
@@ -1357,7 +1357,7 @@ impl Discounts {
             .await
     }
     /**
-     * Creates a discount code.
+     * Creates a discount code
      *
      * This function performs a `POST` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
      *
@@ -1365,7 +1365,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_create_price_rules_param_rule_codes(
         &self,
@@ -1390,7 +1390,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a single discount code.
+     * Retrieves a single discount code
      *
      * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1398,8 +1398,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_price_rules_param_rule_codes_code(
         &self,
@@ -1425,7 +1425,7 @@ impl Discounts {
             .await
     }
     /**
-     * Updates an existing discount code.
+     * Updates an existing discount code
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1433,8 +1433,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_price_rules_param_rule_codes_code(
         &self,
@@ -1461,7 +1461,7 @@ impl Discounts {
             .await
     }
     /**
-     * Deletes a discount code.
+     * Deletes a discount code
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1469,8 +1469,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_price_rules_param_rule_codes_code(
         &self,
@@ -1496,18 +1496,18 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves the location of a discount code.
-             The discount code's location is returned in the location header, not in the DiscountCode object itself.
-               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/discount_codes/lookup.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `code: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves the location of a discount code.
+     * The discount code's location is returned in the location header, not in the DiscountCode object itself.
+     * Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/discount_codes/lookup.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `code` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202101_get_codes_lookup(
         &self,
         code: i64,
@@ -1518,7 +1518,7 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/discount_codes/lookup.json?{}", query_),
+            &format!("/admin/api/2021-01/discount_codes/lookup.json?{query_}"),
             None,
         );
         self.client
@@ -1532,33 +1532,33 @@ impl Discounts {
             .await
     }
     /**
-    * Creates a discount code creation job.
-             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-             enqueues and returns a discount_code_creation object that can be monitored for completion.
-             Response fields that are specific to the batch endpoint include:
-
-               status: The state of the discount code creation job. Possible values are:
-
-                   queued: The job is acknowledged, but not started.
-                   running: The job is in process.
-                   completed: The job has finished.
-
-               codes_count: The number of discount codes to create.
-               imported_count: The number of discount codes created successfully.
-               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
-
-                   "Price rule target selection can't be blank"
-                   "Price rule allocation method can't be blank".
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code creation job.
+     * The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+     * enqueues and returns a discount_code_creation object that can be monitored for completion.
+     * Response fields that are specific to the batch endpoint include:
+     *
+     * status: The state of the discount code creation job. Possible values are:
+     *
+     * queued: The job is acknowledged, but not started.
+     * running: The job is in process.
+     * completed: The job has finished.
+     *
+     * codes_count: The number of discount codes to create.
+     * imported_count: The number of discount codes created successfully.
+     * failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+     * logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+     *
+     * "Price rule target selection can't be blank"
+     * "Price rule allocation method can't be blank"
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_create_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -1582,7 +1582,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a discount code creation job.
+     * Retrieves a discount code creation job
      *
      * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
      *
@@ -1590,8 +1590,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `batch_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_price_rules_param_rule_batch(
         &self,
@@ -1617,19 +1617,19 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves a list of discount codes for a discount code creation job.
-             Discount codes that have been successfully created include a populated id field. Discount codes that
-             encountered errors during the creation process include a populated errors field.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of discount codes for a discount code creation job.
+     * Discount codes that have been successfully created include a populated id field. Discount codes that
+     * encountered errors during the creation process include a populated errors field.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_get_price_rules_param_rule_batch_code(
         &self,
         price_rule_id: &str,
@@ -1662,7 +1662,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_price_rules_param_rule_code(
         &self,
@@ -1686,7 +1686,7 @@ impl Discounts {
             .await
     }
     /**
-     * Creates a discount code.
+     * Creates a discount code
      *
      * This function performs a `POST` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes.json` endpoint.
      *
@@ -1694,7 +1694,7 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_create_price_rules_param_rule_codes(
         &self,
@@ -1719,7 +1719,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a single discount code.
+     * Retrieves a single discount code
      *
      * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1727,8 +1727,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_price_rules_param_rule_codes_code(
         &self,
@@ -1754,7 +1754,7 @@ impl Discounts {
             .await
     }
     /**
-     * Updates an existing discount code.
+     * Updates an existing discount code
      *
      * This function performs a `PUT` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1762,8 +1762,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_price_rules_param_rule_codes_code(
         &self,
@@ -1790,7 +1790,7 @@ impl Discounts {
             .await
     }
     /**
-     * Deletes a discount code.
+     * Deletes a discount code
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
      *
@@ -1798,8 +1798,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `discount_code_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `discount_code_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_price_rules_param_rule_codes_code(
         &self,
@@ -1825,18 +1825,18 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves the location of a discount code.
-             The discount code's location is returned in the location header, not in the DiscountCode object itself.
-               Depending on your HTTP client, the location of the discount code might follow the location header automatically.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/discount_codes/lookup.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-unstable
-    *
-    * **Parameters:**
-    *
-    * * `code: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves the location of a discount code.
+     * The discount code's location is returned in the location header, not in the DiscountCode object itself.
+     * Depending on your HTTP client, the location of the discount code might follow the location header automatically.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/discount_codes/lookup.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#lookup-unstable
+     *
+     * **Parameters:**
+     *
+     * * `code` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_unstable_get_codes_lookup(
         &self,
         code: i64,
@@ -1847,7 +1847,7 @@ impl Discounts {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/discount_codes/lookup.json?{}", query_),
+            &format!("/admin/api/unstable/discount_codes/lookup.json?{query_}"),
             None,
         );
         self.client
@@ -1861,33 +1861,33 @@ impl Discounts {
             .await
     }
     /**
-    * Creates a discount code creation job.
-             The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
-             enqueues and returns a discount_code_creation object that can be monitored for completion.
-             Response fields that are specific to the batch endpoint include:
-
-               status: The state of the discount code creation job. Possible values are:
-
-                   queued: The job is acknowledged, but not started.
-                   running: The job is in process.
-                   completed: The job has finished.
-
-               codes_count: The number of discount codes to create.
-               imported_count: The number of discount codes created successfully.
-               failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
-               logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
-
-                   "Price rule target selection can't be blank"
-                   "Price rule allocation method can't be blank".
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code creation job.
+     * The batch endpoint can be used to asynchronously create up to 100 discount codes in a single request. It
+     * enqueues and returns a discount_code_creation object that can be monitored for completion.
+     * Response fields that are specific to the batch endpoint include:
+     *
+     * status: The state of the discount code creation job. Possible values are:
+     *
+     * queued: The job is acknowledged, but not started.
+     * running: The job is in process.
+     * completed: The job has finished.
+     *
+     * codes_count: The number of discount codes to create.
+     * imported_count: The number of discount codes created successfully.
+     * failed_count: The number of discount codes that were not created successfully. Unsuccessful attempts will retry up to three times.
+     * logs: A report that specifies when no discount codes were created because the provided data was invalid. Example responses:
+     *
+     * "Price rule target selection can't be blank"
+     * "Price rule allocation method can't be blank"
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_create_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -1911,7 +1911,7 @@ impl Discounts {
             .await
     }
     /**
-     * Retrieves a discount code creation job.
+     * Retrieves a discount code creation job
      *
      * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
      *
@@ -1919,8 +1919,8 @@ impl Discounts {
      *
      * **Parameters:**
      *
-     * * `price_rule_id: &str` -- storefront_access_token_id.
-     * * `batch_id: &str` -- storefront_access_token_id.
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_price_rules_param_rule_batch(
         &self,
@@ -1946,19 +1946,19 @@ impl Discounts {
             .await
     }
     /**
-    * Retrieves a list of discount codes for a discount code creation job.
-             Discount codes that have been successfully created include a populated id field. Discount codes that
-             encountered errors during the creation process include a populated errors field.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of discount codes for a discount code creation job.
+     * Discount codes that have been successfully created include a populated id field. Discount codes that
+     * encountered errors during the creation process include a populated errors field.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch/{batch_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_discount_codes_index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id` -- storefront_access_token_id
+     * * `batch_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_get_price_rules_param_rule_batch_code(
         &self,
         price_rule_id: &str,

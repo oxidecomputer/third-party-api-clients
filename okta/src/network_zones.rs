@@ -12,7 +12,7 @@ impl NetworkZones {
     }
 
     /**
-     * List Network Zones.
+     * List Network Zones
      *
      * This function performs a `GET` to the `/api/v1/zones` endpoint.
      *
@@ -20,9 +20,9 @@ impl NetworkZones {
      *
      * **Parameters:**
      *
-     * * `after: &str` -- Specifies the pagination cursor for the next page of network zones.
-     * * `limit: i64` -- Specifies the number of results for a page.
-     * * `filter: &str` -- Filters zones by usage or id expression.
+     * * `after` -- Specifies the pagination cursor for the next page of network zones
+     * * `limit` -- Specifies the number of results for a page
+     * * `filter` -- Filters zones by usage or id expression
      */
     pub async fn list(
         &self,
@@ -41,7 +41,7 @@ impl NetworkZones {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/zones?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/zones?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -53,7 +53,7 @@ impl NetworkZones {
             .await
     }
     /**
-     * List Network Zones.
+     * List Network Zones
      *
      * This function performs a `GET` to the `/api/v1/zones` endpoint.
      *
@@ -70,7 +70,7 @@ impl NetworkZones {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/zones?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/zones?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -82,7 +82,7 @@ impl NetworkZones {
             .await
     }
     /**
-     * Add Network Zone.
+     * Add Network Zone
      *
      * This function performs a `POST` to the `/api/v1/zones` endpoint.
      *
@@ -104,7 +104,7 @@ impl NetworkZones {
             .await
     }
     /**
-     * Get Network Zone.
+     * Get Network Zone
      *
      * This function performs a `GET` to the `/api/v1/zones/{zoneId}` endpoint.
      *
@@ -112,7 +112,7 @@ impl NetworkZones {
      *
      * **Parameters:**
      *
-     * * `zone_id: &str`
+     * * `zone_id`
      */
     pub async fn get(
         &self,
@@ -136,7 +136,7 @@ impl NetworkZones {
             .await
     }
     /**
-     * Update Network Zone.
+     * Update Network Zone
      *
      * This function performs a `PUT` to the `/api/v1/zones/{zoneId}` endpoint.
      *
@@ -144,7 +144,7 @@ impl NetworkZones {
      *
      * **Parameters:**
      *
-     * * `zone_id: &str`
+     * * `zone_id`
      */
     pub async fn update(
         &self,
@@ -169,7 +169,7 @@ impl NetworkZones {
             .await
     }
     /**
-     * Delete Network Zone.
+     * Delete Network Zone
      *
      * This function performs a `DELETE` to the `/api/v1/zones/{zoneId}` endpoint.
      *
@@ -177,7 +177,7 @@ impl NetworkZones {
      *
      * **Parameters:**
      *
-     * * `zone_id: &str`
+     * * `zone_id`
      */
     pub async fn delete(&self, zone_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -198,7 +198,7 @@ impl NetworkZones {
             .await
     }
     /**
-     * Activate Network Zone.
+     * Activate Network Zone
      *
      * This function performs a `POST` to the `/api/v1/zones/{zoneId}/lifecycle/activate` endpoint.
      *
@@ -206,7 +206,7 @@ impl NetworkZones {
      *
      * **Parameters:**
      *
-     * * `zone_id: &str`
+     * * `zone_id`
      */
     pub async fn activate(
         &self,
@@ -230,7 +230,7 @@ impl NetworkZones {
             .await
     }
     /**
-     * Deactivate Network Zone.
+     * Deactivate Network Zone
      *
      * This function performs a `POST` to the `/api/v1/zones/{zoneId}/lifecycle/deactivate` endpoint.
      *
@@ -238,7 +238,7 @@ impl NetworkZones {
      *
      * **Parameters:**
      *
-     * * `zone_id: &str`
+     * * `zone_id`
      */
     pub async fn deactivate(
         &self,

@@ -12,7 +12,7 @@ impl Invoices {
     }
 
     /**
-     * Get a List of Billing Invoices.
+     * Get a List of Billing Invoices
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/billing_invoices` endpoint.
      *
@@ -22,9 +22,9 @@ impl Invoices {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `from_date: &str` -- Specifies the date/time of the earliest invoice in the account to retrieve.
-     * * `to_date: &str` -- Specifies the date/time of the latest invoice in the account to retrieve.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `from_date` -- Specifies the date/time of the earliest invoice in the account to retrieve.
+     * * `to_date` -- Specifies the date/time of the latest invoice in the account to retrieve.
      */
     pub async fn billing_get(
         &self,
@@ -100,8 +100,8 @@ impl Invoices {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `invoice_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `invoice_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn billing_get_invoices(
         &self,
@@ -137,7 +137,7 @@ impl Invoices {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn billing_get_past_due(
         &self,

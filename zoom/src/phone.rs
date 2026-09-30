@@ -12,7 +12,7 @@ impl Phone {
     }
 
     /**
-     * Set up a Zoom Phone account.
+     * Set up a Zoom Phone account
      *
      * This function performs a `POST` to the `/accounts/{accountId}/phone/setup` endpoint.
      *
@@ -21,13 +21,14 @@ impl Phone {
      * **Scopes:** `phone:write:admin`, `phone:write`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Paid account
-     *  * A Pro or a higher account plan
+     * * A Pro or a higher account plan
      * * Master account option enabled
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique identifier of the account.
+     * * `account_id` -- Unique identifier of the account.
      */
     pub async fn set_up_account(
         &self,
@@ -52,7 +53,7 @@ impl Phone {
             .await
     }
     /**
-     * List phone numbers.
+     * List phone numbers
      *
      * This function performs a `GET` to the `/phone/numbers` endpoint.
      *
@@ -61,24 +62,25 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account plan
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `type_: crate::types::ListAccountPhoneNumbersType` -- Query response by number assignment. The value can be one of the following:
-     *  <br>
-     *  `assigned`: The number has been assigned to either a user, a call queue, an auto-receptionist or a common area phone in an account. <br>`unassigned`: The number is not assigned to anyone.<br>
-     *  `all`: Include both assigned and unassigned numbers in the response.<br>
-     *  `byoc`: Include Bring Your Own Carrier (BYOC) numbers only in the response.
-     * * `extension_type: crate::types::ExtensionType` -- The type of assignee to whom the number is assigned. The value can be one of the following:<br>
-     *  `user`<br> `callQueue`<br> `autoReceptionist`<br>
-     *  `commonAreaPhone`.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `number_type: crate::types::Type` -- The type of phone number. The value can be either `toll` or `tollfree`.
-     * * `pending_numbers: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
-     * * `site_id: &str` -- Unique identifier of the site. Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by a specific phone site. See [Managing multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) or [Adding a site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites#h_05c88e35-1593-491f-b1a8-b7139a75dc15) for details.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `type_` -- Query response by number assignment. The value can be one of the following:
+     *
+     *   `assigned`: The number has been assigned to either a user, a call queue, an auto-receptionist or a common area phone in an account. <br>`unassigned`: The number is not assigned to anyone.<br>
+     *   `all`: Include both assigned and unassigned numbers in the response.<br>
+     *   `byoc`: Include Bring Your Own Carrier (BYOC) numbers only in the response.
+     * * `extension_type` -- The type of assignee to whom the number is assigned. The value can be one of the following:<br>
+     *   `user`<br> `callQueue`<br> `autoReceptionist`<br>
+     *   `commonAreaPhone`
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `number_type` -- The type of phone number. The value can be either `toll` or `tollfree`.
+     * * `pending_numbers` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `site_id` -- Unique identifier of the site. Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by a specific phone site. See [Managing multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) or [Adding a site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites#h_05c88e35-1593-491f-b1a8-b7139a75dc15) for details.
      */
     pub async fn list_account_numbers(
         &self,
@@ -113,7 +115,7 @@ impl Phone {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/phone/numbers?{}", query_), None);
+        let url = self.client.url(&format!("/phone/numbers?{query_}"), None);
         let resp: crate::Response<crate::types::ListAccountPhoneNumbersResponseData> = self
             .client
             .get(
@@ -133,7 +135,7 @@ impl Phone {
         ))
     }
     /**
-     * List phone numbers.
+     * List phone numbers
      *
      * This function performs a `GET` to the `/phone/numbers` endpoint.
      *
@@ -144,6 +146,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account plan
      * * A Zoom Phone license
      */
@@ -172,7 +175,7 @@ impl Phone {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/phone/numbers?{}", query_), None);
+        let url = self.client.url(&format!("/phone/numbers?{query_}"), None);
         let crate::Response::<crate::types::ListAccountPhoneNumbersResponseData> {
             mut status,
             mut headers,
@@ -202,7 +205,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -217,7 +220,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -239,7 +242,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, phone_numbers))
     }
     /**
-     * Get user's profile.
+     * Get user's profile
      *
      * This function performs a `GET` to the `/phone/users/{userId}` endpoint.
      *
@@ -248,12 +251,13 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
-     *  * A Business or Enterprise account
+     *
+     * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn user(
         &self,
@@ -277,7 +281,7 @@ impl Phone {
             .await
     }
     /**
-     * Update user's profile.
+     * Update user's profile
      *
      * This function performs a `PATCH` to the `/phone/users/{userId}` endpoint.
      *
@@ -286,6 +290,7 @@ impl Phone {
      * **Scopes:** `phone:write`, `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
@@ -312,7 +317,7 @@ impl Phone {
             .await
     }
     /**
-     * Get account's setting.
+     * Get account's setting
      *
      * This function performs a `GET` to the `/phone/settings` endpoint.
      *
@@ -321,12 +326,12 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
     pub async fn setting(
         &self,
-        account_id: &str,
     ) -> ClientResult<crate::Response<crate::types::PhoneSettingResponse>> {
         let url = self.client.url("/phone/settings", None);
         self.client
@@ -340,7 +345,7 @@ impl Phone {
             .await
     }
     /**
-     * Update BYOC settings.
+     * Update BYOC settings
      *
      * This function performs a `PATCH` to the `/phone/settings` endpoint.
      *
@@ -349,15 +354,11 @@ impl Phone {
      * **Scopes:** `phone:master`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- Unique identifier of the sub account.
      */
     pub async fn update_settings(
         &self,
-        account_id: &str,
         body: &crate::types::UpdatePhoneSettingsRequest,
     ) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/phone/settings", None);
@@ -372,7 +373,7 @@ impl Phone {
             .await
     }
     /**
-     * Get user's settings.
+     * Get user's settings
      *
      * This function performs a `GET` to the `/phone/users/{userId}/settings` endpoint.
      *
@@ -381,12 +382,13 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn user_settings(
         &self,
@@ -410,7 +412,7 @@ impl Phone {
             .await
     }
     /**
-     * List setting templates.
+     * List setting templates
      *
      * This function performs a `GET` to the `/phone/setting_templates` endpoint.
      *
@@ -419,14 +421,15 @@ impl Phone {
      * **Scopes:** `phone:read:admin` or `phone:read`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- Number of records returns within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `site_id: &str` -- Unique identifier of the site. This field is required only if multiple sites have been enabled.  of the site. Required only when multiple sites are enabled. See [Managing multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) for details. If this is not provided, the response lists the account level setting templates.
+     * * `page_size` -- Number of records returns within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `site_id` -- Unique identifier of the site. This field is required only if multiple sites have been enabled.  of the site. Required only when multiple sites are enabled. See [Managing multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) for details. If this is not provided, the response lists the account level setting templates.
      */
     pub async fn list_setting_templates(
         &self,
@@ -447,7 +450,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/setting_templates?{}", query_), None);
+            .url(&format!("/phone/setting_templates?{query_}"), None);
         let resp: crate::Response<crate::types::ListSettingTemplatesResponse> = self
             .client
             .get(
@@ -467,7 +470,7 @@ impl Phone {
         ))
     }
     /**
-     * List setting templates.
+     * List setting templates
      *
      * This function performs a `GET` to the `/phone/setting_templates` endpoint.
      *
@@ -478,6 +481,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin` or `phone:read`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
@@ -492,7 +496,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/setting_templates?{}", query_), None);
+            .url(&format!("/phone/setting_templates?{query_}"), None);
         let crate::Response::<crate::types::ListSettingTemplatesResponse> {
             mut status,
             mut headers,
@@ -522,7 +526,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -537,7 +541,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -559,7 +563,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, templates))
     }
     /**
-     * Add a setting template.
+     * Add a setting template
      *
      * This function performs a `POST` to the `/phone/setting_templates` endpoint.
      *
@@ -568,6 +572,7 @@ impl Phone {
      * **Scopes:** `phone:write:admin`, `phone:write`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or enterprise Zoom account
      * * A Zoom Phone license
      */
@@ -587,7 +592,7 @@ impl Phone {
             .await
     }
     /**
-     * Batch add emergency service locations.
+     * Batch add emergency service locations
      *
      * This function performs a `POST` to the `/phone/batch_locations` endpoint.
      *
@@ -609,7 +614,7 @@ impl Phone {
             .await
     }
     /**
-     * List emergency service locations.
+     * List emergency service locations
      *
      * This function performs a `GET` to the `/phone/locations` endpoint.
      *
@@ -618,13 +623,14 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single API call.
      */
     pub async fn list_locations(
         &self,
@@ -639,9 +645,7 @@ impl Phone {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/phone/locations?{}", query_), None);
+        let url = self.client.url(&format!("/phone/locations?{query_}"), None);
         let resp: crate::Response<crate::types::ListLocationsResponseData> = self
             .client
             .get(
@@ -661,7 +665,7 @@ impl Phone {
         ))
     }
     /**
-     * List emergency service locations.
+     * List emergency service locations
      *
      * This function performs a `GET` to the `/phone/locations` endpoint.
      *
@@ -672,6 +676,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
@@ -708,7 +713,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -723,7 +728,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -745,7 +750,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, locations))
     }
     /**
-     * Add emergency service location.
+     * Add emergency service location
      *
      * This function performs a `POST` to the `/phone/locations` endpoint.
      *
@@ -754,6 +759,7 @@ impl Phone {
      * **Scopes:** `phone:write:adminRate`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
@@ -773,7 +779,7 @@ impl Phone {
             .await
     }
     /**
-     * Get emergency service location details.
+     * Get emergency service location details
      *
      * This function performs a `GET` to the `/phone/locations/{locationId}` endpoint.
      *
@@ -782,12 +788,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- The emergency service location's ID.
+     * * `location_id` -- The emergency service location's ID.
      */
     pub async fn get_location(
         &self,
@@ -811,7 +818,7 @@ impl Phone {
             .await
     }
     /**
-     * Delete an emergency location.
+     * Delete an emergency location
      *
      * This function performs a `DELETE` to the `/phone/locations/{locationId}` endpoint.
      *
@@ -820,12 +827,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- The emergency service location's ID.
+     * * `location_id` -- The emergency service location's ID.
      */
     pub async fn delete_location(&self, location_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -846,7 +854,7 @@ impl Phone {
             .await
     }
     /**
-     * Update emergency service location.
+     * Update emergency service location
      *
      * This function performs a `PATCH` to the `/phone/locations/{locationId}` endpoint.
      *
@@ -855,6 +863,7 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
@@ -881,7 +890,7 @@ impl Phone {
             .await
     }
     /**
-     * List SIP groups.
+     * List SIP groups
      *
      * This function performs a `GET` to the `/phone/sip_groups` endpoint.
      *
@@ -890,13 +899,14 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single API call.
      */
     pub async fn list_sip_groups(
         &self,
@@ -913,7 +923,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/sip_groups?{}", query_), None);
+            .url(&format!("/phone/sip_groups?{query_}"), None);
         let resp: crate::Response<crate::types::ListSipGroupsResponse> = self
             .client
             .get(
@@ -933,7 +943,7 @@ impl Phone {
         ))
     }
     /**
-     * List SIP groups.
+     * List SIP groups
      *
      * This function performs a `GET` to the `/phone/sip_groups` endpoint.
      *
@@ -944,6 +954,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
@@ -980,7 +991,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -995,7 +1006,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1017,7 +1028,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, sip_groups))
     }
     /**
-     * Get setting template details.
+     * Get setting template details
      *
      * This function performs a `GET` to the `/phone/setting_templates/{templateId}` endpoint.
      *
@@ -1026,13 +1037,14 @@ impl Phone {
      * **Scopes:** `phone:write:admin` or `phone:write`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `template_id: &str` -- Unique identifier of the template.
-     * * `custom_query_fields: &str` -- Provide the name of the field to use to filter the response. For example, if you provide "description" as the value of the field, you will get a response similar to the following: {“description”: “template description”}.
+     * * `template_id` -- Unique identifier of the template.
+     * * `custom_query_fields` -- Provide the name of the field to use to filter the response. For example, if you provide "description" as the value of the field, you will get a response similar to the following: {“description”: “template description”}.
      */
     pub async fn get_setting_template(
         &self,
@@ -1066,7 +1078,7 @@ impl Phone {
             .await
     }
     /**
-     * Update a setting template.
+     * Update a setting template
      *
      * This function performs a `PATCH` to the `/phone/setting_templates/{templateId}` endpoint.
      *
@@ -1075,12 +1087,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin` or `phone:write`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `template_id: &str` -- User's first name.
+     * * `template_id` -- User's first name.
      */
     pub async fn update_setting_template(
         &self,
@@ -1105,7 +1118,7 @@ impl Phone {
             .await
     }
     /**
-     * Get user's call logs.
+     * Get user's call logs
      *
      * This function performs a `GET` to the `/phone/users/{userId}/call_logs` endpoint.
      *
@@ -1114,19 +1127,20 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`, `phone_call_log:read`, `phone_call_log:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- Start Date.
-     * * `type_: crate::types::PhoneUserCallLogsType`
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `phone_number: &str` -- Filter API responses to include call logs of only the phone number defined in this field.
-     * * `time_type: crate::types::TimeType` -- Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `from` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- Start Date.
+     * * `type_`
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `phone_number` -- Filter API responses to include call logs of only the phone number defined in this field.
+     * * `time_type` -- Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
      */
     pub async fn user_call_logs(
         &self,
@@ -1189,7 +1203,7 @@ impl Phone {
         ))
     }
     /**
-     * Get user's call logs.
+     * Get user's call logs
      *
      * This function performs a `GET` to the `/phone/users/{userId}/call_logs` endpoint.
      *
@@ -1200,6 +1214,7 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`, `phone_call_log:read`, `phone_call_log:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
@@ -1266,7 +1281,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1281,7 +1296,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1303,7 +1318,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, call_logs))
     }
     /**
-     * Get user's recordings.
+     * Get user's recordings
      *
      * This function performs a `GET` to the `/phone/users/{userId}/recordings` endpoint.
      *
@@ -1312,16 +1327,17 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`, `phone_recording:read`, `phone_recording:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `from: chrono::NaiveDate` -- Start date for the query in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the response includes only one month worth of recording data. The month defined should fall within the last six months.
-     * * `to: chrono::NaiveDate` -- Start Date.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `from` -- Start date for the query in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the response includes only one month worth of recording data. The month defined should fall within the last six months.
+     * * `to` -- Start Date.
      */
     pub async fn user_recordings(
         &self,
@@ -1372,7 +1388,7 @@ impl Phone {
         ))
     }
     /**
-     * Get user's recordings.
+     * Get user's recordings
      *
      * This function performs a `GET` to the `/phone/users/{userId}/recordings` endpoint.
      *
@@ -1383,6 +1399,7 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`, `phone_recording:read`, `phone_recording:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
@@ -1437,7 +1454,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1452,7 +1469,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1474,7 +1491,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, recordings))
     }
     /**
-     * Get user's voicemails.
+     * Get user's voicemails
      *
      * This function performs a `GET` to the `/phone/users/{userId}/voice_mails` endpoint.
      *
@@ -1483,17 +1500,18 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`, `phone_voicemail:read`, `phone_voicemail:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `status: crate::types::PhoneUserVoiceMailsStatus` -- Status of the voice mail.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `from: chrono::NaiveDate` -- Start date for the query in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the response includes only one month worth of voicemail data. The month defined should fall within the last six months.
-     * * `to: chrono::NaiveDate` -- Start Date.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `status` -- Status of the voice mail
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `from` -- Start date for the query in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the response includes only one month worth of voicemail data. The month defined should fall within the last six months.
+     * * `to` -- Start Date.
      */
     pub async fn user_voice_mails(
         &self,
@@ -1548,7 +1566,7 @@ impl Phone {
         ))
     }
     /**
-     * Get user's voicemails.
+     * Get user's voicemails
      *
      * This function performs a `GET` to the `/phone/users/{userId}/voice_mails` endpoint.
      *
@@ -1559,6 +1577,7 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`, `phone_voicemail:read`, `phone_voicemail:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
@@ -1617,7 +1636,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1632,7 +1651,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1654,7 +1673,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, voice_mails))
     }
     /**
-     * Set up shared access.
+     * Set up shared access
      *
      * This function performs a `POST` to the `/phone/users/{userId}/settings/{settingType}` endpoint.
      *
@@ -1667,12 +1686,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- Unique identifier of the user.
-     * * `setting_type: &str` -- Corresponds to the setting item you wish to modify. Allowed values: `voice_mail`.
+     * * `user_id` -- Unique identifier of the user.
+     * * `setting_type` -- Corresponds to the setting item you wish to modify. Allowed values: `voice_mail`
      */
     pub async fn add_user_setting(
         &self,
@@ -1699,7 +1719,7 @@ impl Phone {
             .await
     }
     /**
-     * Remove shared access.
+     * Remove shared access
      *
      * This function performs a `DELETE` to the `/phone/users/{userId}/settings/{settingType}` endpoint.
      *
@@ -1710,13 +1730,14 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- Unique identifier of the user.
-     * * `setting_type: &str` -- Corresponds to the setting item you wish to remove. Allowed values: `voice_mail`.
-     * * `shared_id: &str` -- Required only for voicemail setting type.
+     * * `user_id` -- Unique identifier of the user.
+     * * `setting_type` -- Corresponds to the setting item you wish to remove. Allowed values: `voice_mail`
+     * * `shared_id` -- Required only for voicemail setting type.
      */
     pub async fn delete_user_setting(
         &self,
@@ -1749,7 +1770,7 @@ impl Phone {
             .await
     }
     /**
-     * Update shared access.
+     * Update shared access
      *
      * This function performs a `PATCH` to the `/phone/users/{userId}/settings/{settingType}` endpoint.
      *
@@ -1762,12 +1783,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      *
      * **Parameters:**
      *
-     * * `setting_type: &str` -- Corresponds to the setting item you wish to modify. Allowed values: `voice_mail`.
-     * * `user_id: &str` -- Unique identifier of the user.
+     * * `setting_type` -- Corresponds to the setting item you wish to modify. Allowed values: `voice_mail`
+     * * `user_id` -- Unique identifier of the user.
      */
     pub async fn update_user_setting(
         &self,
@@ -1794,7 +1816,7 @@ impl Phone {
             .await
     }
     /**
-     * Get account's call logs.
+     * Get account's call logs
      *
      * This function performs a `GET` to the `/phone/call_logs` endpoint.
      *
@@ -1803,24 +1825,25 @@ impl Phone {
      * **Scopes:** `phone:read:admin`, `phone_call_log:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      * * Account owner and a [role](https://support.zoom.us/hc/en-us/articles/115001078646-Role-Based-Access-Control) with Zoom Phone management
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `from: &str` -- Start date from which you would like to get the call logs. The start date should be within past six months. <br>
-     *   
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `from` -- Start date from which you would like to get the call logs. The start date should be within past six months. <br>
+     *
      *   The API only returns data pertaining to a month. Thus, the date range(defined using "from" and "to" fields) for which the call logs are to be returned must not exceed a month.
-     * * `to: &str` -- The end date upto which you would like to get the call logs for. The end date should be within past six months.
-     * * `type_: &str` -- The type of the call logs. The value can be either "all" or "missed".
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `path: &str` -- Filter the API response by [path](https://support.zoom.us/hc/en-us/articles/360021114452-Viewing-and-identifying-logs#h_646b46c6-0623-4ab1-8b8b-ea5b8bcef679) of the call. The value of this field can be one of the following: `voiceMail`, `message`, `forward`, `extension`, `callQueue`, `ivrMenu`, `companyDirectory`, `autoReceptionist`, `contactCenter`, `disconnected`, `commonAreaPhone`,
+     * * `to` -- The end date upto which you would like to get the call logs for. The end date should be within past six months.
+     * * `type_` -- The type of the call logs. The value can be either "all" or "missed".
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `path` -- Filter the API response by [path](https://support.zoom.us/hc/en-us/articles/360021114452-Viewing-and-identifying-logs#h_646b46c6-0623-4ab1-8b8b-ea5b8bcef679) of the call. The value of this field can be one of the following: `voiceMail`, `message`, `forward`, `extension`, `callQueue`, `ivrMenu`, `companyDirectory`, `autoReceptionist`, `contactCenter`, `disconnected`, `commonAreaPhone`,
      *   `pstn`, `transfer`, `sharedLines`, `sharedLineGroup`, `tollFreeBilling`, `meetingService`, `parkPickup`,
-     *   `parkTimeout`, `monitor`, `takeover`, `sipGroup`.
-     * * `time_type: crate::types::TimeType` -- Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
-     * * `site_id: &str` -- Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites). Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by call logs of a specific phone site.
+     *   `parkTimeout`, `monitor`, `takeover`, `sipGroup`
+     * * `time_type` -- Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
+     * * `site_id` -- Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites). Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by call logs of a specific phone site.
      */
     pub async fn account_call_logs(
         &self,
@@ -1859,9 +1882,7 @@ impl Phone {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/phone/call_logs?{}", query_), None);
+        let url = self.client.url(&format!("/phone/call_logs?{query_}"), None);
         let resp: crate::Response<crate::types::AccountCallLogsResponseData> = self
             .client
             .get(
@@ -1881,7 +1902,7 @@ impl Phone {
         ))
     }
     /**
-     * Get account's call logs.
+     * Get account's call logs
      *
      * This function performs a `GET` to the `/phone/call_logs` endpoint.
      *
@@ -1892,6 +1913,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`, `phone_call_log:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      * * Account owner and a [role](https://support.zoom.us/hc/en-us/articles/115001078646-Role-Based-Access-Control) with Zoom Phone management
@@ -1925,9 +1947,7 @@ impl Phone {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/phone/call_logs?{}", query_), None);
+        let url = self.client.url(&format!("/phone/call_logs?{query_}"), None);
         let crate::Response::<crate::types::AccountCallLogsResponseData> {
             mut status,
             mut headers,
@@ -1957,7 +1977,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1972,7 +1992,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1994,7 +2014,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, call_logs))
     }
     /**
-     * Assign phone number to user.
+     * Assign phone number to user
      *
      * This function performs a `POST` to the `/phone/users/{userId}/phone_numbers` endpoint.
      *
@@ -2003,6 +2023,7 @@ impl Phone {
      * **Scopes:** `phone:write`, `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
@@ -2029,7 +2050,7 @@ impl Phone {
             .await
     }
     /**
-     * Unassign phone number.
+     * Unassign phone number
      *
      * This function performs a `DELETE` to the `/phone/users/{userId}/phone_numbers/{phoneNumberId}` endpoint.
      *
@@ -2040,14 +2061,15 @@ impl Phone {
      * **Scopes:** `phone:write`, `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      * * The user must have been previously assigned a Zoom Phone number
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- Provide either userId or email address of the user.
-     * * `phone_number_id: &str` -- Provide either phone number or phoneNumberId of the user. .
+     * * `user_id` -- Provide either userId or email address of the user.
+     * * `phone_number_id` -- Provide either phone number or phoneNumberId of the user.
      */
     pub async fn unassign_number(
         &self,
@@ -2073,7 +2095,7 @@ impl Phone {
             .await
     }
     /**
-     * Assign calling plan to a user.
+     * Assign calling plan to a user
      *
      * This function performs a `POST` to the `/phone/users/{userId}/calling_plans` endpoint.
      *
@@ -2082,6 +2104,7 @@ impl Phone {
      * **Scopes:** `phone:write`, `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
@@ -2108,7 +2131,7 @@ impl Phone {
             .await
     }
     /**
-     * Unassign user's calling plan.
+     * Unassign user's calling plan
      *
      * This function performs a `DELETE` to the `/phone/users/{userId}/calling_plans/{type}` endpoint.
      *
@@ -2117,13 +2140,13 @@ impl Phone {
      * **Scopes:** `phone:write`, `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `type_: &str` -- The [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of the calling plan that was assigned to user. (e.g: The value of type would be "200" for Unlimited US/Canada calling plan.)
-     *   .
+     * * `type_` -- The [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of the calling plan that was assigned to user. (e.g: The value of type would be "200" for Unlimited US/Canada calling plan.)
      */
     pub async fn unassign_calling_plan(
         &self,
@@ -2149,7 +2172,7 @@ impl Phone {
             .await
     }
     /**
-     * Get call recordings.
+     * Get call recordings
      *
      * This function performs a `GET` to the `/phone/recordings` endpoint.
      *
@@ -2158,25 +2181,21 @@ impl Phone {
      * **Scopes:** `phone:read:admin`, `phone:write:admin`,`phone_recording:read:admin`
      *
      * **Prerequisties:**
+     *
      * * A Pro or higher account plan
      * * A Zoom Phone license
      * * Account owner or admin privileges
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The number of records returned within a single API call. The default is **30**, and the maximum is **100**.
-     * * `next_page_token: &str` -- The current page number of returned records.
-     * * `from: &str` -- Start date and time in **yyyy-mm-dd** format or **yyyy-MM-dd’T’HH:mm:ss’Z’** format. The date range defined by the from and to parameters should only be one month as the report includes only one month worth of data at once.
-     *   .
-     * * `to: &str` -- End date and time in **yyyy-mm-dd** format or **yyyy-MM-dd’T’HH:mm:ss’Z’** format, the same formats supported by the `from` parameter.
-     *   
-     *   .
-     * * `owner_type: &str` -- The owner type. The allowed values are null, `user`, or `callQueue`. The default is null. If null, returns all owner types.
-     *   .
-     * * `recording_type: &str` -- The recording type. The allowed values are null, `OnDemand`, or `Automatic`. The default is null. If null, returns all recording types.
-     *   .
-     * * `site_id: &str` -- The site ID. The default is `All sites`.
-     * * `query_date_type: crate::types::QueryDateType` -- Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
+     * * `page_size` -- The number of records returned within a single API call. The default is **30**, and the maximum is **100**.
+     * * `next_page_token` -- The current page number of returned records.
+     * * `from` -- Start date and time in **yyyy-mm-dd** format or **yyyy-MM-dd’T’HH:mm:ss’Z’** format. The date range defined by the from and to parameters should only be one month as the report includes only one month worth of data at once.
+     * * `to` -- End date and time in **yyyy-mm-dd** format or **yyyy-MM-dd’T’HH:mm:ss’Z’** format, the same formats supported by the `from` parameter.
+     * * `owner_type` -- The owner type. The allowed values are null, `user`, or `callQueue`. The default is null. If null, returns all owner types.
+     * * `recording_type` -- The recording type. The allowed values are null, `OnDemand`, or `Automatic`. The default is null. If null, returns all recording types.
+     * * `site_id` -- The site ID. The default is `All sites`.
+     * * `query_date_type` -- Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
      */
     pub async fn get_recordings(
         &self,
@@ -2217,7 +2236,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/recordings?{}", query_), None);
+            .url(&format!("/phone/recordings?{query_}"), None);
         let resp: crate::Response<crate::types::GetPhoneRecordingsResponseData> = self
             .client
             .get(
@@ -2237,7 +2256,7 @@ impl Phone {
         ))
     }
     /**
-     * Get call recordings.
+     * Get call recordings
      *
      * This function performs a `GET` to the `/phone/recordings` endpoint.
      *
@@ -2248,6 +2267,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`, `phone:write:admin`,`phone_recording:read:admin`
      *
      * **Prerequisties:**
+     *
      * * A Pro or higher account plan
      * * A Zoom Phone license
      * * Account owner or admin privileges
@@ -2283,7 +2303,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/recordings?{}", query_), None);
+            .url(&format!("/phone/recordings?{query_}"), None);
         let crate::Response::<crate::types::GetPhoneRecordingsResponseData> {
             mut status,
             mut headers,
@@ -2313,7 +2333,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2328,7 +2348,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2350,7 +2370,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, recordings))
     }
     /**
-     * List BYOC SIP trunks.
+     * List BYOC SIP trunks
      *
      * This function performs a `GET` to the `/phone/sip_trunk/trunks` endpoint.
      *
@@ -2359,12 +2379,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin` or `phone:master`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      *
      * **Parameters:**
      *
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single API call.
      */
     pub async fn list_byocsip_trunk(
         &self,
@@ -2381,7 +2402,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/sip_trunk/trunks?{}", query_), None);
+            .url(&format!("/phone/sip_trunk/trunks?{query_}"), None);
         let resp: crate::Response<crate::types::ListByocsipTrunkResponse> = self
             .client
             .get(
@@ -2401,7 +2422,7 @@ impl Phone {
         ))
     }
     /**
-     * List BYOC SIP trunks.
+     * List BYOC SIP trunks
      *
      * This function performs a `GET` to the `/phone/sip_trunk/trunks` endpoint.
      *
@@ -2412,6 +2433,7 @@ impl Phone {
      * **Scopes:** `phone:write:admin` or `phone:master`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      */
     pub async fn list_all_byocsip_trunk(
@@ -2447,7 +2469,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2462,7 +2484,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2484,7 +2506,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, byoc_sip_trunk))
     }
     /**
-     * Assign SIP trunks.
+     * Assign SIP trunks
      *
      * This function performs a `POST` to the `/accounts/{accountId}/phone/sip_trunk/trunks` endpoint.
      *
@@ -2493,11 +2515,12 @@ impl Phone {
      * **Scopes:** `phone:master`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique identifier of the account.
+     * * `account_id` -- Unique identifier of the account.
      */
     pub async fn post_sip_trunk(
         &self,
@@ -2522,7 +2545,7 @@ impl Phone {
             .await
     }
     /**
-     * Update SIP trunk details.
+     * Update SIP trunk details
      *
      * This function performs a `PATCH` to the `/accounts/{accountId}/phone/sip_trunk/trunks/{sipTrunkId}` endpoint.
      *
@@ -2531,12 +2554,13 @@ impl Phone {
      * **Scopes:** `phone:master` <br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      *
      * **Parameters:**
      *
-     * * `sip_trunk_id: &str` -- Unique identifier of the SIP trunk.
-     * * `account_id: &str` -- Unique identifier of the sub account.
+     * * `sip_trunk_id` -- Unique identifier of the SIP trunk.
+     * * `account_id` -- Unique identifier of the sub account.
      */
     pub async fn update_sip_trunk(
         &self,
@@ -2563,7 +2587,7 @@ impl Phone {
             .await
     }
     /**
-     * List external contacts.
+     * List external contacts
      *
      * This function performs a `GET` to the `/phone/external_contacts` endpoint.
      *
@@ -2572,13 +2596,14 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The number of records returned within a single API call.
      */
     pub async fn list_external_contacts(
         &self,
@@ -2595,7 +2620,7 @@ impl Phone {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/external_contacts?{}", query_), None);
+            .url(&format!("/phone/external_contacts?{query_}"), None);
         let resp: crate::Response<crate::types::ListExternalContactsResponse> = self
             .client
             .get(
@@ -2615,7 +2640,7 @@ impl Phone {
         ))
     }
     /**
-     * List external contacts.
+     * List external contacts
      *
      * This function performs a `GET` to the `/phone/external_contacts` endpoint.
      *
@@ -2626,6 +2651,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
@@ -2662,7 +2688,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2677,7 +2703,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -2699,7 +2725,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, external_contacts))
     }
     /**
-     * Add an external contact.
+     * Add an external contact
      *
      * This function performs a `POST` to the `/phone/external_contacts` endpoint.
      *
@@ -2708,6 +2734,7 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
@@ -2727,7 +2754,7 @@ impl Phone {
             .await
     }
     /**
-     * Get external contact details.
+     * Get external contact details
      *
      * This function performs a `GET` to the `/phone/external_contacts/{externalContactId}` endpoint.
      *
@@ -2736,12 +2763,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions<br>
      *
      * **Parameters:**
      *
-     * * `external_contact_id: &str` -- The external contact's ID.
+     * * `external_contact_id` -- The external contact's ID.
      */
     pub async fn get_external_contact(
         &self,
@@ -2765,7 +2793,7 @@ impl Phone {
             .await
     }
     /**
-     * Delete an external contact.
+     * Delete an external contact
      *
      * This function performs a `DELETE` to the `/phone/external_contacts/{externalContactId}` endpoint.
      *
@@ -2774,12 +2802,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `external_contact_id: &str` -- The external contact's ID.
+     * * `external_contact_id` -- The external contact's ID.
      */
     pub async fn delete_external_contact(
         &self,
@@ -2803,7 +2832,7 @@ impl Phone {
             .await
     }
     /**
-     * Update external contact.
+     * Update external contact
      *
      * This function performs a `PATCH` to the `/phone/external_contacts/{externalContactId}` endpoint.
      *
@@ -2812,12 +2841,13 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `external_contact_id: &str` -- User's first name.
+     * * `external_contact_id` -- External contact ID.
      */
     pub async fn update_external_contact(
         &self,
@@ -2842,7 +2872,7 @@ impl Phone {
             .await
     }
     /**
-     * Get phone number details.
+     * Get phone number details
      *
      * This function performs a `GET` to the `/phone/numbers/{numberId}` endpoint.
      *
@@ -2851,12 +2881,13 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account plan
      * * A Zoom phone license
      *
      * **Parameters:**
      *
-     * * `number_id: &str` -- Unique Identifier of the Phone Number. This can be retrieved from the List Phone Numbers API.
+     * * `number_id` -- Unique Identifier of the Phone Number. This can be retrieved from the List Phone Numbers API.
      */
     pub async fn get_number_details(
         &self,
@@ -2880,7 +2911,7 @@ impl Phone {
             .await
     }
     /**
-     * Update phone number details.
+     * Update phone number details
      *
      * This function performs a `PATCH` to the `/phone/numbers/{numberId}` endpoint.
      *
@@ -2889,11 +2920,12 @@ impl Phone {
      * **Scopes:** `phone:write`, `phone:write:admin`, `phone:master`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Paid account
      *
      * **Parameters:**
      *
-     * * `number_id: &str` -- User's first name.
+     * * `number_id` -- User's first name.
      */
     pub async fn update_number_details(
         &self,
@@ -2918,7 +2950,7 @@ impl Phone {
             .await
     }
     /**
-     * Change main company number.
+     * Change main company number
      *
      * This function performs a `PUT` to the `/phone/company_number` endpoint.
      *
@@ -2929,6 +2961,7 @@ impl Phone {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account plan
      * * Account owner or admin permissions
      */
@@ -2948,7 +2981,7 @@ impl Phone {
             .await
     }
     /**
-     * List calling plans.
+     * List calling plans
      *
      * This function performs a `GET` to the `/phone/calling_plans` endpoint.
      *
@@ -2957,6 +2990,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * A Pro or a higher account
      * * A Zoom Phone license
      */
@@ -2975,7 +3009,7 @@ impl Phone {
             .await
     }
     /**
-     * List phone users.
+     * List phone users
      *
      * This function performs a `GET` to the `/phone/users` endpoint.
      *
@@ -2984,14 +3018,15 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account plan
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The number of records returned from a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `site_id: &str` -- Unique Identifier of the site. This can be retrieved from the [List Phone Sites](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone-site/listphonesites) API.
+     * * `page_size` -- The number of records returned from a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `site_id` -- Unique Identifier of the site. This can be retrieved from the [List Phone Sites](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone-site/listphonesites) API.
      */
     pub async fn list_users(
         &self,
@@ -3010,7 +3045,7 @@ impl Phone {
             query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/phone/users?{}", query_), None);
+        let url = self.client.url(&format!("/phone/users?{query_}"), None);
         let resp: crate::Response<crate::types::ListPhoneUsersResponseData> = self
             .client
             .get(
@@ -3030,7 +3065,7 @@ impl Phone {
         ))
     }
     /**
-     * List phone users.
+     * List phone users
      *
      * This function performs a `GET` to the `/phone/users` endpoint.
      *
@@ -3041,6 +3076,7 @@ impl Phone {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account plan
      * * A Zoom Phone license
      */
@@ -3053,7 +3089,7 @@ impl Phone {
             query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/phone/users?{}", query_), None);
+        let url = self.client.url(&format!("/phone/users?{query_}"), None);
         let crate::Response::<crate::types::ListPhoneUsersResponseData> {
             mut status,
             mut headers,
@@ -3083,7 +3119,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -3098,7 +3134,7 @@ impl Phone {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -3120,7 +3156,7 @@ impl Phone {
         Ok(crate::Response::new(status, headers, users))
     }
     /**
-     * Get call log details.
+     * Get call log details
      *
      * This function performs a `GET` to the `/phone/call_logs/{callLogId}` endpoint.
      *
@@ -3129,12 +3165,13 @@ impl Phone {
      * **Scopes:** `phone:read`, `phone:read:admin`, `phone_call_log:read`, `phone_call_log:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise account
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `call_log_id: &str` -- Unique identifier of the call log. Both `callLogId` and `callId` can be used as path parameters. The value for this field can be retrieved from [account's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/accountcalllogs) or the [user's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneusercalllogs).
+     * * `call_log_id` -- Unique identifier of the call log. Both `callLogId` and `callId` can be used as path parameters. The value for this field can be retrieved from [account's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/accountcalllogs) or the [user's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneusercalllogs).
      */
     pub async fn get_call_log_details(
         &self,
@@ -3158,7 +3195,7 @@ impl Phone {
             .await
     }
     /**
-     * Delete a user's call log.
+     * Delete a user's call log
      *
      * This function performs a `DELETE` to the `/phone/users/{userId}/call_logs/{callLogId}` endpoint.
      *
@@ -3167,13 +3204,14 @@ impl Phone {
      * **Scopes:** `phone:write`, `phone:write:admin`, `phone_call_log:write`, `phone_call_log:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * User must belong to a Business or Enterprise account
      * * User must have a Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user.
-     * * `call_log_id: &str` -- Unique identifier of the call log. The value for this field can be retrieved from [account's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/accountcalllogs) or [user's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneusercalllogs).
+     * * `user_id` -- The user ID or email address of the user.
+     * * `call_log_id` -- Unique identifier of the call log. The value for this field can be retrieved from [account's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/accountcalllogs) or [user's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneusercalllogs).
      */
     pub async fn delete_call_log(
         &self,
@@ -3199,7 +3237,7 @@ impl Phone {
             .await
     }
     /**
-     * Add BYOC phone numbers.
+     * Add BYOC phone numbers
      *
      * This function performs a `POST` to the `/phone/byoc_numbers` endpoint.
      *
@@ -3208,6 +3246,7 @@ impl Phone {
      * **Scopes:** `phone:write:admin`, `phone:write`, or `phone:master`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Business or Enterprise plan
      * * A Zoom Phone license
      */
@@ -3227,7 +3266,7 @@ impl Phone {
             .await
     }
     /**
-     * Delete a voicemail.
+     * Delete a voicemail
      *
      * This function performs a `DELETE` to the `/phone/voice_mails/{voicemailId}` endpoint.
      *
@@ -3236,11 +3275,12 @@ impl Phone {
      * **Scopes:** `phone:write:admin`, `phone:write`, `phone_voicemail:write`, `phone_voicemail:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Zoom Phone license
      *
      * **Parameters:**
      *
-     * * `voicemail_id: &str` -- Unique identifier of the voicemail. Retrieve the value for this field by calling the [Get voicemails](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneuservoicemails) API.
+     * * `voicemail_id` -- Unique identifier of the voicemail. Retrieve the value for this field by calling the [Get voicemails](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneuservoicemails) API.
      */
     pub async fn delete_voicemail(&self, voicemail_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

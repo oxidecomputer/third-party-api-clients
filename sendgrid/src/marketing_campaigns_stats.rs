@@ -12,7 +12,7 @@ impl MarketingCampaignsStats {
     }
 
     /**
-     * Get All Automation Stats.
+     * Get All Automation Stats
      *
      * This function performs a `GET` to the `/marketing/stats/automations` endpoint.
      *
@@ -26,9 +26,9 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `automation_ids: &[String]` -- This endpoint returns all automation IDs if no `automation_ids` are specified.
-     * * `page_size: i64` -- The number of elements you want returned on each page.
-     * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
+     * * `automation_ids` -- This endpoint returns all automation IDs if no `automation_ids` are specified.
+     * * `page_size` -- The number of elements you want returned on each page.
+     * * `page_token` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
      */
     pub async fn getall_automation_stats(
         &self,
@@ -49,7 +49,7 @@ impl MarketingCampaignsStats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/marketing/stats/automations?{}", query_), None);
+            .url(&format!("/marketing/stats/automations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -61,7 +61,7 @@ impl MarketingCampaignsStats {
             .await
     }
     /**
-     * Get Automation Stats by ID.
+     * Get Automation Stats by ID
      *
      * This function performs a `GET` to the `/marketing/stats/automations/{id}` endpoint.
      *
@@ -73,14 +73,14 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `group_by: &[String]` -- Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.
-     * * `step_ids: &[String]` -- The recipient IDs of the recipients that already existed from this request.
-     * * `aggregated_by: crate::types::AggregatedBy` -- Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
-     * * `start_date: chrono::NaiveDate` -- Format: `YYYY-MM-DD`. If this parameter is included, the stats' start date is included in the search.
-     * * `end_date: chrono::NaiveDate` -- Format: `YYYY-MM-DD`.If this parameter is included, the stats' end date is included in the search.
-     * * `timezone: &str` -- [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented, e.g., "America/Chicago".
-     * * `page_size: i64` -- The number of elements you want returned on each page.
-     * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
+     * * `group_by` -- Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.
+     * * `step_ids` -- The recipient IDs of the recipients that already existed from this request.
+     * * `aggregated_by` -- Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
+     * * `start_date` -- Format: `YYYY-MM-DD`. If this parameter is included, the stats' start date is included in the search.
+     * * `end_date` -- Format: `YYYY-MM-DD`.If this parameter is included, the stats' end date is included in the search.
+     * * `timezone` -- [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented, e.g., "America/Chicago".
+     * * `page_size` -- The number of elements you want returned on each page.
+     * * `page_token` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
      */
     pub async fn get_automation_stat(
         &self,
@@ -139,7 +139,7 @@ impl MarketingCampaignsStats {
             .await
     }
     /**
-     * Get All Single Sends Stats.
+     * Get All Single Sends Stats
      *
      * This function performs a `GET` to the `/marketing/stats/singlesends` endpoint.
      *
@@ -153,9 +153,9 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `singlesend_ids: &[String]` -- This endpoint returns all Single Send IDs if no IDs are included in `singlesend_ids`.
-     * * `page_size: i64` -- The number of elements you want returned on each page.
-     * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
+     * * `singlesend_ids` -- This endpoint returns all Single Send IDs if no IDs are included in `singlesend_ids`.
+     * * `page_size` -- The number of elements you want returned on each page.
+     * * `page_token` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
      */
     pub async fn getall_singlesend_stats(
         &self,
@@ -176,7 +176,7 @@ impl MarketingCampaignsStats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/marketing/stats/singlesends?{}", query_), None);
+            .url(&format!("/marketing/stats/singlesends?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -188,7 +188,7 @@ impl MarketingCampaignsStats {
             .await
     }
     /**
-     * Get Single Send Stats by ID.
+     * Get Single Send Stats by ID
      *
      * This function performs a `GET` to the `/marketing/stats/singlesends/{id}` endpoint.
      *
@@ -200,13 +200,13 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `aggregated_by: crate::types::AggregatedBy` -- Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
-     * * `start_date: chrono::NaiveDate` -- Format: `YYYY-MM-DD`. If this parameter is included, the stats' start date is included in the search.
-     * * `end_date: chrono::NaiveDate` -- Format: `YYYY-MM-DD`.If this parameter is included, the stats' end date is included in the search.
-     * * `timezone: &str` -- [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented, e.g., "America/Chicago".
-     * * `page_size: i64` -- The number of elements you want returned on each page.
-     * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
-     * * `group_by: &[String]` -- A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.
+     * * `aggregated_by` -- Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
+     * * `start_date` -- Format: `YYYY-MM-DD`. If this parameter is included, the stats' start date is included in the search.
+     * * `end_date` -- Format: `YYYY-MM-DD`.If this parameter is included, the stats' end date is included in the search.
+     * * `timezone` -- [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented, e.g., "America/Chicago".
+     * * `page_size` -- The number of elements you want returned on each page.
+     * * `page_token` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
+     * * `group_by` -- A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.
      */
     pub async fn get_singlesend_stat(
         &self,
@@ -261,7 +261,7 @@ impl MarketingCampaignsStats {
             .await
     }
     /**
-     * Get Automation Click Tracking Stats by ID.
+     * Get Automation Click Tracking Stats by ID
      *
      * This function performs a `GET` to the `/marketing/stats/automations/{id}/links` endpoint.
      *
@@ -275,10 +275,10 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `group_by: &[String]` -- Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.
-     * * `step_ids: &[String]` -- The recipient IDs of the recipients that already existed from this request.
-     * * `page_size: i64` -- The number of elements you want returned on each page.
-     * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
+     * * `group_by` -- Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.
+     * * `step_ids` -- The recipient IDs of the recipients that already existed from this request.
+     * * `page_size` -- The number of elements you want returned on each page.
+     * * `page_token` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
      */
     pub async fn get_automation_link_stat(
         &self,
@@ -321,7 +321,7 @@ impl MarketingCampaignsStats {
             .await
     }
     /**
-     * Get Single Send Click Tracking Stats by ID.
+     * Get Single Send Click Tracking Stats by ID
      *
      * This function performs a `GET` to the `/marketing/stats/singlesends/{id}/links` endpoint.
      *
@@ -335,11 +335,11 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The number of elements you want returned on each page.
-     * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
-     * * `group_by: &[String]` -- A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.
-     * * `ab_variation_id: &str` -- The license key provided with your New Relic account.
-     * * `ab_phase_id: crate::types::AbPhaseId`
+     * * `page_size` -- The number of elements you want returned on each page.
+     * * `page_token` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
+     * * `group_by` -- A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.
+     * * `ab_variation_id` -- The license key provided with your New Relic account.
+     * * `ab_phase_id`
      */
     pub async fn get_singlesend_link_stat(
         &self,
@@ -386,7 +386,7 @@ impl MarketingCampaignsStats {
             .await
     }
     /**
-     * Export Single Send Stats.
+     * Export Single Send Stats
      *
      * This function performs a `GET` to the `/marketing/stats/singlesends/export` endpoint.
      *
@@ -398,8 +398,8 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `ids: &[String]` -- The recipient IDs of the recipients that already existed from this request.
-     * * `timezone: &str` -- The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `"America/Chicago"`. This parameter changes the timezone format only; it does not alter which stats are returned.
+     * * `ids` -- The recipient IDs of the recipients that already existed from this request.
+     * * `timezone` -- The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `"America/Chicago"`. This parameter changes the timezone format only; it does not alter which stats are returned.
      */
     pub async fn get_singlesend_stats_export(
         &self,
@@ -415,7 +415,7 @@ impl MarketingCampaignsStats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/marketing/stats/singlesends/export?{}", query_),
+            &format!("/marketing/stats/singlesends/export?{query_}"),
             None,
         );
         self.client
@@ -429,7 +429,7 @@ impl MarketingCampaignsStats {
             .await
     }
     /**
-     * Export Automation Stats.
+     * Export Automation Stats
      *
      * This function performs a `GET` to the `/marketing/stats/automations/export` endpoint.
      *
@@ -441,8 +441,8 @@ impl MarketingCampaignsStats {
      *
      * **Parameters:**
      *
-     * * `ids: &[String]` -- The recipient IDs of the recipients that already existed from this request.
-     * * `timezone: &str` -- The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `"America/Chicago"`. This parameter changes the timezone format only; it does not alter which stats are returned.
+     * * `ids` -- The recipient IDs of the recipients that already existed from this request.
+     * * `timezone` -- The [IANA Area/Region](https://en.wikipedia.org/wiki/Tz_database#Names_of_time_zones) string representing the timezone in which the stats are to be presented; i.e. `"America/Chicago"`. This parameter changes the timezone format only; it does not alter which stats are returned.
      */
     pub async fn get_automations_stats_export(
         &self,
@@ -458,7 +458,7 @@ impl MarketingCampaignsStats {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/marketing/stats/automations/export?{}", query_),
+            &format!("/marketing/stats/automations/export?{query_}"),
             None,
         );
         self.client

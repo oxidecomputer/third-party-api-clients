@@ -12,7 +12,7 @@ impl ContactsApiCustomFields {
     }
 
     /**
-     * Retrieve all custom fields.
+     * Retrieve all custom fields
      *
      * This function performs a `GET` to the `/contactdb/custom_fields` endpoint.
      *
@@ -20,7 +20,7 @@ impl ContactsApiCustomFields {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_custom_fields(
         &self,
@@ -37,7 +37,7 @@ impl ContactsApiCustomFields {
             .await
     }
     /**
-     * Create a Custom Field.
+     * Create a Custom Field
      *
      * This function performs a `POST` to the `/contactdb/custom_fields` endpoint.
      *
@@ -47,7 +47,7 @@ impl ContactsApiCustomFields {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_contactdb_custom_field(
         &self,
@@ -65,7 +65,7 @@ impl ContactsApiCustomFields {
             .await
     }
     /**
-     * Retrieve a Custom Field.
+     * Retrieve a Custom Field
      *
      * This function performs a `GET` to the `/contactdb/custom_fields/{custom_field_id}` endpoint.
      *
@@ -73,7 +73,7 @@ impl ContactsApiCustomFields {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_custom_fields_field(
         &self,
@@ -97,7 +97,7 @@ impl ContactsApiCustomFields {
             .await
     }
     /**
-     * Delete a Custom Field.
+     * Delete a Custom Field
      *
      * This function performs a `DELETE` to the `/contactdb/custom_fields/{custom_field_id}` endpoint.
      *
@@ -105,7 +105,7 @@ impl ContactsApiCustomFields {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_custom_fields_field(
         &self,
@@ -129,7 +129,7 @@ impl ContactsApiCustomFields {
             .await
     }
     /**
-     * Retrieve reserved fields.
+     * Retrieve reserved fields
      *
      * This function performs a `GET` to the `/contactdb/reserved_fields` endpoint.
      *
@@ -137,7 +137,7 @@ impl ContactsApiCustomFields {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_reserved_fields(
         &self,

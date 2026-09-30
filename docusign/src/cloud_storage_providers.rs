@@ -18,16 +18,13 @@ impl CloudStorageProviders {
      *
      * Retrieves the list of cloud storage providers enabled for the account and the configuration information for the user.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `redirect_url: &str` --  The URL the user is redirected to after the cloud storage provider authenticates the user. Using this will append the redirectUrl to the authenticationUrl.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `redirect_url` -- The URL the user is redirected to after the cloud storage provider authenticates the user. Using this will append the redirectUrl to the authenticationUrl.
+     *
      *   The redirectUrl is restricted to URLs in the docusign.com or docusign.net domains.
-     *    .
      */
     pub async fn cloud_storage_get_provider(
         &self,
@@ -68,9 +65,8 @@ impl CloudStorageProviders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn cloud_storage_post(
         &self,
@@ -105,9 +101,8 @@ impl CloudStorageProviders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn cloud_storage_delete_providers(
         &self,
@@ -142,16 +137,14 @@ impl CloudStorageProviders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `service_id: &str` -- The ID of the service to access.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `service_id` -- The ID of the service to access.
+     *
      *   Valid values are the service name ("Box") or the numerical serviceId ("4136").
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
-     * * `redirect_url: &str` --  The URL the user is redirected to after the cloud storage provider authenticates the user. Using this will append the redirectUrl to the authenticationUrl.
-     *   
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
+     * * `redirect_url` -- The URL the user is redirected to after the cloud storage provider authenticates the user. Using this will append the redirectUrl to the authenticationUrl.
+     *
      *   The redirectUrl is restricted to URLs in the docusign.com or docusign.net domains.
-     *    .
      */
     pub async fn cloud_storage_get(
         &self,
@@ -194,12 +187,11 @@ impl CloudStorageProviders {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `service_id: &str` -- The ID of the service to access.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `service_id` -- The ID of the service to access.
+     *
      *   Valid values are the service name ("Box") or the numerical serviceId ("4136").
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn cloud_storage_delete(
         &self,

@@ -12,18 +12,20 @@ impl SipConnectedAudio {
     }
 
     /**
-     * List SIP trunk numbers.
+     * List SIP trunk numbers
      *
      * This function performs a `GET` to the `/sip_trunk/numbers` endpoint.
      *
      * With SIP-connected audio, Zoom establishes a SIP trunk (a network connection specifically designed to make and deliver phone calls) over a direct and private connection between the customer’s network and the Zoom cloud. Meeting participants that dial into a meeting or have the meeting call them, and are On-Net from the perspective of the customers' IP telephony network, will be connected over this trunk rather than over the PSTN. <br><br>Use this API to list all the numbers that are configured for SIP Connected Audio in a Zoom Account.
      *
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with SIP Connected Audio plan enabled.
      * * The account must be a master account<br>
+     *
      * **Scopes:** `sip_trunk:master`
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn list_sip_trunk_numbers(
         &self,
@@ -40,7 +42,7 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Assign SIP trunk configuration.
+     * Assign SIP trunk configuration
      *
      * This function performs a `PATCH` to the `/accounts/{accountId}/sip_trunk/settings` endpoint.
      *
@@ -51,6 +53,7 @@ impl SipConnectedAudio {
      * **Scopes:** `sip_trunk:master`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Pro or a higher account with SIP Connected Audio plan enabled.
      * * A Master account owner
      */
@@ -77,22 +80,23 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Assign numbers.
+     * Assign numbers
      *
      * This function performs a `POST` to the `/accounts/{accountId}/sip_trunk/numbers` endpoint.
      *
      * With SIP-connected audio, Zoom establishes a SIP trunk (a network connection specifically designed to make and deliver phone calls) over a direct and private connection between the customer’s network and the Zoom cloud. Meeting participants that dial into a meeting or have the meeting call them, and are On-Net from the perspective of the customers' IP telephony network, will be connected over this trunk rather than over the PSTN. <br><br>Use this API to assign internal numbers to a sub account.
      *
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with SIP Connected Audio plan enabled.
      * * The account must be a master account<br>
-     * **Scopes:** `sip_trunk:master`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
+     * **Scopes:** `sip_trunk:master`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique Identifier of the sub account.
+     * * `account_id` -- Unique Identifier of the sub account.
      */
     pub async fn assign_sip_trunk_numbers(
         &self,
@@ -117,7 +121,7 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Delete all numbers.
+     * Delete all numbers
      *
      * This function performs a `DELETE` to the `/accounts/{accountId}/sip_trunk/numbers` endpoint.
      *
@@ -126,12 +130,13 @@ impl SipConnectedAudio {
      *
      * * Pro or a higher account with SIP Connected Audio plan enabled.
      * * The account must be a master account<br>
+     *
      * **Scopes:** `sip_trunk:master`<br>
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Account ID of the sub account from which the numbers are to be deleted. This can be retrieved from [List sub accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/account) API.
+     * * `account_id` -- Account ID of the sub account from which the numbers are to be deleted. This can be retrieved from [List sub accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/account) API.
      */
     pub async fn delete_all_sip_numbers(
         &self,
@@ -155,18 +160,19 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * List SIP trunks.
+     * List SIP trunks
      *
      * This function performs a `GET` to the `/accounts/{accountId}/sip_trunk/trunks` endpoint.
      *
      * With SIP-connected audio, Zoom establishes a SIP trunk (a network connection specifically designed to make and deliver phone calls) over a direct and private connection between the customer’s network and the Zoom cloud. Meeting participants that dial into a meeting or have the meeting call them, and are On-Net from the perspective of the customers’ IP telephony network, will be connected over this trunk rather than over the PSTN.<br><br>
      * Use this API to list all the SIP trunks assigned to a master account or a sub account of the master account. To retrieve SIP trunks assigned to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To retrieve SIP trunks of a master account, provide `me` as the value of the `accountId` path parameter. <br><br> **Scope:** `sip_trunk:read:admin`
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account must either be a master account or a sub account with [API Partner Plan](https://zoom.us/plan/api) and SIP Connected Audio Plan.
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique Identifier of the Account. To retrieve SIP trunks assigned to a sub account, provide the account ID of the sub account in the as the value of this field. To retrieve SIP trunks of a master account, provide `me` as the value of this field.
+     * * `account_id` -- Unique Identifier of the Account. To retrieve SIP trunks assigned to a sub account, provide the account ID of the sub account in the as the value of this field. To retrieve SIP trunks of a master account, provide `me` as the value of this field.
      */
     pub async fn list_sip_trunk(
         &self,
@@ -190,17 +196,19 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Assign SIP trunks.
+     * Assign SIP trunks
      *
      * This function performs a `POST` to the `/accounts/{accountId}/sip_trunk/trunks` endpoint.
      *
      * With SIP-connected audio, Zoom establishes a SIP trunk (a network connection specifically designed to make and deliver phone calls) over a direct and private connection between the customer’s network and the Zoom cloud. Meeting participants that dial into a meeting or have the meeting call them, and are On-Net from the perspective of the customers’ IP telephony network, will be connected over this trunk rather than over the PSTN.<br><br>Use this API to assign SIP trunk(s) that are available on a master account to a sub account. <br><b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a master account with [API Partner Plan](https://zoom.us/plan/api) and SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique Identifier of the sub account.
+     * * `account_id` -- Unique Identifier of the sub account.
      */
     pub async fn assign_sip_trunks(
         &self,
@@ -225,19 +233,21 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Delete a SIP trunk.
+     * Delete a SIP trunk
      *
      * This function performs a `DELETE` to the `/accounts/{accountId}/sip_trunk/trunks/{trunkId}` endpoint.
      *
      * Use this API to remove existing SIP trunk of a sub account.<br>
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a master account with [API Partner Plan](https://zoom.us/plan/api) and SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique identifier of the sub account.
-     * * `trunk_id: &str` -- Unique identifier of the SIP Trunk that was previously assigned to a sub account. To retrieve the value of this field, use the List SIP Trunks API.
+     * * `account_id` -- Unique identifier of the sub account.
+     * * `trunk_id` -- Unique identifier of the SIP Trunk that was previously assigned to a sub account. To retrieve the value of this field, use the List SIP Trunks API.
      */
     pub async fn delete_sip_trunk(
         &self,
@@ -263,18 +273,20 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * List internal call-out countries.
+     * List internal call-out countries
      *
      * This function performs a `GET` to the `/accounts/{accountId}/sip_trunk/callout_countries` endpoint.
      *
      * Retrieve the list of internal [call-out](https://support.zoom.us/hc/en-us/articles/200942859-How-To-Use-Telephone-Call-Out-) countries of a master account or a sub account. To list call-out enabled countries of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list call-out enabled countries of a master account, provide `me` as the value of the `accountId` path parameter.
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique identifier of the account. To list Call-out enabled countries to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list Call-out enabled countries of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list Call-out enabled countries of a master account, provide `me` as the value of the `accountId` path parameter.
+     * * `account_id` -- Unique identifier of the account. To list Call-out enabled countries to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list Call-out enabled countries of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list Call-out enabled countries of a master account, provide `me` as the value of the `accountId` path parameter.
      */
     pub async fn list_internal_callout_countries(
         &self,
@@ -298,18 +310,20 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Add internal call-out countries.
+     * Add internal call-out countries
      *
      * This function performs a `POST` to the `/accounts/{accountId}/sip_trunk/callout_countries` endpoint.
      *
      * Specify the list of [call-out](https://support.zoom.us/hc/en-us/articles/200942859-How-To-Use-Telephone-Call-Out-) countries for a master account or a sub account. To add call-out enabled countries to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To add call-out enabled countries to a master account, provide `me` as the value of the `accountId` path parameter.
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique identifier of the account. To add Call-out enabled countries to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To add Call-out enabled countries to a master account, provide `me` as the value of the `accountId` path parameter.
+     * * `account_id` -- Unique identifier of the account. To add Call-out enabled countries to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To add Call-out enabled countries to a master account, provide `me` as the value of the `accountId` path parameter.
      */
     pub async fn add_callout_countries(
         &self,
@@ -334,20 +348,22 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Delete internal call-out country.
+     * Delete internal call-out country
      *
      * This function performs a `DELETE` to the `/accounts/{accountId}/sip_trunk/callout_countries/{countryId}` endpoint.
      *
      * Delete a previously assigned [call-out](https://support.zoom.us/hc/en-us/articles/200942859-How-To-Use-Telephone-Call-Out-) country from a master account or a sub account. To remove call-out country from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To remove call-out country from a master account, provide `me` as the value of the `accountId` path parameter.
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique Identifier of the Account.<br>
+     * * `account_id` -- Unique Identifier of the Account.<br>
      *   To remove Call-out country from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To remove Call-out country from a master account, provide `me` as the value of the `accountId` path parameter.
-     * * `country_id: &str` -- Two lettered Id of the country.
+     * * `country_id` -- Two lettered Id of the country.
      */
     pub async fn delete_internal_call_out_country(
         &self,
@@ -373,23 +389,22 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * List internal numbers.
+     * List internal numbers
      *
      * This function performs a `GET` to the `/accounts/{accountId}/sip_trunk/internal_numbers` endpoint.
      *
      * This API allows a master account with SIP Connected Audio plan to list internal phone numbers (i.e., numbers that are not provided by Zoom but are owned by the organization consuming the API) assigned to a master account or a sub account.<br><br>To list internal numbers of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list internal numbers of a  master account, provide `me` as the value of the `accountId` path parameter.
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
-     *
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique identifier of the account. To list internal numbers of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list internal numbers of a  master account, provide `me` as the value of the `accountId` path parameter.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `account_id` -- Unique identifier of the account. To list internal numbers of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list internal numbers of a  master account, provide `me` as the value of the `accountId` path parameter.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn list_internal_numbers(
         &self,
@@ -432,19 +447,18 @@ impl SipConnectedAudio {
         ))
     }
     /**
-     * List internal numbers.
+     * List internal numbers
      *
      * This function performs a `GET` to the `/accounts/{accountId}/sip_trunk/internal_numbers` endpoint.
      *
      * As opposed to `list_internal_numbers`, this function returns all the pages of the request at once.
      *
      * This API allows a master account with SIP Connected Audio plan to list internal phone numbers (i.e., numbers that are not provided by Zoom but are owned by the organization consuming the API) assigned to a master account or a sub account.<br><br>To list internal numbers of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list internal numbers of a  master account, provide `me` as the value of the `accountId` path parameter.
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
-     *
-     *
-     *
      */
     pub async fn list_all_internal_numbers(
         &self,
@@ -486,7 +500,7 @@ impl SipConnectedAudio {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -501,7 +515,7 @@ impl SipConnectedAudio {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -523,20 +537,20 @@ impl SipConnectedAudio {
         Ok(crate::Response::new(status, headers, internal_numbers))
     }
     /**
-     * Add internal numbers.
+     * Add internal numbers
      *
      * This function performs a `POST` to the `/accounts/{accountId}/sip_trunk/internal_numbers` endpoint.
      *
      * This API allows a master account with SIP Connected Audio plan to assign internal phone numbers (i.e., numbers that are not provided by Zoom but are owned by the organization consuming the API) to a master account or a sub account.<br><br>To add internal numbers to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To add internal numbers to a master account, provide `me` as the value of the `accountId` path parameter.
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique identifier of the account.<br>To add internal numbers to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To add internal numbers to a master account, provide `me` as the value of the `accountId` path parameter.
+     * * `account_id` -- Unique identifier of the account.<br>To add internal numbers to a sub account, provide the account ID of the sub account in the `accountId` path parameter. To add internal numbers to a master account, provide `me` as the value of the `accountId` path parameter.
      */
     pub async fn add_internal_numbers(
         &self,
@@ -561,22 +575,21 @@ impl SipConnectedAudio {
             .await
     }
     /**
-     * Delete an internal number.
+     * Delete an internal number
      *
      * This function performs a `DELETE` to the `/accounts/{accountId}/sip_trunk/internal_numbers/{numberId}` endpoint.
      *
      * This API allows a master account with SIP Connected Audio plan to delete a previously assigned internal phone number from a master account or a sub account.<br><br>To delete an internal number from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To delete an internal number from a master account, provide `me` as the value of the `accountId` path parameter.
-     * <br><b>Prerequisites:</b><br>
+     * <b>Prerequisites:</b><br>
+     *
      * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     *
      * **Scope:** `sip_trunk:master`
-     *
-     *
-     *
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- Unique Identifier of the account. To delete an internal number from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To delete an internal number from a master account, provide `me` as the value of the `accountId` path parameter.
-     * * `number_id: &str` -- Unique identifier of the phone number. This value can be retrieved by calling the List Internal Numbers API.
+     * * `account_id` -- Unique Identifier of the account. To delete an internal number from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To delete an internal number from a master account, provide `me` as the value of the `accountId` path parameter.
+     * * `number_id` -- Unique identifier of the phone number. This value can be retrieved by calling the List Internal Numbers API.
      */
     pub async fn delete_internal_number(
         &self,

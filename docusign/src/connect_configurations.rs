@@ -12,7 +12,7 @@ impl ConnectConfigurations {
     }
 
     /**
-     * Get Connect Configuration Information.
+     * Get Connect Configuration Information
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/connect` endpoint.
      *
@@ -22,7 +22,7 @@ impl ConnectConfigurations {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_get_config(
         &self,
@@ -56,7 +56,7 @@ impl ConnectConfigurations {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_put_configuration(
         &self,
@@ -89,10 +89,9 @@ impl ConnectConfigurations {
      *
      * **Note**: Connect must be enabled for your account to use this function. This cannot be used to set up Connect configurations for Salesforce or eOriginal.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_post_configuration(
         &self,
@@ -125,11 +124,10 @@ impl ConnectConfigurations {
      *
      * **Note**: Connect must be enabled for your account to use this function.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `connect_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `connect_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_get_config_connect_configurations(
         &self,
@@ -163,13 +161,10 @@ impl ConnectConfigurations {
      *
      * **Note**: Connect must be enabled for your account to use this function.
      *
-     *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `connect_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `connect_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn connect_delete_config(
         &self,
@@ -203,24 +198,23 @@ impl ConnectConfigurations {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `connect_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `email_substring: &str` -- Filters returned user records by full email address or a substring of email address.
-     * * `list_included_users: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
-     * * `status: &str` -- Filters the results by user status.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `connect_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `email_substring` -- Filters returned user records by full email address or a substring of email address.
+     * * `list_included_users` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     * * `status` -- Filters the results by user status.
      *   You can specify a comma-separated
      *   list of the following statuses:
-     *   
+     *
      *   * ActivationRequired
      *   * ActivationSent
      *   * Active
      *   * Closed
      *   * Disabled
-     *   .
-     * * `user_name_substring: &str` -- Filters results based on a full or partial user name.
-     *   
+     * * `user_name_substring` -- Filters results based on a full or partial user name.
+     *
      *   **Note**: When you enter a partial user name, you do not use a wildcard character.
      */
     pub async fn connect_get_user(

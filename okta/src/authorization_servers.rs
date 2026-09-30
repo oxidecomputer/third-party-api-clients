@@ -18,9 +18,9 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `q: &str`
-     * * `limit: &str`
-     * * `after: &str`
+     * * `q`
+     * * `limit`
+     * * `after`
      */
     pub async fn list(
         &self,
@@ -41,7 +41,7 @@ impl AuthorizationServers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/authorizationServers?{}", query_), None);
+            .url(&format!("/api/v1/authorizationServers?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -70,7 +70,7 @@ impl AuthorizationServers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/authorizationServers?{}", query_), None);
+            .url(&format!("/api/v1/authorizationServers?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -108,7 +108,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn get(
         &self,
@@ -138,7 +138,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn update(
         &self,
@@ -169,7 +169,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn delete(&self, auth_server_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -196,7 +196,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn list_o_auth_2_claims(
         &self,
@@ -254,7 +254,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn create_o_auth_2_claim(
         &self,
@@ -285,8 +285,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `claim_id: &str`
+     * * `auth_server_id`
+     * * `claim_id`
      */
     pub async fn get_o_auth_2_claim(
         &self,
@@ -318,8 +318,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `claim_id: &str`
+     * * `auth_server_id`
+     * * `claim_id`
      */
     pub async fn update_o_auth_2_claim(
         &self,
@@ -352,8 +352,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `claim_id: &str`
+     * * `auth_server_id`
+     * * `claim_id`
      */
     pub async fn delete_o_auth_2_claim(
         &self,
@@ -385,7 +385,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn list_o_auth_2_clients_fors(
         &self,
@@ -443,11 +443,11 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `client_id: &str`
-     * * `expand: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `auth_server_id`
+     * * `client_id`
+     * * `expand`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_refresh_tokens_for_and_clients(
         &self,
@@ -531,8 +531,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `client_id: &str`
+     * * `auth_server_id`
+     * * `client_id`
      */
     pub async fn revoke_refresh_tokens_for_and_client(
         &self,
@@ -564,10 +564,10 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `client_id: &str`
-     * * `token_id: &str`
-     * * `expand: &str`
+     * * `auth_server_id`
+     * * `client_id`
+     * * `token_id`
+     * * `expand`
      */
     pub async fn get_refresh_token_for_and_client(
         &self,
@@ -608,9 +608,9 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `client_id: &str`
-     * * `token_id: &str`
+     * * `auth_server_id`
+     * * `client_id`
+     * * `token_id`
      */
     pub async fn revoke_refresh_token_for_and_client(
         &self,
@@ -644,7 +644,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn list_keys(
         &self,
@@ -702,7 +702,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn rotate_keys(
         &self,
@@ -733,7 +733,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn activate(&self, auth_server_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -760,7 +760,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn deactivate(&self, auth_server_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -787,7 +787,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn list_policies(
         &self,
@@ -845,7 +845,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn create_policy(
         &self,
@@ -876,8 +876,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `policy_id: &str`
+     * * `auth_server_id`
+     * * `policy_id`
      */
     pub async fn get_policy(
         &self,
@@ -909,8 +909,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `policy_id: &str`
+     * * `auth_server_id`
+     * * `policy_id`
      */
     pub async fn update_policy(
         &self,
@@ -943,8 +943,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `policy_id: &str`
+     * * `auth_server_id`
+     * * `policy_id`
      */
     pub async fn delete_policy(
         &self,
@@ -976,8 +976,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `policy_id: &str`
+     * * `auth_server_id`
+     * * `policy_id`
      */
     pub async fn activate_policy(
         &self,
@@ -1009,8 +1009,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `policy_id: &str`
+     * * `auth_server_id`
+     * * `policy_id`
      */
     pub async fn deactivate_policy(
         &self,
@@ -1042,8 +1042,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `auth_server_id: &str`
+     * * `policy_id`
+     * * `auth_server_id`
      */
     pub async fn list_policy_rules(
         &self,
@@ -1105,8 +1105,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `auth_server_id: &str`
+     * * `policy_id`
+     * * `auth_server_id`
      */
     pub async fn create_policy_rule(
         &self,
@@ -1139,9 +1139,9 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `auth_server_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `auth_server_id`
+     * * `rule_id`
      */
     pub async fn get_policy_rule(
         &self,
@@ -1175,9 +1175,9 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `auth_server_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `auth_server_id`
+     * * `rule_id`
      */
     pub async fn update_policy_rule(
         &self,
@@ -1212,9 +1212,9 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `policy_id: &str`
-     * * `auth_server_id: &str`
-     * * `rule_id: &str`
+     * * `policy_id`
+     * * `auth_server_id`
+     * * `rule_id`
      */
     pub async fn delete_policy_rule(
         &self,
@@ -1248,9 +1248,9 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `policy_id: &str`
-     * * `rule_id: &str`
+     * * `auth_server_id`
+     * * `policy_id`
+     * * `rule_id`
      */
     pub async fn activate_policy_rule(
         &self,
@@ -1284,9 +1284,9 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `policy_id: &str`
-     * * `rule_id: &str`
+     * * `auth_server_id`
+     * * `policy_id`
+     * * `rule_id`
      */
     pub async fn deactivate_policy_rule(
         &self,
@@ -1320,11 +1320,11 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `q: &str`
-     * * `filter: &str`
-     * * `cursor: &str`
-     * * `limit: i64`
+     * * `auth_server_id`
+     * * `q`
+     * * `filter`
+     * * `cursor`
+     * * `limit`
      */
     pub async fn list_o_auth_2_scopes(
         &self,
@@ -1416,7 +1416,7 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
+     * * `auth_server_id`
      */
     pub async fn create_o_auth_2_scope(
         &self,
@@ -1447,8 +1447,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `scope_id: &str`
+     * * `auth_server_id`
+     * * `scope_id`
      */
     pub async fn get_o_auth_2_scope(
         &self,
@@ -1480,8 +1480,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `scope_id: &str`
+     * * `auth_server_id`
+     * * `scope_id`
      */
     pub async fn update_o_auth_2_scope(
         &self,
@@ -1514,8 +1514,8 @@ impl AuthorizationServers {
      *
      * **Parameters:**
      *
-     * * `auth_server_id: &str`
-     * * `scope_id: &str`
+     * * `auth_server_id`
+     * * `scope_id`
      */
     pub async fn delete_o_auth_2_scope(
         &self,

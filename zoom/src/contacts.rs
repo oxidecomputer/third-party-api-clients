@@ -12,7 +12,7 @@ impl Contacts {
     }
 
     /**
-     * Search company contacts.
+     * Search company contacts
      *
      * This function performs a `GET` to the `/contacts` endpoint.
      *
@@ -20,14 +20,14 @@ impl Contacts {
      *
      * **Scopes:** `contact:read:admin`, `contact:read`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `search_key: &str` -- Provide the keyword - either first name, last name or email of the contact whom you have to search for.
-     * * `query_presence_status: &str` -- Set `query_presence_status` to `true` in order to include the presence status of a contact in the response.
-     * * `page_size: i64` -- The number of records to be returned with a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `search_key` -- Provide the keyword - either first name, last name or email of the contact whom you have to search for.
+     * * `query_presence_status` -- Set `query_presence_status` to `true` in order to include the presence status of a contact in the response.
+     * * `page_size` -- The number of records to be returned with a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn search_company(
         &self,
@@ -53,7 +53,7 @@ impl Contacts {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/contacts?{}", query_), None);
+        let url = self.client.url(&format!("/contacts?{query_}"), None);
         let resp: crate::Response<crate::types::SearchCompanyContactsResponse> = self
             .client
             .get(
@@ -73,7 +73,7 @@ impl Contacts {
         ))
     }
     /**
-     * Search company contacts.
+     * Search company contacts
      *
      * This function performs a `GET` to the `/contacts` endpoint.
      *
@@ -83,7 +83,7 @@ impl Contacts {
      *
      * **Scopes:** `contact:read:admin`, `contact:read`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get_all_search_company(
         &self,
@@ -101,7 +101,7 @@ impl Contacts {
             query_args.push(("search_key".to_string(), search_key.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/contacts?{}", query_), None);
+        let url = self.client.url(&format!("/contacts?{query_}"), None);
         let crate::Response::<crate::types::SearchCompanyContactsResponse> {
             mut status,
             mut headers,
@@ -131,7 +131,7 @@ impl Contacts {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -146,7 +146,7 @@ impl Contacts {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -168,7 +168,7 @@ impl Contacts {
         Ok(crate::Response::new(status, headers, contacts))
     }
     /**
-     * List user's contacts.
+     * List user's contacts
      *
      * This function performs a `GET` to the `/chat/users/me/contacts` endpoint.
      *
@@ -178,15 +178,15 @@ impl Contacts {
      *
      * **Scope**: `chat_contact:read`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `type_: &str` -- The type of contact. The value can be one of the following:
+     * * `type_` -- The type of contact. The value can be one of the following:
      *   `company`: Contacts from the user's organization.
-     *   `external`: External contacts. .
-     * * `page_size: i64` -- The number of records returned with a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     *   `external`: External contacts.
+     * * `page_size` -- The number of records returned with a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn get_user(
         &self,
@@ -207,7 +207,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/chat/users/me/contacts?{}", query_), None);
+            .url(&format!("/chat/users/me/contacts?{query_}"), None);
         let resp: crate::Response<crate::types::GetUserContactsResponseData> = self
             .client
             .get(
@@ -227,7 +227,7 @@ impl Contacts {
         ))
     }
     /**
-     * List user's contacts.
+     * List user's contacts
      *
      * This function performs a `GET` to the `/chat/users/me/contacts` endpoint.
      *
@@ -239,7 +239,7 @@ impl Contacts {
      *
      * **Scope**: `chat_contact:read`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get_all_user(
         &self,
@@ -252,7 +252,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/chat/users/me/contacts?{}", query_), None);
+            .url(&format!("/chat/users/me/contacts?{query_}"), None);
         let crate::Response::<crate::types::GetUserContactsResponseData> {
             mut status,
             mut headers,
@@ -282,7 +282,7 @@ impl Contacts {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -297,7 +297,7 @@ impl Contacts {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -319,7 +319,7 @@ impl Contacts {
         Ok(crate::Response::new(status, headers, contacts))
     }
     /**
-     * Get user's contact details.
+     * Get user's contact details
      *
      * This function performs a `GET` to the `/chat/users/me/contacts/{contactId}` endpoint.
      *
@@ -329,12 +329,12 @@ impl Contacts {
      *
      * **Scope**: `chat_contact:read`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `contact_id: &str` -- The user's contact Id or email address. The contact can be either a company contact or an external contact.
-     * * `query_presence_status: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `contact_id` -- The user's contact Id or email address. The contact can be either a company contact or an external contact.
+     * * `query_presence_status` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     pub async fn get_user_contacts(
         &self,

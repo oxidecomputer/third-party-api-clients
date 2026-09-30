@@ -21,7 +21,7 @@ impl Repos {
     }
 
     /**
-     * List organization repositories.
+     * List organization repositories
      *
      * This function performs a `GET` to the `/orgs/{org}/repos` endpoint.
      *
@@ -31,14 +31,14 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `type_` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
+     * * `sort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_org(
         &self,
@@ -85,7 +85,7 @@ impl Repos {
             .await
     }
     /**
-     * List organization repositories.
+     * List organization repositories
      *
      * This function performs a `GET` to the `/orgs/{org}/repos` endpoint.
      *
@@ -132,7 +132,7 @@ impl Repos {
             .await
     }
     /**
-     * Create an organization repository.
+     * Create an organization repository
      *
      * This function performs a `POST` to the `/orgs/{org}/repos` endpoint.
      *
@@ -149,7 +149,7 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn create_in_org(
         &self,
@@ -174,7 +174,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a repository.
+     * Get a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}` endpoint.
      *
@@ -186,8 +186,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get(
         &self,
@@ -213,7 +213,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete a repository.
+     * Delete a repository
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}` endpoint.
      *
@@ -226,8 +226,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn delete(&self, owner: &str, repo: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -249,7 +249,7 @@ impl Repos {
             .await
     }
     /**
-     * Update a repository.
+     * Update a repository
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}` endpoint.
      *
@@ -259,8 +259,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn update(
         &self,
@@ -287,7 +287,7 @@ impl Repos {
             .await
     }
     /**
-     * List all autolinks of a repository.
+     * List all autolinks of a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/autolinks` endpoint.
      *
@@ -299,9 +299,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_autolinks(
         &self,
@@ -334,7 +334,7 @@ impl Repos {
             .await
     }
     /**
-     * List all autolinks of a repository.
+     * List all autolinks of a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/autolinks` endpoint.
      *
@@ -370,7 +370,7 @@ impl Repos {
             .await
     }
     /**
-     * Create an autolink reference for a repository.
+     * Create an autolink reference for a repository
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/autolinks` endpoint.
      *
@@ -380,8 +380,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_autolink(
         &self,
@@ -408,7 +408,7 @@ impl Repos {
             .await
     }
     /**
-     * Get an autolink reference of a repository.
+     * Get an autolink reference of a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/autolinks/{autolink_id}` endpoint.
      *
@@ -420,9 +420,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `autolink_id: i64` -- autolink_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `autolink_id` -- autolink_id parameter
      */
     pub async fn get_autolink(
         &self,
@@ -450,7 +450,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete an autolink reference from a repository.
+     * Delete an autolink reference from a repository
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/autolinks/{autolink_id}` endpoint.
      *
@@ -462,9 +462,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `autolink_id: i64` -- autolink_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `autolink_id` -- autolink_id parameter
      */
     pub async fn delete_autolink(
         &self,
@@ -492,7 +492,7 @@ impl Repos {
             .await
     }
     /**
-     * Enable automated security fixes.
+     * Enable automated security fixes
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/automated-security-fixes` endpoint.
      *
@@ -502,8 +502,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn enable_automated_security_fixes(
         &self,
@@ -529,7 +529,7 @@ impl Repos {
             .await
     }
     /**
-     * Disable automated security fixes.
+     * Disable automated security fixes
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/automated-security-fixes` endpoint.
      *
@@ -539,8 +539,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn disable_automated_security_fixes(
         &self,
@@ -566,21 +566,19 @@ impl Repos {
             .await
     }
     /**
-     * List branches.
+     * List branches
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-branches>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `protected: bool` -- Setting to `true` returns only protected branches. When set to `false`, only unprotected branches are returned. Omitting this parameter returns all branches.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `protected` -- Setting to `true` returns only protected branches. When set to `false`, only unprotected branches are returned. Omitting this parameter returns all branches.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_branches(
         &self,
@@ -621,13 +619,11 @@ impl Repos {
             .await
     }
     /**
-     * List branches.
+     * List branches
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches` endpoint.
      *
      * As opposed to `list_branches`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-branches>
      */
@@ -662,19 +658,17 @@ impl Repos {
             .await
     }
     /**
-     * Get a branch.
+     * Get a branch
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-a-branch>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_branch(
         &self,
@@ -702,7 +696,7 @@ impl Repos {
             .await
     }
     /**
-     * Get branch protection.
+     * Get branch protection
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection` endpoint.
      *
@@ -712,9 +706,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_branch_protection(
         &self,
@@ -742,7 +736,7 @@ impl Repos {
             .await
     }
     /**
-     * Update branch protection.
+     * Update branch protection
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection` endpoint.
      *
@@ -758,9 +752,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn update_branch_protection(
         &self,
@@ -789,7 +783,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete branch protection.
+     * Delete branch protection
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection` endpoint.
      *
@@ -799,9 +793,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn delete_branch_protection(
         &self,
@@ -829,7 +823,7 @@ impl Repos {
             .await
     }
     /**
-     * Get admin branch protection.
+     * Get admin branch protection
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins` endpoint.
      *
@@ -839,9 +833,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_admin_branch_protection(
         &self,
@@ -869,7 +863,7 @@ impl Repos {
             .await
     }
     /**
-     * Set admin branch protection.
+     * Set admin branch protection
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins` endpoint.
      *
@@ -881,9 +875,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn set_admin_branch_protection(
         &self,
@@ -911,7 +905,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete admin branch protection.
+     * Delete admin branch protection
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins` endpoint.
      *
@@ -923,9 +917,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn delete_admin_branch_protection(
         &self,
@@ -953,7 +947,7 @@ impl Repos {
             .await
     }
     /**
-     * Get pull request review protection.
+     * Get pull request review protection
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews` endpoint.
      *
@@ -963,9 +957,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_pull_request_review_protection(
         &self,
@@ -993,7 +987,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete pull request review protection.
+     * Delete pull request review protection
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews` endpoint.
      *
@@ -1003,9 +997,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn delete_pull_request_review_protection(
         &self,
@@ -1033,7 +1027,7 @@ impl Repos {
             .await
     }
     /**
-     * Update pull request review protection.
+     * Update pull request review protection
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews` endpoint.
      *
@@ -1047,9 +1041,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn update_pull_request_review_protection(
         &self,
@@ -1078,7 +1072,7 @@ impl Repos {
             .await
     }
     /**
-     * Get commit signature protection.
+     * Get commit signature protection
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures` endpoint.
      *
@@ -1092,9 +1086,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_commit_signature_protection(
         &self,
@@ -1122,7 +1116,7 @@ impl Repos {
             .await
     }
     /**
-     * Create commit signature protection.
+     * Create commit signature protection
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures` endpoint.
      *
@@ -1134,9 +1128,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn create_commit_signature_protection(
         &self,
@@ -1164,7 +1158,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete commit signature protection.
+     * Delete commit signature protection
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures` endpoint.
      *
@@ -1176,9 +1170,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn delete_commit_signature_protection(
         &self,
@@ -1206,7 +1200,7 @@ impl Repos {
             .await
     }
     /**
-     * Get status checks protection.
+     * Get status checks protection
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks` endpoint.
      *
@@ -1216,9 +1210,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_status_checks_protection(
         &self,
@@ -1246,7 +1240,7 @@ impl Repos {
             .await
     }
     /**
-     * Remove status check protection.
+     * Remove status check protection
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks` endpoint.
      *
@@ -1256,9 +1250,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn remove_status_check_protection(
         &self,
@@ -1286,7 +1280,7 @@ impl Repos {
             .await
     }
     /**
-     * Update status check protection.
+     * Update status check protection
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks` endpoint.
      *
@@ -1298,9 +1292,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn update_status_check_protection(
         &self,
@@ -1329,7 +1323,7 @@ impl Repos {
             .await
     }
     /**
-     * Get all status check contexts.
+     * Get all status check contexts
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
      *
@@ -1339,9 +1333,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_all_status_check_contexts(
         &self,
@@ -1369,7 +1363,7 @@ impl Repos {
             .await
     }
     /**
-     * Get all status check contexts.
+     * Get all status check contexts
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
      *
@@ -1405,7 +1399,7 @@ impl Repos {
             .await
     }
     /**
-     * Set status check contexts.
+     * Set status check contexts
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
      *
@@ -1415,9 +1409,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn set_status_check_contexts(
         &self,
@@ -1446,7 +1440,7 @@ impl Repos {
             .await
     }
     /**
-     * Add status check contexts.
+     * Add status check contexts
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
      *
@@ -1456,9 +1450,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn add_status_check_contexts(
         &self,
@@ -1487,7 +1481,7 @@ impl Repos {
             .await
     }
     /**
-     * Remove status check contexts.
+     * Remove status check contexts
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
      *
@@ -1497,9 +1491,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn remove_status_check_contexts(
         &self,
@@ -1528,7 +1522,7 @@ impl Repos {
             .await
     }
     /**
-     * Get access restrictions.
+     * Get access restrictions
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions` endpoint.
      *
@@ -1542,9 +1536,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_access_restrictions(
         &self,
@@ -1572,7 +1566,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete access restrictions.
+     * Delete access restrictions
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions` endpoint.
      *
@@ -1584,9 +1578,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn delete_access_restrictions(
         &self,
@@ -1614,7 +1608,7 @@ impl Repos {
             .await
     }
     /**
-     * Get apps with access to the protected branch.
+     * Get apps with access to the protected branch
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
      *
@@ -1626,9 +1620,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_apps_with_access_to_protected_branch(
         &self,
@@ -1656,7 +1650,7 @@ impl Repos {
             .await
     }
     /**
-     * Get apps with access to the protected branch.
+     * Get apps with access to the protected branch
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
      *
@@ -1694,7 +1688,7 @@ impl Repos {
             .await
     }
     /**
-     * Set app access restrictions.
+     * Set app access restrictions
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
      *
@@ -1710,9 +1704,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn set_app_access_restrictions(
         &self,
@@ -1741,7 +1735,7 @@ impl Repos {
             .await
     }
     /**
-     * Add app access restrictions.
+     * Add app access restrictions
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
      *
@@ -1757,9 +1751,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn add_app_access_restrictions(
         &self,
@@ -1788,7 +1782,7 @@ impl Repos {
             .await
     }
     /**
-     * Remove app access restrictions.
+     * Remove app access restrictions
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
      *
@@ -1804,9 +1798,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn remove_app_access_restrictions(
         &self,
@@ -1835,7 +1829,7 @@ impl Repos {
             .await
     }
     /**
-     * Get teams with access to the protected branch.
+     * Get teams with access to the protected branch
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
      *
@@ -1847,9 +1841,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_teams_with_access_to_protected_branch(
         &self,
@@ -1877,7 +1871,7 @@ impl Repos {
             .await
     }
     /**
-     * Get teams with access to the protected branch.
+     * Get teams with access to the protected branch
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
      *
@@ -1915,7 +1909,7 @@ impl Repos {
             .await
     }
     /**
-     * Set team access restrictions.
+     * Set team access restrictions
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
      *
@@ -1931,9 +1925,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn set_team_access_restrictions(
         &self,
@@ -1962,7 +1956,7 @@ impl Repos {
             .await
     }
     /**
-     * Add team access restrictions.
+     * Add team access restrictions
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
      *
@@ -1978,9 +1972,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn add_team_access_restrictions(
         &self,
@@ -2009,7 +2003,7 @@ impl Repos {
             .await
     }
     /**
-     * Remove team access restrictions.
+     * Remove team access restrictions
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
      *
@@ -2025,9 +2019,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn remove_team_access_restrictions(
         &self,
@@ -2056,7 +2050,7 @@ impl Repos {
             .await
     }
     /**
-     * Get users with access to the protected branch.
+     * Get users with access to the protected branch
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
      *
@@ -2068,9 +2062,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn get_users_with_access_to_protected_branch(
         &self,
@@ -2098,7 +2092,7 @@ impl Repos {
             .await
     }
     /**
-     * Get users with access to the protected branch.
+     * Get users with access to the protected branch
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
      *
@@ -2136,7 +2130,7 @@ impl Repos {
             .await
     }
     /**
-     * Set user access restrictions.
+     * Set user access restrictions
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
      *
@@ -2152,9 +2146,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn set_user_access_restrictions(
         &self,
@@ -2183,7 +2177,7 @@ impl Repos {
             .await
     }
     /**
-     * Add user access restrictions.
+     * Add user access restrictions
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
      *
@@ -2199,9 +2193,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn add_user_access_restrictions(
         &self,
@@ -2230,7 +2224,7 @@ impl Repos {
             .await
     }
     /**
-     * Remove user access restrictions.
+     * Remove user access restrictions
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
      *
@@ -2246,9 +2240,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn remove_user_access_restrictions(
         &self,
@@ -2277,7 +2271,7 @@ impl Repos {
             .await
     }
     /**
-     * Rename a branch.
+     * Rename a branch
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/rename` endpoint.
      *
@@ -2301,9 +2295,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `branch: &str` -- The name of the branch.
+     * * `owner`
+     * * `repo`
+     * * `branch` -- The name of the branch.
      */
     pub async fn rename_branch(
         &self,
@@ -2332,7 +2326,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository collaborators.
+     * List repository collaborators
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators` endpoint.
      *
@@ -2344,14 +2338,14 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
-     *  \\* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
-     *  \\* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
-     *  \\* `all`: All collaborators the authenticated user can see.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `affiliation` -- Filter collaborators returned by their affiliation. Can be one of:
+     *   \* `outside`: All outside collaborators of an organization-owned repository.
+     *   \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.
+     *   \* `all`: All collaborators the authenticated user can see.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_collaborators(
         &self,
@@ -2392,7 +2386,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository collaborators.
+     * List repository collaborators
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators` endpoint.
      *
@@ -2435,7 +2429,7 @@ impl Repos {
             .await
     }
     /**
-     * Check if a user is a repository collaborator.
+     * Check if a user is a repository collaborator
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
      *
@@ -2447,9 +2441,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `username: &str`
+     * * `owner`
+     * * `repo`
+     * * `username`
      */
     pub async fn check_collaborator(
         &self,
@@ -2477,7 +2471,7 @@ impl Repos {
             .await
     }
     /**
-     * Add a repository collaborator.
+     * Add a repository collaborator
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
      *
@@ -2497,9 +2491,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `username: &str`
+     * * `owner`
+     * * `repo`
+     * * `username`
      */
     pub async fn add_collaborator(
         &self,
@@ -2528,19 +2522,17 @@ impl Repos {
             .await
     }
     /**
-     * Remove a repository collaborator.
+     * Remove a repository collaborator
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#remove-a-repository-collaborator>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `username: &str`
+     * * `owner`
+     * * `repo`
+     * * `username`
      */
     pub async fn remove_collaborator(
         &self,
@@ -2568,7 +2560,7 @@ impl Repos {
             .await
     }
     /**
-     * Get repository permissions for a user.
+     * Get repository permissions for a user
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators/{username}/permission` endpoint.
      *
@@ -2578,9 +2570,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `username: &str`
+     * * `owner`
+     * * `repo`
+     * * `username`
      */
     pub async fn get_collaborator_permission_level(
         &self,
@@ -2608,7 +2600,7 @@ impl Repos {
             .await
     }
     /**
-     * List commit comments for a repository.
+     * List commit comments for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/comments` endpoint.
      *
@@ -2620,10 +2612,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_commit_comments_for_repo(
         &self,
@@ -2660,7 +2652,7 @@ impl Repos {
             .await
     }
     /**
-     * List commit comments for a repository.
+     * List commit comments for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/comments` endpoint.
      *
@@ -2696,19 +2688,17 @@ impl Repos {
             .await
     }
     /**
-     * Get a commit comment.
+     * Get a commit comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-a-commit-comment>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn get_commit_comment(
         &self,
@@ -2736,19 +2726,17 @@ impl Repos {
             .await
     }
     /**
-     * Delete a commit comment.
+     * Delete a commit comment
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#delete-a-commit-comment>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn delete_commit_comment(
         &self,
@@ -2776,19 +2764,17 @@ impl Repos {
             .await
     }
     /**
-     * Update a commit comment.
+     * Update a commit comment
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#update-a-commit-comment>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn update_commit_comment(
         &self,
@@ -2817,7 +2803,7 @@ impl Repos {
             .await
     }
     /**
-     * List commits.
+     * List commits
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits` endpoint.
      *
@@ -2854,15 +2840,15 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `sha: &str` -- SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`).
-     * * `path: &str` -- Only commits containing this file path will be returned.
-     * * `author: &str` -- GitHub login or email address by which to filter by commit author.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `until: chrono::DateTime<chrono::Utc>` -- Only commits before this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `sha` -- SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`).
+     * * `path` -- Only commits containing this file path will be returned.
+     * * `author` -- GitHub login or email address by which to filter by commit author.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `until` -- Only commits before this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_commits(
         &self,
@@ -2919,7 +2905,7 @@ impl Repos {
             .await
     }
     /**
-     * List commits.
+     * List commits
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits` endpoint.
      *
@@ -3003,7 +2989,7 @@ impl Repos {
             .await
     }
     /**
-     * List branches for HEAD commit.
+     * List branches for HEAD commit
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head` endpoint.
      *
@@ -3015,9 +3001,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `commit_sha: &str` -- commit_sha parameter.
+     * * `owner`
+     * * `repo`
+     * * `commit_sha` -- commit_sha parameter
      */
     pub async fn list_branches_for_head_commit(
         &self,
@@ -3045,7 +3031,7 @@ impl Repos {
             .await
     }
     /**
-     * List branches for HEAD commit.
+     * List branches for HEAD commit
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head` endpoint.
      *
@@ -3083,7 +3069,7 @@ impl Repos {
             .await
     }
     /**
-     * List commit comments.
+     * List commit comments
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/comments` endpoint.
      *
@@ -3093,11 +3079,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `commit_sha: &str` -- commit_sha parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `commit_sha` -- commit_sha parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_comments_for_commit(
         &self,
@@ -3136,7 +3122,7 @@ impl Repos {
             .await
     }
     /**
-     * List commit comments.
+     * List commit comments
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/comments` endpoint.
      *
@@ -3172,7 +3158,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a commit comment.
+     * Create a commit comment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/commits/{commit_sha}/comments` endpoint.
      *
@@ -3184,9 +3170,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `commit_sha: &str` -- commit_sha parameter.
+     * * `owner`
+     * * `repo`
+     * * `commit_sha` -- commit_sha parameter
      */
     pub async fn create_commit_comment(
         &self,
@@ -3215,7 +3201,7 @@ impl Repos {
             .await
     }
     /**
-     * List pull requests associated with a commit.
+     * List pull requests associated with a commit
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/pulls` endpoint.
      *
@@ -3225,11 +3211,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `commit_sha: &str` -- commit_sha parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `commit_sha` -- commit_sha parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_pull_requests_associated_with_commit(
         &self,
@@ -3268,7 +3254,7 @@ impl Repos {
             .await
     }
     /**
-     * List pull requests associated with a commit.
+     * List pull requests associated with a commit
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/pulls` endpoint.
      *
@@ -3304,7 +3290,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a commit.
+     * Get a commit
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}` endpoint.
      *
@@ -3349,11 +3335,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `ref_: &str` -- ref parameter.
+     * * `owner`
+     * * `repo`
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `ref_` -- ref parameter
      */
     pub async fn get_commit(
         &self,
@@ -3392,7 +3378,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the combined status for a specific reference.
+     * Get the combined status for a specific reference
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/status` endpoint.
      *
@@ -3410,11 +3396,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn get_combined_status_for_ref(
         &self,
@@ -3453,7 +3439,7 @@ impl Repos {
             .await
     }
     /**
-     * List commit statuses for a reference.
+     * List commit statuses for a reference
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/statuses` endpoint.
      *
@@ -3465,11 +3451,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- ref parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- ref parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_commit_statuses_for_ref(
         &self,
@@ -3508,7 +3494,7 @@ impl Repos {
             .await
     }
     /**
-     * List commit statuses for a reference.
+     * List commit statuses for a reference
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/statuses` endpoint.
      *
@@ -3546,7 +3532,7 @@ impl Repos {
             .await
     }
     /**
-     * Get community profile metrics.
+     * Get community profile metrics
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/community/profile` endpoint.
      *
@@ -3567,8 +3553,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_community_profile_metrics(
         &self,
@@ -3594,7 +3580,7 @@ impl Repos {
             .await
     }
     /**
-     * Compare two commits.
+     * Compare two commits
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/compare/{basehead}` endpoint.
      *
@@ -3643,11 +3629,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `basehead: &str` -- The base branch and head branch to compare. This parameter expects the format `{base}...{head}`.
+     * * `owner`
+     * * `repo`
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `basehead` -- The base branch and head branch to compare. This parameter expects the format `{base}...{head}`.
      */
     pub async fn compare_commits(
         &self,
@@ -3686,7 +3672,7 @@ impl Repos {
             .await
     }
     /**
-     * Get repository content.
+     * Get repository content
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
@@ -3699,9 +3685,10 @@ impl Repos {
      * object format.
      *
      * **Note**:
+     *
      * *   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).
      * *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
-     * API](https://docs.github.com/rest/reference/git#get-a-tree).
+     *     API](https://docs.github.com/rest/reference/git#get-a-tree).
      * *   This API supports files up to 1 megabyte in size.
      *
      * #### If the content is a directory
@@ -3727,10 +3714,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `path: &str` -- path parameter.
-     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * `owner`
+     * * `repo`
+     * * `path` -- path parameter
+     * * `ref_` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
     pub async fn get_content_vec_entries(
         &self,
@@ -3765,7 +3752,7 @@ impl Repos {
             .await
     }
     /**
-     * Get repository content.
+     * Get repository content
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
@@ -3778,9 +3765,10 @@ impl Repos {
      * object format.
      *
      * **Note**:
+     *
      * *   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).
      * *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
-     * API](https://docs.github.com/rest/reference/git#get-a-tree).
+     *     API](https://docs.github.com/rest/reference/git#get-a-tree).
      * *   This API supports files up to 1 megabyte in size.
      *
      * #### If the content is a directory
@@ -3806,10 +3794,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `path: &str` -- path parameter.
-     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * `owner`
+     * * `repo`
+     * * `path` -- path parameter
+     * * `ref_` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
     pub async fn get_content_file(
         &self,
@@ -3844,7 +3832,7 @@ impl Repos {
             .await
     }
     /**
-     * Get repository content.
+     * Get repository content
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
@@ -3857,9 +3845,10 @@ impl Repos {
      * object format.
      *
      * **Note**:
+     *
      * *   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).
      * *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
-     * API](https://docs.github.com/rest/reference/git#get-a-tree).
+     *     API](https://docs.github.com/rest/reference/git#get-a-tree).
      * *   This API supports files up to 1 megabyte in size.
      *
      * #### If the content is a directory
@@ -3885,10 +3874,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `path: &str` -- path parameter.
-     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * `owner`
+     * * `repo`
+     * * `path` -- path parameter
+     * * `ref_` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
     pub async fn get_content_symlink(
         &self,
@@ -3923,7 +3912,7 @@ impl Repos {
             .await
     }
     /**
-     * Get repository content.
+     * Get repository content
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
@@ -3936,9 +3925,10 @@ impl Repos {
      * object format.
      *
      * **Note**:
+     *
      * *   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).
      * *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
-     * API](https://docs.github.com/rest/reference/git#get-a-tree).
+     *     API](https://docs.github.com/rest/reference/git#get-a-tree).
      * *   This API supports files up to 1 megabyte in size.
      *
      * #### If the content is a directory
@@ -3964,10 +3954,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `path: &str` -- path parameter.
-     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * `owner`
+     * * `repo`
+     * * `path` -- path parameter
+     * * `ref_` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
     pub async fn get_content_submodule(
         &self,
@@ -4002,7 +3992,7 @@ impl Repos {
             .await
     }
     /**
-     * Get repository content.
+     * Get repository content
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
@@ -4015,9 +4005,10 @@ impl Repos {
      * object format.
      *
      * **Note**:
+     *
      * *   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).
      * *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
-     * API](https://docs.github.com/rest/reference/git#get-a-tree).
+     *     API](https://docs.github.com/rest/reference/git#get-a-tree).
      * *   This API supports files up to 1 megabyte in size.
      *
      * #### If the content is a directory
@@ -4043,10 +4034,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `path: &str` -- path parameter.
-     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * `owner`
+     * * `repo`
+     * * `path` -- path parameter
+     * * `ref_` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
     pub async fn get_content(
         &self,
@@ -4081,7 +4072,7 @@ impl Repos {
             .await
     }
     /**
-     * Create or update file contents.
+     * Create or update file contents
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
@@ -4091,9 +4082,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `path: &str` -- path parameter.
+     * * `owner`
+     * * `repo`
+     * * `path` -- path parameter
      */
     pub async fn create_or_update_file_contents(
         &self,
@@ -4122,7 +4113,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete a file.
+     * Delete a file
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
@@ -4138,9 +4129,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `path: &str` -- path parameter.
+     * * `owner`
+     * * `repo`
+     * * `path` -- path parameter
      */
     pub async fn delete_file(
         &self,
@@ -4169,7 +4160,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository contributors.
+     * List repository contributors
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contributors` endpoint.
      *
@@ -4181,11 +4172,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `anon: &str` -- Set to `1` or `true` to include anonymous contributors in results.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `anon` -- Set to `1` or `true` to include anonymous contributors in results.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_contributors(
         &self,
@@ -4226,7 +4217,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository contributors.
+     * List repository contributors
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contributors` endpoint.
      *
@@ -4269,7 +4260,7 @@ impl Repos {
             .await
     }
     /**
-     * List deployments.
+     * List deployments
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
      *
@@ -4279,14 +4270,14 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `sha: &str` -- The SHA recorded at creation time.
-     * * `ref_: &str` -- The name of the ref. This can be a branch, tag, or SHA.
-     * * `task: &str` -- The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`).
-     * * `environment: &str` -- The name of the environment that was deployed to (e.g., `staging` or `production`).
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `sha` -- The SHA recorded at creation time.
+     * * `ref_` -- The name of the ref. This can be a branch, tag, or SHA.
+     * * `task` -- The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`).
+     * * `environment` -- The name of the environment that was deployed to (e.g., `staging` or `production`).
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_deployments(
         &self,
@@ -4339,7 +4330,7 @@ impl Repos {
             .await
     }
     /**
-     * List deployments.
+     * List deployments
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
      *
@@ -4392,7 +4383,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a deployment.
+     * Create a deployment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/deployments` endpoint.
      *
@@ -4427,6 +4418,7 @@ impl Repos {
      * #### Merged branch response
      * You will see this response when GitHub automatically merges the base branch into the topic branch instead of creating
      * a deployment. This auto-merge happens when:
+     *
      * *   Auto-merge option is enabled in the repository
      * *   Topic branch does not include the latest changes on the base branch, which is `master` in the response example
      * *   There are no merge conflicts
@@ -4446,8 +4438,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_deployment(
         &self,
@@ -4474,19 +4466,17 @@ impl Repos {
             .await
     }
     /**
-     * Get a deployment.
+     * Get a deployment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-a-deployment>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `deployment_id: i64` -- deployment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `deployment_id` -- deployment_id parameter
      */
     pub async fn get_deployment(
         &self,
@@ -4514,7 +4504,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete a deployment.
+     * Delete a deployment
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/deployments/{deployment_id}` endpoint.
      *
@@ -4531,9 +4521,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `deployment_id: i64` -- deployment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `deployment_id` -- deployment_id parameter
      */
     pub async fn delete_deployment(
         &self,
@@ -4561,7 +4551,7 @@ impl Repos {
             .await
     }
     /**
-     * List deployment statuses.
+     * List deployment statuses
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses` endpoint.
      *
@@ -4571,11 +4561,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `deployment_id: i64` -- deployment_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `deployment_id` -- deployment_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_deployment_statuses(
         &self,
@@ -4614,7 +4604,7 @@ impl Repos {
             .await
     }
     /**
-     * List deployment statuses.
+     * List deployment statuses
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses` endpoint.
      *
@@ -4650,7 +4640,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a deployment status.
+     * Create a deployment status
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses` endpoint.
      *
@@ -4662,9 +4652,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `deployment_id: i64` -- deployment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `deployment_id` -- deployment_id parameter
      */
     pub async fn create_deployment_status(
         &self,
@@ -4693,7 +4683,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a deployment status.
+     * Get a deployment status
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}` endpoint.
      *
@@ -4703,10 +4693,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `deployment_id: i64` -- deployment_id parameter.
-     * * `status_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `deployment_id` -- deployment_id parameter
+     * * `status_id`
      */
     pub async fn get_deployment_status(
         &self,
@@ -4736,7 +4726,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a repository dispatch event.
+     * Create a repository dispatch event
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/dispatches` endpoint.
      *
@@ -4746,8 +4736,8 @@ impl Repos {
      *
      * This endpoint requires write access to the repository by providing either:
      *
-     *   - Personal access tokens with `repo` scope. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)" in the GitHub Help documentation.
-     *   - GitHub Apps with both `metadata:read` and `contents:read&write` permissions.
+     * - Personal access tokens with `repo` scope. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)" in the GitHub Help documentation.
+     * - GitHub Apps with both `metadata:read` and `contents:read&write` permissions.
      *
      * This input example shows how you can use the `client_payload` as a test to debug your workflow.
      *
@@ -4755,8 +4745,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_dispatch_event(
         &self,
@@ -4783,7 +4773,7 @@ impl Repos {
             .await
     }
     /**
-     * Get all environments.
+     * Get all environments
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/environments` endpoint.
      *
@@ -4795,8 +4785,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_all_environments(
         &self,
@@ -4822,7 +4812,7 @@ impl Repos {
             .await
     }
     /**
-     * Get an environment.
+     * Get an environment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/environments/{environment_name}` endpoint.
      *
@@ -4832,9 +4822,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `environment_name: &str` -- The name of the environment.
+     * * `owner`
+     * * `repo`
+     * * `environment_name` -- The name of the environment
      */
     pub async fn get_environment(
         &self,
@@ -4862,7 +4852,7 @@ impl Repos {
             .await
     }
     /**
-     * Create or update an environment.
+     * Create or update an environment
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/environments/{environment_name}` endpoint.
      *
@@ -4878,9 +4868,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `environment_name: &str` -- The name of the environment.
+     * * `owner`
+     * * `repo`
+     * * `environment_name` -- The name of the environment
      */
     pub async fn create_or_update_environment(
         &self,
@@ -4909,7 +4899,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete an environment.
+     * Delete an environment
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/environments/{environment_name}` endpoint.
      *
@@ -4919,9 +4909,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `environment_name: &str` -- The name of the environment.
+     * * `owner`
+     * * `repo`
+     * * `environment_name` -- The name of the environment
      */
     pub async fn delete_an_environment(
         &self,
@@ -4949,21 +4939,19 @@ impl Repos {
             .await
     }
     /**
-     * List forks.
+     * List forks
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/forks` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-forks>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `sort: crate::types::ReposListForksSort` -- The sort order. Can be either `newest`, `oldest`, or `stargazers`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `sort` -- The sort order. Can be either `newest`, `oldest`, or `stargazers`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_forks(
         &self,
@@ -5004,13 +4992,11 @@ impl Repos {
             .await
     }
     /**
-     * List forks.
+     * List forks
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/forks` endpoint.
      *
      * As opposed to `list_forks`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-forks>
      */
@@ -5045,7 +5031,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a fork.
+     * Create a fork
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/forks` endpoint.
      *
@@ -5057,8 +5043,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_fork(
         &self,
@@ -5085,20 +5071,18 @@ impl Repos {
             .await
     }
     /**
-     * List repository webhooks.
+     * List repository webhooks
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-webhooks>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_webhooks(
         &self,
@@ -5135,13 +5119,11 @@ impl Repos {
             .await
     }
     /**
-     * List repository webhooks.
+     * List repository webhooks
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks` endpoint.
      *
      * As opposed to `list_webhooks`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-webhooks>
      */
@@ -5169,7 +5151,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a repository webhook.
+     * Create a repository webhook
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks` endpoint.
      *
@@ -5180,8 +5162,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_webhook(
         &self,
@@ -5208,7 +5190,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a repository webhook.
+     * Get a repository webhook
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}` endpoint.
      *
@@ -5218,9 +5200,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
      */
     pub async fn get_webhook(
         &self,
@@ -5248,19 +5230,17 @@ impl Repos {
             .await
     }
     /**
-     * Delete a repository webhook.
+     * Delete a repository webhook
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/hooks/{hook_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#delete-a-repository-webhook>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
      */
     pub async fn delete_webhook(
         &self,
@@ -5288,7 +5268,7 @@ impl Repos {
             .await
     }
     /**
-     * Update a repository webhook.
+     * Update a repository webhook
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/hooks/{hook_id}` endpoint.
      *
@@ -5298,9 +5278,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
      */
     pub async fn update_webhook(
         &self,
@@ -5329,7 +5309,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a webhook configuration for a repository.
+     * Get a webhook configuration for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/config` endpoint.
      *
@@ -5341,9 +5321,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
      */
     pub async fn get_webhook_config_for_repo(
         &self,
@@ -5371,7 +5351,7 @@ impl Repos {
             .await
     }
     /**
-     * Update a webhook configuration for a repository.
+     * Update a webhook configuration for a repository
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/hooks/{hook_id}/config` endpoint.
      *
@@ -5383,9 +5363,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
      */
     pub async fn update_webhook_config_for_repo(
         &self,
@@ -5414,7 +5394,7 @@ impl Repos {
             .await
     }
     /**
-     * List deliveries for a repository webhook.
+     * List deliveries for a repository webhook
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries` endpoint.
      *
@@ -5424,11 +5404,11 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `cursor: &str` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
+     * * `per_page` -- Results per page (max 100)
+     * * `cursor` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
      */
     pub async fn list_webhook_deliveries(
         &self,
@@ -5467,7 +5447,7 @@ impl Repos {
             .await
     }
     /**
-     * List deliveries for a repository webhook.
+     * List deliveries for a repository webhook
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries` endpoint.
      *
@@ -5510,7 +5490,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a delivery for a repository webhook.
+     * Get a delivery for a repository webhook
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries/{delivery_id}` endpoint.
      *
@@ -5520,10 +5500,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
-     * * `delivery_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
+     * * `delivery_id`
      */
     pub async fn get_webhook_delivery(
         &self,
@@ -5553,7 +5533,7 @@ impl Repos {
             .await
     }
     /**
-     * Redeliver a delivery for a repository webhook.
+     * Redeliver a delivery for a repository webhook
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries/{delivery_id}/attempts` endpoint.
      *
@@ -5563,10 +5543,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
-     * * `delivery_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
+     * * `delivery_id`
      */
     pub async fn redeliver_webhook_delivery(
         &self,
@@ -5596,7 +5576,7 @@ impl Repos {
             .await
     }
     /**
-     * Ping a repository webhook.
+     * Ping a repository webhook
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks/{hook_id}/pings` endpoint.
      *
@@ -5606,9 +5586,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
      */
     pub async fn ping_webhook(
         &self,
@@ -5636,7 +5616,7 @@ impl Repos {
             .await
     }
     /**
-     * Test the push repository webhook.
+     * Test the push repository webhook
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks/{hook_id}/tests` endpoint.
      *
@@ -5648,9 +5628,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `hook_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `hook_id`
      */
     pub async fn test_push_webhook(
         &self,
@@ -5678,7 +5658,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository invitations.
+     * List repository invitations
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/invitations` endpoint.
      *
@@ -5688,10 +5668,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_invitations(
         &self,
@@ -5728,7 +5708,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository invitations.
+     * List repository invitations
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/invitations` endpoint.
      *
@@ -5762,19 +5742,17 @@ impl Repos {
             .await
     }
     /**
-     * Delete a repository invitation.
+     * Delete a repository invitation
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/invitations/{invitation_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#delete-a-repository-invitation>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `invitation_id: i64` -- invitation_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `invitation_id` -- invitation_id parameter
      */
     pub async fn delete_invitation(
         &self,
@@ -5802,19 +5780,17 @@ impl Repos {
             .await
     }
     /**
-     * Update a repository invitation.
+     * Update a repository invitation
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/invitations/{invitation_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#update-a-repository-invitation>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `invitation_id: i64` -- invitation_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `invitation_id` -- invitation_id parameter
      */
     pub async fn update_invitation(
         &self,
@@ -5843,20 +5819,18 @@ impl Repos {
             .await
     }
     /**
-     * List deploy keys.
+     * List deploy keys
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/keys` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-deploy-keys>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_deploy_keys(
         &self,
@@ -5893,13 +5867,11 @@ impl Repos {
             .await
     }
     /**
-     * List deploy keys.
+     * List deploy keys
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/keys` endpoint.
      *
      * As opposed to `list_deploy_keys`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-deploy-keys>
      */
@@ -5927,7 +5899,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a deploy key.
+     * Create a deploy key
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/keys` endpoint.
      *
@@ -5937,8 +5909,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_deploy_key(
         &self,
@@ -5965,19 +5937,17 @@ impl Repos {
             .await
     }
     /**
-     * Get a deploy key.
+     * Get a deploy key
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/keys/{key_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-a-deploy-key>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `key_id: i64` -- key_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `key_id` -- key_id parameter
      */
     pub async fn get_deploy_key(
         &self,
@@ -6005,7 +5975,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete a deploy key.
+     * Delete a deploy key
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/keys/{key_id}` endpoint.
      *
@@ -6015,9 +5985,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `key_id: i64` -- key_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `key_id` -- key_id parameter
      */
     pub async fn delete_deploy_key(
         &self,
@@ -6045,7 +6015,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository languages.
+     * List repository languages
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/languages` endpoint.
      *
@@ -6055,8 +6025,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn list_languages(
         &self,
@@ -6082,18 +6052,16 @@ impl Repos {
             .await
     }
     /**
-     * Merge a branch.
+     * Merge a branch
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/merges` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#merge-a-branch>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn merge(
         &self,
@@ -6120,18 +6088,16 @@ impl Repos {
             .await
     }
     /**
-     * Get a GitHub Pages site.
+     * Get a GitHub Pages site
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pages` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-a-github-pages-site>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_pages(
         &self,
@@ -6157,7 +6123,7 @@ impl Repos {
             .await
     }
     /**
-     * Update information about a GitHub Pages site.
+     * Update information about a GitHub Pages site
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/pages` endpoint.
      *
@@ -6167,8 +6133,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn update_information_about_pages_site(
         &self,
@@ -6195,7 +6161,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a GitHub Pages site.
+     * Create a GitHub Pages site
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pages` endpoint.
      *
@@ -6205,8 +6171,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_pages_site(
         &self,
@@ -6233,18 +6199,16 @@ impl Repos {
             .await
     }
     /**
-     * Delete a GitHub Pages site.
+     * Delete a GitHub Pages site
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pages` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#delete-a-github-pages-site>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn delete_pages_site(
         &self,
@@ -6270,20 +6234,18 @@ impl Repos {
             .await
     }
     /**
-     * List GitHub Pages builds.
+     * List GitHub Pages builds
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-github-pages-builds>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_pages_builds(
         &self,
@@ -6320,13 +6282,11 @@ impl Repos {
             .await
     }
     /**
-     * List GitHub Pages builds.
+     * List GitHub Pages builds
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
      *
      * As opposed to `list_pages_builds`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-github-pages-builds>
      */
@@ -6354,7 +6314,7 @@ impl Repos {
             .await
     }
     /**
-     * Request a GitHub Pages build.
+     * Request a GitHub Pages build
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
      *
@@ -6366,8 +6326,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn request_pages_build(
         &self,
@@ -6393,18 +6353,16 @@ impl Repos {
             .await
     }
     /**
-     * Get latest Pages build.
+     * Get latest Pages build
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds/latest` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-latest-pages-build>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_latest_pages_build(
         &self,
@@ -6430,19 +6388,17 @@ impl Repos {
             .await
     }
     /**
-     * Get GitHub Pages build.
+     * Get GitHub Pages build
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds/{build_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-github-pages-build>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `build_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `build_id`
      */
     pub async fn get_pages_build(
         &self,
@@ -6470,7 +6426,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a DNS health check for GitHub Pages.
+     * Get a DNS health check for GitHub Pages
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/health` endpoint.
      *
@@ -6484,8 +6440,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_pages_health_check(
         &self,
@@ -6511,7 +6467,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a repository README.
+     * Get a repository README
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/readme` endpoint.
      *
@@ -6523,9 +6479,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * `owner`
+     * * `repo`
+     * * `ref_` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
     pub async fn get_readme(
         &self,
@@ -6558,7 +6514,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a repository README for a directory.
+     * Get a repository README for a directory
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/readme/{dir}` endpoint.
      *
@@ -6570,10 +6526,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `dir: &str` -- The alternate path to look for a README file.
-     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * `owner`
+     * * `repo`
+     * * `dir` -- The alternate path to look for a README file
+     * * `ref_` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)
      */
     pub async fn get_readme_in_directory(
         &self,
@@ -6608,7 +6564,7 @@ impl Repos {
             .await
     }
     /**
-     * List releases.
+     * List releases
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases` endpoint.
      *
@@ -6620,10 +6576,10 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_releases(
         &self,
@@ -6660,7 +6616,7 @@ impl Repos {
             .await
     }
     /**
-     * List releases.
+     * List releases
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases` endpoint.
      *
@@ -6696,7 +6652,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a release.
+     * Create a release
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/releases` endpoint.
      *
@@ -6708,8 +6664,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_release(
         &self,
@@ -6736,7 +6692,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a release asset.
+     * Get a release asset
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/assets/{asset_id}` endpoint.
      *
@@ -6746,9 +6702,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `asset_id: i64` -- asset_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `asset_id` -- asset_id parameter
      */
     pub async fn get_release_asset(
         &self,
@@ -6776,19 +6732,17 @@ impl Repos {
             .await
     }
     /**
-     * Delete a release asset.
+     * Delete a release asset
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/releases/assets/{asset_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#delete-a-release-asset>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `asset_id: i64` -- asset_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `asset_id` -- asset_id parameter
      */
     pub async fn delete_release_asset(
         &self,
@@ -6816,7 +6770,7 @@ impl Repos {
             .await
     }
     /**
-     * Update a release asset.
+     * Update a release asset
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/releases/assets/{asset_id}` endpoint.
      *
@@ -6826,9 +6780,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `asset_id: i64` -- asset_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `asset_id` -- asset_id parameter
      */
     pub async fn update_release_asset(
         &self,
@@ -6857,7 +6811,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the latest release.
+     * Get the latest release
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/latest` endpoint.
      *
@@ -6869,8 +6823,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_latest_release(
         &self,
@@ -6896,7 +6850,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a release by tag name.
+     * Get a release by tag name
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/tags/{tag}` endpoint.
      *
@@ -6906,9 +6860,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `tag: &str` -- tag parameter.
+     * * `owner`
+     * * `repo`
+     * * `tag` -- tag parameter
      */
     pub async fn get_release_by_tag(
         &self,
@@ -6936,7 +6890,7 @@ impl Repos {
             .await
     }
     /**
-     * Get a release.
+     * Get a release
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/{release_id}` endpoint.
      *
@@ -6946,9 +6900,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `release_id: i64` -- release_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `release_id` -- release_id parameter
      */
     pub async fn get_release(
         &self,
@@ -6976,7 +6930,7 @@ impl Repos {
             .await
     }
     /**
-     * Delete a release.
+     * Delete a release
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/releases/{release_id}` endpoint.
      *
@@ -6986,9 +6940,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `release_id: i64` -- release_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `release_id` -- release_id parameter
      */
     pub async fn delete_release(
         &self,
@@ -7016,7 +6970,7 @@ impl Repos {
             .await
     }
     /**
-     * Update a release.
+     * Update a release
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/releases/{release_id}` endpoint.
      *
@@ -7026,9 +6980,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `release_id: i64` -- release_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `release_id` -- release_id parameter
      */
     pub async fn update_release(
         &self,
@@ -7057,21 +7011,19 @@ impl Repos {
             .await
     }
     /**
-     * List release assets.
+     * List release assets
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-release-assets>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `release_id: i64` -- release_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `release_id` -- release_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_release_assets(
         &self,
@@ -7110,13 +7062,11 @@ impl Repos {
             .await
     }
     /**
-     * List release assets.
+     * List release assets
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
      *
      * As opposed to `list_release_assets`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-release-assets>
      */
@@ -7146,7 +7096,7 @@ impl Repos {
             .await
     }
     /**
-     * Upload a release asset.
+     * Upload a release asset
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
      *
@@ -7165,19 +7115,20 @@ impl Repos {
      * When an upstream failure occurs, you will receive a `502 Bad Gateway` status. This may leave an empty asset with a state of `starter`. It can be safely deleted.
      *
      * **Notes:**
+     *
      * *   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://docs.github.com/rest/reference/repos#list-assets-for-a-release)"
-     * endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact?tags=rest-api).
+     *     endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact?tags=rest-api).
      * *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
      *
      * FROM: <https://docs.github.com/rest/reference/repos#upload-a-release-asset>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `release_id: i64` -- release_id parameter.
-     * * `name: &str`
-     * * `label: &str`
+     * * `owner`
+     * * `repo`
+     * * `release_id` -- release_id parameter
+     * * `name`
+     * * `label`
      */
     pub async fn upload_release_asset<B: Into<reqwest::Body>>(
         &self,
@@ -7217,7 +7168,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the weekly commit activity.
+     * Get the weekly commit activity
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/code_frequency` endpoint.
      *
@@ -7227,8 +7178,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_code_frequency_stats(
         &self,
@@ -7254,7 +7205,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the weekly commit activity.
+     * Get the weekly commit activity
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/code_frequency` endpoint.
      *
@@ -7288,7 +7239,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the last year of commit activity.
+     * Get the last year of commit activity
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/commit_activity` endpoint.
      *
@@ -7298,8 +7249,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_commit_activity_stats(
         &self,
@@ -7325,7 +7276,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the last year of commit activity.
+     * Get the last year of commit activity
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/commit_activity` endpoint.
      *
@@ -7359,10 +7310,9 @@ impl Repos {
             .await
     }
     /**
-     * Get all contributor commit activity.
+     * Get all contributor commit activity
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/contributors` endpoint.
-     *
      *
      * Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information:
      *
@@ -7375,8 +7325,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_contributors_stats(
         &self,
@@ -7402,12 +7352,11 @@ impl Repos {
             .await
     }
     /**
-     * Get all contributor commit activity.
+     * Get all contributor commit activity
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/contributors` endpoint.
      *
      * As opposed to `get_contributors_stats`, this function returns all the pages of the request at once.
-     *
      *
      * Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information:
      *
@@ -7442,7 +7391,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the weekly commit count.
+     * Get the weekly commit count
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/participation` endpoint.
      *
@@ -7454,8 +7403,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_participation_stats(
         &self,
@@ -7481,7 +7430,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the hourly commit count for each day.
+     * Get the hourly commit count for each day
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/punch_card` endpoint.
      *
@@ -7497,8 +7446,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_punch_card_stats(
         &self,
@@ -7524,7 +7473,7 @@ impl Repos {
             .await
     }
     /**
-     * Get the hourly commit count for each day.
+     * Get the hourly commit count for each day
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/punch_card` endpoint.
      *
@@ -7564,7 +7513,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a commit status.
+     * Create a commit status
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/statuses/{sha}` endpoint.
      *
@@ -7576,9 +7525,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `sha: &str`
+     * * `owner`
+     * * `repo`
+     * * `sha`
      */
     pub async fn create_commit_status(
         &self,
@@ -7607,20 +7556,18 @@ impl Repos {
             .await
     }
     /**
-     * List repository tags.
+     * List repository tags
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/tags` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-tags>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_tags(
         &self,
@@ -7657,13 +7604,11 @@ impl Repos {
             .await
     }
     /**
-     * List repository tags.
+     * List repository tags
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/tags` endpoint.
      *
      * As opposed to `list_tags`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-tags>
      */
@@ -7691,7 +7636,7 @@ impl Repos {
             .await
     }
     /**
-     * Download a repository archive (tar).
+     * Download a repository archive (tar)
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/tarball/{ref}` endpoint.
      *
@@ -7704,9 +7649,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str`
+     * * `owner`
+     * * `repo`
+     * * `ref_`
      */
     pub async fn download_tarball_archive(
         &self,
@@ -7734,20 +7679,18 @@ impl Repos {
             .await
     }
     /**
-     * List repository teams.
+     * List repository teams
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/teams` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-teams>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_teams(
         &self,
@@ -7784,13 +7727,11 @@ impl Repos {
             .await
     }
     /**
-     * List repository teams.
+     * List repository teams
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/teams` endpoint.
      *
      * As opposed to `list_teams`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-teams>
      */
@@ -7818,20 +7759,18 @@ impl Repos {
             .await
     }
     /**
-     * Get all repository topics.
+     * Get all repository topics
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/topics` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-all-repository-topics>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `per_page: i64` -- Results per page (max 100).
+     * * `owner`
+     * * `repo`
+     * * `page` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
      */
     pub async fn get_all_topics(
         &self,
@@ -7868,18 +7807,16 @@ impl Repos {
             .await
     }
     /**
-     * Replace all repository topics.
+     * Replace all repository topics
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/topics` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#replace-all-repository-topics>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn replace_all_topics(
         &self,
@@ -7906,7 +7843,7 @@ impl Repos {
             .await
     }
     /**
-     * Get repository clones.
+     * Get repository clones
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/clones` endpoint.
      *
@@ -7916,9 +7853,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per: crate::types::Per` -- Must be one of: `day`, `week`.
+     * * `owner`
+     * * `repo`
+     * * `per` -- Must be one of: `day`, `week`.
      */
     pub async fn get_clones(
         &self,
@@ -7951,7 +7888,7 @@ impl Repos {
             .await
     }
     /**
-     * Get top referral paths.
+     * Get top referral paths
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/paths` endpoint.
      *
@@ -7961,8 +7898,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_top_paths(
         &self,
@@ -7988,7 +7925,7 @@ impl Repos {
             .await
     }
     /**
-     * Get top referral paths.
+     * Get top referral paths
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/paths` endpoint.
      *
@@ -8022,7 +7959,7 @@ impl Repos {
             .await
     }
     /**
-     * Get top referral sources.
+     * Get top referral sources
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/referrers` endpoint.
      *
@@ -8032,8 +7969,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_top_referrers(
         &self,
@@ -8059,7 +7996,7 @@ impl Repos {
             .await
     }
     /**
-     * Get top referral sources.
+     * Get top referral sources
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/referrers` endpoint.
      *
@@ -8093,7 +8030,7 @@ impl Repos {
             .await
     }
     /**
-     * Get page views.
+     * Get page views
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/views` endpoint.
      *
@@ -8103,9 +8040,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per: crate::types::Per` -- Must be one of: `day`, `week`.
+     * * `owner`
+     * * `repo`
+     * * `per` -- Must be one of: `day`, `week`.
      */
     pub async fn get_views(
         &self,
@@ -8138,7 +8075,7 @@ impl Repos {
             .await
     }
     /**
-     * Transfer a repository.
+     * Transfer a repository
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/transfer` endpoint.
      *
@@ -8148,8 +8085,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn transfer(
         &self,
@@ -8176,7 +8113,7 @@ impl Repos {
             .await
     }
     /**
-     * Check if vulnerability alerts are enabled for a repository.
+     * Check if vulnerability alerts are enabled for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/vulnerability-alerts` endpoint.
      *
@@ -8186,8 +8123,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn check_vulnerability_alerts(
         &self,
@@ -8213,7 +8150,7 @@ impl Repos {
             .await
     }
     /**
-     * Enable vulnerability alerts.
+     * Enable vulnerability alerts
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/vulnerability-alerts` endpoint.
      *
@@ -8223,8 +8160,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn enable_vulnerability_alerts(
         &self,
@@ -8250,7 +8187,7 @@ impl Repos {
             .await
     }
     /**
-     * Disable vulnerability alerts.
+     * Disable vulnerability alerts
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/vulnerability-alerts` endpoint.
      *
@@ -8260,8 +8197,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn disable_vulnerability_alerts(
         &self,
@@ -8287,7 +8224,7 @@ impl Repos {
             .await
     }
     /**
-     * Download a repository archive (zip).
+     * Download a repository archive (zip)
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/zipball/{ref}` endpoint.
      *
@@ -8300,9 +8237,9 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `ref_: &str`
+     * * `owner`
+     * * `repo`
+     * * `ref_`
      */
     pub async fn download_zipball_archive(
         &self,
@@ -8330,7 +8267,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a repository using a template.
+     * Create a repository using a template
      *
      * This function performs a `POST` to the `/repos/{template_owner}/{template_repo}/generate` endpoint.
      *
@@ -8347,8 +8284,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `template_owner: &str`
-     * * `template_repo: &str`
+     * * `template_owner`
+     * * `template_repo`
      */
     pub async fn create_using_template(
         &self,
@@ -8375,13 +8312,14 @@ impl Repos {
             .await
     }
     /**
-     * List public repositories.
+     * List public repositories
      *
      * This function performs a `GET` to the `/repositories` endpoint.
      *
      * Lists all public repositories in the order that they were created.
      *
      * Note:
+     *
      * - For GitHub Enterprise Server, this endpoint will only list repositories available to all users on the enterprise.
      * - Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
      *
@@ -8389,7 +8327,7 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `since: i64` -- A repository ID. Only return repositories with an ID greater than this ID.
+     * * `since` -- A repository ID. Only return repositories with an ID greater than this ID.
      */
     pub async fn list_public(
         &self,
@@ -8400,7 +8338,7 @@ impl Repos {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/repositories?{}", query_), None);
+        let url = self.client.url(&format!("/repositories?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -8412,7 +8350,7 @@ impl Repos {
             .await
     }
     /**
-     * List public repositories.
+     * List public repositories
      *
      * This function performs a `GET` to the `/repositories` endpoint.
      *
@@ -8421,6 +8359,7 @@ impl Repos {
      * Lists all public repositories in the order that they were created.
      *
      * Note:
+     *
      * - For GitHub Enterprise Server, this endpoint will only list repositories available to all users on the enterprise.
      * - Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
      *
@@ -8435,7 +8374,7 @@ impl Repos {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/repositories?{}", query_), None);
+        let url = self.client.url(&format!("/repositories?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -8447,7 +8386,7 @@ impl Repos {
             .await
     }
     /**
-     * List repositories for the authenticated user.
+     * List repositories for the authenticated user
      *
      * This function performs a `GET` to the `/user/repos` endpoint.
      *
@@ -8459,22 +8398,22 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `visibility: crate::types::ReposListVisibility` -- Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
-     * * `affiliation: &str` -- Comma-separated list of values. Can include:  
-     *   \* `owner`: Repositories that are owned by the authenticated user.  
-     *   \* `collaborator`: Repositories that the user has been added to as a collaborator.  
+     * * `visibility` -- Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
+     * * `affiliation` -- Comma-separated list of values. Can include:
+     *   \* `owner`: Repositories that are owned by the authenticated user.
+     *   \* `collaborator`: Repositories that the user has been added to as a collaborator.
      *   \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
-     * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
-     *    
-     *  Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*. Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `before: chrono::DateTime<chrono::Utc>` -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `type_` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`
+     *
+     *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
+     * * `sort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `before` -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
     pub async fn list_for_authenticated_user(
         &self,
@@ -8517,7 +8456,7 @@ impl Repos {
             query_args.push(("visibility".to_string(), visibility.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/repos?{}", query_), None);
+        let url = self.client.url(&format!("/user/repos?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -8529,7 +8468,7 @@ impl Repos {
             .await
     }
     /**
-     * List repositories for the authenticated user.
+     * List repositories for the authenticated user
      *
      * This function performs a `GET` to the `/user/repos` endpoint.
      *
@@ -8574,7 +8513,7 @@ impl Repos {
             query_args.push(("visibility".to_string(), visibility.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/repos?{}", query_), None);
+        let url = self.client.url(&format!("/user/repos?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -8586,7 +8525,7 @@ impl Repos {
             .await
     }
     /**
-     * Create a repository for the authenticated user.
+     * Create a repository for the authenticated user
      *
      * This function performs a `POST` to the `/user/repos` endpoint.
      *
@@ -8617,7 +8556,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository invitations for the authenticated user.
+     * List repository invitations for the authenticated user
      *
      * This function performs a `GET` to the `/user/repository_invitations` endpoint.
      *
@@ -8627,8 +8566,8 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_invitations_for_authenticated_user(
         &self,
@@ -8645,7 +8584,7 @@ impl Repos {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/repository_invitations?{}", query_), None);
+            .url(&format!("/user/repository_invitations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -8657,7 +8596,7 @@ impl Repos {
             .await
     }
     /**
-     * List repository invitations for the authenticated user.
+     * List repository invitations for the authenticated user
      *
      * This function performs a `GET` to the `/user/repository_invitations` endpoint.
      *
@@ -8682,17 +8621,15 @@ impl Repos {
             .await
     }
     /**
-     * Decline a repository invitation.
+     * Decline a repository invitation
      *
      * This function performs a `DELETE` to the `/user/repository_invitations/{invitation_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#decline-a-repository-invitation>
      *
      * **Parameters:**
      *
-     * * `invitation_id: i64` -- invitation_id parameter.
+     * * `invitation_id` -- invitation_id parameter
      */
     pub async fn decline_invitation(
         &self,
@@ -8716,17 +8653,15 @@ impl Repos {
             .await
     }
     /**
-     * Accept a repository invitation.
+     * Accept a repository invitation
      *
      * This function performs a `PATCH` to the `/user/repository_invitations/{invitation_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/repos#accept-a-repository-invitation>
      *
      * **Parameters:**
      *
-     * * `invitation_id: i64` -- invitation_id parameter.
+     * * `invitation_id` -- invitation_id parameter
      */
     pub async fn accept_invitation(&self, invitation_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -8747,7 +8682,7 @@ impl Repos {
             .await
     }
     /**
-     * List repositories for a user.
+     * List repositories for a user
      *
      * This function performs a `GET` to the `/users/{username}/repos` endpoint.
      *
@@ -8757,14 +8692,14 @@ impl Repos {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `type_: crate::types::ReposListUserType` -- Can be one of `all`, `owner`, `member`.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `type_` -- Can be one of `all`, `owner`, `member`.
+     * * `sort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_user(
         &self,
@@ -8811,7 +8746,7 @@ impl Repos {
             .await
     }
     /**
-     * List repositories for a user.
+     * List repositories for a user
      *
      * This function performs a `GET` to the `/users/{username}/repos` endpoint.
      *

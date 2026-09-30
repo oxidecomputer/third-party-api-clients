@@ -12,7 +12,7 @@ impl Lists {
     }
 
     /**
-     * Get lists info.
+     * Get lists info
      *
      * This function performs a `GET` to the `/lists` endpoint.
      *
@@ -20,19 +20,19 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `before_date_created: &str` -- Restrict response to lists created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_date_created: &str` -- Restrict results to lists created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_campaign_last_sent: &str` -- Restrict results to lists created before the last campaign send date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_campaign_last_sent: &str` -- Restrict results to lists created after the last campaign send date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `email: &str` -- Restrict results to lists that include a specific subscriber's email address.
-     * * `sort_field: crate::types::GetListsSortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
-     * * `has_ecommerce_store: bool` -- Restrict results to lists that contain an active, connected, undeleted ecommerce store.
-     * * `include_total_contacts: bool` -- Return the total_contacts field in the stats response, which contains an approximate count of all contacts in any state.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `before_date_created` -- Restrict response to lists created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_date_created` -- Restrict results to lists created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_campaign_last_sent` -- Restrict results to lists created before the last campaign send date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_campaign_last_sent` -- Restrict results to lists created after the last campaign send date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `email` -- Restrict results to lists that include a specific subscriber's email address.
+     * * `sort_field` -- Returns files sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
+     * * `has_ecommerce_store` -- Restrict results to lists that contain an active, connected, undeleted ecommerce store.
+     * * `include_total_contacts` -- Return the total_contacts field in the stats response, which contains an approximate count of all contacts in any state.
      */
     pub async fn get(
         &self,
@@ -109,7 +109,7 @@ impl Lists {
             query_args.push(("sort_field".to_string(), sort_field.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/lists?{}", query_), None);
+        let url = self.client.url(&format!("/lists?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -121,7 +121,7 @@ impl Lists {
             .await
     }
     /**
-     * Add list.
+     * Add list
      *
      * This function performs a `POST` to the `/lists` endpoint.
      *
@@ -143,7 +143,7 @@ impl Lists {
             .await
     }
     /**
-     * Get list info.
+     * Get list info
      *
      * This function performs a `GET` to the `/lists/{list_id}` endpoint.
      *
@@ -151,10 +151,10 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `include_total_contacts: bool` -- Return the total_contacts field in the stats response, which contains an approximate count of all contacts in any state.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `include_total_contacts` -- Return the total_contacts field in the stats response, which contains an approximate count of all contacts in any state.
      */
     pub async fn get_lists(
         &self,
@@ -196,7 +196,7 @@ impl Lists {
             .await
     }
     /**
-     * Batch subscribe or unsubscribe.
+     * Batch subscribe or unsubscribe
      *
      * This function performs a `POST` to the `/lists/{list_id}` endpoint.
      *
@@ -204,9 +204,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `skip_merge_validation: bool` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
-     * * `skip_duplicate_check: bool` -- If skip_duplicate_check is true, we will ignore duplicates sent in the request when using the batch sub/unsub on the lists endpoint. The status of the first appearance in the request will be saved. This defaults to false.
+     * * `list_id` -- The unique ID for the list.
+     * * `skip_merge_validation` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
+     * * `skip_duplicate_check` -- If skip_duplicate_check is true, we will ignore duplicates sent in the request when using the batch sub/unsub on the lists endpoint. The status of the first appearance in the request will be saved. This defaults to false.
      */
     pub async fn post_lists(
         &self,
@@ -248,7 +248,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete list.
+     * Delete list
      *
      * This function performs a `DELETE` to the `/lists/{list_id}` endpoint.
      *
@@ -256,7 +256,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn delete(&self, list_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -274,7 +274,7 @@ impl Lists {
             .await
     }
     /**
-     * Update lists.
+     * Update lists
      *
      * This function performs a `PATCH` to the `/lists/{list_id}` endpoint.
      *
@@ -282,7 +282,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn patch(
         &self,
@@ -304,7 +304,7 @@ impl Lists {
             .await
     }
     /**
-     * List abuse reports.
+     * List abuse reports
      *
      * This function performs a `GET` to the `/lists/{list_id}/abuse-reports` endpoint.
      *
@@ -312,11 +312,11 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn get_abuse_report(
         &self,
@@ -359,7 +359,7 @@ impl Lists {
             .await
     }
     /**
-     * Get abuse report.
+     * Get abuse report
      *
      * This function performs a `GET` to the `/lists/{list_id}/abuse-reports/{report_id}` endpoint.
      *
@@ -367,12 +367,12 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `report_id: &str` -- The id for the abuse report.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `report_id` -- The id for the abuse report.
      */
     pub async fn get_abuse_report_lists(
         &self,
@@ -417,7 +417,7 @@ impl Lists {
             .await
     }
     /**
-     * List recent activity.
+     * List recent activity
      *
      * This function performs a `GET` to the `/lists/{list_id}/activity` endpoint.
      *
@@ -425,9 +425,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn get_activity(
         &self,
@@ -462,7 +462,7 @@ impl Lists {
             .await
     }
     /**
-     * List top email clients.
+     * List top email clients
      *
      * This function performs a `GET` to the `/lists/{list_id}/clients` endpoint.
      *
@@ -470,9 +470,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn get_client(
         &self,
@@ -507,7 +507,7 @@ impl Lists {
             .await
     }
     /**
-     * List growth history data.
+     * List growth history data
      *
      * This function performs a `GET` to the `/lists/{list_id}/growth-history` endpoint.
      *
@@ -515,13 +515,13 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `sort_field: crate::types::GetListsGrowthHistorySortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `sort_field` -- Returns files sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
      */
     pub async fn get_growth_history(
         &self,
@@ -572,7 +572,7 @@ impl Lists {
             .await
     }
     /**
-     * Get growth history by month.
+     * Get growth history by month
      *
      * This function performs a `GET` to the `/lists/{list_id}/growth-history/{month}` endpoint.
      *
@@ -580,10 +580,10 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `month: &str` -- A specific month of list growth history.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `month` -- A specific month of list growth history.
      */
     pub async fn get_growth_history_lists(
         &self,
@@ -620,7 +620,7 @@ impl Lists {
             .await
     }
     /**
-     * List interest categories.
+     * List interest categories
      *
      * This function performs a `GET` to the `/lists/{list_id}/interest-categories` endpoint.
      *
@@ -628,12 +628,12 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `type_: &str` -- Restrict results a type of interest group.
+     * * `list_id` -- The unique ID for the list.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `type_` -- Restrict results a type of interest group
      */
     pub async fn get_interest_categorie(
         &self,
@@ -680,7 +680,7 @@ impl Lists {
             .await
     }
     /**
-     * Add interest category.
+     * Add interest category
      *
      * This function performs a `POST` to the `/lists/{list_id}/interest-categories` endpoint.
      *
@@ -688,7 +688,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn post_interest_categorie(
         &self,
@@ -713,7 +713,7 @@ impl Lists {
             .await
     }
     /**
-     * Get interest category info.
+     * Get interest category info
      *
      * This function performs a `GET` to the `/lists/{list_id}/interest-categories/{interest_category_id}` endpoint.
      *
@@ -721,10 +721,10 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_interest_categorie_lists(
         &self,
@@ -761,7 +761,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete interest category.
+     * Delete interest category
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/interest-categories/{interest_category_id}` endpoint.
      *
@@ -769,8 +769,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
      */
     pub async fn delete_interest_categories(
         &self,
@@ -796,7 +796,7 @@ impl Lists {
             .await
     }
     /**
-     * Update interest category.
+     * Update interest category
      *
      * This function performs a `PATCH` to the `/lists/{list_id}/interest-categories/{interest_category_id}` endpoint.
      *
@@ -804,8 +804,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
      */
     pub async fn patch_interest_categories(
         &self,
@@ -832,7 +832,7 @@ impl Lists {
             .await
     }
     /**
-     * List interests in category.
+     * List interests in category
      *
      * This function performs a `GET` to the `/lists/{list_id}/interest-categories/{interest_category_id}/interests` endpoint.
      *
@@ -840,12 +840,12 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get_interest_categories_interest(
         &self,
@@ -890,7 +890,7 @@ impl Lists {
             .await
     }
     /**
-     * Add interest in category.
+     * Add interest in category
      *
      * This function performs a `POST` to the `/lists/{list_id}/interest-categories/{interest_category_id}/interests` endpoint.
      *
@@ -898,8 +898,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
      */
     pub async fn post_interest_categories(
         &self,
@@ -926,7 +926,7 @@ impl Lists {
             .await
     }
     /**
-     * Get interest in category.
+     * Get interest in category
      *
      * This function performs a `GET` to the `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}` endpoint.
      *
@@ -934,11 +934,11 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
-     * * `interest_id: &str` -- The specific interest or 'group name'.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
+     * * `interest_id` -- The specific interest or 'group name'.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_interest_categories_interest_lists(
         &self,
@@ -977,7 +977,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete interest in category.
+     * Delete interest in category
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}` endpoint.
      *
@@ -985,9 +985,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
-     * * `interest_id: &str` -- The specific interest or 'group name'.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
+     * * `interest_id` -- The specific interest or 'group name'.
      */
     pub async fn delete_interest_categories_interests(
         &self,
@@ -1015,7 +1015,7 @@ impl Lists {
             .await
     }
     /**
-     * Update interest in category.
+     * Update interest in category
      *
      * This function performs a `PATCH` to the `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}` endpoint.
      *
@@ -1023,9 +1023,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `interest_category_id: &str` -- The unique ID for the interest category.
-     * * `interest_id: &str` -- The specific interest or 'group name'.
+     * * `list_id` -- The unique ID for the list.
+     * * `interest_category_id` -- The unique ID for the interest category.
+     * * `interest_id` -- The specific interest or 'group name'.
      */
     pub async fn patch_interest_categories_interests(
         &self,
@@ -1054,7 +1054,7 @@ impl Lists {
             .await
     }
     /**
-     * List segments.
+     * List segments
      *
      * This function performs a `GET` to the `/lists/{list_id}/segments` endpoint.
      *
@@ -1062,19 +1062,19 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `type_: &str` -- Limit results based on segment type.
-     * * `since_created_at: &str` -- Restrict results to segments created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_created_at: &str` -- Restrict results to segments created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `include_cleaned: bool` -- Whether the webhook is triggered when a list subscriber is added.
-     * * `include_transactional: bool` -- Whether the webhook is triggered when a list subscriber is added.
-     * * `include_unsubscribed: bool` -- Whether the webhook is triggered when a list subscriber is added.
-     * * `since_updated_at: &str` -- Restrict results to segments update after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_updated_at: &str` -- Restrict results to segments update before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `type_` -- Limit results based on segment type.
+     * * `since_created_at` -- Restrict results to segments created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_created_at` -- Restrict results to segments created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `include_cleaned` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `include_transactional` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `include_unsubscribed` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `since_updated_at` -- Restrict results to segments update after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_updated_at` -- Restrict results to segments update before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
      */
     pub async fn preview_segment(
         &self,
@@ -1161,7 +1161,7 @@ impl Lists {
             .await
     }
     /**
-     * Add segment.
+     * Add segment
      *
      * This function performs a `POST` to the `/lists/{list_id}/segments` endpoint.
      *
@@ -1169,7 +1169,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn post_segment(
         &self,
@@ -1194,7 +1194,7 @@ impl Lists {
             .await
     }
     /**
-     * Get segment info.
+     * Get segment info
      *
      * This function performs a `GET` to the `/lists/{list_id}/segments/{segment_id}` endpoint.
      *
@@ -1202,13 +1202,13 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `segment_id: &str` -- The unique id for the segment.
-     * * `include_cleaned: bool` -- Whether the webhook is triggered when a list subscriber is added.
-     * * `include_transactional: bool` -- Whether the webhook is triggered when a list subscriber is added.
-     * * `include_unsubscribed: bool` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `segment_id` -- The unique id for the segment.
+     * * `include_cleaned` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `include_transactional` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `include_unsubscribed` -- Whether the webhook is triggered when a list subscriber is added.
      */
     pub async fn get_segment(
         &self,
@@ -1263,7 +1263,7 @@ impl Lists {
             .await
     }
     /**
-     * Batch add or remove members.
+     * Batch add or remove members
      *
      * This function performs a `POST` to the `/lists/{list_id}/segments/{segment_id}` endpoint.
      *
@@ -1271,8 +1271,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `segment_id: &str` -- The unique id for the segment.
+     * * `list_id` -- The unique ID for the list.
+     * * `segment_id` -- The unique id for the segment.
      */
     pub async fn post_segment_lists(
         &self,
@@ -1300,7 +1300,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete segment.
+     * Delete segment
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/segments/{segment_id}` endpoint.
      *
@@ -1308,8 +1308,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `segment_id: &str` -- The unique id for the segment.
+     * * `list_id` -- The unique ID for the list.
+     * * `segment_id` -- The unique id for the segment.
      */
     pub async fn delete_segments(
         &self,
@@ -1335,7 +1335,7 @@ impl Lists {
             .await
     }
     /**
-     * Update segment.
+     * Update segment
      *
      * This function performs a `PATCH` to the `/lists/{list_id}/segments/{segment_id}` endpoint.
      *
@@ -1343,8 +1343,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `segment_id: &str` -- The unique id for the segment.
+     * * `list_id` -- The unique ID for the list.
+     * * `segment_id` -- The unique id for the segment.
      */
     pub async fn patch_segments(
         &self,
@@ -1371,7 +1371,7 @@ impl Lists {
             .await
     }
     /**
-     * List members in segment.
+     * List members in segment
      *
      * This function performs a `GET` to the `/lists/{list_id}/segments/{segment_id}/members` endpoint.
      *
@@ -1379,15 +1379,15 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `segment_id: &str` -- The unique id for the segment.
-     * * `include_cleaned: bool` -- Whether the webhook is triggered when a list subscriber is added.
-     * * `include_transactional: bool` -- Whether the webhook is triggered when a list subscriber is added.
-     * * `include_unsubscribed: bool` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `segment_id` -- The unique id for the segment.
+     * * `include_cleaned` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `include_transactional` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `include_unsubscribed` -- Whether the webhook is triggered when a list subscriber is added.
      */
     pub async fn get_segments_member(
         &self,
@@ -1450,7 +1450,7 @@ impl Lists {
             .await
     }
     /**
-     * Add member to segment.
+     * Add member to segment
      *
      * This function performs a `POST` to the `/lists/{list_id}/segments/{segment_id}/members` endpoint.
      *
@@ -1458,8 +1458,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `segment_id: &str` -- The unique id for the segment.
+     * * `list_id` -- The unique ID for the list.
+     * * `segment_id` -- The unique id for the segment.
      */
     pub async fn post_segments_member(
         &self,
@@ -1486,7 +1486,7 @@ impl Lists {
             .await
     }
     /**
-     * Remove list member from segment.
+     * Remove list member from segment
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}` endpoint.
      *
@@ -1494,9 +1494,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `segment_id: &str` -- The unique id for the segment.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `list_id` -- The unique ID for the list.
+     * * `segment_id` -- The unique id for the segment.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn delete_segments_members(
         &self,
@@ -1532,8 +1532,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `name: &str` -- The search query used to filter tags.  The search query will be compared to each tag as a prefix, so all tags that have a name starting with this field will be returned.
+     * * `list_id` -- The unique ID for the list.
+     * * `name` -- The search query used to filter tags.  The search query will be compared to each tag as a prefix, so all tags that have a name starting with this field will be returned.
      */
     pub async fn search_tags_name(
         &self,
@@ -1564,7 +1564,7 @@ impl Lists {
             .await
     }
     /**
-     * List members info.
+     * List members info
      *
      * This function performs a `GET` to the `/lists/{list_id}/members` endpoint.
      *
@@ -1572,26 +1572,26 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `email_type: &str` -- The name of the folder.
-     * * `status: crate::types::GetListsMembersStatus` -- The subscriber's status.
-     * * `since_timestamp_opt: &str` -- Restrict results to subscribers who opted-in after the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_timestamp_opt: &str` -- Restrict results to subscribers who opted-in before the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_last_changed: &str` -- Restrict results to subscribers whose information changed after the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_last_changed: &str` -- Restrict results to subscribers whose information changed before the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `unique_email_id: &str` -- A unique identifier for the email address across all Mailchimp lists.
-     * * `vip_only: bool` -- A filter to return only the list's VIP members. Passing `true` will restrict results to VIP list members, passing `false` will return all list members.
-     * * `interest_category_id: &str` -- The unique id for the interest category.
-     * * `interest_ids: &str` -- Used to filter list members by interests. Must be accompanied by interest_category_id and interest_match. The value must be a comma separated list of interest ids present for any supplied interest categories.
-     * * `interest_match: crate::types::InterestMatch` -- Used to filter list members by interests. Must be accompanied by interest_category_id and interest_ids. "any" will match a member with any of the interest supplied, "all" will only match members with every interest supplied, and "none" will match members without any of the interest supplied.
-     * * `sort_field: crate::types::GetListsMembersSortField` -- Returns files sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
-     * * `since_last_campaign: bool` -- Filter subscribers by those subscribed/unsubscribed/pending/cleaned since last email campaign send. Member status is required to use this filter.
-     * * `unsubscribed_since: &str` -- Filter subscribers by those unsubscribed since a specific date. Using any status other than unsubscribed with this filter will result in an error.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `email_type` -- The name of the folder.
+     * * `status` -- The subscriber's status.
+     * * `since_timestamp_opt` -- Restrict results to subscribers who opted-in after the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_timestamp_opt` -- Restrict results to subscribers who opted-in before the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_last_changed` -- Restrict results to subscribers whose information changed after the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_last_changed` -- Restrict results to subscribers whose information changed before the set timeframe. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `unique_email_id` -- A unique identifier for the email address across all Mailchimp lists.
+     * * `vip_only` -- A filter to return only the list's VIP members. Passing `true` will restrict results to VIP list members, passing `false` will return all list members.
+     * * `interest_category_id` -- The unique id for the interest category.
+     * * `interest_ids` -- Used to filter list members by interests. Must be accompanied by interest_category_id and interest_match. The value must be a comma separated list of interest ids present for any supplied interest categories.
+     * * `interest_match` -- Used to filter list members by interests. Must be accompanied by interest_category_id and interest_ids. "any" will match a member with any of the interest supplied, "all" will only match members with every interest supplied, and "none" will match members without any of the interest supplied.
+     * * `sort_field` -- Returns files sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
+     * * `since_last_campaign` -- Filter subscribers by those subscribed/unsubscribed/pending/cleaned since last email campaign send. Member status is required to use this filter.
+     * * `unsubscribed_since` -- Filter subscribers by those unsubscribed since a specific date. Using any status other than unsubscribed with this filter will result in an error.
      */
     pub async fn get_member(
         &self,
@@ -1715,7 +1715,7 @@ impl Lists {
             .await
     }
     /**
-     * Add member to list.
+     * Add member to list
      *
      * This function performs a `POST` to the `/lists/{list_id}/members` endpoint.
      *
@@ -1723,8 +1723,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `skip_merge_validation: bool` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
+     * * `list_id` -- The unique ID for the list.
+     * * `skip_merge_validation` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
      */
     pub async fn post_member(
         &self,
@@ -1759,7 +1759,7 @@ impl Lists {
             .await
     }
     /**
-     * Get member info.
+     * Get member info
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}` endpoint.
      *
@@ -1767,10 +1767,10 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts email addresses.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts email addresses.
      */
     pub async fn get_member_lists(
         &self,
@@ -1807,7 +1807,7 @@ impl Lists {
             .await
     }
     /**
-     * Add or update list member.
+     * Add or update list member
      *
      * This function performs a `PUT` to the `/lists/{list_id}/members/{subscriber_hash}` endpoint.
      *
@@ -1815,9 +1815,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `skip_merge_validation: bool` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `skip_merge_validation` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
      */
     pub async fn put_members(
         &self,
@@ -1854,7 +1854,7 @@ impl Lists {
             .await
     }
     /**
-     * Archive list member.
+     * Archive list member
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/members/{subscriber_hash}` endpoint.
      *
@@ -1862,8 +1862,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn delete_members(
         &self,
@@ -1889,7 +1889,7 @@ impl Lists {
             .await
     }
     /**
-     * Update list member.
+     * Update list member
      *
      * This function performs a `PATCH` to the `/lists/{list_id}/members/{subscriber_hash}` endpoint.
      *
@@ -1897,9 +1897,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `skip_merge_validation: bool` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `skip_merge_validation` -- If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false.
      */
     pub async fn patch_members(
         &self,
@@ -1936,7 +1936,7 @@ impl Lists {
             .await
     }
     /**
-     * View recent activity 50.
+     * View recent activity 50
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}/activity` endpoint.
      *
@@ -1944,11 +1944,11 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `action: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `action` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_members_activity(
         &self,
@@ -1989,7 +1989,7 @@ impl Lists {
             .await
     }
     /**
-     * View recent activity.
+     * View recent activity
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}/activity-feed` endpoint.
      *
@@ -1997,13 +1997,13 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `activity_filters: &[String]` -- A comma-separated list of activity filters that correspond to a set of activity types, e.g "?activity_filters=open,bounce,click".
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `activity_filters` -- A comma-separated list of activity filters that correspond to a set of activity types, e.g "?activity_filters=open,bounce,click".
      */
     pub async fn get_members_activity_feed(
         &self,
@@ -2052,7 +2052,7 @@ impl Lists {
             .await
     }
     /**
-     * List member tags.
+     * List member tags
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}/tags` endpoint.
      *
@@ -2060,12 +2060,12 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get_member_tag(
         &self,
@@ -2110,7 +2110,7 @@ impl Lists {
             .await
     }
     /**
-     * Add or remove member tags.
+     * Add or remove member tags
      *
      * This function performs a `POST` to the `/lists/{list_id}/members/{subscriber_hash}/tags` endpoint.
      *
@@ -2118,8 +2118,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn post_member_tag(
         &self,
@@ -2146,7 +2146,7 @@ impl Lists {
             .await
     }
     /**
-     * List member events.
+     * List member events
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}/events` endpoint.
      *
@@ -2154,12 +2154,12 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts email addresses.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts email addresses.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_members_event(
         &self,
@@ -2204,7 +2204,7 @@ impl Lists {
             .await
     }
     /**
-     * Add event.
+     * Add event
      *
      * This function performs a `POST` to the `/lists/{list_id}/members/{subscriber_hash}/events` endpoint.
      *
@@ -2212,8 +2212,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts email addresses.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts email addresses.
      */
     pub async fn post_member_event(
         &self,
@@ -2240,7 +2240,7 @@ impl Lists {
             .await
     }
     /**
-     * List member goal events.
+     * List member goal events
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}/goals` endpoint.
      *
@@ -2248,10 +2248,10 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_members_goal(
         &self,
@@ -2288,7 +2288,7 @@ impl Lists {
             .await
     }
     /**
-     * List recent member notes.
+     * List recent member notes
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}/notes` endpoint.
      *
@@ -2296,14 +2296,14 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `sort_field: crate::types::GetListsMembersNotesSortField` -- Returns notes sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `sort_field` -- Returns notes sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get_members_note(
         &self,
@@ -2356,7 +2356,7 @@ impl Lists {
             .await
     }
     /**
-     * Add member note.
+     * Add member note
      *
      * This function performs a `POST` to the `/lists/{list_id}/members/{subscriber_hash}/notes` endpoint.
      *
@@ -2364,8 +2364,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn post_members_note(
         &self,
@@ -2392,7 +2392,7 @@ impl Lists {
             .await
     }
     /**
-     * Get member note.
+     * Get member note
      *
      * This function performs a `GET` to the `/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}` endpoint.
      *
@@ -2400,11 +2400,11 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `note_id: &str` -- The name of the folder.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `note_id` -- The name of the folder.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_members_note_lists(
         &self,
@@ -2443,7 +2443,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete note.
+     * Delete note
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}` endpoint.
      *
@@ -2451,9 +2451,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `note_id: &str` -- The name of the folder.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `note_id` -- The name of the folder.
      */
     pub async fn delete_members_notes(
         &self,
@@ -2481,7 +2481,7 @@ impl Lists {
             .await
     }
     /**
-     * Update note.
+     * Update note
      *
      * This function performs a `PATCH` to the `/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}` endpoint.
      *
@@ -2489,9 +2489,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-     * * `note_id: &str` -- The name of the folder.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `note_id` -- The name of the folder.
      */
     pub async fn patch_members_notes(
         &self,
@@ -2520,7 +2520,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete list member.
+     * Delete list member
      *
      * This function performs a `POST` to the `/lists/{list_id}/members/{subscriber_hash}/actions/delete-permanent` endpoint.
      *
@@ -2528,8 +2528,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `list_id` -- The unique ID for the list.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn post_members_hash_actions_delete_permanent(
         &self,
@@ -2555,7 +2555,7 @@ impl Lists {
             .await
     }
     /**
-     * List merge fields.
+     * List merge fields
      *
      * This function performs a `GET` to the `/lists/{list_id}/merge-fields` endpoint.
      *
@@ -2563,13 +2563,13 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `type_: &str` -- The name of the folder.
-     * * `required: bool` -- Whether the webhook is triggered when a list subscriber is added.
+     * * `list_id` -- The unique ID for the list.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `type_` -- The name of the folder.
+     * * `required` -- Whether the webhook is triggered when a list subscriber is added.
      */
     pub async fn get_merge_field(
         &self,
@@ -2620,7 +2620,7 @@ impl Lists {
             .await
     }
     /**
-     * Add merge field.
+     * Add merge field
      *
      * This function performs a `POST` to the `/lists/{list_id}/merge-fields` endpoint.
      *
@@ -2628,7 +2628,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn post_merge_field(
         &self,
@@ -2653,7 +2653,7 @@ impl Lists {
             .await
     }
     /**
-     * Get merge field.
+     * Get merge field
      *
      * This function performs a `GET` to the `/lists/{list_id}/merge-fields/{merge_id}` endpoint.
      *
@@ -2661,10 +2661,10 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `merge_id: &str` -- The id for the merge field.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
+     * * `merge_id` -- The id for the merge field.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
     pub async fn get_merge_field_lists(
         &self,
@@ -2701,7 +2701,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete merge field.
+     * Delete merge field
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/merge-fields/{merge_id}` endpoint.
      *
@@ -2709,8 +2709,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `merge_id: &str` -- The id for the merge field.
+     * * `list_id` -- The unique ID for the list.
+     * * `merge_id` -- The id for the merge field.
      */
     pub async fn delete_merge_fields(
         &self,
@@ -2736,7 +2736,7 @@ impl Lists {
             .await
     }
     /**
-     * Update merge field.
+     * Update merge field
      *
      * This function performs a `PATCH` to the `/lists/{list_id}/merge-fields/{merge_id}` endpoint.
      *
@@ -2744,8 +2744,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `merge_id: &str` -- The id for the merge field.
+     * * `list_id` -- The unique ID for the list.
+     * * `merge_id` -- The id for the merge field.
      */
     pub async fn patch_merge_fields(
         &self,
@@ -2772,7 +2772,7 @@ impl Lists {
             .await
     }
     /**
-     * List webhooks.
+     * List webhooks
      *
      * This function performs a `GET` to the `/lists/{list_id}/webhooks` endpoint.
      *
@@ -2780,7 +2780,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn get_webhook(
         &self,
@@ -2804,7 +2804,7 @@ impl Lists {
             .await
     }
     /**
-     * Add webhook.
+     * Add webhook
      *
      * This function performs a `POST` to the `/lists/{list_id}/webhooks` endpoint.
      *
@@ -2812,7 +2812,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn post_webhook(
         &self,
@@ -2837,7 +2837,7 @@ impl Lists {
             .await
     }
     /**
-     * Get webhook info.
+     * Get webhook info
      *
      * This function performs a `GET` to the `/lists/{list_id}/webhooks/{webhook_id}` endpoint.
      *
@@ -2845,8 +2845,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `webhook_id: &str` -- The name of the folder.
+     * * `list_id` -- The unique ID for the list.
+     * * `webhook_id` -- The name of the folder.
      */
     pub async fn get_webhook_lists(
         &self,
@@ -2872,7 +2872,7 @@ impl Lists {
             .await
     }
     /**
-     * Delete webhook.
+     * Delete webhook
      *
      * This function performs a `DELETE` to the `/lists/{list_id}/webhooks/{webhook_id}` endpoint.
      *
@@ -2880,8 +2880,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `webhook_id: &str` -- The name of the folder.
+     * * `list_id` -- The unique ID for the list.
+     * * `webhook_id` -- The name of the folder.
      */
     pub async fn delete_webhooks(
         &self,
@@ -2907,7 +2907,7 @@ impl Lists {
             .await
     }
     /**
-     * Update webhook.
+     * Update webhook
      *
      * This function performs a `PATCH` to the `/lists/{list_id}/webhooks/{webhook_id}` endpoint.
      *
@@ -2915,8 +2915,8 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
-     * * `webhook_id: &str` -- The name of the folder.
+     * * `list_id` -- The unique ID for the list.
+     * * `webhook_id` -- The name of the folder.
      */
     pub async fn patch_webhooks(
         &self,
@@ -2943,7 +2943,7 @@ impl Lists {
             .await
     }
     /**
-     * List signup forms.
+     * List signup forms
      *
      * This function performs a `GET` to the `/lists/{list_id}/signup-forms` endpoint.
      *
@@ -2951,7 +2951,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn get_signup_form(
         &self,
@@ -2975,7 +2975,7 @@ impl Lists {
             .await
     }
     /**
-     * Customize signup form.
+     * Customize signup form
      *
      * This function performs a `POST` to the `/lists/{list_id}/signup-forms` endpoint.
      *
@@ -2983,7 +2983,7 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn post_signup_form(
         &self,
@@ -3008,7 +3008,7 @@ impl Lists {
             .await
     }
     /**
-     * List locations.
+     * List locations
      *
      * This function performs a `GET` to the `/lists/{list_id}/locations` endpoint.
      *
@@ -3016,9 +3016,9 @@ impl Lists {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `list_id: &str` -- The unique ID for the list.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `list_id` -- The unique ID for the list.
      */
     pub async fn get_location(
         &self,

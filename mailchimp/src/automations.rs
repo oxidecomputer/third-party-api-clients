@@ -12,7 +12,7 @@ impl Automations {
     }
 
     /**
-     * List automations.
+     * List automations
      *
      * This function performs a `GET` to the `/automations` endpoint.
      *
@@ -20,15 +20,15 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `before_create_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to automations created before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_create_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to automations created after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_start_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to automations started before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `since_start_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to automations started after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `status: crate::types::Status` -- Restrict the results to automations with the specified status.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `before_create_time` -- Restrict the response to automations created before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_create_time` -- Restrict the response to automations created after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_start_time` -- Restrict the response to automations started before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_start_time` -- Restrict the response to automations started after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `status` -- Restrict the results to automations with the specified status.
      */
     pub async fn get(
         &self,
@@ -71,7 +71,7 @@ impl Automations {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/automations?{}", query_), None);
+        let url = self.client.url(&format!("/automations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -83,7 +83,7 @@ impl Automations {
             .await
     }
     /**
-     * Add automation.
+     * Add automation
      *
      * This function performs a `POST` to the `/automations` endpoint.
      *
@@ -105,7 +105,7 @@ impl Automations {
             .await
     }
     /**
-     * Get automation info.
+     * Get automation info
      *
      * This function performs a `GET` to the `/automations/{workflow_id}` endpoint.
      *
@@ -113,9 +113,9 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `workflow_id` -- The unique id for the Automation workflow.
      */
     pub async fn get_automations(
         &self,
@@ -150,7 +150,7 @@ impl Automations {
             .await
     }
     /**
-     * Pause automation emails.
+     * Pause automation emails
      *
      * This function performs a `POST` to the `/automations/{workflow_id}/actions/pause-all-emails` endpoint.
      *
@@ -158,7 +158,7 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
+     * * `workflow_id` -- The unique id for the Automation workflow.
      */
     pub async fn post_actions_pause_all_email(
         &self,
@@ -182,7 +182,7 @@ impl Automations {
             .await
     }
     /**
-     * Start automation emails.
+     * Start automation emails
      *
      * This function performs a `POST` to the `/automations/{workflow_id}/actions/start-all-emails` endpoint.
      *
@@ -190,7 +190,7 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
+     * * `workflow_id` -- The unique id for the Automation workflow.
      */
     pub async fn post_actions_start_all_email(
         &self,
@@ -214,7 +214,7 @@ impl Automations {
             .await
     }
     /**
-     * Archive automation.
+     * Archive automation
      *
      * This function performs a `POST` to the `/automations/{workflow_id}/actions/archive` endpoint.
      *
@@ -222,7 +222,7 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
+     * * `workflow_id` -- The unique id for the Automation workflow.
      */
     pub async fn archive(&self, workflow_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -243,7 +243,7 @@ impl Automations {
             .await
     }
     /**
-     * List automated emails.
+     * List automated emails
      *
      * This function performs a `GET` to the `/automations/{workflow_id}/emails` endpoint.
      *
@@ -251,7 +251,7 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
+     * * `workflow_id` -- The unique id for the Automation workflow.
      */
     pub async fn get_email(
         &self,
@@ -275,7 +275,7 @@ impl Automations {
             .await
     }
     /**
-     * Get workflow email info.
+     * Get workflow email info
      *
      * This function performs a `GET` to the `/automations/{workflow_id}/emails/{workflow_email_id}` endpoint.
      *
@@ -283,8 +283,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
      */
     pub async fn get_email_automations(
         &self,
@@ -310,7 +310,7 @@ impl Automations {
             .await
     }
     /**
-     * Delete workflow email.
+     * Delete workflow email
      *
      * This function performs a `DELETE` to the `/automations/{workflow_id}/emails/{workflow_email_id}` endpoint.
      *
@@ -318,8 +318,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
      */
     pub async fn delete_emails(
         &self,
@@ -345,7 +345,7 @@ impl Automations {
             .await
     }
     /**
-     * Update workflow email.
+     * Update workflow email
      *
      * This function performs a `PATCH` to the `/automations/{workflow_id}/emails/{workflow_email_id}` endpoint.
      *
@@ -353,8 +353,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
      */
     pub async fn patch_email_workflow(
         &self,
@@ -381,7 +381,7 @@ impl Automations {
             .await
     }
     /**
-     * List automated email subscribers.
+     * List automated email subscribers
      *
      * This function performs a `GET` to the `/automations/{workflow_id}/emails/{workflow_email_id}/queue` endpoint.
      *
@@ -389,8 +389,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
      */
     pub async fn get_emails_queue(
         &self,
@@ -416,7 +416,7 @@ impl Automations {
             .await
     }
     /**
-     * Add subscriber to workflow email.
+     * Add subscriber to workflow email
      *
      * This function performs a `POST` to the `/automations/{workflow_id}/emails/{workflow_email_id}/queue` endpoint.
      *
@@ -424,8 +424,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
      */
     pub async fn post_emails_queue(
         &self,
@@ -452,7 +452,7 @@ impl Automations {
             .await
     }
     /**
-     * Get automated email subscriber.
+     * Get automated email subscriber
      *
      * This function performs a `GET` to the `/automations/{workflow_id}/emails/{workflow_email_id}/queue/{subscriber_hash}` endpoint.
      *
@@ -460,9 +460,9 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn get_emails_queue_automations(
         &self,
@@ -490,7 +490,7 @@ impl Automations {
             .await
     }
     /**
-     * Pause automated email.
+     * Pause automated email
      *
      * This function performs a `POST` to the `/automations/{workflow_id}/emails/{workflow_email_id}/actions/pause` endpoint.
      *
@@ -498,8 +498,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
      */
     pub async fn post_emails_actions_pause(
         &self,
@@ -525,7 +525,7 @@ impl Automations {
             .await
     }
     /**
-     * Start automated email.
+     * Start automated email
      *
      * This function performs a `POST` to the `/automations/{workflow_id}/emails/{workflow_email_id}/actions/start` endpoint.
      *
@@ -533,8 +533,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `workflow_email_id: &str` -- The unique id for the Automation workflow email.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `workflow_email_id` -- The unique id for the Automation workflow email.
      */
     pub async fn post_emails_actions_start(
         &self,
@@ -560,7 +560,7 @@ impl Automations {
             .await
     }
     /**
-     * List subscribers removed from workflow.
+     * List subscribers removed from workflow
      *
      * This function performs a `GET` to the `/automations/{workflow_id}/removed-subscribers` endpoint.
      *
@@ -568,7 +568,7 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
+     * * `workflow_id` -- The unique id for the Automation workflow.
      */
     pub async fn get_removed_subscriber(
         &self,
@@ -592,7 +592,7 @@ impl Automations {
             .await
     }
     /**
-     * Remove subscriber from workflow.
+     * Remove subscriber from workflow
      *
      * This function performs a `POST` to the `/automations/{workflow_id}/removed-subscribers` endpoint.
      *
@@ -600,7 +600,7 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
+     * * `workflow_id` -- The unique id for the Automation workflow.
      */
     pub async fn post_removed_subscriber(
         &self,
@@ -625,7 +625,7 @@ impl Automations {
             .await
     }
     /**
-     * Get subscriber removed from workflow.
+     * Get subscriber removed from workflow
      *
      * This function performs a `GET` to the `/automations/{workflow_id}/removed-subscribers/{subscriber_hash}` endpoint.
      *
@@ -633,8 +633,8 @@ impl Automations {
      *
      * **Parameters:**
      *
-     * * `workflow_id: &str` -- The unique id for the Automation workflow.
-     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `workflow_id` -- The unique id for the Automation workflow.
+     * * `subscriber_hash` -- The MD5 hash of the lowercase version of the list member's email address.
      */
     pub async fn get_removed_subscriber_automations(
         &self,

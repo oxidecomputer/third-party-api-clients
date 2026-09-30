@@ -12,7 +12,7 @@ impl Batches {
     }
 
     /**
-     * List batch requests.
+     * List batch requests
      *
      * This function performs a `GET` to the `/batches` endpoint.
      *
@@ -20,10 +20,10 @@ impl Batches {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
      */
     pub async fn get(
         &self,
@@ -46,7 +46,7 @@ impl Batches {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/batches?{}", query_), None);
+        let url = self.client.url(&format!("/batches?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -58,7 +58,7 @@ impl Batches {
             .await
     }
     /**
-     * Start batch operation.
+     * Start batch operation
      *
      * This function performs a `POST` to the `/batches` endpoint.
      *
@@ -80,7 +80,7 @@ impl Batches {
             .await
     }
     /**
-     * Get batch operation status.
+     * Get batch operation status
      *
      * This function performs a `GET` to the `/batches/{batch_id}` endpoint.
      *
@@ -88,9 +88,9 @@ impl Batches {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `batch_id: &str` -- The unique id for the batch operation.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `batch_id` -- The unique id for the batch operation.
      */
     pub async fn get_batches(
         &self,
@@ -125,7 +125,7 @@ impl Batches {
             .await
     }
     /**
-     * Delete batch request.
+     * Delete batch request
      *
      * This function performs a `DELETE` to the `/batches/{batch_id}` endpoint.
      *
@@ -133,7 +133,7 @@ impl Batches {
      *
      * **Parameters:**
      *
-     * * `batch_id: &str` -- The unique id for the batch operation.
+     * * `batch_id` -- The unique id for the batch operation.
      */
     pub async fn delete(&self, batch_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

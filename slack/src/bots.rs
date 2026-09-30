@@ -20,8 +20,8 @@ impl Bots {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users:read`.
-     * * `bot: &str` -- Bot user to get info on.
+     * * `token` -- Authentication token. Requires scope: `users:read`
+     * * `bot` -- Bot user to get info on
      */
     pub async fn info(
         &self,
@@ -32,7 +32,7 @@ impl Bots {
             query_args.push(("bot".to_string(), bot.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/bots.info?{}", query_), None);
+        let url = self.client.url(&format!("/bots.info?{query_}"), None);
         self.client
             .get(
                 &url,

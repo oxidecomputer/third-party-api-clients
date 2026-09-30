@@ -67,7 +67,7 @@
 
 /// Use the Channel Resource to list “channels” which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints.
 ///
-/// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.  
+/// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.
 ///
 /// Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.
 pub mod channels;
@@ -103,7 +103,7 @@ pub mod locations;
 ///
 /// A shipment is an object that is the result of a fulfillment of an order. An order can have one or more shipments. Say Shopify order #122323 contains 3 different products, shipped in two separate packages, there would be 2 shipments for that order.
 ///
-///  Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request “serial scan”, which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).
+/// Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request “serial scan”, which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).
 pub mod orders;
 /// Use the Products Resource to retrieve and create product records in ShipBob.
 ///
@@ -119,7 +119,7 @@ pub mod orders;
 ///
 /// * Use specific and/or unique names to describe each product so they can be easily identified by users in the ShipBob Merchant Portal. In particular, when creating variants, please give them distinguishable names i.e. for a Blue shirt that comes in two sizes, small and medium, strong product names would be Blue shirt size:small and Blue shirt size:medium.
 ///
-/// > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s).
+/// > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s)
 pub mod products;
 /// Use the Receiving Resource to retrieve, create and cancel Warehouse Receiving Orders (WROs).
 ///
@@ -303,7 +303,7 @@ impl Client {
                     client,
                 }
             }
-            Err(e) => panic!("creating reqwest client failed: {:?}", e),
+            Err(e) => panic!("creating reqwest client failed: {e:?}"),
         }
     }
 
@@ -822,7 +822,7 @@ impl Client {
             .await
     }
 
-    ///  >  Note: The orderId in the API response will not match the Id displayed in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the shipmentId not the orderId. In the future, the portal will display both orderId(s) and shipmentId(s).
+    /// >  Note: The orderId in the API response will not match the Id displayed in the ShipBob Merchant Portal when you navigate to the Orders page. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the shipmentId not the orderId. In the future, the portal will display both orderId(s) and shipmentId(s).
     ///
     /// Use the Orders Resource to create and retrieve orders in ShipBob.
     ///
@@ -842,7 +842,7 @@ impl Client {
     ///
     /// A shipment is an object that is the result of a fulfillment of an order. An order can have one or more shipments. Say Shopify order #122323 contains 3 different products, shipped in two separate packages, there would be 2 shipments for that order.
     ///
-    ///  Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request “serial scan”, which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).
+    /// Serial numbers are unique identifiers for an individual item (e.g. your specific iPhone X that you bought at the Apple Store). No inventory item can possess duplicate serial numbers. Merchants can request “serial scan”, which means ShipBob will capture the serial number(s) upon sending a shipment so the merchant knows which customer received which individual item(s).
     pub fn orders(&self) -> orders::Orders {
         orders::Orders::new(self.clone())
     }
@@ -861,12 +861,12 @@ impl Client {
     ///
     /// * Use specific and/or unique names to describe each product so they can be easily identified by users in the ShipBob Merchant Portal. In particular, when creating variants, please give them distinguishable names i.e. for a Blue shirt that comes in two sizes, small and medium, strong product names would be Blue shirt size:small and Blue shirt size:medium.
     ///
-    /// > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s).
+    /// > **NOTE:** The productId returned in the API response will not match the id displayed in the ShipBob Merchant Portal when you navigate to Inventory > Products. ShipBob is currently undergoing a schema migration and the Id displayed in the ShipBob Merchant Portal is the inventoryId not the productId. In the future, the portal will display both productId(s) and inventoryId(s)
     pub fn products(&self) -> products::Products {
         products::Products::new(self.clone())
     }
 
-    ///  Use the Inventory Resource to retrieve ShipBob  inventory items and quantities.
+    /// Use the Inventory Resource to retrieve ShipBob  inventory items and quantities.
     ///
     /// An inventory item is a representation of a physical good, that may or may not have physical stock in ShipBob’s fulfillment centers. Every product will have one or more inventory items mapped to it. A bundle product (a set of products that are sold as one combined package - e.g.  gift or multi packs) is an example of a product that has  2 or more inventory items mapped to it.
     ///
@@ -877,7 +877,7 @@ impl Client {
 
     /// Use the Channel Resource to list “channels” which you have access to. You will use this channelId for subsequent API calls made to ShipBob endpoints.
     ///
-    /// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.  
+    /// A channel is a specific installation of an application built by a vendor on top of our API – e.g. Kevin’s Shopify Store #133432.  All write and most read endpoints require a channel to be passed in the header to complete the request. The channel is used to Identify where the data originally came from.
     ///
     /// Applications that are granted multi-channel permissions will be able to read data from all channels that belong to a user. However, multi-channel applications will only be able to write on behalf of their own channel.
     pub fn channels(&self) -> channels::Channels {

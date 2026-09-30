@@ -22,9 +22,9 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `exclude_distributor_brand: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_logos: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `exclude_distributor_brand` -- When **true**, excludes distributor brand information from the response set.
+     * * `include_logos` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brands_get(
         &self,
@@ -76,7 +76,7 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brands_post(
         &self,
@@ -111,7 +111,7 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brands_delete(
         &self,
@@ -146,10 +146,10 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_external_references: &str` -- When **true**, the landing pages and links associated with the brand are included in the response.
-     * * `include_logos: &str` -- When **true**, the URIs for the logos associated with the brand are included in the response.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_external_references` -- When **true**, the landing pages and links associated with the brand are included in the response.
+     * * `include_logos` -- When **true**, the URIs for the logos associated with the brand are included in the response.
      */
     pub async fn brand_get(
         &self,
@@ -199,8 +199,8 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_put(
         &self,
@@ -237,8 +237,8 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_delete(
         &self,
@@ -274,8 +274,8 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_export_get_file(
         &self,
@@ -311,9 +311,9 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `logo_type: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `logo_type` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_logo_get(
         &self,
@@ -355,9 +355,9 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `logo_type: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `logo_type` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_logo_put<T: Into<reqwest::Body>>(
         &self,
@@ -396,9 +396,9 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `logo_type: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `logo_type` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_logo_delete(
         &self,
@@ -436,8 +436,8 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn brand_resources_get_list(
         &self,
@@ -477,16 +477,16 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `resource_content_type: &str` -- The type of brand resource file to return. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `resource_content_type` -- The type of brand resource file to return. Valid values are:
+     *
      *   - `sending`
      *   - `signing`
      *   - `email`
-     *   - `signing_captive`.
-     * * `langcode: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `return_master: &str` -- Specifies which resource file data to return. When **true**, only the master resource file is returned. When **false**, only the elements that you modified are returned.
+     *   - `signing_captive`
+     * * `langcode` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `return_master` -- Specifies which resource file data to return. When **true**, only the master resource file is returned. When **false**, only the elements that you modified are returned.
      */
     pub async fn brand_resources_get(
         &self,
@@ -543,14 +543,14 @@ impl AccountBrands {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `brand_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `resource_content_type: &str` -- The type of brand resource file that you are updating. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `brand_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `resource_content_type` -- The type of brand resource file that you are updating. Valid values are:
+     *
      *   - `sending`
      *   - `signing`
      *   - `email`
-     *   - `signing_captive`.
+     *   - `signing_captive`
      */
     pub async fn brand_resources_put(
         &self,

@@ -18,7 +18,7 @@ impl Schemas {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer_id` -- Immutable ID of the Google Workspace account.
      */
     pub async fn list(
         &self,
@@ -48,7 +48,7 @@ impl Schemas {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer_id` -- Immutable ID of the Google Workspace account.
      */
     pub async fn insert(
         &self,
@@ -79,8 +79,8 @@ impl Schemas {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
+     * * `customer_id` -- Immutable ID of the Google Workspace account.
+     * * `schema_key` -- Name or immutable ID of the schema.
      */
     pub async fn get(
         &self,
@@ -112,8 +112,8 @@ impl Schemas {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
+     * * `customer_id` -- Immutable ID of the Google Workspace account.
+     * * `schema_key` -- Name or immutable ID of the schema.
      */
     pub async fn update(
         &self,
@@ -146,8 +146,8 @@ impl Schemas {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
+     * * `customer_id` -- Immutable ID of the Google Workspace account.
+     * * `schema_key` -- Name or immutable ID of the schema.
      */
     pub async fn delete(
         &self,
@@ -179,8 +179,8 @@ impl Schemas {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
+     * * `customer_id` -- Immutable ID of the Google Workspace account.
+     * * `schema_key` -- Name or immutable ID of the schema.
      */
     pub async fn patch(
         &self,

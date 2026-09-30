@@ -24,7 +24,7 @@ impl SettingsPartner {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_partner_settings_new_relic(
         &self,
@@ -53,7 +53,7 @@ impl SettingsPartner {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_partner_settings_new_relic(
         &self,
@@ -81,9 +81,9 @@ impl SettingsPartner {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- The number of settings to return per page.
-     * * `offset: i64` -- The paging offset.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- The number of settings to return per page.
+     * * `offset` -- The paging offset.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_partner_settings(
         &self,
@@ -100,7 +100,7 @@ impl SettingsPartner {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/partner_settings?{}", query_), None);
+            .url(&format!("/partner_settings?{query_}"), None);
         self.client
             .get(
                 &url,

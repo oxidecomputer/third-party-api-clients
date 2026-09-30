@@ -20,16 +20,15 @@ impl AccountPermissionProfiles {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include: &str` -- A comma-separated list of additional properties to return in the response. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include` -- A comma-separated list of additional properties to return in the response. Valid values are:
+     *
      *   - `user_count`: The total number of users associated with the permission profile.
      *   - `closed_users`: Includes closed users in the `user_count`.
      *   - `account_management`: The account management settings.
      *   - `metadata`: Metadata indicating whether the properties associated with the account permission profile are editable.
-     *   
+     *
      *   Example: `user_count,closed_users`
-     *   .
      */
     pub async fn permission_profiles_get(
         &self,
@@ -68,8 +67,8 @@ impl AccountPermissionProfiles {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include: &str` -- A comma-separated list of additional properties to return in the response. The only valid value for this request is `metadata`, which returns metadata indicating whether the properties associated with the account permission profile are editable.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include` -- A comma-separated list of additional properties to return in the response. The only valid value for this request is `metadata`, which returns metadata indicating whether the properties associated with the account permission profile are editable.
      */
     pub async fn permission_profiles_post(
         &self,
@@ -109,15 +108,15 @@ impl AccountPermissionProfiles {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `permission_profile_id: &str` -- The ID of the permission profile. Possible values include:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `permission_profile_id` -- The ID of the permission profile. Possible values include:
+     *
      *   - `2301416` (for the `DocuSign Viewer` profile)
      *   - `2301415` (for the `DocuSign Sender` profile)
      *   - `2301414` (for the `Account Administrator` profile)
-     *   
+     *
      *   In addition, any custom permission profiles associated with your account will have an automatically generated `permissionProfileId`.
-     * * `include: &str` -- A comma-separated list of additional properties to return in the response. The only valid value for this request is `metadata`, which returns metadata indicating whether the properties associated with the account permission profile are editable.
+     * * `include` -- A comma-separated list of additional properties to return in the response. The only valid value for this request is `metadata`, which returns metadata indicating whether the properties associated with the account permission profile are editable.
      */
     pub async fn permission_profiles_get_profile(
         &self,
@@ -158,15 +157,15 @@ impl AccountPermissionProfiles {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `permission_profile_id: &str` -- The ID of the permission profile. Possible values include:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `permission_profile_id` -- The ID of the permission profile. Possible values include:
+     *
      *   - `2301416` (for the `DocuSign Viewer` profile)
      *   - `2301415` (for the `DocuSign Sender` profile)
      *   - `2301414` (for the `Account Administrator` profile)
-     *   
+     *
      *   In addition, any custom permission profiles associated with your account will have an automatically generated `permissionProfileId`.
-     * * `include: &str` -- A comma-separated list of additional properties to return in the response. The only valid value for this request is `metadata`, which returns metadata indicating whether the properties associated with the account permission profile are editable.
+     * * `include` -- A comma-separated list of additional properties to return in the response. The only valid value for this request is `metadata`, which returns metadata indicating whether the properties associated with the account permission profile are editable.
      */
     pub async fn permission_profiles_put(
         &self,
@@ -210,15 +209,15 @@ impl AccountPermissionProfiles {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `permission_profile_id: &str` -- The ID of the permission profile. Possible values include:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `permission_profile_id` -- The ID of the permission profile. Possible values include:
+     *
      *   - `2301416` (for the `DocuSign Viewer` profile)
      *   - `2301415` (for the `DocuSign Sender` profile)
      *   - `2301414` (for the `Account Administrator` profile)
-     *   
+     *
      *   In addition, any custom permission profiles associated with your account will have an automatically generated `permissionProfileId`.
-     * * `move_users_to: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `move_users_to` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn permission_profiles_delete(
         &self,

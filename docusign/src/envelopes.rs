@@ -28,7 +28,6 @@ impl Envelopes {
      * * `envelope_ids`
      * * `transaction_ids`
      *
-     *
      * Getting envelope status using `transaction_ids` is useful
      * for offline signing situations where it can be used
      * determine if an envelope was created or not. It can be used
@@ -51,7 +50,6 @@ impl Envelopes {
      * response would be generated.
      * In this case, DocuSign does not query the database
      * and returns an empty list immediately.
-     *
      *
      * The following table shows the valid current envelope
      * statuses (`status` parameter) for the different status
@@ -88,37 +86,32 @@ impl Envelopes {
      * during the time period. As a workaround, check the envelope
      * status values in the result set as needed.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `ac_status: &str` -- Specifies the Authoritative Copy Status for the envelopes. The possible values are: Unknown, Original, Transferred, AuthoritativeCopy, AuthoritativeCopyExportPending, AuthoritativeCopyExported, DepositPending, Deposited, DepositedEO, or DepositFailed.
-     * * `block: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `cdse_mode: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `continuation_token: &str` -- A token returned in the response to a previous API call that is used to resume a search query from a specific point.
-     * * `count: &str` -- Optional. Number of items to return. Currently there is no implicit maximum limit of the number of items that can be returned.
-     *   .
-     * * `custom_field: &str` -- Optional. Specifies a envelope custom field name and value searched for in the envelopes. Format: `custom_envelope_field_name=desired_value`
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `ac_status` -- Specifies the Authoritative Copy Status for the envelopes. The possible values are: Unknown, Original, Transferred, AuthoritativeCopy, AuthoritativeCopyExportPending, AuthoritativeCopyExported, DepositPending, Deposited, DepositedEO, or DepositFailed.
+     * * `block` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `cdse_mode` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `continuation_token` -- A token returned in the response to a previous API call that is used to resume a search query from a specific point.
+     * * `count` -- Optional. Number of items to return. Currently there is no implicit maximum limit of the number of items that can be returned.
+     * * `custom_field` -- Optional. Specifies a envelope custom field name and value searched for in the envelopes. Format: `custom_envelope_field_name=desired_value`
+     *
      *   Example: If you have an envelope custom field named "Region" and you want to search for all envelopes where the value is "West" you would use set this parameter to `Region=West`.
-     *   
-     *   .
-     * * `email: &str` -- Limit results to envelopes
+     * * `email` -- Limit results to envelopes
      *   sent by the account user
      *   with this email address.
-     *   
+     *
      *   `user_name` must be given as well,
      *   and both `email` and `user_name`
      *   must refer to an existing account user.
-     *   .
-     * * `envelope_ids: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `exclude: &str` -- Excludes information from the response. Enter  as a comma-separated list (e.g., `folders,powerforms`). Valid values are:
-     *   
+     * * `envelope_ids` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `exclude` -- Excludes information from the response. Enter  as a comma-separated list (e.g., `folders,powerforms`). Valid values are:
+     *
      *   - `recipients`
      *   - `powerforms`
-     *   - `folders`.
-     * * `folder_ids: &str` -- Returns the envelopes from specific folders. Enter as a comma-separated list of either valid folder Guids or the following values:
-     *   
+     *   - `folders`
+     * * `folder_ids` -- Returns the envelopes from specific folders. Enter as a comma-separated list of either valid folder Guids or the following values:
+     *
      *   - `awaiting_my_signature`
      *   - `completed`
      *   - `draft`
@@ -128,21 +121,20 @@ impl Envelopes {
      *   - `out_for_signature`
      *   - `recyclebin`
      *   - `sentitems`
-     *   - `waiting_for_others`.
-     * * `folder_types: &str` -- A comma-separated list of folder types you want to retrieve envelopes from. Valid values are:
-     *   
+     *   - `waiting_for_others`
+     * * `folder_types` -- A comma-separated list of folder types you want to retrieve envelopes from. Valid values are:
+     *
      *   - `normal`
      *   - `inbox`
      *   - `sentitems`
      *   - `draft`
-     *   - `templates`.
-     * * `from_date: &str` -- Specifies the date and time
+     *   - `templates`
+     * * `from_date` -- Specifies the date and time
      *   to start looking for status changes.
      *   This parameter is required
      *   unless `envelopeIds` or `transactionIds`
      *   are set.
-     *   
-     *   
+     *
      *   Although you can use any date format
      *   supported by the .NET system library's
      *   [`DateTime.Parse()`][msoft] function,
@@ -152,21 +144,20 @@ impl Envelopes {
      *   If you do not provide
      *   a time zone offset,
      *   the method uses the server's time zone.
-     *   
+     *
      *   For example, the following dates and times refer to the same instant:
-     *   
+     *
      *   * `2017-05-02T01:44Z`
      *   * `2017-05-01T21:44-04:00`
      *   * `2017-05-01T18:44-07:00`
-     *   
-     *   
+     *
      *   [msoft]: https://msdn.microsoft.com/en-us/library/system.datetime.parse(v=vs.110).aspx#StringToParse
-     *   [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601.
-     * * `from_to_status: &str` -- This is the status type checked for in the `from_date`/`to_date` period. If `changed` is specified, then envelopes that changed status during the period are found. If for example, `created` is specified, then envelopes created during the period are found. Default is `changed`.
-     *   
+     *   [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
+     * * `from_to_status` -- This is the status type checked for in the `from_date`/`to_date` period. If `changed` is specified, then envelopes that changed status during the period are found. If for example, `created` is specified, then envelopes created during the period are found. Default is `changed`.
+     *
      *   Possible values are: Voided, Changed, Created, Deleted, Sent, Delivered, Signed, Completed, Declined, TimedOut and Processing.
-     * * `include: &str` -- Specifies additional information to return  about the envelopes. Enter a comma-separated list, such as `tabs,recipients`. Valid values are:
-     *   
+     * * `include` -- Specifies additional information to return  about the envelopes. Enter a comma-separated list, such as `tabs,recipients`. Valid values are:
+     *
      *   - `custom_fields`: The custom fields associated with the envelope.
      *   - `documents`: The documents associated with the envelope.
      *   - `attachments`: The attachments associated with the envelope.
@@ -175,21 +166,20 @@ impl Envelopes {
      *   - `recipients`: The recipients associated with the envelope.
      *   - `powerform`: The PowerForms associated with the envelope.
      *   - `payment_tabs`: The payment tabs associated with the envelope.
-     *   .
-     * * `include_purge_information: &str` -- When set to **true**, information about envelopes that have been deleted is included in the response.
-     * * `intersecting_folder_ids: &str` -- A comma-separated list of folders that you want want to get envelopes from. Valid values are:
-     *   
+     * * `include_purge_information` -- When set to **true**, information about envelopes that have been deleted is included in the response.
+     * * `intersecting_folder_ids` -- A comma-separated list of folders that you want want to get envelopes from. Valid values are:
+     *
      *   - `normal`
      *   - `inbox`
      *   - `sentitems`
      *   - `draft`
-     *   - `templates`.
-     * * `last_queried_date: &str` -- Returns envelopes that were modified prior to the specified date and time.
-     *   
-     *   Example: `2020-05-09T21:56:12.2500000Z`.
-     * * `order: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `order_by: &str` -- Sorts results according to a specific property. Valid values are:
-     *   
+     *   - `templates`
+     * * `last_queried_date` -- Returns envelopes that were modified prior to the specified date and time.
+     *
+     *   Example: `2020-05-09T21:56:12.2500000Z`
+     * * `order` -- Returns envelopes in either ascending (`asc`) or descending (`desc`) order.
+     * * `order_by` -- Sorts results according to a specific property. Valid values are:
+     *
      *   - `last_modified`
      *   - `action_required`
      *   - `created`
@@ -202,14 +192,14 @@ impl Envelopes {
      *   - `subject`
      *   - `user_name`
      *   - `status_changed`
-     *   - `last_modified`.
-     * * `powerformids: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `query_budget: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `requester_date_format: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `search_text: &str` -- Free text search criteria that you can use to filter the list of envelopes that is returned.
-     * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `status: &str` -- A comma-separated list of current envelope statuses to included in the response. Possible values are:
-     *   
+     *   - `last_modified`
+     * * `powerformids` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `query_budget` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `requester_date_format` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `search_text` -- Free text search criteria that you can use to filter the list of envelopes that is returned.
+     * * `start_position` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `status` -- A comma-separated list of current envelope statuses to included in the response. Possible values are:
+     *
      *   * `completed`
      *   * `created`
      *   * `declined`
@@ -220,13 +210,12 @@ impl Envelopes {
      *   * `signed`
      *   * `timedout`
      *   * `voided`
-     *   
+     *
      *   The `any` value is equivalent to any status.
-     *   .
-     * * `to_date: &str` -- Specifies the date and time
+     * * `to_date` -- Specifies the date and time
      *   to stop looking for status changes.
      *   The default is the current date and time.
-     *   
+     *
      *   Although you can use any date format
      *   supported by the .NET system library's
      *   [`DateTime.Parse()`][msoft] function,
@@ -236,37 +225,33 @@ impl Envelopes {
      *   If you do not provide
      *   a time zone offset,
      *   the method uses the server's time zone.
-     *   
+     *
      *   For example, the following dates and times refer to the same instant:
-     *   
+     *
      *   * `2017-05-02T01:44Z`
      *   * `2017-05-01T21:44-04:00`
      *   * `2017-05-01T18:44-07:00`
-     *   
-     *   
+     *
      *   [msoft]: https://msdn.microsoft.com/en-us/library/system.datetime.parse(v=vs.110).aspx#StringToParse
      *   [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
-     *   .
-     * * `transaction_ids: &str` -- If included in the query string, this is a comma separated list of envelope `transactionId`s.
-     *   
+     * * `transaction_ids` -- If included in the query string, this is a comma separated list of envelope `transactionId`s.
+     *
      *   If included in the `request_body`, this is a list of envelope `transactionId`s.
-     *   
+     *
      *   ###### Note: `transactionId`s are only valid in the DocuSign system for seven days.
-     *   .
-     * * `user_filter: &str` -- Returns envelopes where the current user is the recipient, the sender, or the recipient only. (For example, `user_filter=sender`.) Valid values are:
-     *   
+     * * `user_filter` -- Returns envelopes where the current user is the recipient, the sender, or the recipient only. (For example, `user_filter=sender`.) Valid values are:
+     *
      *   - `sender`
      *   - `recipient`
-     *   - `recipient_only`.
-     * * `user_id: &str` -- The ID of the user who created the envelopes to be retrieved. Note that an account can have multiple users, and any user with account access can retrieve envelopes by user_id from the account.
-     * * `user_name: &str` -- Limit results to envelopes
+     *   - `recipient_only`
+     * * `user_id` -- The ID of the user who created the envelopes to be retrieved. Note that an account can have multiple users, and any user with account access can retrieve envelopes by user_id from the account.
+     * * `user_name` -- Limit results to envelopes
      *   sent by the account user
      *   with this user name.
-     *   
+     *
      *   `email` must be given as well,
      *   and both `email` and `user_name`
      *   must refer to an existing account user.
-     *   .
      */
     pub async fn get(
         &self,
@@ -444,7 +429,6 @@ impl Envelopes {
      *   a combination of documents and templates](https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/templates/composite/).
      * * Create a draft envelope.
      *
-     *
      * When you use this method
      * to create and send an envelope
      * in a single request,
@@ -457,7 +441,6 @@ impl Envelopes {
      * | `documents`    | The [documents][] to be signed. |
      * | `recipients`   | The email addresses of the envelope [recipients][]. |
      *
-     *
      * **Note**: If the envelope has a workflow definition
      * and the `workflowStatus` is `paused`,
      * the envelope will not be sent immediately,
@@ -469,14 +452,12 @@ impl Envelopes {
      * or you can use several API requests
      * to create, populate, and send envelopes.
      *
-     *
      * | See:                  | To learn about:                                                                                                                    |
      * | :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
      * | [Envelopes][envelopes]   | Envelopes, [adding documents][addingdocs], [tracking][], [locking][], [deleting][], [templates][]                                  |
      * | [Documents][documents]   | Documents, [attachments][], [supplemental documents][supdocs], [authoritative copies][authcopies], [purging][]                     |
      * | [Recipients][recipients] | Recipients, [recipient types][reciptypes], [recipient status][recipstatus]                                                         |
      * | [Tabs][tabs]             | Tabs, [anchoring tabs][tabanchor],   [custom tabs][tabcustom], [payments][] |
-     *
      *
      * [addingdocs]:           https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/envelopes/
      * [attachments]:          https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/documents/
@@ -502,15 +483,14 @@ impl Envelopes {
      *
      * **Note**: When you create an envelope by using a [composite template](https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/templates/composite/), you should specify the envelope custom fields in the inline template. Any custom fields that you specify at the root level are ignored.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `cdse_mode: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `change_routing_order: &str` -- When true, users can define the routing order of recipients while sending documents for signature.
-     * * `completed_documents_only: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `merge_roles_on_draft: &str` -- When set to **true**, template roles will be merged, and empty recipients will be removed. This parameter applies when you create a draft envelope with multiple templates. (To create a draft envelope, the `status` field is set to `created`.)
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `cdse_mode` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `change_routing_order` -- When true, users can define the routing order of recipients while sending documents for signature.
+     * * `completed_documents_only` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `merge_roles_on_draft` -- When set to **true**, template roles will be merged, and empty recipients will be removed. This parameter applies when you create a draft envelope with multiple templates. (To create a draft envelope, the `status` field is set to `created`.)
+     *
      *   **Note**: DocuSign recommends that this parameter should be set to **true** whenever you create a draft envelope with multiple templates.
      */
     pub async fn post(
@@ -599,9 +579,9 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `ac_status: &str` -- Specifies the Authoritative Copy Status for the envelopes. The possible values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `ac_status` -- Specifies the Authoritative Copy Status for the envelopes. The possible values are:
+     *
      *   - `Unknown`
      *   - `Original`
      *   - `Transferred`
@@ -611,21 +591,21 @@ impl Envelopes {
      *   - `DepositPending`
      *   - `Deposited`
      *   - `DepositedEO`
-     *   - `DepositFailed`.
-     * * `block: &str` -- If set to **true**, removes any results that match one of the provided `transaction_ids`.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `email: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_ids: &str` -- The envelope IDs to include in the results.
-     *   
+     *   - `DepositFailed`
+     * * `block` -- If set to **true**, removes any results that match one of the provided `transaction_ids`.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `email` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_ids` -- The envelope IDs to include in the results.
+     *
      *   The value of this property can be:
+     *
      *   - A comma-separated list of envelope IDs
      *   - The special value `request_body`. In this case, the method uses the envelope IDs in the request body.
-     * * `from_date: &str` -- The date/time setting that specifies when the request begins checking for status changes for envelopes in the account. This is required unless parameters `envelope_ids` and/or `transaction_Ids` are provided.
-     *   
+     * * `from_date` -- The date/time setting that specifies when the request begins checking for status changes for envelopes in the account. This is required unless parameters `envelope_ids` and/or `transaction_Ids` are provided.
+     *
      *   ****Note****: This parameter must be set to a valid  `DateTime`, or  `envelope_ids` and/or `transaction_ids` must be specified.
-     * * `from_to_status: &str` -- The envelope status that you are checking for. Possible values are:
-     *   
-     *   
+     * * `from_to_status` -- The envelope status that you are checking for. Possible values are:
+     *
      *   - `Changed` (default)
      *   - `Completed`
      *   - `Created`
@@ -637,14 +617,13 @@ impl Envelopes {
      *   - `Signed`
      *   - `TimedOut`
      *   - `Voided`
-     *   
+     *
      *   For example, if you specify `Changed`, this method
      *   returns a list of envelopes that changed status
      *   during the `from_date` to `to_date` time period.
-     *   .
-     * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `status: &str` -- A comma-separated list of envelope status to search for. Possible values are:
-     *   
+     * * `start_position` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `status` -- A comma-separated list of envelope status to search for. Possible values are:
+     *
      *   - `completed`
      *   - `created`
      *   - `declined`
@@ -655,26 +634,24 @@ impl Envelopes {
      *   - `signed`
      *   - `template`
      *   - `voided`
-     *   .
-     * * `to_date: &str` -- Optional date/time setting
+     * * `to_date` -- Optional date/time setting
      *   that specifies the last date/time
      *   or envelope status changes in the result set.
-     *   
+     *
      *   The default value is the time that you call the method.
-     *   .
-     * * `transaction_ids: &str` -- The transaction IDs to include in the results. Note that transaction IDs are valid for seven days.
-     *   
+     * * `transaction_ids` -- The transaction IDs to include in the results. Note that transaction IDs are valid for seven days.
+     *
      *   The value of this property can be:
+     *
      *   - A list of comma-separated transaction IDs
      *   - The special value `request_body`. In this case, this method uses the transaction IDs in the request body.
-     * * `user_name: &str` -- Limits results to envelopes
+     * * `user_name` -- Limits results to envelopes
      *   sent by the account user
      *   with this user name.
-     *   
+     *
      *   `email` must be given as well,
      *   and both `email` and `user_name`
      *   must refer to an existing account user.
-     *   .
      */
     pub async fn put_status(
         &self,
@@ -760,11 +737,11 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `advanced_update: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include: &str` -- Specifies additional information about the envelope to return. Enter a comma-separated list, such as `tabs,recipients`. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `advanced_update` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include` -- Specifies additional information about the envelope to return. Enter a comma-separated list, such as `tabs,recipients`. Valid values are:
+     *
      *   - `custom_fields`: The custom fields associated with the envelope.
      *   - `documents`: The documents associated with the envelope.
      *   - `attachments`: The attachments associated with the envelope.
@@ -774,7 +751,6 @@ impl Envelopes {
      *   - `powerform`: The PowerForms associated with the envelope.
      *   - `tabs`: The tabs associated with the envelope.
      *   - `payment_tabs`: The payment tabs associated with the envelope.
-     *   .
      */
     pub async fn get_envelopes(
         &self,
@@ -823,7 +799,6 @@ impl Envelopes {
      * * Modify a draft envelope
      * * Purge documents and envelope metadata from the DocuSign platform
      *
-     *
      * <div class="highlight highlight-info">
      * <p markdown="1">
      *
@@ -835,7 +810,6 @@ impl Envelopes {
      *
      * </p>
      * </div>
-     *
      *
      * ## Sending a Draft Envelope
      *
@@ -902,7 +876,6 @@ impl Envelopes {
      *
      * ## Purging Documents from DocuSign
      *
-     *
      * To place only the documents
      * in the purge queue,
      * leaving any
@@ -910,7 +883,6 @@ impl Envelopes {
      * and tabs in the DocuSign platform,
      * set the `purgeState` property
      * to `documents_queued`.
-     *
      *
      * ```json
      * {
@@ -931,7 +903,6 @@ impl Envelopes {
      * }
      * ```
      *
-     *
      * You can purge documents
      * only from completed envelopes
      * that are not marked as the authoritative copy.
@@ -939,8 +910,6 @@ impl Envelopes {
      * must have permission to purge documents
      * and
      * must be the sender or be acting on behalf of the sender.
-     *
-     *
      *
      * When the purge request is initiated
      * the items to be purged
@@ -960,7 +929,6 @@ impl Envelopes {
      * the documents are deleted from the system.
      * Recipients without DocuSign accounts
      * do not receive email notifications.
-     *
      *
      * If your account has a Document Retention policy,
      * envelope documents
@@ -983,10 +951,10 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `advanced_update: &str` -- When set to **true**, allows the caller to update recipients, tabs, custom fields, notification, email settings and other envelope attributes.
-     * * `resend_envelope: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `advanced_update` -- When set to **true**, allows the caller to update recipients, tabs, custom fields, notification, email settings and other envelope attributes.
+     * * `resend_envelope` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -1032,8 +1000,8 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn audit_events_get(
         &self,
@@ -1067,16 +1035,16 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `dpi: &str` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
-     * * `max_height: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `max_width: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `nocache: &str` -- If **true**, using cache is disabled and image information is retrieved from a database. **True** is the default value. .
-     * * `show_changes: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `dpi` -- The number of dots per inch (DPI) for the resulting images. Valid values are 1-310 DPI. The default value is 94.
+     * * `max_height` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `max_width` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `nocache` -- If **true**, using cache is disabled and image information is retrieved from a database. **True** is the default value.
+     * * `show_changes` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
      */
     pub async fn pages_get_page_image(
         &self,
@@ -1143,10 +1111,10 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `page_number` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn pages_delete_page(
         &self,
@@ -1184,14 +1152,14 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `dpi: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `max_height: &str` -- Sets the maximum height for the page image in pixels. The DPI is recalculated based on this setting.
-     * * `max_width: &str` -- Sets the maximum width for the page image in pixels. The DPI is recalculated based on this setting.
-     * * `show_changes: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `page_number` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `dpi` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `max_height` -- Sets the maximum height for the page image in pixels. The DPI is recalculated based on this setting.
+     * * `max_width` -- Sets the maximum width for the page image in pixels. The DPI is recalculated based on this setting.
+     * * `show_changes` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn pages_get_page_image_envelopes(
         &self,
@@ -1248,10 +1216,10 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `page_number` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn pages_put_page_image(
         &self,
@@ -1290,8 +1258,8 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn notification_get(
         &self,
@@ -1327,8 +1295,8 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn notification_put(
         &self,
@@ -1371,10 +1339,10 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `include_chrome: &str` -- The added line and identifier around the initial image. Note: Older envelopes might only have chromed images. If getting the non-chromed image fails, try getting the chromed image.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `include_chrome` -- The added line and identifier around the initial image. Note: Older envelopes might only have chromed images. If getting the non-chromed image fails, try getting the chromed image.
      */
     pub async fn recipients_get_recipient_initials_image(
         &self,
@@ -1419,9 +1387,9 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
      */
     pub async fn recipients_put_recipient_initials_image(
         &self,
@@ -1457,9 +1425,9 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
      */
     pub async fn recipients_get_recipient_signature(
         &self,
@@ -1503,10 +1471,10 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `include_chrome: &str` -- When set to **true**, the response includes the chromed version of the signature image.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `include_chrome` -- When set to **true**, the response includes the chromed version of the signature image.
      */
     pub async fn recipients_get_recipient_signature_image(
         &self,
@@ -1551,9 +1519,9 @@ impl Envelopes {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
      */
     pub async fn recipients_put_recipient_signature_image(
         &self,

@@ -138,20 +138,20 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/disputes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/dispute#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Return only disputes after the specified ID.
-    * * `last_id: &str` -- Return only disputes before the specified ID.
-    * * `status: &str` -- Return only disputes with the specified status.
-    * * `initiated_at: &str` -- Return only disputes with the specified initiated_at date (ISO 8601 format).
-    */
+     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/disputes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/dispute#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Return only disputes after the specified ID.
+     * * `last_id` -- Return only disputes before the specified ID.
+     * * `status` -- Return only disputes with the specified status.
+     * * `initiated_at` -- Return only disputes with the specified initiated_at date (ISO 8601 format).
+     */
     pub async fn deprecated_202001_get_dispute(
         &self,
         since_id: &str,
@@ -174,10 +174,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/shopify_payments/disputes.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/shopify_payments/disputes.json?{query_}"),
             None,
         );
         self.client
@@ -199,7 +196,7 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `dispute_id: &str` -- storefront_access_token_id.
+     * * `dispute_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_disputes_param_dispute(
         &self,
@@ -223,20 +220,20 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/disputes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/dispute#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Return only disputes after the specified ID.
-    * * `last_id: &str` -- Return only disputes before the specified ID.
-    * * `status: &str` -- Return only disputes with the specified status.
-    * * `initiated_at: &str` -- Return only disputes with the specified initiated_at date (ISO 8601 format).
-    */
+     * Retrieve all disputes ordered by initiated_at date and time (ISO 8601 format), with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/disputes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/dispute#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Return only disputes after the specified ID.
+     * * `last_id` -- Return only disputes before the specified ID.
+     * * `status` -- Return only disputes with the specified status.
+     * * `initiated_at` -- Return only disputes with the specified initiated_at date (ISO 8601 format).
+     */
     pub async fn deprecated_202004_get_dispute(
         &self,
         since_id: &str,
@@ -259,10 +256,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-04/shopify_payments/disputes.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-04/shopify_payments/disputes.json?{query_}"),
             None,
         );
         self.client
@@ -276,22 +270,22 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/payouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Filter the response to payouts made after the specified ID.
-    * * `last_id: &str` -- Filter the response to payouts made before the specified ID.
-    * * `date_min: &str` -- Filter the response to payouts made inclusively after the specified date.
-    * * `date_max: &str` -- Filter the response to payouts made inclusively before the specified date.
-    * * `date: &str` -- Filter the response to payouts made on the specified date.
-    * * `status: &str` -- Filter the response to payouts made with the specified status.
-    */
+     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/payouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Filter the response to payouts made after the specified ID.
+     * * `last_id` -- Filter the response to payouts made before the specified ID.
+     * * `date_min` -- Filter the response to payouts made inclusively after the specified date.
+     * * `date_max` -- Filter the response to payouts made inclusively before the specified date.
+     * * `date` -- Filter the response to payouts made on the specified date.
+     * * `status` -- Filter the response to payouts made with the specified status.
+     */
     pub async fn deprecated_202001_get_payout(
         &self,
         since_id: &str,
@@ -322,10 +316,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/shopify_payments/payouts.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/shopify_payments/payouts.json?{query_}"),
             None,
         );
         self.client
@@ -347,7 +338,7 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `payout_id: &str` -- storefront_access_token_id.
+     * * `payout_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_payouts_param_payout(
         &self,
@@ -371,22 +362,22 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/payouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Filter the response to payouts made after the specified ID.
-    * * `last_id: &str` -- Filter the response to payouts made before the specified ID.
-    * * `date_min: &str` -- Filter the response to payouts made inclusively after the specified date.
-    * * `date_max: &str` -- Filter the response to payouts made inclusively before the specified date.
-    * * `date: &str` -- Filter the response to payouts made on the specified date.
-    * * `status: &str` -- Filter the response to payouts made with the specified status.
-    */
+     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/shopify_payments/payouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Filter the response to payouts made after the specified ID.
+     * * `last_id` -- Filter the response to payouts made before the specified ID.
+     * * `date_min` -- Filter the response to payouts made inclusively after the specified date.
+     * * `date_max` -- Filter the response to payouts made inclusively before the specified date.
+     * * `date` -- Filter the response to payouts made on the specified date.
+     * * `status` -- Filter the response to payouts made with the specified status.
+     */
     pub async fn deprecated_202004_get_payout(
         &self,
         since_id: &str,
@@ -417,10 +408,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-04/shopify_payments/payouts.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-04/shopify_payments/payouts.json?{query_}"),
             None,
         );
         self.client
@@ -442,7 +430,7 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `payout_id: &str` -- storefront_access_token_id.
+     * * `payout_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_payouts_param_payout(
         &self,
@@ -466,22 +454,22 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/shopify_payments/payouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Filter the response to payouts made after the specified ID.
-    * * `last_id: &str` -- Filter the response to payouts made before the specified ID.
-    * * `date_min: &str` -- Filter the response to payouts made inclusively after the specified date.
-    * * `date_max: &str` -- Filter the response to payouts made inclusively before the specified date.
-    * * `date: &str` -- Filter the response to payouts made on the specified date.
-    * * `status: &str` -- Filter the response to payouts made with the specified status.
-    */
+     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/shopify_payments/payouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Filter the response to payouts made after the specified ID.
+     * * `last_id` -- Filter the response to payouts made before the specified ID.
+     * * `date_min` -- Filter the response to payouts made inclusively after the specified date.
+     * * `date_max` -- Filter the response to payouts made inclusively before the specified date.
+     * * `date` -- Filter the response to payouts made on the specified date.
+     * * `status` -- Filter the response to payouts made with the specified status.
+     */
     pub async fn deprecated_202007_get_payout(
         &self,
         since_id: &str,
@@ -512,10 +500,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-07/shopify_payments/payouts.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-07/shopify_payments/payouts.json?{query_}"),
             None,
         );
         self.client
@@ -537,7 +522,7 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `payout_id: &str` -- storefront_access_token_id.
+     * * `payout_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_payouts_param_payout(
         &self,
@@ -561,22 +546,22 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/shopify_payments/payouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Filter the response to payouts made after the specified ID.
-    * * `last_id: &str` -- Filter the response to payouts made before the specified ID.
-    * * `date_min: &str` -- Filter the response to payouts made inclusively after the specified date.
-    * * `date_max: &str` -- Filter the response to payouts made inclusively before the specified date.
-    * * `date: &str` -- Filter the response to payouts made on the specified date.
-    * * `status: &str` -- Filter the response to payouts made with the specified status.
-    */
+     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/shopify_payments/payouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Filter the response to payouts made after the specified ID.
+     * * `last_id` -- Filter the response to payouts made before the specified ID.
+     * * `date_min` -- Filter the response to payouts made inclusively after the specified date.
+     * * `date_max` -- Filter the response to payouts made inclusively before the specified date.
+     * * `date` -- Filter the response to payouts made on the specified date.
+     * * `status` -- Filter the response to payouts made with the specified status.
+     */
     pub async fn get_payout(
         &self,
         since_id: &str,
@@ -607,10 +592,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-10/shopify_payments/payouts.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-10/shopify_payments/payouts.json?{query_}"),
             None,
         );
         self.client
@@ -632,7 +614,7 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `payout_id: &str` -- storefront_access_token_id.
+     * * `payout_id` -- storefront_access_token_id
      */
     pub async fn get_payouts_param_payout(
         &self,
@@ -656,22 +638,22 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/shopify_payments/payouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Filter the response to payouts made after the specified ID.
-    * * `last_id: &str` -- Filter the response to payouts made before the specified ID.
-    * * `date_min: &str` -- Filter the response to payouts made inclusively after the specified date.
-    * * `date_max: &str` -- Filter the response to payouts made inclusively before the specified date.
-    * * `date: &str` -- Filter the response to payouts made on the specified date.
-    * * `status: &str` -- Filter the response to payouts made with the specified status.
-    */
+     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/shopify_payments/payouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Filter the response to payouts made after the specified ID.
+     * * `last_id` -- Filter the response to payouts made before the specified ID.
+     * * `date_min` -- Filter the response to payouts made inclusively after the specified date.
+     * * `date_max` -- Filter the response to payouts made inclusively before the specified date.
+     * * `date` -- Filter the response to payouts made on the specified date.
+     * * `status` -- Filter the response to payouts made with the specified status.
+     */
     pub async fn deprecated_202101_get_payout(
         &self,
         since_id: &str,
@@ -702,10 +684,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2021-01/shopify_payments/payouts.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2021-01/shopify_payments/payouts.json?{query_}"),
             None,
         );
         self.client
@@ -727,7 +706,7 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `payout_id: &str` -- storefront_access_token_id.
+     * * `payout_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_payouts_param_payout(
         &self,
@@ -751,22 +730,22 @@ impl ShopifyPayments {
             .await
     }
     /**
-    * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/shopify_payments/payouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Filter the response to payouts made after the specified ID.
-    * * `last_id: &str` -- Filter the response to payouts made before the specified ID.
-    * * `date_min: &str` -- Filter the response to payouts made inclusively after the specified date.
-    * * `date_max: &str` -- Filter the response to payouts made inclusively before the specified date.
-    * * `date: &str` -- Filter the response to payouts made on the specified date.
-    * * `status: &str` -- Filter the response to payouts made with the specified status.
-    */
+     * Retrieves a list of all payouts ordered by payout date, with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/shopify_payments/payouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shopify_payments/payout#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `since_id` -- Filter the response to payouts made after the specified ID.
+     * * `last_id` -- Filter the response to payouts made before the specified ID.
+     * * `date_min` -- Filter the response to payouts made inclusively after the specified date.
+     * * `date_max` -- Filter the response to payouts made inclusively before the specified date.
+     * * `date` -- Filter the response to payouts made on the specified date.
+     * * `status` -- Filter the response to payouts made with the specified status.
+     */
     pub async fn deprecated_unstable_get_payout(
         &self,
         since_id: &str,
@@ -797,10 +776,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/shopify_payments/payouts.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/shopify_payments/payouts.json?{query_}"),
             None,
         );
         self.client
@@ -822,7 +798,7 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `payout_id: &str` -- storefront_access_token_id.
+     * * `payout_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_payouts_param_payout(
         &self,
@@ -847,8 +823,8 @@ impl ShopifyPayments {
     }
     /**
      * Retrieves a list of all balance transactions ordered by processing
-    time, with the most recent being first.
-    Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     * time, with the most recent being first.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
      *
      * This function performs a `GET` to the `/admin/api/2020-01/shopify_payments/balance/transactions.json` endpoint.
      *
@@ -856,11 +832,11 @@ impl ShopifyPayments {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Filter response to transactions exclusively after the specified ID.
-     * * `last_id: &str` -- Filter response to transactions exclusively before the specified ID.
-     * * `test: &str` -- Filter response to transactions placed in test mode.
-     * * `payout_id: &str` -- Filter response to transactions paid out in the specified payout.
-     * * `payout_status: &str` -- Filter response to transactions with the specified payout status.
+     * * `since_id` -- Filter response to transactions exclusively after the specified ID.
+     * * `last_id` -- Filter response to transactions exclusively before the specified ID
+     * * `test` -- Filter response to transactions placed in test mode.
+     * * `payout_id` -- Filter response to transactions paid out in the specified payout.
+     * * `payout_status` -- Filter response to transactions with the specified payout status
      */
     pub async fn deprecated_202001_get_balance_transaction(
         &self,
@@ -888,10 +864,7 @@ impl ShopifyPayments {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/shopify_payments/balance/transactions.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/shopify_payments/balance/transactions.json?{query_}"),
             None,
         );
         self.client

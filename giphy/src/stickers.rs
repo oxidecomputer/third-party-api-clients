@@ -12,17 +12,16 @@ impl Stickers {
     }
 
     /**
-     * Random Sticker.
+     * Random Sticker
      *
      * This function performs a `GET` to the `/stickers/random` endpoint.
      *
      * Returns a random GIF, limited by tag. Excluding the tag parameter will return a random GIF from the GIPHY catalog.
      *
-     *
      * **Parameters:**
      *
-     * * `tag: &str` -- The unique bit.ly URL for this GIF.
-     * * `rating: &str` -- The unique bit.ly URL for this GIF.
+     * * `tag` -- The unique bit.ly URL for this GIF
+     * * `rating` -- Filters results by specified rating.
      */
     pub async fn random(
         &self,
@@ -37,9 +36,7 @@ impl Stickers {
             query_args.push(("tag".to_string(), tag.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/stickers/random?{}", query_), None);
+        let url = self.client.url(&format!("/stickers/random?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -51,20 +48,19 @@ impl Stickers {
             .await
     }
     /**
-     * Search Stickers.
+     * Search Stickers
      *
      * This function performs a `GET` to the `/stickers/search` endpoint.
      *
      * Replicates the functionality and requirements of the classic GIPHY search, but returns animated stickers rather than GIFs.
      *
-     *
      * **Parameters:**
      *
-     * * `q: &str` -- The unique bit.ly URL for this GIF.
-     * * `limit: i64` -- The maximum number of records to return.
-     * * `offset: i64` -- An optional results offset.
-     * * `rating: &str` -- The unique bit.ly URL for this GIF.
-     * * `lang: &str` -- Specify default language for regional content; use a 2-letter ISO 639-1 language code.
+     * * `q` -- The unique bit.ly URL for this GIF
+     * * `limit` -- The maximum number of records to return.
+     * * `offset` -- An optional results offset.
+     * * `rating` -- Filters results by specified rating.
+     * * `lang` -- Specify default language for regional content; use a 2-letter ISO 639-1 language code.
      */
     pub async fn search(
         &self,
@@ -91,9 +87,7 @@ impl Stickers {
             query_args.push(("rating".to_string(), rating.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/stickers/search?{}", query_), None);
+        let url = self.client.url(&format!("/stickers/search?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -105,16 +99,15 @@ impl Stickers {
             .await
     }
     /**
-     * Translate phrase to Sticker.
+     * Translate phrase to Sticker
      *
      * This function performs a `GET` to the `/stickers/translate` endpoint.
      *
      * The translate API draws on search, but uses the GIPHY `special sauce` to handle translating from one vocabulary to another. In this case, words and phrases to GIFs.
      *
-     *
      * **Parameters:**
      *
-     * * `s: &str` -- The unique bit.ly URL for this GIF.
+     * * `s` -- The unique bit.ly URL for this GIF
      */
     pub async fn translate(
         &self,
@@ -127,7 +120,7 @@ impl Stickers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/stickers/translate?{}", query_), None);
+            .url(&format!("/stickers/translate?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -139,18 +132,17 @@ impl Stickers {
             .await
     }
     /**
-     * Trending Stickers.
+     * Trending Stickers
      *
      * This function performs a `GET` to the `/stickers/trending` endpoint.
      *
      * Fetch Stickers currently trending online. Hand curated by the GIPHY editorial team. Returns 25 results by default.
      *
-     *
      * **Parameters:**
      *
-     * * `limit: i64` -- The maximum number of records to return.
-     * * `offset: i64` -- An optional results offset.
-     * * `rating: &str` -- The unique bit.ly URL for this GIF.
+     * * `limit` -- The maximum number of records to return.
+     * * `offset` -- An optional results offset.
+     * * `rating` -- Filters results by specified rating.
      */
     pub async fn trending(
         &self,
@@ -171,7 +163,7 @@ impl Stickers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/stickers/trending?{}", query_), None);
+            .url(&format!("/stickers/trending?{query_}"), None);
         self.client
             .get(
                 &url,

@@ -12,7 +12,7 @@ impl Orders {
     }
 
     /**
-     * Estimate Fulfillment Cost For Order.
+     * Estimate Fulfillment Cost For Order
      *
      * This function performs a `POST` to the `/order/estimate` endpoint.
      *
@@ -23,7 +23,7 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post_estimate(
         &self,
@@ -41,14 +41,14 @@ impl Orders {
             .await
     }
     /**
-     * Get Order.
+     * Get Order
      *
      * This function performs a `GET` to the `/order/{orderId}` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `order_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get(&self, order_id: i64) -> ClientResult<crate::Response<crate::types::Order>> {
         let url = self.client.url(
@@ -69,7 +69,7 @@ impl Orders {
             .await
     }
     /**
-     * Get Orders.
+     * Get Orders
      *
      * This function performs a `GET` to the `/order` endpoint.
      *
@@ -77,18 +77,18 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `page: i64` -- Unique id of the channel.
-     * * `limit: i64` -- Amount of orders per page to request.
-     * * `i_ds: &[String]` -- Shipment IDs to cancel.
-     * * `reference_ids: &[String]` -- Array of permissions granted for the channel.
-     * * `start_date: chrono::DateTime<chrono::Utc>` -- Start date to filter orders inserted later than.
-     * * `end_date: chrono::DateTime<chrono::Utc>` -- End date to filter orders inserted earlier than.
-     * * `sort_order: crate::types::SortOrder` -- Order to sort results in.
-     * * `has_tracking: bool` -- Has any portion of this order been assigned a tracking number.
-     * * `last_update_start_date: chrono::DateTime<chrono::Utc>` -- Start date to filter orders updated later than.
-     * * `last_update_end_date: chrono::DateTime<chrono::Utc>` -- End date to filter orders updated later than.
-     * * `is_tracking_uploaded: bool` -- Filter orders that their tracking information was fully uploaded.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `page` -- Unique id of the channel
+     * * `limit` -- Amount of orders per page to request
+     * * `i_ds` -- Shipment IDs to cancel
+     * * `reference_ids` -- Array of permissions granted for the channel
+     * * `start_date` -- Start date to filter orders inserted later than
+     * * `end_date` -- End date to filter orders inserted earlier than
+     * * `sort_order` -- Order to sort results in
+     * * `has_tracking` -- Has any portion of this order been assigned a tracking number
+     * * `last_update_start_date` -- Start date to filter orders updated later than
+     * * `last_update_end_date` -- End date to filter orders updated later than
+     * * `is_tracking_uploaded` -- Filter orders that their tracking information was fully uploaded
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_page(
         &self,
@@ -142,7 +142,7 @@ impl Orders {
             query_args.push(("StartDate".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/order?{}", query_), None);
+        let url = self.client.url(&format!("/order?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -154,7 +154,7 @@ impl Orders {
             .await
     }
     /**
-     * Get Orders.
+     * Get Orders
      *
      * This function performs a `GET` to the `/order` endpoint.
      *
@@ -206,7 +206,7 @@ impl Orders {
             query_args.push(("StartDate".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/order?{}", query_), None);
+        let url = self.client.url(&format!("/order?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -218,13 +218,13 @@ impl Orders {
             .await
     }
     /**
-     * Create Order.
+     * Create Order
      *
      * This function performs a `POST` to the `/order` endpoint.
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post(
         &self,
@@ -242,14 +242,14 @@ impl Orders {
             .await
     }
     /**
-     * Cancel single Order by Order ID.
+     * Cancel single Order by Order ID
      *
      * This function performs a `POST` to the `/order/{orderId}/cancel` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `order_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post_cancel(
         &self,
@@ -273,13 +273,13 @@ impl Orders {
             .await
     }
     /**
-     * Get Order Store Json.
+     * Get Order Store Json
      *
      * This function performs a `GET` to the `/order/{orderId}/storeOrderJson` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- The order ID to Get the JSON Stored.
+     * * `order_id` -- The order ID to Get the JSON Stored
      */
     pub async fn get_store_json(&self, order_id: i64) -> ClientResult<crate::Response<String>> {
         let url = self.client.url(
@@ -300,13 +300,13 @@ impl Orders {
             .await
     }
     /**
-     * Save the Store Order Json.
+     * Save the Store Order Json
      *
      * This function performs a `POST` to the `/order/{orderId}/storeOrderJson` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- Unique id of the channel.
+     * * `order_id` -- Unique id of the channel
      */
     pub async fn post_store_json(
         &self,
@@ -331,15 +331,15 @@ impl Orders {
             .await
     }
     /**
-     * Get one Shipment by Order Id and Shipment Id.
+     * Get one Shipment by Order Id and Shipment Id
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment/{shipmentId}` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- The order id to get the shipment for.
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `order_id` -- The order id to get the shipment for
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_shipment(
         &self,
@@ -365,15 +365,15 @@ impl Orders {
             .await
     }
     /**
-     * Cancel one Shipment by Order Id and Shipment Id.
+     * Cancel one Shipment by Order Id and Shipment Id
      *
      * This function performs a `POST` to the `/order/{orderId}/shipment/{shipmentId}/cancel` endpoint.
      *
      * **Parameters:**
      *
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
-     * * `order_id: &str` -- Name of the channel.
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
+     * * `order_id` -- Name of the channel
      */
     pub async fn post_shipment_cancel(
         &self,
@@ -399,15 +399,15 @@ impl Orders {
             .await
     }
     /**
-     * Get one Shipment's status timeline by Order Id and Shipment Id.
+     * Get one Shipment's status timeline by Order Id and Shipment Id
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment/{shipmentId}/timeline` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- The order id to get the shipment for.
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `order_id` -- The order id to get the shipment for
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_shipment_timeline(
         &self,
@@ -433,7 +433,7 @@ impl Orders {
             .await
     }
     /**
-     * Get one Shipment's status timeline by Order Id and Shipment Id.
+     * Get one Shipment's status timeline by Order Id and Shipment Id
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment/{shipmentId}/timeline` endpoint.
      *
@@ -463,14 +463,14 @@ impl Orders {
             .await
     }
     /**
-     * Get all Shipments for Order.
+     * Get all Shipments for Order
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- The order id to get shipments for.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `order_id` -- The order id to get shipments for
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_shipments(
         &self,
@@ -494,7 +494,7 @@ impl Orders {
             .await
     }
     /**
-     * Get all Shipments for Order.
+     * Get all Shipments for Order
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment` endpoint.
      *
@@ -522,15 +522,15 @@ impl Orders {
             .await
     }
     /**
-     * Get logs for one Shipment by Order Id and Shipment Id.
+     * Get logs for one Shipment by Order Id and Shipment Id
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment/{shipmentId}/logs` endpoint.
      *
      * **Parameters:**
      *
-     * * `order_id: i64` -- The order id to get the shipment for.
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `order_id` -- The order id to get the shipment for
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_shipment_logs(
         &self,
@@ -556,7 +556,7 @@ impl Orders {
             .await
     }
     /**
-     * Get logs for one Shipment by Order Id and Shipment Id.
+     * Get logs for one Shipment by Order Id and Shipment Id
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment/{shipmentId}/logs` endpoint.
      *
@@ -586,14 +586,14 @@ impl Orders {
             .await
     }
     /**
-     * Get one Shipment by Shipment Id.
+     * Get one Shipment by Shipment Id
      *
      * This function performs a `GET` to the `/shipment/{shipmentId}` endpoint.
      *
      * **Parameters:**
      *
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_shipment_orders(
         &self,
@@ -617,14 +617,14 @@ impl Orders {
             .await
     }
     /**
-     * Cancel one Shipment by Shipment Id.
+     * Cancel one Shipment by Shipment Id
      *
      * This function performs a `POST` to the `/shipment/{shipmentId}/cancel` endpoint.
      *
      * **Parameters:**
      *
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post_shipment_cancel_orders(
         &self,
@@ -648,13 +648,13 @@ impl Orders {
             .await
     }
     /**
-     * Cancel multiple Shipments by Shipment Id.
+     * Cancel multiple Shipments by Shipment Id
      *
      * This function performs a `POST` to the `/shipment/cancelbulk` endpoint.
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post_shipment_cancel_bulk(
         &self,
@@ -672,14 +672,14 @@ impl Orders {
             .await
     }
     /**
-     * Get one Shipment's status timeline by Shipment Id.
+     * Get one Shipment's status timeline by Shipment Id
      *
      * This function performs a `GET` to the `/shipment/{shipmentId}/timeline` endpoint.
      *
      * **Parameters:**
      *
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_shipment_timeline_orders(
         &self,
@@ -703,7 +703,7 @@ impl Orders {
             .await
     }
     /**
-     * Get one Shipment's status timeline by Shipment Id.
+     * Get one Shipment's status timeline by Shipment Id
      *
      * This function performs a `GET` to the `/shipment/{shipmentId}/timeline` endpoint.
      *
@@ -731,14 +731,14 @@ impl Orders {
             .await
     }
     /**
-     * Get logs for one Shipment by Shipment Id.
+     * Get logs for one Shipment by Shipment Id
      *
      * This function performs a `GET` to the `/shipment/{shipmentId}/logs` endpoint.
      *
      * **Parameters:**
      *
-     * * `shipment_id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `shipment_id` -- Unique id of the channel
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_shipment_logs_orders(
         &self,
@@ -762,7 +762,7 @@ impl Orders {
             .await
     }
     /**
-     * Get logs for one Shipment by Shipment Id.
+     * Get logs for one Shipment by Shipment Id
      *
      * This function performs a `GET` to the `/shipment/{shipmentId}/logs` endpoint.
      *
@@ -790,7 +790,7 @@ impl Orders {
             .await
     }
     /**
-     * Get shipping methods.
+     * Get shipping methods
      *
      * This function performs a `GET` to the `/shippingmethod` endpoint.
      *
@@ -798,8 +798,8 @@ impl Orders {
      *
      * **Parameters:**
      *
-     * * `page: i64` -- Unique id of the channel.
-     * * `limit: i64` -- Amount of records per page to request.
+     * * `page` -- Unique id of the channel
+     * * `limit` -- Amount of records per page to request
      */
     pub async fn get_shipping_method(
         &self,
@@ -814,9 +814,7 @@ impl Orders {
             query_args.push(("Page".to_string(), page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/shippingmethod?{}", query_), None);
+        let url = self.client.url(&format!("/shippingmethod?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -828,7 +826,7 @@ impl Orders {
             .await
     }
     /**
-     * Get shipping methods.
+     * Get shipping methods
      *
      * This function performs a `GET` to the `/shippingmethod` endpoint.
      *

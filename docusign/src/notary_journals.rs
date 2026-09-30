@@ -16,13 +16,11 @@ impl NotaryJournals {
      *
      * This function performs a `GET` to the `/v2.1/current_user/notary/journals` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `search_text: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     * * `count` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `search_text` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
      */
     pub async fn get(
         &self,
@@ -42,7 +40,7 @@ impl NotaryJournals {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/v2.1/current_user/notary/journals?{}", query_),
+            &format!("/v2.1/current_user/notary/journals?{query_}"),
             None,
         );
         self.client

@@ -20,9 +20,9 @@ impl Dialog {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `dialog: &str` -- The dialog definition. This must be a JSON-encoded string.
-     * * `trigger_id: &str` -- Exchange a trigger to post to the user.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `dialog` -- The dialog definition. This must be a JSON-encoded string.
+     * * `trigger_id` -- Exchange a trigger to post to the user.
      */
     pub async fn open(
         &self,
@@ -37,7 +37,7 @@ impl Dialog {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/dialog.open?{}", query_), None);
+        let url = self.client.url(&format!("/dialog.open?{query_}"), None);
         self.client
             .get(
                 &url,

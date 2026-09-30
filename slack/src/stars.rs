@@ -20,7 +20,7 @@ impl Stars {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
+     * * `token` -- Authentication token. Requires scope: `stars:write`
      */
     pub async fn add(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/stars.add", None);
@@ -43,11 +43,11 @@ impl Stars {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `stars:read`.
-     * * `count: &str`
-     * * `page: &str`
-     * * `cursor: &str` -- Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
-     * * `limit: i64` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+     * * `token` -- Authentication token. Requires scope: `stars:read`
+     * * `count`
+     * * `page`
+     * * `cursor` -- Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
+     * * `limit` -- The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
      */
     pub async fn list(
         &self,
@@ -70,7 +70,7 @@ impl Stars {
             query_args.push(("page".to_string(), page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/stars.list?{}", query_), None);
+        let url = self.client.url(&format!("/stars.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -90,7 +90,7 @@ impl Stars {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `stars:write`.
+     * * `token` -- Authentication token. Requires scope: `stars:write`
      */
     pub async fn remove(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/stars.remove", None);

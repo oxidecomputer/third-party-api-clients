@@ -18,8 +18,8 @@ impl DomainAliases {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `parent_domain_name: &str` -- Name of the parent domain for which domain aliases are to be fetched.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `parent_domain_name` -- Name of the parent domain for which domain aliases are to be fetched.
      */
     pub async fn list(
         &self,
@@ -59,7 +59,7 @@ impl DomainAliases {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer` -- Immutable ID of the Google Workspace account.
      */
     pub async fn insert(
         &self,
@@ -90,8 +90,8 @@ impl DomainAliases {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `domain_alias_name` -- Name of domain alias to be retrieved.
      */
     pub async fn get(
         &self,
@@ -123,8 +123,8 @@ impl DomainAliases {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `domain_alias_name` -- Name of domain alias to be retrieved.
      */
     pub async fn delete(
         &self,

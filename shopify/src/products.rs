@@ -20,10 +20,10 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_collect(
         &self,
@@ -42,10 +42,9 @@ impl Products {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-01/collects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/collects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -87,8 +86,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_collects_param_collect(
         &self,
@@ -127,7 +126,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
+     * * `collect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_collects_param_collect(
         &self,
@@ -159,7 +158,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: i64` -- recurring_application_charge[capped_amount].
+     * * `collection_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202001_get_collects_count(
         &self,
@@ -171,7 +170,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/collects/count.json?{}", query_),
+            &format!("/admin/api/2020-01/collects/count.json?{query_}"),
             None,
         );
         self.client
@@ -193,10 +192,10 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_collect(
         &self,
@@ -215,10 +214,9 @@ impl Products {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-04/collects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/collects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -260,8 +258,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_collects_param_collect(
         &self,
@@ -300,7 +298,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
+     * * `collect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_collects_param_collect(
         &self,
@@ -332,7 +330,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: i64` -- recurring_application_charge[capped_amount].
+     * * `collection_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202004_get_collects_count(
         &self,
@@ -344,7 +342,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/collects/count.json?{}", query_),
+            &format!("/admin/api/2020-04/collects/count.json?{query_}"),
             None,
         );
         self.client
@@ -366,10 +364,10 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_collect(
         &self,
@@ -388,10 +386,9 @@ impl Products {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-07/collects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/collects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -433,8 +430,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_collects_param_collect(
         &self,
@@ -473,7 +470,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
+     * * `collect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_collects_param_collect(
         &self,
@@ -505,7 +502,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: i64` -- recurring_application_charge[capped_amount].
+     * * `collection_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202007_get_collects_count(
         &self,
@@ -517,7 +514,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/collects/count.json?{}", query_),
+            &format!("/admin/api/2020-07/collects/count.json?{query_}"),
             None,
         );
         self.client
@@ -539,10 +536,10 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_collect(
         &self,
@@ -561,10 +558,9 @@ impl Products {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-10/collects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/collects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -606,8 +602,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_collects_param_collect(
         &self,
@@ -646,7 +642,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
+     * * `collect_id` -- storefront_access_token_id
      */
     pub async fn delete_collects_param_collect(
         &self,
@@ -678,7 +674,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: i64` -- recurring_application_charge[capped_amount].
+     * * `collection_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn get_collects_count(
         &self,
@@ -690,7 +686,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/collects/count.json?{}", query_),
+            &format!("/admin/api/2020-10/collects/count.json?{query_}"),
             None,
         );
         self.client
@@ -712,10 +708,10 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_collect(
         &self,
@@ -734,10 +730,9 @@ impl Products {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2021-01/collects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/collects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -779,8 +774,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_collects_param_collect(
         &self,
@@ -819,7 +814,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
+     * * `collect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_collects_param_collect(
         &self,
@@ -851,7 +846,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: i64` -- recurring_application_charge[capped_amount].
+     * * `collection_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202101_get_collects_count(
         &self,
@@ -863,7 +858,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/collects/count.json?{}", query_),
+            &format!("/admin/api/2021-01/collects/count.json?{query_}"),
             None,
         );
         self.client
@@ -885,10 +880,10 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_collect(
         &self,
@@ -907,10 +902,9 @@ impl Products {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/unstable/collects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/unstable/collects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -952,8 +946,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_collects_param_collect(
         &self,
@@ -992,7 +986,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collect_id: &str` -- storefront_access_token_id.
+     * * `collect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_collects_param_collect(
         &self,
@@ -1024,7 +1018,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: i64` -- recurring_application_charge[capped_amount].
+     * * `collection_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_unstable_get_collects_count(
         &self,
@@ -1036,7 +1030,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/collects/count.json?{}", query_),
+            &format!("/admin/api/unstable/collects/count.json?{query_}"),
             None,
         );
         self.client
@@ -1050,7 +1044,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single collection.
+     * Retrieves a single collection
      *
      * This function performs a `GET` to the `/admin/api/2020-01/collections/{collection_id}.json` endpoint.
      *
@@ -1058,8 +1052,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_collections_param_collection(
         &self,
@@ -1098,9 +1092,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The number of products to retrieve.
-     *                     (default: 50, maximum: 250).
+     * * `collection_id` -- storefront_access_token_id
+     * * `limit` -- The number of products to retrieve.
+     *   (default: 50, maximum: 250)
      */
     pub async fn deprecated_202001_get_collections_param_collection_products(
         &self,
@@ -1131,7 +1125,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single collection.
+     * Retrieves a single collection
      *
      * This function performs a `GET` to the `/admin/api/2020-04/collections/{collection_id}.json` endpoint.
      *
@@ -1139,8 +1133,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_collections_param_collection(
         &self,
@@ -1179,9 +1173,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The number of products to retrieve.
-     *                     (default: 50, maximum: 250).
+     * * `collection_id` -- storefront_access_token_id
+     * * `limit` -- The number of products to retrieve.
+     *   (default: 50, maximum: 250)
      */
     pub async fn deprecated_202004_get_collections_param_collection_products(
         &self,
@@ -1212,7 +1206,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single collection.
+     * Retrieves a single collection
      *
      * This function performs a `GET` to the `/admin/api/2020-07/collections/{collection_id}.json` endpoint.
      *
@@ -1220,8 +1214,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_collections_param_collection(
         &self,
@@ -1260,9 +1254,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The number of products to retrieve.
-     *                     (default: 50, maximum: 250).
+     * * `collection_id` -- storefront_access_token_id
+     * * `limit` -- The number of products to retrieve.
+     *   (default: 50, maximum: 250)
      */
     pub async fn deprecated_202007_get_collections_param_collection_products(
         &self,
@@ -1293,7 +1287,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single collection.
+     * Retrieves a single collection
      *
      * This function performs a `GET` to the `/admin/api/2020-10/collections/{collection_id}.json` endpoint.
      *
@@ -1301,8 +1295,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_collections_param_collection(
         &self,
@@ -1341,9 +1335,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The number of products to retrieve.
-     *                     (default: 50, maximum: 250).
+     * * `collection_id` -- storefront_access_token_id
+     * * `limit` -- The number of products to retrieve.
+     *   (default: 50, maximum: 250)
      */
     pub async fn get_collections_param_collection_products(
         &self,
@@ -1374,7 +1368,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single collection.
+     * Retrieves a single collection
      *
      * This function performs a `GET` to the `/admin/api/2021-01/collections/{collection_id}.json` endpoint.
      *
@@ -1382,8 +1376,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_collections_param_collection(
         &self,
@@ -1422,9 +1416,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The number of products to retrieve.
-     *                     (default: 50, maximum: 250).
+     * * `collection_id` -- storefront_access_token_id
+     * * `limit` -- The number of products to retrieve.
+     *   (default: 50, maximum: 250)
      */
     pub async fn deprecated_202101_get_collections_param_collection_products(
         &self,
@@ -1455,7 +1449,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single collection.
+     * Retrieves a single collection
      *
      * This function performs a `GET` to the `/admin/api/unstable/collections/{collection_id}.json` endpoint.
      *
@@ -1463,8 +1457,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_collections_param_collection(
         &self,
@@ -1503,9 +1497,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `collection_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The number of products to retrieve.
-     *                     (default: 50, maximum: 250).
+     * * `collection_id` -- storefront_access_token_id
+     * * `limit` -- The number of products to retrieve.
+     *   (default: 50, maximum: 250)
      */
     pub async fn deprecated_unstable_get_collections_param_collection_products(
         &self,
@@ -1544,24 +1538,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show custom collections with a given title.
-     * * `product_id: &str` -- Show custom collections that include a given product.
-     * * `handle: &str` -- Filter by custom collection handle.
-     * * `updated_at_min: &str` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Show custom collectsion with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published custom collections.
-     *                           unpublished: Show only unpublished custom collections.
-     *                           any: Show custom collections of any published status.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show custom collections with a given title.
+     * * `product_id` -- Show custom collections that include a given product.
+     * * `handle` -- Filter by custom collection handle.
+     * * `updated_at_min` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Show custom collectsion with a given published status.
+     *   (default: any)
+     *
+     *   published: Show only published custom collections.
+     *   unpublished: Show only unpublished custom collections.
+     *   any: Show custom collections of any published status.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_custom_collection(
         &self,
@@ -1617,7 +1611,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/custom_collections.json?{}", query_),
+            &format!("/admin/api/2020-01/custom_collections.json?{query_}"),
             None,
         );
         self.client
@@ -1631,7 +1625,7 @@ impl Products {
             .await
     }
     /**
-     * Creates a custom collection.
+     * Creates a custom collection
      *
      * This function performs a `POST` to the `/admin/api/2020-01/custom_collections.json` endpoint.
      *
@@ -1655,7 +1649,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of custom collections.
+     * Retrieves a count of custom collections
      *
      * This function performs a `GET` to the `/admin/api/2020-01/custom_collections/count.json` endpoint.
      *
@@ -1663,18 +1657,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Count custom collections with given title.
-     * * `product_id: &str` -- Count custom collections that include a given product.
-     * * `updated_at_min: &str` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count custom collections with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published custom collections.
-     *                           unpublished: Count only unpublished custom collections.
-     *                           any: Count custom collections of any published status.
+     * * `title` -- Count custom collections with given title.
+     * * `product_id` -- Count custom collections that include a given product.
+     * * `updated_at_min` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count custom collections with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published custom collections.
+     *   unpublished: Count only unpublished custom collections.
+     *   any: Count custom collections of any published status.
      */
     pub async fn deprecated_202001_get_custom_collections_count(
         &self,
@@ -1710,10 +1704,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/custom_collections/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/custom_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -1727,7 +1718,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single custom collection.
+     * Retrieves a single custom collection
      *
      * This function performs a `GET` to the `/admin/api/2020-01/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -1735,8 +1726,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `custom_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_custom_collections_param_collection(
         &self,
@@ -1767,7 +1758,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing custom collection.
+     * Updates an existing custom collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -1775,7 +1766,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_custom_collections_param_collection(
         &self,
@@ -1800,7 +1791,7 @@ impl Products {
             .await
     }
     /**
-     * Deletes a custom collection.
+     * Deletes a custom collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -1808,7 +1799,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_custom_collections_param_collection(
         &self,
@@ -1840,24 +1831,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show custom collections with a given title.
-     * * `product_id: &str` -- Show custom collections that include a given product.
-     * * `handle: &str` -- Filter by custom collection handle.
-     * * `updated_at_min: &str` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Show custom collectsion with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published custom collections.
-     *                           unpublished: Show only unpublished custom collections.
-     *                           any: Show custom collections of any published status.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show custom collections with a given title.
+     * * `product_id` -- Show custom collections that include a given product.
+     * * `handle` -- Filter by custom collection handle.
+     * * `updated_at_min` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Show custom collectsion with a given published status.
+     *   (default: any)
+     *
+     *   published: Show only published custom collections.
+     *   unpublished: Show only unpublished custom collections.
+     *   any: Show custom collections of any published status.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_custom_collection(
         &self,
@@ -1913,7 +1904,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/custom_collections.json?{}", query_),
+            &format!("/admin/api/2020-04/custom_collections.json?{query_}"),
             None,
         );
         self.client
@@ -1927,7 +1918,7 @@ impl Products {
             .await
     }
     /**
-     * Creates a custom collection.
+     * Creates a custom collection
      *
      * This function performs a `POST` to the `/admin/api/2020-04/custom_collections.json` endpoint.
      *
@@ -1951,7 +1942,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of custom collections.
+     * Retrieves a count of custom collections
      *
      * This function performs a `GET` to the `/admin/api/2020-04/custom_collections/count.json` endpoint.
      *
@@ -1959,18 +1950,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Count custom collections with given title.
-     * * `product_id: &str` -- Count custom collections that include a given product.
-     * * `updated_at_min: &str` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count custom collections with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published custom collections.
-     *                           unpublished: Count only unpublished custom collections.
-     *                           any: Count custom collections of any published status.
+     * * `title` -- Count custom collections with given title.
+     * * `product_id` -- Count custom collections that include a given product.
+     * * `updated_at_min` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count custom collections with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published custom collections.
+     *   unpublished: Count only unpublished custom collections.
+     *   any: Count custom collections of any published status.
      */
     pub async fn deprecated_202004_get_custom_collections_count(
         &self,
@@ -2006,10 +1997,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-04/custom_collections/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-04/custom_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -2023,7 +2011,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single custom collection.
+     * Retrieves a single custom collection
      *
      * This function performs a `GET` to the `/admin/api/2020-04/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2031,8 +2019,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `custom_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_custom_collections_param_collection(
         &self,
@@ -2063,7 +2051,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing custom collection.
+     * Updates an existing custom collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2071,7 +2059,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_custom_collections_param_collection(
         &self,
@@ -2096,7 +2084,7 @@ impl Products {
             .await
     }
     /**
-     * Deletes a custom collection.
+     * Deletes a custom collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2104,7 +2092,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_custom_collections_param_collection(
         &self,
@@ -2136,24 +2124,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show custom collections with a given title.
-     * * `product_id: &str` -- Show custom collections that include a given product.
-     * * `handle: &str` -- Filter by custom collection handle.
-     * * `updated_at_min: &str` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Show custom collectsion with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published custom collections.
-     *                           unpublished: Show only unpublished custom collections.
-     *                           any: Show custom collections of any published status.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show custom collections with a given title.
+     * * `product_id` -- Show custom collections that include a given product.
+     * * `handle` -- Filter by custom collection handle.
+     * * `updated_at_min` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Show custom collectsion with a given published status.
+     *   (default: any)
+     *
+     *   published: Show only published custom collections.
+     *   unpublished: Show only unpublished custom collections.
+     *   any: Show custom collections of any published status.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_custom_collection(
         &self,
@@ -2209,7 +2197,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/custom_collections.json?{}", query_),
+            &format!("/admin/api/2020-07/custom_collections.json?{query_}"),
             None,
         );
         self.client
@@ -2223,7 +2211,7 @@ impl Products {
             .await
     }
     /**
-     * Creates a custom collection.
+     * Creates a custom collection
      *
      * This function performs a `POST` to the `/admin/api/2020-07/custom_collections.json` endpoint.
      *
@@ -2247,7 +2235,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of custom collections.
+     * Retrieves a count of custom collections
      *
      * This function performs a `GET` to the `/admin/api/2020-07/custom_collections/count.json` endpoint.
      *
@@ -2255,18 +2243,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Count custom collections with given title.
-     * * `product_id: &str` -- Count custom collections that include a given product.
-     * * `updated_at_min: &str` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count custom collections with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published custom collections.
-     *                           unpublished: Count only unpublished custom collections.
-     *                           any: Count custom collections of any published status.
+     * * `title` -- Count custom collections with given title.
+     * * `product_id` -- Count custom collections that include a given product.
+     * * `updated_at_min` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count custom collections with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published custom collections.
+     *   unpublished: Count only unpublished custom collections.
+     *   any: Count custom collections of any published status.
      */
     pub async fn deprecated_202007_get_custom_collections_count(
         &self,
@@ -2302,10 +2290,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-07/custom_collections/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-07/custom_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -2319,7 +2304,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single custom collection.
+     * Retrieves a single custom collection
      *
      * This function performs a `GET` to the `/admin/api/2020-07/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2327,8 +2312,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `custom_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_custom_collections_param_collection(
         &self,
@@ -2359,7 +2344,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing custom collection.
+     * Updates an existing custom collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2367,7 +2352,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_custom_collections_param_collection(
         &self,
@@ -2392,7 +2377,7 @@ impl Products {
             .await
     }
     /**
-     * Deletes a custom collection.
+     * Deletes a custom collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2400,7 +2385,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_custom_collections_param_collection(
         &self,
@@ -2432,24 +2417,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show custom collections with a given title.
-     * * `product_id: &str` -- Show custom collections that include a given product.
-     * * `handle: &str` -- Filter by custom collection handle.
-     * * `updated_at_min: &str` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Show custom collectsion with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published custom collections.
-     *                           unpublished: Show only unpublished custom collections.
-     *                           any: Show custom collections of any published status.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show custom collections with a given title.
+     * * `product_id` -- Show custom collections that include a given product.
+     * * `handle` -- Filter by custom collection handle.
+     * * `updated_at_min` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Show custom collectsion with a given published status.
+     *   (default: any)
+     *
+     *   published: Show only published custom collections.
+     *   unpublished: Show only unpublished custom collections.
+     *   any: Show custom collections of any published status.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_custom_collection(
         &self,
@@ -2505,7 +2490,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/custom_collections.json?{}", query_),
+            &format!("/admin/api/2020-10/custom_collections.json?{query_}"),
             None,
         );
         self.client
@@ -2519,7 +2504,7 @@ impl Products {
             .await
     }
     /**
-     * Creates a custom collection.
+     * Creates a custom collection
      *
      * This function performs a `POST` to the `/admin/api/2020-10/custom_collections.json` endpoint.
      *
@@ -2543,7 +2528,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of custom collections.
+     * Retrieves a count of custom collections
      *
      * This function performs a `GET` to the `/admin/api/2020-10/custom_collections/count.json` endpoint.
      *
@@ -2551,18 +2536,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Count custom collections with given title.
-     * * `product_id: &str` -- Count custom collections that include a given product.
-     * * `updated_at_min: &str` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count custom collections with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published custom collections.
-     *                           unpublished: Count only unpublished custom collections.
-     *                           any: Count custom collections of any published status.
+     * * `title` -- Count custom collections with given title.
+     * * `product_id` -- Count custom collections that include a given product.
+     * * `updated_at_min` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count custom collections with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published custom collections.
+     *   unpublished: Count only unpublished custom collections.
+     *   any: Count custom collections of any published status.
      */
     pub async fn get_custom_collections_count(
         &self,
@@ -2598,10 +2583,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-10/custom_collections/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-10/custom_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -2615,7 +2597,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single custom collection.
+     * Retrieves a single custom collection
      *
      * This function performs a `GET` to the `/admin/api/2020-10/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2623,8 +2605,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `custom_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_custom_collections_param_collection(
         &self,
@@ -2655,7 +2637,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing custom collection.
+     * Updates an existing custom collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2663,7 +2645,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn update_custom_collections_param_collection(
         &self,
@@ -2688,7 +2670,7 @@ impl Products {
             .await
     }
     /**
-     * Deletes a custom collection.
+     * Deletes a custom collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2696,7 +2678,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn delete_custom_collections_param_collection(
         &self,
@@ -2728,24 +2710,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show custom collections with a given title.
-     * * `product_id: &str` -- Show custom collections that include a given product.
-     * * `handle: &str` -- Filter by custom collection handle.
-     * * `updated_at_min: &str` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Show custom collectsion with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published custom collections.
-     *                           unpublished: Show only unpublished custom collections.
-     *                           any: Show custom collections of any published status.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show custom collections with a given title.
+     * * `product_id` -- Show custom collections that include a given product.
+     * * `handle` -- Filter by custom collection handle.
+     * * `updated_at_min` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Show custom collectsion with a given published status.
+     *   (default: any)
+     *
+     *   published: Show only published custom collections.
+     *   unpublished: Show only unpublished custom collections.
+     *   any: Show custom collections of any published status.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_custom_collection(
         &self,
@@ -2801,7 +2783,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/custom_collections.json?{}", query_),
+            &format!("/admin/api/2021-01/custom_collections.json?{query_}"),
             None,
         );
         self.client
@@ -2815,7 +2797,7 @@ impl Products {
             .await
     }
     /**
-     * Creates a custom collection.
+     * Creates a custom collection
      *
      * This function performs a `POST` to the `/admin/api/2021-01/custom_collections.json` endpoint.
      *
@@ -2839,7 +2821,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of custom collections.
+     * Retrieves a count of custom collections
      *
      * This function performs a `GET` to the `/admin/api/2021-01/custom_collections/count.json` endpoint.
      *
@@ -2847,18 +2829,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Count custom collections with given title.
-     * * `product_id: &str` -- Count custom collections that include a given product.
-     * * `updated_at_min: &str` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count custom collections with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published custom collections.
-     *                           unpublished: Count only unpublished custom collections.
-     *                           any: Count custom collections of any published status.
+     * * `title` -- Count custom collections with given title.
+     * * `product_id` -- Count custom collections that include a given product.
+     * * `updated_at_min` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count custom collections with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published custom collections.
+     *   unpublished: Count only unpublished custom collections.
+     *   any: Count custom collections of any published status.
      */
     pub async fn deprecated_202101_get_custom_collections_count(
         &self,
@@ -2894,10 +2876,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2021-01/custom_collections/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2021-01/custom_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -2911,7 +2890,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single custom collection.
+     * Retrieves a single custom collection
      *
      * This function performs a `GET` to the `/admin/api/2021-01/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2919,8 +2898,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `custom_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_custom_collections_param_collection(
         &self,
@@ -2951,7 +2930,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing custom collection.
+     * Updates an existing custom collection
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2959,7 +2938,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_custom_collections_param_collection(
         &self,
@@ -2984,7 +2963,7 @@ impl Products {
             .await
     }
     /**
-     * Deletes a custom collection.
+     * Deletes a custom collection
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -2992,7 +2971,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_custom_collections_param_collection(
         &self,
@@ -3024,24 +3003,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show custom collections with a given title.
-     * * `product_id: &str` -- Show custom collections that include a given product.
-     * * `handle: &str` -- Filter by custom collection handle.
-     * * `updated_at_min: &str` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Show custom collectsion with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published custom collections.
-     *                           unpublished: Show only unpublished custom collections.
-     *                           any: Show custom collections of any published status.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show custom collections with a given title.
+     * * `product_id` -- Show custom collections that include a given product.
+     * * `handle` -- Filter by custom collection handle.
+     * * `updated_at_min` -- Show custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Show custom collectsion with a given published status.
+     *   (default: any)
+     *
+     *   published: Show only published custom collections.
+     *   unpublished: Show only unpublished custom collections.
+     *   any: Show custom collections of any published status.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_custom_collection(
         &self,
@@ -3097,7 +3076,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/custom_collections.json?{}", query_),
+            &format!("/admin/api/unstable/custom_collections.json?{query_}"),
             None,
         );
         self.client
@@ -3111,7 +3090,7 @@ impl Products {
             .await
     }
     /**
-     * Creates a custom collection.
+     * Creates a custom collection
      *
      * This function performs a `POST` to the `/admin/api/unstable/custom_collections.json` endpoint.
      *
@@ -3135,7 +3114,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of custom collections.
+     * Retrieves a count of custom collections
      *
      * This function performs a `GET` to the `/admin/api/unstable/custom_collections/count.json` endpoint.
      *
@@ -3143,18 +3122,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Count custom collections with given title.
-     * * `product_id: &str` -- Count custom collections that include a given product.
-     * * `updated_at_min: &str` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count custom collections with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published custom collections.
-     *                           unpublished: Count only unpublished custom collections.
-     *                           any: Count custom collections of any published status.
+     * * `title` -- Count custom collections with given title.
+     * * `product_id` -- Count custom collections that include a given product.
+     * * `updated_at_min` -- Count custom collections last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count custom collections last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count custom collections published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count custom collections published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count custom collections with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published custom collections.
+     *   unpublished: Count only unpublished custom collections.
+     *   any: Count custom collections of any published status.
      */
     pub async fn deprecated_unstable_get_custom_collections_count(
         &self,
@@ -3190,10 +3169,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/custom_collections/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/custom_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -3207,7 +3183,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single custom collection.
+     * Retrieves a single custom collection
      *
      * This function performs a `GET` to the `/admin/api/unstable/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -3215,8 +3191,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `custom_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_custom_collections_param_collection(
         &self,
@@ -3247,7 +3223,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing custom collection.
+     * Updates an existing custom collection
      *
      * This function performs a `PUT` to the `/admin/api/unstable/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -3255,7 +3231,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_custom_collections_param_collection(
         &self,
@@ -3280,7 +3256,7 @@ impl Products {
             .await
     }
     /**
-     * Deletes a custom collection.
+     * Deletes a custom collection
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/custom_collections/{custom_collection_id}.json` endpoint.
      *
@@ -3288,7 +3264,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `custom_collection_id: &str` -- storefront_access_token_id.
+     * * `custom_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_custom_collections_param_collection(
         &self,
@@ -3320,35 +3296,35 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Return only products specified by a comma-separated list of product IDs.
-     * * `limit: &str` -- Return up to this many results per page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Filter results by product title.
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `handle: &str` -- Filter results by product handle.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `status: &str` -- Return products by their status.
-     *                     (default: active)
-     *                       
-     *                           active: Show only active products.
-     *                           archived: Show only archived products.
-     *                           draft: Show only draft products.
-     * * `collection_id: &str` -- Filter results by product collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `presentment_currencies: &str` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
+     * * `ids` -- Return only products specified by a comma-separated list of product IDs.
+     * * `limit` -- Return up to this many results per page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Filter results by product title.
+     * * `vendor` -- Filter results by product vendor.
+     * * `handle` -- Filter results by product handle.
+     * * `product_type` -- Filter results by product type.
+     * * `status` -- Return products by their status.
+     *   (default: active)
+     *
+     *   active: Show only active products.
+     *   archived: Show only archived products.
+     *   draft: Show only draft products.
+     * * `collection_id` -- Filter results by product collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `presentment_currencies` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
      */
     pub async fn deprecated_202001_get(
         &self,
@@ -3430,10 +3406,9 @@ impl Products {
             query_args.push(("vendor".to_string(), vendor.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-01/products.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/products.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -3445,16 +3420,16 @@ impl Products {
             .await
     }
     /**
-    * Creates a new product.
-             If you want to set the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/products.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-01
-    */
+     * Creates a new product.
+     * If you want to set the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/products.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-01
+     */
     pub async fn deprecated_202001_create(
         &self,
         body: &serde_json::Value,
@@ -3479,21 +3454,21 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `collection_id: &str` -- Filter results by collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
+     * * `vendor` -- Filter results by product vendor.
+     * * `product_type` -- Filter results by product type.
+     * * `collection_id` -- Filter results by collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
      */
     pub async fn deprecated_202001_get_count(
         &self,
@@ -3541,7 +3516,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/products/count.json?{}", query_),
+            &format!("/admin/api/2020-01/products/count.json?{query_}"),
             None,
         );
         self.client
@@ -3563,8 +3538,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_param(
         &self,
@@ -3595,20 +3570,20 @@ impl Products {
             .await
     }
     /**
-    * Updates a product and its variants and images.
-             If you want to update the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/products/{product_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `product_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a product and its variants and images.
+     * If you want to update the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/products/{product_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `product_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_update_param(
         &self,
         product_id: &str,
@@ -3640,7 +3615,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_param(
         &self,
@@ -3672,35 +3647,35 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Return only products specified by a comma-separated list of product IDs.
-     * * `limit: &str` -- Return up to this many results per page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Filter results by product title.
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `handle: &str` -- Filter results by product handle.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `status: &str` -- Return products by their status.
-     *                     (default: active)
-     *                       
-     *                           active: Show only active products.
-     *                           archived: Show only archived products.
-     *                           draft: Show only draft products.
-     * * `collection_id: &str` -- Filter results by product collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `presentment_currencies: &str` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
+     * * `ids` -- Return only products specified by a comma-separated list of product IDs.
+     * * `limit` -- Return up to this many results per page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Filter results by product title.
+     * * `vendor` -- Filter results by product vendor.
+     * * `handle` -- Filter results by product handle.
+     * * `product_type` -- Filter results by product type.
+     * * `status` -- Return products by their status.
+     *   (default: active)
+     *
+     *   active: Show only active products.
+     *   archived: Show only archived products.
+     *   draft: Show only draft products.
+     * * `collection_id` -- Filter results by product collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `presentment_currencies` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
      */
     pub async fn deprecated_202004_get(
         &self,
@@ -3782,10 +3757,9 @@ impl Products {
             query_args.push(("vendor".to_string(), vendor.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-04/products.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/products.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -3797,16 +3771,16 @@ impl Products {
             .await
     }
     /**
-    * Creates a new product.
-             If you want to set the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/products.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-04
-    */
+     * Creates a new product.
+     * If you want to set the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/products.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-04
+     */
     pub async fn deprecated_202004_create(
         &self,
         body: &serde_json::Value,
@@ -3831,21 +3805,21 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `collection_id: &str` -- Filter results by collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
+     * * `vendor` -- Filter results by product vendor.
+     * * `product_type` -- Filter results by product type.
+     * * `collection_id` -- Filter results by collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
      */
     pub async fn deprecated_202004_get_count(
         &self,
@@ -3893,7 +3867,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/products/count.json?{}", query_),
+            &format!("/admin/api/2020-04/products/count.json?{query_}"),
             None,
         );
         self.client
@@ -3915,8 +3889,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_param(
         &self,
@@ -3947,20 +3921,20 @@ impl Products {
             .await
     }
     /**
-    * Updates a product and its variants and images.
-             If you want to update the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/products/{product_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `product_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a product and its variants and images.
+     * If you want to update the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/products/{product_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `product_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_update_param(
         &self,
         product_id: &str,
@@ -3992,7 +3966,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_param(
         &self,
@@ -4024,35 +3998,35 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Return only products specified by a comma-separated list of product IDs.
-     * * `limit: &str` -- Return up to this many results per page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Filter results by product title.
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `handle: &str` -- Filter results by product handle.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `status: &str` -- Return products by their status.
-     *                     (default: active)
-     *                       
-     *                           active: Show only active products.
-     *                           archived: Show only archived products.
-     *                           draft: Show only draft products.
-     * * `collection_id: &str` -- Filter results by product collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `presentment_currencies: &str` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
+     * * `ids` -- Return only products specified by a comma-separated list of product IDs.
+     * * `limit` -- Return up to this many results per page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Filter results by product title.
+     * * `vendor` -- Filter results by product vendor.
+     * * `handle` -- Filter results by product handle.
+     * * `product_type` -- Filter results by product type.
+     * * `status` -- Return products by their status.
+     *   (default: active)
+     *
+     *   active: Show only active products.
+     *   archived: Show only archived products.
+     *   draft: Show only draft products.
+     * * `collection_id` -- Filter results by product collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `presentment_currencies` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
      */
     pub async fn deprecated_202007_get(
         &self,
@@ -4134,10 +4108,9 @@ impl Products {
             query_args.push(("vendor".to_string(), vendor.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-07/products.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/products.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -4149,16 +4122,16 @@ impl Products {
             .await
     }
     /**
-    * Creates a new product.
-             If you want to set the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/products.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-07
-    */
+     * Creates a new product.
+     * If you want to set the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/products.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-07
+     */
     pub async fn deprecated_202007_create(
         &self,
         body: &serde_json::Value,
@@ -4183,21 +4156,21 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `collection_id: &str` -- Filter results by collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
+     * * `vendor` -- Filter results by product vendor.
+     * * `product_type` -- Filter results by product type.
+     * * `collection_id` -- Filter results by collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
      */
     pub async fn deprecated_202007_get_count(
         &self,
@@ -4245,7 +4218,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/products/count.json?{}", query_),
+            &format!("/admin/api/2020-07/products/count.json?{query_}"),
             None,
         );
         self.client
@@ -4267,8 +4240,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_param(
         &self,
@@ -4299,20 +4272,20 @@ impl Products {
             .await
     }
     /**
-    * Updates a product and its variants and images.
-             If you want to update the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/products/{product_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `product_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a product and its variants and images.
+     * If you want to update the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/products/{product_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `product_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_update_param(
         &self,
         product_id: &str,
@@ -4344,7 +4317,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_param(
         &self,
@@ -4376,35 +4349,35 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Return only products specified by a comma-separated list of product IDs.
-     * * `limit: &str` -- Return up to this many results per page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Filter results by product title.
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `handle: &str` -- Filter results by product handle.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `status: &str` -- Return products by their status.
-     *                     (default: active)
-     *                       
-     *                           active: Show only active products.
-     *                           archived: Show only archived products.
-     *                           draft: Show only draft products.
-     * * `collection_id: &str` -- Filter results by product collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `presentment_currencies: &str` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
+     * * `ids` -- Return only products specified by a comma-separated list of product IDs.
+     * * `limit` -- Return up to this many results per page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Filter results by product title.
+     * * `vendor` -- Filter results by product vendor.
+     * * `handle` -- Filter results by product handle.
+     * * `product_type` -- Filter results by product type.
+     * * `status` -- Return products by their status.
+     *   (default: active)
+     *
+     *   active: Show only active products.
+     *   archived: Show only archived products.
+     *   draft: Show only draft products.
+     * * `collection_id` -- Filter results by product collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `presentment_currencies` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
      */
     pub async fn get(
         &self,
@@ -4486,10 +4459,9 @@ impl Products {
             query_args.push(("vendor".to_string(), vendor.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-10/products.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/products.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -4501,16 +4473,16 @@ impl Products {
             .await
     }
     /**
-    * Creates a new product.
-             If you want to set the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/products.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-10
-    */
+     * Creates a new product.
+     * If you want to set the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/products.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2020-10
+     */
     pub async fn create(&self, body: &serde_json::Value) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/admin/api/2020-10/products.json", None);
         self.client
@@ -4532,21 +4504,21 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `collection_id: &str` -- Filter results by collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
+     * * `vendor` -- Filter results by product vendor.
+     * * `product_type` -- Filter results by product type.
+     * * `collection_id` -- Filter results by collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
      */
     pub async fn get_count(
         &self,
@@ -4594,7 +4566,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/products/count.json?{}", query_),
+            &format!("/admin/api/2020-10/products/count.json?{query_}"),
             None,
         );
         self.client
@@ -4616,8 +4588,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_param(
         &self,
@@ -4648,20 +4620,20 @@ impl Products {
             .await
     }
     /**
-    * Updates a product and its variants and images.
-             If you want to update the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/products/{product_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `product_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a product and its variants and images.
+     * If you want to update the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/products/{product_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `product_id` -- storefront_access_token_id
+     */
     pub async fn update_param(
         &self,
         product_id: &str,
@@ -4693,7 +4665,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn delete_param(&self, product_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -4722,35 +4694,35 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Return only products specified by a comma-separated list of product IDs.
-     * * `limit: &str` -- Return up to this many results per page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Filter results by product title.
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `handle: &str` -- Filter results by product handle.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `status: &str` -- Return products by their status.
-     *                     (default: active)
-     *                       
-     *                           active: Show only active products.
-     *                           archived: Show only archived products.
-     *                           draft: Show only draft products.
-     * * `collection_id: &str` -- Filter results by product collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `presentment_currencies: &str` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
+     * * `ids` -- Return only products specified by a comma-separated list of product IDs.
+     * * `limit` -- Return up to this many results per page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Filter results by product title.
+     * * `vendor` -- Filter results by product vendor.
+     * * `handle` -- Filter results by product handle.
+     * * `product_type` -- Filter results by product type.
+     * * `status` -- Return products by their status.
+     *   (default: active)
+     *
+     *   active: Show only active products.
+     *   archived: Show only archived products.
+     *   draft: Show only draft products.
+     * * `collection_id` -- Filter results by product collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `presentment_currencies` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
      */
     pub async fn deprecated_202101_get(
         &self,
@@ -4832,10 +4804,9 @@ impl Products {
             query_args.push(("vendor".to_string(), vendor.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2021-01/products.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/products.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -4847,16 +4818,16 @@ impl Products {
             .await
     }
     /**
-    * Creates a new product.
-             If you want to set the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/products.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2021-01
-    */
+     * Creates a new product.
+     * If you want to set the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/products.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-2021-01
+     */
     pub async fn deprecated_202101_create(
         &self,
         body: &serde_json::Value,
@@ -4881,21 +4852,21 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `collection_id: &str` -- Filter results by collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
+     * * `vendor` -- Filter results by product vendor.
+     * * `product_type` -- Filter results by product type.
+     * * `collection_id` -- Filter results by collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
      */
     pub async fn deprecated_202101_get_count(
         &self,
@@ -4943,7 +4914,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/products/count.json?{}", query_),
+            &format!("/admin/api/2021-01/products/count.json?{query_}"),
             None,
         );
         self.client
@@ -4965,8 +4936,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_param(
         &self,
@@ -4997,20 +4968,20 @@ impl Products {
             .await
     }
     /**
-    * Updates a product and its variants and images.
-             If you want to update the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/products/{product_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `product_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a product and its variants and images.
+     * If you want to update the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/products/{product_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `product_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_update_param(
         &self,
         product_id: &str,
@@ -5042,7 +5013,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_param(
         &self,
@@ -5074,35 +5045,35 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Return only products specified by a comma-separated list of product IDs.
-     * * `limit: &str` -- Return up to this many results per page.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Filter results by product title.
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `handle: &str` -- Filter results by product handle.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `status: &str` -- Return products by their status.
-     *                     (default: active)
-     *                       
-     *                           active: Show only active products.
-     *                           archived: Show only archived products.
-     *                           draft: Show only draft products.
-     * * `collection_id: &str` -- Filter results by product collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `presentment_currencies: &str` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
+     * * `ids` -- Return only products specified by a comma-separated list of product IDs.
+     * * `limit` -- Return up to this many results per page.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Filter results by product title.
+     * * `vendor` -- Filter results by product vendor.
+     * * `handle` -- Filter results by product handle.
+     * * `product_type` -- Filter results by product type.
+     * * `status` -- Return products by their status.
+     *   (default: active)
+     *
+     *   active: Show only active products.
+     *   archived: Show only archived products.
+     *   draft: Show only draft products.
+     * * `collection_id` -- Filter results by product collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `presentment_currencies` -- Return presentment prices in only certain currencies, specified by a comma-separated list of ISO 4217 currency codes.
      */
     pub async fn deprecated_unstable_get(
         &self,
@@ -5184,10 +5155,9 @@ impl Products {
             query_args.push(("vendor".to_string(), vendor.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/unstable/products.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/unstable/products.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -5199,16 +5169,16 @@ impl Products {
             .await
     }
     /**
-    * Creates a new product.
-             If you want to set the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/products.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-unstable
-    */
+     * Creates a new product.
+     * If you want to set the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/products.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#create-unstable
+     */
     pub async fn deprecated_unstable_create(
         &self,
         body: &serde_json::Value,
@@ -5233,21 +5203,21 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `vendor: &str` -- Filter results by product vendor.
-     * * `product_type: &str` -- Filter results by product type.
-     * * `collection_id: &str` -- Filter results by collection ID.
-     * * `created_at_min: &str` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Return products by their published status
-     *                     (default: any)
-     *                       
-     *                           published: Show only published products.
-     *                           unpublished: Show only unpublished products.
-     *                           any: Show all products.
+     * * `vendor` -- Filter results by product vendor.
+     * * `product_type` -- Filter results by product type.
+     * * `collection_id` -- Filter results by collection ID.
+     * * `created_at_min` -- Show products created after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show products created before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show products last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show products last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show products published after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show products published before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Return products by their published status
+     *   (default: any)
+     *
+     *   published: Show only published products.
+     *   unpublished: Show only unpublished products.
+     *   any: Show all products.
      */
     pub async fn deprecated_unstable_get_count(
         &self,
@@ -5295,7 +5265,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/products/count.json?{}", query_),
+            &format!("/admin/api/unstable/products/count.json?{query_}"),
             None,
         );
         self.client
@@ -5317,8 +5287,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_param(
         &self,
@@ -5349,20 +5319,20 @@ impl Products {
             .await
     }
     /**
-    * Updates a product and its variants and images.
-             If you want to update the product's SEO information, then you can use the following properties:
-
-               metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
-               metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/products/{product_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `product_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a product and its variants and images.
+     * If you want to update the product's SEO information, then you can use the following properties:
+     *
+     * metafields_global_title_tag: The name of the product used for SEO purposes. Generally added to the <meta name='title'> tag.
+     * metafields_global_description_tag: A description of the product used for SEO purposes. Generally added to the <meta name='description'> tag.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/products/{product_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/products/product#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `product_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_update_param(
         &self,
         product_id: &str,
@@ -5394,7 +5364,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_param(
         &self,
@@ -5418,7 +5388,7 @@ impl Products {
             .await
     }
     /**
-     * Get all product images.
+     * Get all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-01/products/{product_id}/images.json` endpoint.
      *
@@ -5426,9 +5396,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202001_get_param_image(
         &self,
@@ -5463,7 +5433,7 @@ impl Products {
             .await
     }
     /**
-     * Create a new product image.
+     * Create a new product image
      *
      * This function performs a `POST` to the `/admin/api/2020-01/products/{product_id}/images.json` endpoint.
      *
@@ -5471,7 +5441,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_param_images(
         &self,
@@ -5496,7 +5466,7 @@ impl Products {
             .await
     }
     /**
-     * Get a count of all product images.
+     * Get a count of all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-01/products/{product_id}/images/count.json` endpoint.
      *
@@ -5504,8 +5474,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202001_get_param_images_count(
         &self,
@@ -5536,7 +5506,7 @@ impl Products {
             .await
     }
     /**
-     * Get a single product image by id.
+     * Get a single product image by id
      *
      * This function performs a `GET` to the `/admin/api/2020-01/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -5544,9 +5514,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202001_get_param_images_image(
         &self,
@@ -5579,7 +5549,7 @@ impl Products {
             .await
     }
     /**
-     * Modify an existing product image.
+     * Modify an existing product image
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -5587,8 +5557,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_param_images_image(
         &self,
@@ -5615,7 +5585,6 @@ impl Products {
             .await
     }
     /**
-     * .
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -5623,8 +5592,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_param_images_image(
         &self,
@@ -5650,7 +5619,7 @@ impl Products {
             .await
     }
     /**
-     * Get all product images.
+     * Get all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-04/products/{product_id}/images.json` endpoint.
      *
@@ -5658,9 +5627,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202004_get_param_image(
         &self,
@@ -5695,7 +5664,7 @@ impl Products {
             .await
     }
     /**
-     * Create a new product image.
+     * Create a new product image
      *
      * This function performs a `POST` to the `/admin/api/2020-04/products/{product_id}/images.json` endpoint.
      *
@@ -5703,7 +5672,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_param_images(
         &self,
@@ -5728,7 +5697,7 @@ impl Products {
             .await
     }
     /**
-     * Get a count of all product images.
+     * Get a count of all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-04/products/{product_id}/images/count.json` endpoint.
      *
@@ -5736,8 +5705,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202004_get_param_images_count(
         &self,
@@ -5768,7 +5737,7 @@ impl Products {
             .await
     }
     /**
-     * Get a single product image by id.
+     * Get a single product image by id
      *
      * This function performs a `GET` to the `/admin/api/2020-04/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -5776,9 +5745,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202004_get_param_images_image(
         &self,
@@ -5811,7 +5780,7 @@ impl Products {
             .await
     }
     /**
-     * Modify an existing product image.
+     * Modify an existing product image
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -5819,8 +5788,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_param_images_image(
         &self,
@@ -5847,7 +5816,6 @@ impl Products {
             .await
     }
     /**
-     * .
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -5855,8 +5823,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_param_images_image(
         &self,
@@ -5882,7 +5850,7 @@ impl Products {
             .await
     }
     /**
-     * Get all product images.
+     * Get all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-07/products/{product_id}/images.json` endpoint.
      *
@@ -5890,9 +5858,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202007_get_param_image(
         &self,
@@ -5927,7 +5895,7 @@ impl Products {
             .await
     }
     /**
-     * Create a new product image.
+     * Create a new product image
      *
      * This function performs a `POST` to the `/admin/api/2020-07/products/{product_id}/images.json` endpoint.
      *
@@ -5935,7 +5903,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_create_param_images(
         &self,
@@ -5960,7 +5928,7 @@ impl Products {
             .await
     }
     /**
-     * Get a count of all product images.
+     * Get a count of all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-07/products/{product_id}/images/count.json` endpoint.
      *
@@ -5968,8 +5936,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202007_get_param_images_count(
         &self,
@@ -6000,7 +5968,7 @@ impl Products {
             .await
     }
     /**
-     * Get a single product image by id.
+     * Get a single product image by id
      *
      * This function performs a `GET` to the `/admin/api/2020-07/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6008,9 +5976,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202007_get_param_images_image(
         &self,
@@ -6043,7 +6011,7 @@ impl Products {
             .await
     }
     /**
-     * Modify an existing product image.
+     * Modify an existing product image
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6051,8 +6019,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_param_images_image(
         &self,
@@ -6079,7 +6047,6 @@ impl Products {
             .await
     }
     /**
-     * .
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6087,8 +6054,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_param_images_image(
         &self,
@@ -6114,7 +6081,7 @@ impl Products {
             .await
     }
     /**
-     * Get all product images.
+     * Get all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-10/products/{product_id}/images.json` endpoint.
      *
@@ -6122,9 +6089,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn get_param_image(
         &self,
@@ -6159,7 +6126,7 @@ impl Products {
             .await
     }
     /**
-     * Create a new product image.
+     * Create a new product image
      *
      * This function performs a `POST` to the `/admin/api/2020-10/products/{product_id}/images.json` endpoint.
      *
@@ -6167,7 +6134,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn create_param_images(
         &self,
@@ -6192,7 +6159,7 @@ impl Products {
             .await
     }
     /**
-     * Get a count of all product images.
+     * Get a count of all product images
      *
      * This function performs a `GET` to the `/admin/api/2020-10/products/{product_id}/images/count.json` endpoint.
      *
@@ -6200,8 +6167,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn get_param_images_count(
         &self,
@@ -6232,7 +6199,7 @@ impl Products {
             .await
     }
     /**
-     * Get a single product image by id.
+     * Get a single product image by id
      *
      * This function performs a `GET` to the `/admin/api/2020-10/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6240,9 +6207,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn get_param_images_image(
         &self,
@@ -6275,7 +6242,7 @@ impl Products {
             .await
     }
     /**
-     * Modify an existing product image.
+     * Modify an existing product image
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6283,8 +6250,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn update_param_images_image(
         &self,
@@ -6311,7 +6278,6 @@ impl Products {
             .await
     }
     /**
-     * .
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6319,8 +6285,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn delete_param_images_image(
         &self,
@@ -6346,7 +6312,7 @@ impl Products {
             .await
     }
     /**
-     * Get all product images.
+     * Get all product images
      *
      * This function performs a `GET` to the `/admin/api/2021-01/products/{product_id}/images.json` endpoint.
      *
@@ -6354,9 +6320,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202101_get_param_image(
         &self,
@@ -6391,7 +6357,7 @@ impl Products {
             .await
     }
     /**
-     * Create a new product image.
+     * Create a new product image
      *
      * This function performs a `POST` to the `/admin/api/2021-01/products/{product_id}/images.json` endpoint.
      *
@@ -6399,7 +6365,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_create_param_images(
         &self,
@@ -6424,7 +6390,7 @@ impl Products {
             .await
     }
     /**
-     * Get a count of all product images.
+     * Get a count of all product images
      *
      * This function performs a `GET` to the `/admin/api/2021-01/products/{product_id}/images/count.json` endpoint.
      *
@@ -6432,8 +6398,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202101_get_param_images_count(
         &self,
@@ -6464,7 +6430,7 @@ impl Products {
             .await
     }
     /**
-     * Get a single product image by id.
+     * Get a single product image by id
      *
      * This function performs a `GET` to the `/admin/api/2021-01/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6472,9 +6438,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202101_get_param_images_image(
         &self,
@@ -6507,7 +6473,7 @@ impl Products {
             .await
     }
     /**
-     * Modify an existing product image.
+     * Modify an existing product image
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6515,8 +6481,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_param_images_image(
         &self,
@@ -6543,7 +6509,6 @@ impl Products {
             .await
     }
     /**
-     * .
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6551,8 +6516,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_param_images_image(
         &self,
@@ -6578,7 +6543,7 @@ impl Products {
             .await
     }
     /**
-     * Get all product images.
+     * Get all product images
      *
      * This function performs a `GET` to the `/admin/api/unstable/products/{product_id}/images.json` endpoint.
      *
@@ -6586,9 +6551,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_unstable_get_param_image(
         &self,
@@ -6623,7 +6588,7 @@ impl Products {
             .await
     }
     /**
-     * Create a new product image.
+     * Create a new product image
      *
      * This function performs a `POST` to the `/admin/api/unstable/products/{product_id}/images.json` endpoint.
      *
@@ -6631,7 +6596,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_create_param_images(
         &self,
@@ -6656,7 +6621,7 @@ impl Products {
             .await
     }
     /**
-     * Get a count of all product images.
+     * Get a count of all product images
      *
      * This function performs a `GET` to the `/admin/api/unstable/products/{product_id}/images/count.json` endpoint.
      *
@@ -6664,8 +6629,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `product_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_unstable_get_param_images_count(
         &self,
@@ -6696,7 +6661,7 @@ impl Products {
             .await
     }
     /**
-     * Get a single product image by id.
+     * Get a single product image by id
      *
      * This function performs a `GET` to the `/admin/api/unstable/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6704,9 +6669,9 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_unstable_get_param_images_image(
         &self,
@@ -6739,7 +6704,7 @@ impl Products {
             .await
     }
     /**
-     * Modify an existing product image.
+     * Modify an existing product image
      *
      * This function performs a `PUT` to the `/admin/api/unstable/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6747,8 +6712,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_param_images_image(
         &self,
@@ -6775,7 +6740,6 @@ impl Products {
             .await
     }
     /**
-     * .
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/products/{product_id}/images/{image_id}.json` endpoint.
      *
@@ -6783,8 +6747,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `product_id: &str` -- storefront_access_token_id.
-     * * `image_id: &str` -- storefront_access_token_id.
+     * * `product_id` -- storefront_access_token_id
+     * * `image_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_param_images_image(
         &self,
@@ -6818,24 +6782,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only the smart collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that includes the specified product.
-     * * `handle: &str` -- Filter results by smart collection handle.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only the smart collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that includes the specified product.
+     * * `handle` -- Filter results by smart collection handle.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_smart_collection(
         &self,
@@ -6891,7 +6855,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/smart_collections.json?{}", query_),
+            &format!("/admin/api/2020-01/smart_collections.json?{query_}"),
             None,
         );
         self.client
@@ -6929,7 +6893,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of smart collections.
+     * Retrieves a count of smart collections
      *
      * This function performs a `GET` to the `/admin/api/2020-01/smart_collections/count.json` endpoint.
      *
@@ -6937,18 +6901,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that include the specified product.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that include the specified product.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
      */
     pub async fn deprecated_202001_get_smart_collections_count(
         &self,
@@ -6984,7 +6948,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/smart_collections/count.json?{}", query_),
+            &format!("/admin/api/2020-01/smart_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -6998,7 +6962,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single smart collection.
+     * Retrieves a single smart collection
      *
      * This function performs a `GET` to the `/admin/api/2020-01/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7006,8 +6970,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_smart_collections_param_collection(
         &self,
@@ -7038,7 +7002,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing smart collection.
+     * Updates an existing smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7046,7 +7010,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_smart_collections_param_collection(
         &self,
@@ -7071,7 +7035,7 @@ impl Products {
             .await
     }
     /**
-     * Removes a smart collection.
+     * Removes a smart collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7079,7 +7043,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_smart_collections_param_collection(
         &self,
@@ -7103,7 +7067,7 @@ impl Products {
             .await
     }
     /**
-     * Updates the ordering type of products in a smart collection.
+     * Updates the ordering type of products in a smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/smart_collections/{smart_collection_id}/order.json` endpoint.
      *
@@ -7111,11 +7075,11 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `products: &str` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
-     * * `sort_order: &str` -- The type of sorting to apply. Valid values are listed in the Properties section above.
-     *                     (default: (current value)).
-     * * `products: i64` -- recurring_application_charge[capped_amount].
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `products` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
+     * * `sort_order` -- The type of sorting to apply. Valid values are listed in the Properties section above.
+     *   (default: (current value))
+     * * `products` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202001_update_smart_collections_param_collection_order(
         &self,
@@ -7159,24 +7123,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only the smart collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that includes the specified product.
-     * * `handle: &str` -- Filter results by smart collection handle.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only the smart collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that includes the specified product.
+     * * `handle` -- Filter results by smart collection handle.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_smart_collection(
         &self,
@@ -7232,7 +7196,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/smart_collections.json?{}", query_),
+            &format!("/admin/api/2020-04/smart_collections.json?{query_}"),
             None,
         );
         self.client
@@ -7270,7 +7234,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of smart collections.
+     * Retrieves a count of smart collections
      *
      * This function performs a `GET` to the `/admin/api/2020-04/smart_collections/count.json` endpoint.
      *
@@ -7278,18 +7242,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that include the specified product.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that include the specified product.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
      */
     pub async fn deprecated_202004_get_smart_collections_count(
         &self,
@@ -7325,7 +7289,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/smart_collections/count.json?{}", query_),
+            &format!("/admin/api/2020-04/smart_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -7339,7 +7303,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single smart collection.
+     * Retrieves a single smart collection
      *
      * This function performs a `GET` to the `/admin/api/2020-04/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7347,8 +7311,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_smart_collections_param_collection(
         &self,
@@ -7379,7 +7343,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing smart collection.
+     * Updates an existing smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7387,7 +7351,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_smart_collections_param_collection(
         &self,
@@ -7412,7 +7376,7 @@ impl Products {
             .await
     }
     /**
-     * Removes a smart collection.
+     * Removes a smart collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7420,7 +7384,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_smart_collections_param_collection(
         &self,
@@ -7444,7 +7408,7 @@ impl Products {
             .await
     }
     /**
-     * Updates the ordering type of products in a smart collection.
+     * Updates the ordering type of products in a smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/smart_collections/{smart_collection_id}/order.json` endpoint.
      *
@@ -7452,11 +7416,11 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `products: &str` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
-     * * `sort_order: &str` -- The type of sorting to apply. Valid values are listed in the Properties section above.
-     *                     (default: (current value)).
-     * * `products: i64` -- recurring_application_charge[capped_amount].
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `products` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
+     * * `sort_order` -- The type of sorting to apply. Valid values are listed in the Properties section above.
+     *   (default: (current value))
+     * * `products` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202004_update_smart_collections_param_collection_order(
         &self,
@@ -7500,24 +7464,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only the smart collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that includes the specified product.
-     * * `handle: &str` -- Filter results by smart collection handle.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only the smart collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that includes the specified product.
+     * * `handle` -- Filter results by smart collection handle.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_smart_collection(
         &self,
@@ -7573,7 +7537,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/smart_collections.json?{}", query_),
+            &format!("/admin/api/2020-07/smart_collections.json?{query_}"),
             None,
         );
         self.client
@@ -7611,7 +7575,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of smart collections.
+     * Retrieves a count of smart collections
      *
      * This function performs a `GET` to the `/admin/api/2020-07/smart_collections/count.json` endpoint.
      *
@@ -7619,18 +7583,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that include the specified product.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that include the specified product.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
      */
     pub async fn deprecated_202007_get_smart_collections_count(
         &self,
@@ -7666,7 +7630,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/smart_collections/count.json?{}", query_),
+            &format!("/admin/api/2020-07/smart_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -7680,7 +7644,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single smart collection.
+     * Retrieves a single smart collection
      *
      * This function performs a `GET` to the `/admin/api/2020-07/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7688,8 +7652,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_smart_collections_param_collection(
         &self,
@@ -7720,7 +7684,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing smart collection.
+     * Updates an existing smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7728,7 +7692,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_smart_collections_param_collection(
         &self,
@@ -7753,7 +7717,7 @@ impl Products {
             .await
     }
     /**
-     * Removes a smart collection.
+     * Removes a smart collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -7761,7 +7725,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_smart_collections_param_collection(
         &self,
@@ -7785,7 +7749,7 @@ impl Products {
             .await
     }
     /**
-     * Updates the ordering type of products in a smart collection.
+     * Updates the ordering type of products in a smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/smart_collections/{smart_collection_id}/order.json` endpoint.
      *
@@ -7793,11 +7757,11 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `products: &str` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
-     * * `sort_order: &str` -- The type of sorting to apply. Valid values are listed in the Properties section above.
-     *                     (default: (current value)).
-     * * `products: i64` -- recurring_application_charge[capped_amount].
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `products` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
+     * * `sort_order` -- The type of sorting to apply. Valid values are listed in the Properties section above.
+     *   (default: (current value))
+     * * `products` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202007_update_smart_collections_param_collection_order(
         &self,
@@ -7841,24 +7805,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only the smart collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that includes the specified product.
-     * * `handle: &str` -- Filter results by smart collection handle.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only the smart collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that includes the specified product.
+     * * `handle` -- Filter results by smart collection handle.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_smart_collection(
         &self,
@@ -7914,7 +7878,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/smart_collections.json?{}", query_),
+            &format!("/admin/api/2020-10/smart_collections.json?{query_}"),
             None,
         );
         self.client
@@ -7952,7 +7916,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of smart collections.
+     * Retrieves a count of smart collections
      *
      * This function performs a `GET` to the `/admin/api/2020-10/smart_collections/count.json` endpoint.
      *
@@ -7960,18 +7924,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that include the specified product.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that include the specified product.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
      */
     pub async fn get_smart_collections_count(
         &self,
@@ -8007,7 +7971,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/smart_collections/count.json?{}", query_),
+            &format!("/admin/api/2020-10/smart_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -8021,7 +7985,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single smart collection.
+     * Retrieves a single smart collection
      *
      * This function performs a `GET` to the `/admin/api/2020-10/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8029,8 +7993,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_smart_collections_param_collection(
         &self,
@@ -8061,7 +8025,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing smart collection.
+     * Updates an existing smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8069,7 +8033,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn update_smart_collections_param_collection(
         &self,
@@ -8094,7 +8058,7 @@ impl Products {
             .await
     }
     /**
-     * Removes a smart collection.
+     * Removes a smart collection
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8102,7 +8066,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn delete_smart_collections_param_collection(
         &self,
@@ -8126,7 +8090,7 @@ impl Products {
             .await
     }
     /**
-     * Updates the ordering type of products in a smart collection.
+     * Updates the ordering type of products in a smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/smart_collections/{smart_collection_id}/order.json` endpoint.
      *
@@ -8134,11 +8098,11 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `products: &str` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
-     * * `sort_order: &str` -- The type of sorting to apply. Valid values are listed in the Properties section above.
-     *                     (default: (current value)).
-     * * `products: i64` -- recurring_application_charge[capped_amount].
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `products` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
+     * * `sort_order` -- The type of sorting to apply. Valid values are listed in the Properties section above.
+     *   (default: (current value))
+     * * `products` -- recurring_application_charge[capped_amount]
      */
     pub async fn update_smart_collections_param_collection_order(
         &self,
@@ -8182,24 +8146,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only the smart collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that includes the specified product.
-     * * `handle: &str` -- Filter results by smart collection handle.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only the smart collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that includes the specified product.
+     * * `handle` -- Filter results by smart collection handle.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_smart_collection(
         &self,
@@ -8255,7 +8219,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/smart_collections.json?{}", query_),
+            &format!("/admin/api/2021-01/smart_collections.json?{query_}"),
             None,
         );
         self.client
@@ -8293,7 +8257,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of smart collections.
+     * Retrieves a count of smart collections
      *
      * This function performs a `GET` to the `/admin/api/2021-01/smart_collections/count.json` endpoint.
      *
@@ -8301,18 +8265,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that include the specified product.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that include the specified product.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
      */
     pub async fn deprecated_202101_get_smart_collections_count(
         &self,
@@ -8348,7 +8312,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/smart_collections/count.json?{}", query_),
+            &format!("/admin/api/2021-01/smart_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -8362,7 +8326,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single smart collection.
+     * Retrieves a single smart collection
      *
      * This function performs a `GET` to the `/admin/api/2021-01/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8370,8 +8334,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_smart_collections_param_collection(
         &self,
@@ -8402,7 +8366,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing smart collection.
+     * Updates an existing smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8410,7 +8374,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_smart_collections_param_collection(
         &self,
@@ -8435,7 +8399,7 @@ impl Products {
             .await
     }
     /**
-     * Removes a smart collection.
+     * Removes a smart collection
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8443,7 +8407,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_smart_collections_param_collection(
         &self,
@@ -8467,7 +8431,7 @@ impl Products {
             .await
     }
     /**
-     * Updates the ordering type of products in a smart collection.
+     * Updates the ordering type of products in a smart collection
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/smart_collections/{smart_collection_id}/order.json` endpoint.
      *
@@ -8475,11 +8439,11 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `products: &str` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
-     * * `sort_order: &str` -- The type of sorting to apply. Valid values are listed in the Properties section above.
-     *                     (default: (current value)).
-     * * `products: i64` -- recurring_application_charge[capped_amount].
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `products` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
+     * * `sort_order` -- The type of sorting to apply. Valid values are listed in the Properties section above.
+     *   (default: (current value))
+     * * `products` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202101_update_smart_collections_param_collection_order(
         &self,
@@ -8523,24 +8487,24 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: &str` -- Show only the smart collections specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that includes the specified product.
-     * * `handle: &str` -- Filter results by smart collection handle.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- Show only the smart collections specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that includes the specified product.
+     * * `handle` -- Filter results by smart collection handle.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_smart_collection(
         &self,
@@ -8596,7 +8560,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/smart_collections.json?{}", query_),
+            &format!("/admin/api/unstable/smart_collections.json?{query_}"),
             None,
         );
         self.client
@@ -8634,7 +8598,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a count of smart collections.
+     * Retrieves a count of smart collections
      *
      * This function performs a `GET` to the `/admin/api/unstable/smart_collections/count.json` endpoint.
      *
@@ -8642,18 +8606,18 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `title: &str` -- Show smart collections with the specified title.
-     * * `product_id: &str` -- Show smart collections that include the specified product.
-     * * `updated_at_min: &str` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Filter results based on the published status of smart collections.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published smart collections.
-     *                           unpublished: Show only unpublished smart collections.
-     *                           any: Show all smart collections.
+     * * `title` -- Show smart collections with the specified title.
+     * * `product_id` -- Show smart collections that include the specified product.
+     * * `updated_at_min` -- Show smart collections last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show smart collections last updated before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_min` -- Show smart collections published after this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_at_max` -- Show smart collections published before this date.  (format: 2014-04-25T16:15:47-04:00)
+     * * `published_status` -- Filter results based on the published status of smart collections.
+     *   (default: any)
+     *
+     *   published: Show only published smart collections.
+     *   unpublished: Show only unpublished smart collections.
+     *   any: Show all smart collections.
      */
     pub async fn deprecated_unstable_get_smart_collections_count(
         &self,
@@ -8689,10 +8653,7 @@ impl Products {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/smart_collections/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/smart_collections/count.json?{query_}"),
             None,
         );
         self.client
@@ -8706,7 +8667,7 @@ impl Products {
             .await
     }
     /**
-     * Retrieves a single smart collection.
+     * Retrieves a single smart collection
      *
      * This function performs a `GET` to the `/admin/api/unstable/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8714,8 +8675,8 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_smart_collections_param_collection(
         &self,
@@ -8746,7 +8707,7 @@ impl Products {
             .await
     }
     /**
-     * Updates an existing smart collection.
+     * Updates an existing smart collection
      *
      * This function performs a `PUT` to the `/admin/api/unstable/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8754,7 +8715,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_smart_collections_param_collection(
         &self,
@@ -8779,7 +8740,7 @@ impl Products {
             .await
     }
     /**
-     * Removes a smart collection.
+     * Removes a smart collection
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/smart_collections/{smart_collection_id}.json` endpoint.
      *
@@ -8787,7 +8748,7 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
+     * * `smart_collection_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_smart_collections_param_collection(
         &self,
@@ -8811,7 +8772,7 @@ impl Products {
             .await
     }
     /**
-     * Updates the ordering type of products in a smart collection.
+     * Updates the ordering type of products in a smart collection
      *
      * This function performs a `PUT` to the `/admin/api/unstable/smart_collections/{smart_collection_id}/order.json` endpoint.
      *
@@ -8819,11 +8780,11 @@ impl Products {
      *
      * **Parameters:**
      *
-     * * `smart_collection_id: &str` -- storefront_access_token_id.
-     * * `products: &str` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
-     * * `sort_order: &str` -- The type of sorting to apply. Valid values are listed in the Properties section above.
-     *                     (default: (current value)).
-     * * `products: i64` -- recurring_application_charge[capped_amount].
+     * * `smart_collection_id` -- storefront_access_token_id
+     * * `products` -- An array of product IDs, in the order that you want them to appear at the top of the collection. When products is specified but empty, any previously sorted products are cleared.
+     * * `sort_order` -- The type of sorting to apply. Valid values are listed in the Properties section above.
+     *   (default: (current value))
+     * * `products` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_unstable_update_smart_collections_param_collection_order(
         &self,

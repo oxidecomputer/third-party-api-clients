@@ -20,11 +20,11 @@ impl TemplateBulkRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_tabs: &str` -- When set to **true**, the tab information associated with the recipient is included in the response. If you do not specify this parameter, the effect is the default behavior (**false**).
-     * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_tabs` -- When set to **true**, the tab information associated with the recipient is included in the response. If you do not specify this parameter, the effect is the default behavior (**false**).
+     * * `start_position` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_get_template_bulk(
         &self,
@@ -73,9 +73,9 @@ impl TemplateBulkRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_put_template_bulk(
         &self,
@@ -112,9 +112,9 @@ impl TemplateBulkRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_delete_template_bulk_file(
         &self,

@@ -12,7 +12,7 @@ impl Interactions {
     }
 
     /**
-     * Get interaction restrictions for an organization.
+     * Get interaction restrictions for an organization
      *
      * This function performs a `GET` to the `/orgs/{org}/interaction-limits` endpoint.
      *
@@ -22,7 +22,7 @@ impl Interactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn get_restrictions_for_org(
         &self,
@@ -46,7 +46,7 @@ impl Interactions {
             .await
     }
     /**
-     * Set interaction restrictions for an organization.
+     * Set interaction restrictions for an organization
      *
      * This function performs a `PUT` to the `/orgs/{org}/interaction-limits` endpoint.
      *
@@ -56,7 +56,7 @@ impl Interactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn set_restrictions_for_org(
         &self,
@@ -81,7 +81,7 @@ impl Interactions {
             .await
     }
     /**
-     * Remove interaction restrictions for an organization.
+     * Remove interaction restrictions for an organization
      *
      * This function performs a `DELETE` to the `/orgs/{org}/interaction-limits` endpoint.
      *
@@ -91,7 +91,7 @@ impl Interactions {
      *
      * **Parameters:**
      *
-     * * `org: &str`
+     * * `org`
      */
     pub async fn remove_restrictions_for_org(
         &self,
@@ -115,7 +115,7 @@ impl Interactions {
             .await
     }
     /**
-     * Get interaction restrictions for a repository.
+     * Get interaction restrictions for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/interaction-limits` endpoint.
      *
@@ -125,8 +125,8 @@ impl Interactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_restrictions_for_repo(
         &self,
@@ -152,7 +152,7 @@ impl Interactions {
             .await
     }
     /**
-     * Set interaction restrictions for a repository.
+     * Set interaction restrictions for a repository
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/interaction-limits` endpoint.
      *
@@ -162,8 +162,8 @@ impl Interactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn set_restrictions_for_repo(
         &self,
@@ -190,7 +190,7 @@ impl Interactions {
             .await
     }
     /**
-     * Remove interaction restrictions for a repository.
+     * Remove interaction restrictions for a repository
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/interaction-limits` endpoint.
      *
@@ -200,8 +200,8 @@ impl Interactions {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn remove_restrictions_for_repo(
         &self,
@@ -227,7 +227,7 @@ impl Interactions {
             .await
     }
     /**
-     * Get interaction restrictions for your public repositories.
+     * Get interaction restrictions for your public repositories
      *
      * This function performs a `GET` to the `/user/interaction-limits` endpoint.
      *
@@ -250,7 +250,7 @@ impl Interactions {
             .await
     }
     /**
-     * Set interaction restrictions for your public repositories.
+     * Set interaction restrictions for your public repositories
      *
      * This function performs a `PUT` to the `/user/interaction-limits` endpoint.
      *
@@ -274,7 +274,7 @@ impl Interactions {
             .await
     }
     /**
-     * Remove interaction restrictions from your public repositories.
+     * Remove interaction restrictions from your public repositories
      *
      * This function performs a `DELETE` to the `/user/interaction-limits` endpoint.
      *

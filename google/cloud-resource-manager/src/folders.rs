@@ -18,10 +18,10 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-     * * `page_token: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
-     * * `parent: &str` -- Required. The resource name of the Organization or Folder whose Folders are being listed. Must be of the form `folders/{folder_id}` or `organizations/{org_id}`. Access to this method is controlled by checking the `resourcemanager.folders.list` permission on the `parent`.
-     * * `show_deleted: bool` -- True if the project can be retrieved using `GetProject`. No other operations on the project are guaranteed to work until the project creation is complete.
+     * * `page_size` -- Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+     * * `page_token` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `parent` -- Required. The resource name of the Organization or Folder whose Folders are being listed. Must be of the form `folders/{folder_id}` or `organizations/{org_id}`. Access to this method is controlled by checking the `resourcemanager.folders.list` permission on the `parent`.
+     * * `show_deleted` -- True if the project can be retrieved using `GetProject`. No other operations on the project are guaranteed to work until the project creation is complete.
      */
     pub async fn list(
         &self,
@@ -44,7 +44,7 @@ impl Folders {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
+        let url = self.client.url(&format!("/v2/folders?{query_}"), None);
         let resp: crate::Response<crate::types::ListFoldersResponse> = self
             .client
             .get(
@@ -83,7 +83,7 @@ impl Folders {
             query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
+        let url = self.client.url(&format!("/v2/folders?{query_}"), None);
         let crate::Response::<crate::types::ListFoldersResponse> {
             mut status,
             mut headers,
@@ -112,7 +112,7 @@ impl Folders {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -127,7 +127,7 @@ impl Folders {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -155,7 +155,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `parent: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `parent` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn create(
         &self,
@@ -167,7 +167,7 @@ impl Folders {
             query_args.push(("parent".to_string(), parent.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v2/folders?{}", query_), None);
+        let url = self.client.url(&format!("/v2/folders?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -213,7 +213,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `name` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn get(&self, name: &str) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
@@ -237,7 +237,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `name` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn delete(&self, name: &str) -> ClientResult<crate::Response<crate::types::Folder>> {
         let url = self.client.url(
@@ -261,8 +261,8 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
-     * * `update_mask: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `name` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `update_mask` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn patch(
         &self,
@@ -300,7 +300,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `name` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn mv(
         &self,
@@ -328,7 +328,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `name` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn undelete(
         &self,
@@ -359,7 +359,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `resource: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `resource` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn get_iam_policy(
         &self,
@@ -390,7 +390,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `resource: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `resource` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn set_iam_policy(
         &self,
@@ -421,7 +421,7 @@ impl Folders {
      *
      * **Parameters:**
      *
-     * * `resource: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     * * `resource` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
     pub async fn test_iam_permissions(
         &self,

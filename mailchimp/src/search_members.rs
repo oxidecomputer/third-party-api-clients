@@ -12,7 +12,7 @@ impl SearchMembers {
     }
 
     /**
-     * Search members.
+     * Search members
      *
      * This function performs a `GET` to the `/search-members` endpoint.
      *
@@ -20,10 +20,10 @@ impl SearchMembers {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `query: &str` -- The search query used to filter results. Query should be a valid email, or a string representing a contact's first or last name.
-     * * `list_id: &str` -- The unique id for the list.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `query` -- The search query used to filter results. Query should be a valid email, or a string representing a contact's first or last name.
+     * * `list_id` -- The unique id for the list.
      */
     pub async fn get(
         &self,
@@ -46,9 +46,7 @@ impl SearchMembers {
             query_args.push(("query".to_string(), query.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/search-members?{}", query_), None);
+        let url = self.client.url(&format!("/search-members?{query_}"), None);
         self.client
             .get(
                 &url,

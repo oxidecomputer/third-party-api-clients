@@ -12,7 +12,7 @@ impl Templates {
     }
 
     /**
-     * List templates.
+     * List templates
      *
      * This function performs a `GET` to the `/templates` endpoint.
      *
@@ -20,18 +20,18 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `created_by: &str` -- The Mailchimp account user who created the template.
-     * * `since_date_created: &str` -- Restrict the response to templates created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_date_created: &str` -- Restrict the response to templates created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `type_: &str` -- Limit results based on template type.
-     * * `category: &str` -- Limit results based on category.
-     * * `folder_id: &str` -- The name of the folder.
-     * * `sort_field: crate::types::GetTemplatesSortField` -- Returns user templates sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `count` -- The number of records to return. Default value is 10. Maximum value is 1000
+     * * `offset` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `created_by` -- The Mailchimp account user who created the template.
+     * * `since_date_created` -- Restrict the response to templates created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `before_date_created` -- Restrict the response to templates created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `type_` -- Limit results based on template type.
+     * * `category` -- Limit results based on category.
+     * * `folder_id` -- The name of the folder.
+     * * `sort_field` -- Returns user templates sorted by the specified field.
+     * * `sort_dir` -- Determines the order direction for sorted results.
      */
     pub async fn get(
         &self,
@@ -92,7 +92,7 @@ impl Templates {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/templates?{}", query_), None);
+        let url = self.client.url(&format!("/templates?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -104,7 +104,7 @@ impl Templates {
             .await
     }
     /**
-     * Add template.
+     * Add template
      *
      * This function performs a `POST` to the `/templates` endpoint.
      *
@@ -126,7 +126,7 @@ impl Templates {
             .await
     }
     /**
-     * Get template info.
+     * Get template info
      *
      * This function performs a `GET` to the `/templates/{template_id}` endpoint.
      *
@@ -134,9 +134,9 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `template_id: &str` -- The unique id for the template.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `template_id` -- The unique id for the template.
      */
     pub async fn get_templates(
         &self,
@@ -171,7 +171,7 @@ impl Templates {
             .await
     }
     /**
-     * Delete template.
+     * Delete template
      *
      * This function performs a `DELETE` to the `/templates/{template_id}` endpoint.
      *
@@ -179,7 +179,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `template_id: &str` -- The unique id for the template.
+     * * `template_id` -- The unique id for the template.
      */
     pub async fn delete(&self, template_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -200,7 +200,7 @@ impl Templates {
             .await
     }
     /**
-     * Update template.
+     * Update template
      *
      * This function performs a `PATCH` to the `/templates/{template_id}` endpoint.
      *
@@ -208,7 +208,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `template_id: &str` -- The unique id for the template.
+     * * `template_id` -- The unique id for the template.
      */
     pub async fn patch(
         &self,
@@ -233,7 +233,7 @@ impl Templates {
             .await
     }
     /**
-     * View default content.
+     * View default content
      *
      * This function performs a `GET` to the `/templates/{template_id}/default-content` endpoint.
      *
@@ -241,9 +241,9 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `template_id: &str` -- The unique id for the template.
+     * * `fields` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields` -- A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation.
+     * * `template_id` -- The unique id for the template.
      */
     pub async fn get_default_content(
         &self,

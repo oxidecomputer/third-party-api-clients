@@ -12,7 +12,7 @@ impl Users {
     }
 
     /**
-     * Get the authenticated user.
+     * Get the authenticated user
      *
      * This function performs a `GET` to the `/user` endpoint.
      *
@@ -37,7 +37,7 @@ impl Users {
             .await
     }
     /**
-     * Get the authenticated user.
+     * Get the authenticated user
      *
      * This function performs a `GET` to the `/user` endpoint.
      *
@@ -62,7 +62,7 @@ impl Users {
             .await
     }
     /**
-     * Get the authenticated user.
+     * Get the authenticated user
      *
      * This function performs a `GET` to the `/user` endpoint.
      *
@@ -87,7 +87,7 @@ impl Users {
             .await
     }
     /**
-     * Update the authenticated user.
+     * Update the authenticated user
      *
      * This function performs a `PATCH` to the `/user` endpoint.
      *
@@ -111,7 +111,7 @@ impl Users {
             .await
     }
     /**
-     * List users blocked by the authenticated user.
+     * List users blocked by the authenticated user
      *
      * This function performs a `GET` to the `/user/blocks` endpoint.
      *
@@ -134,7 +134,7 @@ impl Users {
             .await
     }
     /**
-     * List users blocked by the authenticated user.
+     * List users blocked by the authenticated user
      *
      * This function performs a `GET` to the `/user/blocks` endpoint.
      *
@@ -159,17 +159,15 @@ impl Users {
             .await
     }
     /**
-     * Check if a user is blocked by the authenticated user.
+     * Check if a user is blocked by the authenticated user
      *
      * This function performs a `GET` to the `/user/blocks/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/users#check-if-a-user-is-blocked-by-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn check_blocked(&self, username: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -190,17 +188,15 @@ impl Users {
             .await
     }
     /**
-     * Block a user.
+     * Block a user
      *
      * This function performs a `PUT` to the `/user/blocks/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/users#block-a-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn block(&self, username: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -221,17 +217,15 @@ impl Users {
             .await
     }
     /**
-     * Unblock a user.
+     * Unblock a user
      *
      * This function performs a `DELETE` to the `/user/blocks/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/users#unblock-a-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn unblock(&self, username: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -252,7 +246,7 @@ impl Users {
             .await
     }
     /**
-     * Set primary email visibility for the authenticated user.
+     * Set primary email visibility for the authenticated user
      *
      * This function performs a `PATCH` to the `/user/email/visibility` endpoint.
      *
@@ -276,7 +270,7 @@ impl Users {
             .await
     }
     /**
-     * List email addresses for the authenticated user.
+     * List email addresses for the authenticated user
      *
      * This function performs a `GET` to the `/user/emails` endpoint.
      *
@@ -286,8 +280,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_emails_for_authenticated(
         &self,
@@ -302,7 +296,7 @@ impl Users {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/emails?{}", query_), None);
+        let url = self.client.url(&format!("/user/emails?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -314,7 +308,7 @@ impl Users {
             .await
     }
     /**
-     * List email addresses for the authenticated user.
+     * List email addresses for the authenticated user
      *
      * This function performs a `GET` to the `/user/emails` endpoint.
      *
@@ -339,7 +333,7 @@ impl Users {
             .await
     }
     /**
-     * Add an email address for the authenticated user.
+     * Add an email address for the authenticated user
      *
      * This function performs a `POST` to the `/user/emails` endpoint.
      *
@@ -363,7 +357,7 @@ impl Users {
             .await
     }
     /**
-     * Delete an email address for the authenticated user.
+     * Delete an email address for the authenticated user
      *
      * This function performs a `DELETE` to the `/user/emails` endpoint.
      *
@@ -387,7 +381,7 @@ impl Users {
             .await
     }
     /**
-     * List followers of the authenticated user.
+     * List followers of the authenticated user
      *
      * This function performs a `GET` to the `/user/followers` endpoint.
      *
@@ -397,8 +391,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_followers_for_authenticated_user(
         &self,
@@ -413,9 +407,7 @@ impl Users {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/user/followers?{}", query_), None);
+        let url = self.client.url(&format!("/user/followers?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -427,7 +419,7 @@ impl Users {
             .await
     }
     /**
-     * List followers of the authenticated user.
+     * List followers of the authenticated user
      *
      * This function performs a `GET` to the `/user/followers` endpoint.
      *
@@ -452,7 +444,7 @@ impl Users {
             .await
     }
     /**
-     * List the people the authenticated user follows.
+     * List the people the authenticated user follows
      *
      * This function performs a `GET` to the `/user/following` endpoint.
      *
@@ -462,8 +454,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_followed_by_authenticated(
         &self,
@@ -478,9 +470,7 @@ impl Users {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/user/following?{}", query_), None);
+        let url = self.client.url(&format!("/user/following?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -492,7 +482,7 @@ impl Users {
             .await
     }
     /**
-     * List the people the authenticated user follows.
+     * List the people the authenticated user follows
      *
      * This function performs a `GET` to the `/user/following` endpoint.
      *
@@ -517,17 +507,15 @@ impl Users {
             .await
     }
     /**
-     * Check if a person is followed by the authenticated user.
+     * Check if a person is followed by the authenticated user
      *
      * This function performs a `GET` to the `/user/following/{username}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/users#check-if-a-person-is-followed-by-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn check_person_is_followed_by_authenticated(
         &self,
@@ -551,7 +539,7 @@ impl Users {
             .await
     }
     /**
-     * Follow a user.
+     * Follow a user
      *
      * This function performs a `PUT` to the `/user/following/{username}` endpoint.
      *
@@ -563,7 +551,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn follow(&self, username: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -584,7 +572,7 @@ impl Users {
             .await
     }
     /**
-     * Unfollow a user.
+     * Unfollow a user
      *
      * This function performs a `DELETE` to the `/user/following/{username}` endpoint.
      *
@@ -594,7 +582,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn unfollow(&self, username: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -615,7 +603,7 @@ impl Users {
             .await
     }
     /**
-     * List GPG keys for the authenticated user.
+     * List GPG keys for the authenticated user
      *
      * This function performs a `GET` to the `/user/gpg_keys` endpoint.
      *
@@ -625,8 +613,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_gpg_keys_for_authenticated(
         &self,
@@ -641,7 +629,7 @@ impl Users {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/gpg_keys?{}", query_), None);
+        let url = self.client.url(&format!("/user/gpg_keys?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -653,7 +641,7 @@ impl Users {
             .await
     }
     /**
-     * List GPG keys for the authenticated user.
+     * List GPG keys for the authenticated user
      *
      * This function performs a `GET` to the `/user/gpg_keys` endpoint.
      *
@@ -678,7 +666,7 @@ impl Users {
             .await
     }
     /**
-     * Create a GPG key for the authenticated user.
+     * Create a GPG key for the authenticated user
      *
      * This function performs a `POST` to the `/user/gpg_keys` endpoint.
      *
@@ -702,7 +690,7 @@ impl Users {
             .await
     }
     /**
-     * Get a GPG key for the authenticated user.
+     * Get a GPG key for the authenticated user
      *
      * This function performs a `GET` to the `/user/gpg_keys/{gpg_key_id}` endpoint.
      *
@@ -712,7 +700,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `gpg_key_id: i64` -- gpg_key_id parameter.
+     * * `gpg_key_id` -- gpg_key_id parameter
      */
     pub async fn get_gpg_key_for_authenticated(
         &self,
@@ -736,7 +724,7 @@ impl Users {
             .await
     }
     /**
-     * Delete a GPG key for the authenticated user.
+     * Delete a GPG key for the authenticated user
      *
      * This function performs a `DELETE` to the `/user/gpg_keys/{gpg_key_id}` endpoint.
      *
@@ -746,7 +734,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `gpg_key_id: i64` -- gpg_key_id parameter.
+     * * `gpg_key_id` -- gpg_key_id parameter
      */
     pub async fn delete_gpg_key_for_authenticated(
         &self,
@@ -770,7 +758,7 @@ impl Users {
             .await
     }
     /**
-     * List public SSH keys for the authenticated user.
+     * List public SSH keys for the authenticated user
      *
      * This function performs a `GET` to the `/user/keys` endpoint.
      *
@@ -780,8 +768,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_ssh_keys_for_authenticated(
         &self,
@@ -796,7 +784,7 @@ impl Users {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/keys?{}", query_), None);
+        let url = self.client.url(&format!("/user/keys?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -808,7 +796,7 @@ impl Users {
             .await
     }
     /**
-     * List public SSH keys for the authenticated user.
+     * List public SSH keys for the authenticated user
      *
      * This function performs a `GET` to the `/user/keys` endpoint.
      *
@@ -833,7 +821,7 @@ impl Users {
             .await
     }
     /**
-     * Create a public SSH key for the authenticated user.
+     * Create a public SSH key for the authenticated user
      *
      * This function performs a `POST` to the `/user/keys` endpoint.
      *
@@ -857,7 +845,7 @@ impl Users {
             .await
     }
     /**
-     * Get a public SSH key for the authenticated user.
+     * Get a public SSH key for the authenticated user
      *
      * This function performs a `GET` to the `/user/keys/{key_id}` endpoint.
      *
@@ -867,7 +855,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `key_id: i64` -- key_id parameter.
+     * * `key_id` -- key_id parameter
      */
     pub async fn get_public_ssh_key_for_authenticated(
         &self,
@@ -891,7 +879,7 @@ impl Users {
             .await
     }
     /**
-     * Delete a public SSH key for the authenticated user.
+     * Delete a public SSH key for the authenticated user
      *
      * This function performs a `DELETE` to the `/user/keys/{key_id}` endpoint.
      *
@@ -901,7 +889,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `key_id: i64` -- key_id parameter.
+     * * `key_id` -- key_id parameter
      */
     pub async fn delete_public_ssh_key_for_authenticated(
         &self,
@@ -925,7 +913,7 @@ impl Users {
             .await
     }
     /**
-     * List public email addresses for the authenticated user.
+     * List public email addresses for the authenticated user
      *
      * This function performs a `GET` to the `/user/public_emails` endpoint.
      *
@@ -935,8 +923,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_emails_for_authenticated(
         &self,
@@ -953,7 +941,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/public_emails?{}", query_), None);
+            .url(&format!("/user/public_emails?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -965,7 +953,7 @@ impl Users {
             .await
     }
     /**
-     * List public email addresses for the authenticated user.
+     * List public email addresses for the authenticated user
      *
      * This function performs a `GET` to the `/user/public_emails` endpoint.
      *
@@ -990,7 +978,7 @@ impl Users {
             .await
     }
     /**
-     * List users.
+     * List users
      *
      * This function performs a `GET` to the `/users` endpoint.
      *
@@ -1002,8 +990,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `since: i64` -- A user ID. Only return users with an ID greater than this ID.
-     * * `per_page: i64` -- Results per page (max 100).
+     * * `since` -- A user ID. Only return users with an ID greater than this ID.
+     * * `per_page` -- Results per page (max 100)
      */
     pub async fn list(
         &self,
@@ -1018,7 +1006,7 @@ impl Users {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users?{}", query_), None);
+        let url = self.client.url(&format!("/users?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1030,7 +1018,7 @@ impl Users {
             .await
     }
     /**
-     * List users.
+     * List users
      *
      * This function performs a `GET` to the `/users` endpoint.
      *
@@ -1051,7 +1039,7 @@ impl Users {
             query_args.push(("since".to_string(), since.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users?{}", query_), None);
+        let url = self.client.url(&format!("/users?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -1063,7 +1051,7 @@ impl Users {
             .await
     }
     /**
-     * Get a user.
+     * Get a user
      *
      * This function performs a `GET` to the `/users/{username}` endpoint.
      *
@@ -1079,7 +1067,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn get_by_username_public_user(
         &self,
@@ -1103,7 +1091,7 @@ impl Users {
             .await
     }
     /**
-     * Get a user.
+     * Get a user
      *
      * This function performs a `GET` to the `/users/{username}` endpoint.
      *
@@ -1119,7 +1107,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn get_by_username_private_user(
         &self,
@@ -1143,7 +1131,7 @@ impl Users {
             .await
     }
     /**
-     * Get a user.
+     * Get a user
      *
      * This function performs a `GET` to the `/users/{username}` endpoint.
      *
@@ -1159,7 +1147,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
+     * * `username`
      */
     pub async fn get_by_username(
         &self,
@@ -1183,7 +1171,7 @@ impl Users {
             .await
     }
     /**
-     * List followers of a user.
+     * List followers of a user
      *
      * This function performs a `GET` to the `/users/{username}/followers` endpoint.
      *
@@ -1193,9 +1181,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_followers_for_user(
         &self,
@@ -1230,7 +1218,7 @@ impl Users {
             .await
     }
     /**
-     * List followers of a user.
+     * List followers of a user
      *
      * This function performs a `GET` to the `/users/{username}/followers` endpoint.
      *
@@ -1262,7 +1250,7 @@ impl Users {
             .await
     }
     /**
-     * List the people a user follows.
+     * List the people a user follows
      *
      * This function performs a `GET` to the `/users/{username}/following` endpoint.
      *
@@ -1272,9 +1260,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_following_for_user(
         &self,
@@ -1309,7 +1297,7 @@ impl Users {
             .await
     }
     /**
-     * List the people a user follows.
+     * List the people a user follows
      *
      * This function performs a `GET` to the `/users/{username}/following` endpoint.
      *
@@ -1341,18 +1329,16 @@ impl Users {
             .await
     }
     /**
-     * Check if a user follows another user.
+     * Check if a user follows another user
      *
      * This function performs a `GET` to the `/users/{username}/following/{target_user}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/users#check-if-a-user-follows-another-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `target_user: &str`
+     * * `username`
+     * * `target_user`
      */
     pub async fn check_following_for_user(
         &self,
@@ -1378,7 +1364,7 @@ impl Users {
             .await
     }
     /**
-     * List GPG keys for a user.
+     * List GPG keys for a user
      *
      * This function performs a `GET` to the `/users/{username}/gpg_keys` endpoint.
      *
@@ -1388,9 +1374,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_gpg_keys_for_user(
         &self,
@@ -1425,7 +1411,7 @@ impl Users {
             .await
     }
     /**
-     * List GPG keys for a user.
+     * List GPG keys for a user
      *
      * This function performs a `GET` to the `/users/{username}/gpg_keys` endpoint.
      *
@@ -1457,7 +1443,7 @@ impl Users {
             .await
     }
     /**
-     * Get contextual information for a user.
+     * Get contextual information for a user
      *
      * This function performs a `GET` to the `/users/{username}/hovercard` endpoint.
      *
@@ -1474,9 +1460,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `subject_type: crate::types::SubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. \*\*Required\*\* when using `subject_id`.
-     * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
+     * * `username`
+     * * `subject_type` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
+     * * `subject_id` -- Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
      */
     pub async fn get_context_for_user(
         &self,
@@ -1511,7 +1497,7 @@ impl Users {
             .await
     }
     /**
-     * List public keys for a user.
+     * List public keys for a user
      *
      * This function performs a `GET` to the `/users/{username}/keys` endpoint.
      *
@@ -1521,9 +1507,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_keys_for_user(
         &self,
@@ -1558,7 +1544,7 @@ impl Users {
             .await
     }
     /**
-     * List public keys for a user.
+     * List public keys for a user
      *
      * This function performs a `GET` to the `/users/{username}/keys` endpoint.
      *

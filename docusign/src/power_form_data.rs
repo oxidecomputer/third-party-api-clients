@@ -20,7 +20,6 @@ impl PowerFormData {
      *
      * You specify the format in which you want to retrieve the data in the `Accept` header. This header accepts the following values:
      *
-     *
      * - `application/json`: JSON format
      * - `application/xml`: XML format
      * - `text/csv`: Comma-separated value (CSV) format
@@ -29,18 +28,18 @@ impl PowerFormData {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `power_form_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `data_layout: &str` -- The layout in which to return the PowerForm data. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `power_form_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `data_layout` -- The layout in which to return the PowerForm data. Valid values are:
+     *
      *   - `Native`
      *   - `Csv_Classic`
      *   - `Csv_One_Envelope_Per_Line`
-     *   - `Xml_Classic`.
-     * * `from_date: &str` -- The start date for a date range in UTC DateTime format.
-     *   
+     *   - `Xml_Classic`
+     * * `from_date` -- The start date for a date range in UTC DateTime format.
+     *
      *   **Note**: If this property is null, no date filtering is applied.
-     * * `to_date: &str` -- The end date of a date range in UTC DateTime format. The default value is `UtcNow`.
+     * * `to_date` -- The end date of a date range in UTC DateTime format. The default value is `UtcNow`.
      */
     pub async fn power_forms_get_form_data(
         &self,

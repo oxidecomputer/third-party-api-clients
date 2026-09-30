@@ -12,16 +12,14 @@ impl EnvelopeAttachments {
     }
 
     /**
-     * Returns a list of attachments associated with the specified envelope.
+     * Returns a list of attachments associated with the specified envelope
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/attachments` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn attachments_get(
         &self,
@@ -55,8 +53,8 @@ impl EnvelopeAttachments {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn attachments_put(
         &self,
@@ -87,12 +85,10 @@ impl EnvelopeAttachments {
      *
      * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/attachments` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn attachments_delete(
         &self,
@@ -123,13 +119,11 @@ impl EnvelopeAttachments {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/attachments/{attachmentId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `attachment_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `attachment_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn attachments_get_attachment(
         &self,
@@ -161,13 +155,11 @@ impl EnvelopeAttachments {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/attachments/{attachmentId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `attachment_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `attachment_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn attachments_put_attachment(
         &self,

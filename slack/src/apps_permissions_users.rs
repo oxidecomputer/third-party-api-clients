@@ -20,9 +20,9 @@ impl AppsPermissionsUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     * * `limit: i64` -- The maximum number of items to return.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `cursor` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * * `limit` -- The maximum number of items to return.
      */
     pub async fn list(
         &self,
@@ -39,7 +39,7 @@ impl AppsPermissionsUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/apps.permissions.users.list?{}", query_), None);
+            .url(&format!("/apps.permissions.users.list?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -59,10 +59,10 @@ impl AppsPermissionsUsers {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `scopes: &str` -- A comma separated list of user scopes to request for.
-     * * `trigger_id: &str` -- Token used to trigger the request.
-     * * `user: &str` -- The user this scope is being requested for.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `scopes` -- A comma separated list of user scopes to request for
+     * * `trigger_id` -- Token used to trigger the request
+     * * `user` -- The user this scope is being requested for
      */
     pub async fn request(
         &self,
@@ -83,7 +83,7 @@ impl AppsPermissionsUsers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/apps.permissions.users.request?{}", query_), None);
+            .url(&format!("/apps.permissions.users.request?{query_}"), None);
         self.client
             .get(
                 &url,

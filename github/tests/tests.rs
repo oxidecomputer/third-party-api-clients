@@ -293,8 +293,7 @@ async fn test_ratelimit_error() {
         */
         assert!(
             (58..=60).contains(&duration),
-            "duration {} is not within range",
-            duration
+            "duration {duration} is not within range"
         );
     } else {
         unreachable!("Expected Ratelimiting error, got {:?}", err)

@@ -20,8 +20,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_countrie(
         &self,
@@ -36,10 +36,9 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-01/countries.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/countries.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -52,9 +51,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Creates a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Creates a country.
      *
      * This function performs a `POST` to the `/admin/api/2020-01/countries.json` endpoint.
      *
@@ -105,8 +104,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_countries_param_country(
         &self,
@@ -138,9 +137,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}.json` endpoint.
      *
@@ -148,7 +147,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_countries_param_country(
         &self,
@@ -181,7 +180,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_countries_param_country(
         &self,
@@ -213,8 +212,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_countrie(
         &self,
@@ -229,10 +228,9 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-04/countries.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/countries.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -245,9 +243,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Creates a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Creates a country.
      *
      * This function performs a `POST` to the `/admin/api/2020-04/countries.json` endpoint.
      *
@@ -298,8 +296,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_countries_param_country(
         &self,
@@ -331,9 +329,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}.json` endpoint.
      *
@@ -341,7 +339,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_countries_param_country(
         &self,
@@ -374,7 +372,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_countries_param_country(
         &self,
@@ -406,8 +404,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_countrie(
         &self,
@@ -422,10 +420,9 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-07/countries.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/countries.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -438,9 +435,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Creates a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Creates a country.
      *
      * This function performs a `POST` to the `/admin/api/2020-07/countries.json` endpoint.
      *
@@ -491,8 +488,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_countries_param_country(
         &self,
@@ -524,9 +521,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}.json` endpoint.
      *
@@ -534,7 +531,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_countries_param_country(
         &self,
@@ -567,7 +564,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_countries_param_country(
         &self,
@@ -599,8 +596,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_countrie(
         &self,
@@ -615,10 +612,9 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-10/countries.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/countries.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -631,9 +627,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Creates a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Creates a country.
      *
      * This function performs a `POST` to the `/admin/api/2020-10/countries.json` endpoint.
      *
@@ -684,8 +680,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_countries_param_country(
         &self,
@@ -717,9 +713,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}.json` endpoint.
      *
@@ -727,7 +723,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn update_countries_param_country(
         &self,
@@ -760,7 +756,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn delete_countries_param_country(
         &self,
@@ -792,8 +788,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_countrie(
         &self,
@@ -808,10 +804,9 @@ impl StoreProperties {
             query_args.push(("since_id".to_string(), since_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2021-01/countries.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/countries.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -824,9 +819,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Creates a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Creates a country.
      *
      * This function performs a `POST` to the `/admin/api/2021-01/countries.json` endpoint.
      *
@@ -877,8 +872,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_countries_param_country(
         &self,
@@ -910,9 +905,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing country.
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}.json` endpoint.
      *
@@ -920,7 +915,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_countries_param_country(
         &self,
@@ -953,7 +948,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_countries_param_country(
         &self,
@@ -985,8 +980,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_countrie(
         &self,
@@ -1002,7 +997,7 @@ impl StoreProperties {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/countries.json?{}", query_),
+            &format!("/admin/api/unstable/countries.json?{query_}"),
             None,
         );
         self.client
@@ -1017,9 +1012,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Creates a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Creates a country.
      *
      * This function performs a `POST` to the `/admin/api/unstable/countries.json` endpoint.
      *
@@ -1072,8 +1067,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_countries_param_country(
         &self,
@@ -1105,9 +1100,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing country.
      *
      * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}.json` endpoint.
      *
@@ -1115,7 +1110,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_countries_param_country(
         &self,
@@ -1148,7 +1143,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_countries_param_country(
         &self,
@@ -1172,7 +1167,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of currencies enabled on a shop.
+     * Retrieves a list of currencies enabled on a shop
      *
      * This function performs a `GET` to the `/admin/api/2020-01/currencies.json` endpoint.
      *
@@ -1191,7 +1186,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of currencies enabled on a shop.
+     * Retrieves a list of currencies enabled on a shop
      *
      * This function performs a `GET` to the `/admin/api/2020-04/currencies.json` endpoint.
      *
@@ -1210,7 +1205,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of currencies enabled on a shop.
+     * Retrieves a list of currencies enabled on a shop
      *
      * This function performs a `GET` to the `/admin/api/2020-07/currencies.json` endpoint.
      *
@@ -1229,7 +1224,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of currencies enabled on a shop.
+     * Retrieves a list of currencies enabled on a shop
      *
      * This function performs a `GET` to the `/admin/api/2020-10/currencies.json` endpoint.
      *
@@ -1248,7 +1243,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of currencies enabled on a shop.
+     * Retrieves a list of currencies enabled on a shop
      *
      * This function performs a `GET` to the `/admin/api/2021-01/currencies.json` endpoint.
      *
@@ -1267,7 +1262,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of currencies enabled on a shop.
+     * Retrieves a list of currencies enabled on a shop
      *
      * This function performs a `GET` to the `/admin/api/unstable/currencies.json` endpoint.
      *
@@ -1286,7 +1281,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of the shop's policies.
+     * Retrieves a list of the shop's policies
      *
      * This function performs a `GET` to the `/admin/api/2020-01/policies.json` endpoint.
      *
@@ -1305,7 +1300,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of the shop's policies.
+     * Retrieves a list of the shop's policies
      *
      * This function performs a `GET` to the `/admin/api/2020-04/policies.json` endpoint.
      *
@@ -1324,7 +1319,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of the shop's policies.
+     * Retrieves a list of the shop's policies
      *
      * This function performs a `GET` to the `/admin/api/2020-07/policies.json` endpoint.
      *
@@ -1343,7 +1338,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of the shop's policies.
+     * Retrieves a list of the shop's policies
      *
      * This function performs a `GET` to the `/admin/api/2020-10/policies.json` endpoint.
      *
@@ -1362,7 +1357,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of the shop's policies.
+     * Retrieves a list of the shop's policies
      *
      * This function performs a `GET` to the `/admin/api/2021-01/policies.json` endpoint.
      *
@@ -1381,7 +1376,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of the shop's policies.
+     * Retrieves a list of the shop's policies
      *
      * This function performs a `GET` to the `/admin/api/unstable/policies.json` endpoint.
      *
@@ -1400,7 +1395,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of provinces.
+     * Retrieves a list of provinces
      *
      * This function performs a `GET` to the `/admin/api/2020-01/countries/{country_id}/provinces.json` endpoint.
      *
@@ -1408,9 +1403,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of fields names.
+     * * `country_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202001_get_countries_param_country_province(
         &self,
@@ -1445,7 +1440,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a count of provinces for a country.
+     * Retrieves a count of provinces for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-01/countries/{country_id}/provinces/count.json` endpoint.
      *
@@ -1453,7 +1448,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_countries_param_country_provinces_count(
         &self,
@@ -1477,7 +1472,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a single province for a country.
+     * Retrieves a single province for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -1485,9 +1480,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_countries_param_country_provinces_province(
         &self,
@@ -1521,9 +1516,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing province for a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing province for a country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -1531,8 +1526,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_countries_param_country_provinces_province(
         &self,
@@ -1559,7 +1554,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of provinces.
+     * Retrieves a list of provinces
      *
      * This function performs a `GET` to the `/admin/api/2020-04/countries/{country_id}/provinces.json` endpoint.
      *
@@ -1567,9 +1562,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of fields names.
+     * * `country_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202004_get_countries_param_country_province(
         &self,
@@ -1604,7 +1599,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a count of provinces for a country.
+     * Retrieves a count of provinces for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-04/countries/{country_id}/provinces/count.json` endpoint.
      *
@@ -1612,7 +1607,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_countries_param_country_provinces_count(
         &self,
@@ -1636,7 +1631,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a single province for a country.
+     * Retrieves a single province for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-04/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -1644,9 +1639,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_countries_param_country_provinces_province(
         &self,
@@ -1680,9 +1675,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing province for a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing province for a country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -1690,8 +1685,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_countries_param_country_provinces_province(
         &self,
@@ -1718,7 +1713,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of provinces.
+     * Retrieves a list of provinces
      *
      * This function performs a `GET` to the `/admin/api/2020-07/countries/{country_id}/provinces.json` endpoint.
      *
@@ -1726,9 +1721,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of fields names.
+     * * `country_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202007_get_countries_param_country_province(
         &self,
@@ -1763,7 +1758,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a count of provinces for a country.
+     * Retrieves a count of provinces for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-07/countries/{country_id}/provinces/count.json` endpoint.
      *
@@ -1771,7 +1766,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_countries_param_country_provinces_count(
         &self,
@@ -1795,7 +1790,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a single province for a country.
+     * Retrieves a single province for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-07/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -1803,9 +1798,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_countries_param_country_provinces_province(
         &self,
@@ -1839,9 +1834,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing province for a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing province for a country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -1849,8 +1844,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_countries_param_country_provinces_province(
         &self,
@@ -1877,7 +1872,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of provinces.
+     * Retrieves a list of provinces
      *
      * This function performs a `GET` to the `/admin/api/2020-10/countries/{country_id}/provinces.json` endpoint.
      *
@@ -1885,9 +1880,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of fields names.
+     * * `country_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn get_countries_param_country_province(
         &self,
@@ -1922,7 +1917,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a count of provinces for a country.
+     * Retrieves a count of provinces for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-10/countries/{country_id}/provinces/count.json` endpoint.
      *
@@ -1930,7 +1925,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn get_countries_param_country_provinces_count(
         &self,
@@ -1954,7 +1949,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a single province for a country.
+     * Retrieves a single province for a country
      *
      * This function performs a `GET` to the `/admin/api/2020-10/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -1962,9 +1957,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_countries_param_country_provinces_province(
         &self,
@@ -1998,9 +1993,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing province for a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing province for a country.
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -2008,8 +2003,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
      */
     pub async fn update_countries_param_country_provinces_province(
         &self,
@@ -2036,7 +2031,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of provinces.
+     * Retrieves a list of provinces
      *
      * This function performs a `GET` to the `/admin/api/2021-01/countries/{country_id}/provinces.json` endpoint.
      *
@@ -2044,9 +2039,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of fields names.
+     * * `country_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_202101_get_countries_param_country_province(
         &self,
@@ -2081,7 +2076,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a count of provinces for a country.
+     * Retrieves a count of provinces for a country
      *
      * This function performs a `GET` to the `/admin/api/2021-01/countries/{country_id}/provinces/count.json` endpoint.
      *
@@ -2089,7 +2084,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_countries_param_country_provinces_count(
         &self,
@@ -2113,7 +2108,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a single province for a country.
+     * Retrieves a single province for a country
      *
      * This function performs a `GET` to the `/admin/api/2021-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -2121,9 +2116,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_countries_param_country_provinces_province(
         &self,
@@ -2157,9 +2152,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing province for a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing province for a country.
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -2167,8 +2162,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_countries_param_country_provinces_province(
         &self,
@@ -2195,7 +2190,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a list of provinces.
+     * Retrieves a list of provinces
      *
      * This function performs a `GET` to the `/admin/api/unstable/countries/{country_id}/provinces.json` endpoint.
      *
@@ -2203,9 +2198,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of fields names.
+     * * `country_id` -- storefront_access_token_id
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of fields names.
      */
     pub async fn deprecated_unstable_get_countries_param_country_province(
         &self,
@@ -2240,7 +2235,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a count of provinces for a country.
+     * Retrieves a count of provinces for a country
      *
      * This function performs a `GET` to the `/admin/api/unstable/countries/{country_id}/provinces/count.json` endpoint.
      *
@@ -2248,7 +2243,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_countries_param_country_provinces_count(
         &self,
@@ -2272,7 +2267,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves a single province for a country.
+     * Retrieves a single province for a country
      *
      * This function performs a `GET` to the `/admin/api/unstable/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -2280,9 +2275,9 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_countries_param_country_provinces_province(
         &self,
@@ -2316,9 +2311,9 @@ impl StoreProperties {
     }
     /**
      * Caution
-      As of version 2020-10, the tax field is deprecated.
-
-    Updates an existing province for a country.
+     * As of version 2020-10, the tax field is deprecated.
+     *
+     * Updates an existing province for a country.
      *
      * This function performs a `PUT` to the `/admin/api/unstable/countries/{country_id}/provinces/{province_id}.json` endpoint.
      *
@@ -2326,8 +2321,8 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `country_id: &str` -- storefront_access_token_id.
-     * * `province_id: &str` -- storefront_access_token_id.
+     * * `country_id` -- storefront_access_token_id
+     * * `province_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_countries_param_country_provinces_province(
         &self,
@@ -2354,7 +2349,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Get a list of all shipping zones.
+     * Get a list of all shipping zones
      *
      * This function performs a `GET` to the `/admin/api/2020-01/shipping_zones.json` endpoint.
      *
@@ -2362,7 +2357,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202001_get_shipping_zone(
         &self,
@@ -2374,7 +2369,7 @@ impl StoreProperties {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/shipping_zones.json?{}", query_),
+            &format!("/admin/api/2020-01/shipping_zones.json?{query_}"),
             None,
         );
         self.client
@@ -2388,7 +2383,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Get a list of all shipping zones.
+     * Get a list of all shipping zones
      *
      * This function performs a `GET` to the `/admin/api/2020-04/shipping_zones.json` endpoint.
      *
@@ -2396,7 +2391,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202004_get_shipping_zone(
         &self,
@@ -2408,7 +2403,7 @@ impl StoreProperties {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/shipping_zones.json?{}", query_),
+            &format!("/admin/api/2020-04/shipping_zones.json?{query_}"),
             None,
         );
         self.client
@@ -2422,7 +2417,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Get a list of all shipping zones.
+     * Get a list of all shipping zones
      *
      * This function performs a `GET` to the `/admin/api/2020-07/shipping_zones.json` endpoint.
      *
@@ -2430,7 +2425,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202007_get_shipping_zone(
         &self,
@@ -2442,7 +2437,7 @@ impl StoreProperties {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/shipping_zones.json?{}", query_),
+            &format!("/admin/api/2020-07/shipping_zones.json?{query_}"),
             None,
         );
         self.client
@@ -2456,7 +2451,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Get a list of all shipping zones.
+     * Get a list of all shipping zones
      *
      * This function performs a `GET` to the `/admin/api/2020-10/shipping_zones.json` endpoint.
      *
@@ -2464,7 +2459,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn get_shipping_zone(&self, fields: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -2473,7 +2468,7 @@ impl StoreProperties {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/shipping_zones.json?{}", query_),
+            &format!("/admin/api/2020-10/shipping_zones.json?{query_}"),
             None,
         );
         self.client
@@ -2487,7 +2482,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Get a list of all shipping zones.
+     * Get a list of all shipping zones
      *
      * This function performs a `GET` to the `/admin/api/2021-01/shipping_zones.json` endpoint.
      *
@@ -2495,7 +2490,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202101_get_shipping_zone(
         &self,
@@ -2507,7 +2502,7 @@ impl StoreProperties {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/shipping_zones.json?{}", query_),
+            &format!("/admin/api/2021-01/shipping_zones.json?{query_}"),
             None,
         );
         self.client
@@ -2521,7 +2516,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Get a list of all shipping zones.
+     * Get a list of all shipping zones
      *
      * This function performs a `GET` to the `/admin/api/unstable/shipping_zones.json` endpoint.
      *
@@ -2529,7 +2524,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_unstable_get_shipping_zone(
         &self,
@@ -2541,7 +2536,7 @@ impl StoreProperties {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/shipping_zones.json?{}", query_),
+            &format!("/admin/api/unstable/shipping_zones.json?{query_}"),
             None,
         );
         self.client
@@ -2555,7 +2550,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves the shop's configuration.
+     * Retrieves the shop's configuration
      *
      * This function performs a `GET` to the `/admin/api/2020-01/shop.json` endpoint.
      *
@@ -2563,7 +2558,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_shop(
         &self,
@@ -2576,7 +2571,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-01/shop.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-01/shop.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2588,7 +2583,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves the shop's configuration.
+     * Retrieves the shop's configuration
      *
      * This function performs a `GET` to the `/admin/api/2020-04/shop.json` endpoint.
      *
@@ -2596,7 +2591,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_shop(
         &self,
@@ -2609,7 +2604,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-04/shop.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-04/shop.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2621,7 +2616,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves the shop's configuration.
+     * Retrieves the shop's configuration
      *
      * This function performs a `GET` to the `/admin/api/2020-07/shop.json` endpoint.
      *
@@ -2629,7 +2624,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_shop(
         &self,
@@ -2642,7 +2637,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-07/shop.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-07/shop.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2654,7 +2649,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves the shop's configuration.
+     * Retrieves the shop's configuration
      *
      * This function performs a `GET` to the `/admin/api/2020-10/shop.json` endpoint.
      *
@@ -2662,7 +2657,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_shop(&self, fields: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -2672,7 +2667,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-10/shop.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-10/shop.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2684,7 +2679,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves the shop's configuration.
+     * Retrieves the shop's configuration
      *
      * This function performs a `GET` to the `/admin/api/2021-01/shop.json` endpoint.
      *
@@ -2692,7 +2687,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_shop(
         &self,
@@ -2705,7 +2700,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2021-01/shop.json?{}", query_), None);
+            .url(&format!("/admin/api/2021-01/shop.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2717,7 +2712,7 @@ impl StoreProperties {
             .await
     }
     /**
-     * Retrieves the shop's configuration.
+     * Retrieves the shop's configuration
      *
      * This function performs a `GET` to the `/admin/api/unstable/shop.json` endpoint.
      *
@@ -2725,7 +2720,7 @@ impl StoreProperties {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_shop(
         &self,
@@ -2738,7 +2733,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/unstable/shop.json?{}", query_), None);
+            .url(&format!("/admin/api/unstable/shop.json?{query_}"), None);
         self.client
             .get(
                 &url,

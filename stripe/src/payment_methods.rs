@@ -18,12 +18,11 @@ impl PaymentMethods {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The ID of the customer whose PaymentMethods will be retrieved. If not provided, the response list will be empty.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `type_: crate::types::GetCustomersCustomerPaymentMethodsType` -- A required filter on the list, based on the object `type` field.
+     * * `customer` -- The ID of the customer whose PaymentMethods will be retrieved. If not provided, the response list will be empty.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `type_` -- A required filter on the list, based on the object `type` field.
      */
     pub async fn get_page(
         &self,
@@ -52,7 +51,7 @@ impl PaymentMethods {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/payment_methods?{}", query_), None);
+            .url(&format!("/v1/payment_methods?{query_}"), None);
         let resp: crate::Response<crate::types::PaymentFlowsMethodList> = self
             .client
             .get(
@@ -93,7 +92,7 @@ impl PaymentMethods {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/payment_methods?{}", query_), None);
+            .url(&format!("/v1/payment_methods?{query_}"), None);
         let crate::Response::<crate::types::PaymentFlowsMethodList> {
             mut status,
             mut headers,
@@ -133,7 +132,7 @@ impl PaymentMethods {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -148,7 +147,7 @@ impl PaymentMethods {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -191,8 +190,7 @@ impl PaymentMethods {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `payment_method: &str` -- The account's country.
+     * * `payment_method` -- The account's country.
      */
     pub async fn get_method(
         &self,
@@ -222,7 +220,7 @@ impl PaymentMethods {
      *
      * **Parameters:**
      *
-     * * `payment_method: &str` -- The account's country.
+     * * `payment_method` -- The account's country.
      */
     pub async fn post_method(
         &self,
@@ -262,7 +260,7 @@ impl PaymentMethods {
      *
      * **Parameters:**
      *
-     * * `payment_method: &str` -- The account's country.
+     * * `payment_method` -- The account's country.
      */
     pub async fn post_method_attach(
         &self,
@@ -292,7 +290,7 @@ impl PaymentMethods {
      *
      * **Parameters:**
      *
-     * * `payment_method: &str` -- The account's country.
+     * * `payment_method` -- The account's country.
      */
     pub async fn post_method_detach(
         &self,

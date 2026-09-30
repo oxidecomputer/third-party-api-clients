@@ -69,7 +69,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await
         .unwrap();
 
-    println!("{:#?}", repo);
+    println!("{repo:#?}");
 
     // Get a repo without a license.
     let repo = github
@@ -78,7 +78,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await
         .unwrap();
 
-    println!("{:#?}", repo);
+    println!("{repo:#?}");
 
     Ok(())
 }

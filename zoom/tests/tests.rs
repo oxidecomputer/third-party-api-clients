@@ -70,7 +70,7 @@ const RECORDED_MEETINGS: &str = r#"{
 fn test_deserialize_recorded_meetings() {
     let deserialized: zoom_api::types::GetAccountCloudRecordingResponse =
         serde_json::from_str(RECORDED_MEETINGS).unwrap();
-    println!("recorded_meetings = {:?}", deserialized);
+    println!("recorded_meetings = {deserialized:?}");
 
     assert_eq!(
         DateTime::<Utc>::from_naive_utc_and_offset(

@@ -37,10 +37,9 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_locations(
         &self,
@@ -61,7 +60,7 @@ impl Terminal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/terminal/locations?{}", query_), None);
+            .url(&format!("/v1/terminal/locations?{query_}"), None);
         let resp: crate::Response<crate::types::TerminalLocationList> = self
             .client
             .get(
@@ -130,7 +129,7 @@ impl Terminal {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -145,7 +144,7 @@ impl Terminal {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -189,8 +188,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `location: &str` -- The account's country.
+     * * `location` -- The account's country.
      */
     pub async fn get_locations_location(
         &self,
@@ -220,7 +218,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `location: &str` -- The account's country.
+     * * `location` -- The account's country.
      */
     pub async fn post_locations_location(
         &self,
@@ -250,7 +248,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `location: &str` -- The account's country.
+     * * `location` -- The account's country.
      */
     pub async fn delete_locations_location(
         &self,
@@ -280,13 +278,12 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `device_type: crate::types::DeviceType` -- Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, or `verifone_P400`.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `location: &str` -- A location ID to filter the response list to only readers at the specific location.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::CustomerAcceptanceType` -- The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
+     * * `device_type` -- Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, or `verifone_P400`.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `location` -- A location ID to filter the response list to only readers at the specific location
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
      */
     pub async fn get_readers(
         &self,
@@ -319,7 +316,7 @@ impl Terminal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/terminal/readers?{}", query_), None);
+            .url(&format!("/v1/terminal/readers?{query_}"), None);
         let resp: crate::Response<crate::types::TerminalReaderRetrieve> = self
             .client
             .get(
@@ -364,7 +361,7 @@ impl Terminal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/terminal/readers?{}", query_), None);
+            .url(&format!("/v1/terminal/readers?{query_}"), None);
         let crate::Response::<crate::types::TerminalReaderRetrieve> {
             mut status,
             mut headers,
@@ -404,7 +401,7 @@ impl Terminal {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -419,7 +416,7 @@ impl Terminal {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -460,8 +457,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn get_readers_reader(
         &self,
@@ -491,7 +487,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn post_readers_reader(
         &self,
@@ -521,7 +517,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn delete_readers_reader(
         &self,
@@ -551,7 +547,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn post_readers_reader_cancel_action(
         &self,
@@ -581,7 +577,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn post_readers_reader_process_payment_intent(
         &self,
@@ -611,7 +607,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn post_readers_reader_process_setup_intent(
         &self,
@@ -641,7 +637,7 @@ impl Terminal {
      *
      * **Parameters:**
      *
-     * * `reader: &str` -- The account's country.
+     * * `reader` -- The account's country.
      */
     pub async fn post_readers_reader_set_display(
         &self,

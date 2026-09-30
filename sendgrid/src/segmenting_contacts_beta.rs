@@ -12,7 +12,7 @@ impl SegmentingContactsBeta {
     }
 
     /**
-     * Get List of Segments.
+     * Get List of Segments
      *
      * This function performs a `GET` to the `/marketing/segments/2.0` endpoint.
      *
@@ -29,8 +29,8 @@ impl SegmentingContactsBeta {
      *
      * **Parameters:**
      *
-     * * `parent_list_ids: &str` -- A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.
-     * * `no_parent_list_id: bool` -- If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
+     * * `parent_list_ids` -- A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.
+     * * `no_parent_list_id` -- If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
      */
     pub async fn get_segments(
         &self,
@@ -50,7 +50,7 @@ impl SegmentingContactsBeta {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/marketing/segments/2.0?{}", query_), None);
+            .url(&format!("/marketing/segments/2.0?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -62,7 +62,7 @@ impl SegmentingContactsBeta {
             .await
     }
     /**
-     * Create Segment.
+     * Create Segment
      *
      * This function performs a `POST` to the `/marketing/segments/2.0` endpoint.
      *
@@ -86,7 +86,7 @@ impl SegmentingContactsBeta {
             .await
     }
     /**
-     * Get Segment by ID.
+     * Get Segment by ID
      *
      * This function performs a `GET` to the `/marketing/segments/2.0/{segment_id}` endpoint.
      *
@@ -94,7 +94,7 @@ impl SegmentingContactsBeta {
      *
      * **Parameters:**
      *
-     * * `contacts_sample: bool` -- Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
+     * * `contacts_sample` -- Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
      */
     pub async fn get_segments_segment(
         &self,
@@ -125,7 +125,7 @@ impl SegmentingContactsBeta {
             .await
     }
     /**
-     * Delete segment.
+     * Delete segment
      *
      * This function performs a `DELETE` to the `/marketing/segments/2.0/{segment_id}` endpoint.
      *
@@ -153,7 +153,7 @@ impl SegmentingContactsBeta {
             .await
     }
     /**
-     * Update Segment.
+     * Update Segment
      *
      * This function performs a `PATCH` to the `/marketing/segments/2.0/{segment_id}` endpoint.
      *

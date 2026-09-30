@@ -12,7 +12,7 @@ impl Businesses {
     }
 
     /**
-     * GET business metadata.
+     * GET business metadata
      *
      * This function performs a `GET` to the `/business` endpoint.
      *
@@ -20,7 +20,7 @@ impl Businesses {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get_resources_busine(
         &self,
@@ -37,7 +37,7 @@ impl Businesses {
             .await
     }
     /**
-     * GET current info about a business.
+     * GET current info about a business
      *
      * This function performs a `GET` to the `/business/balance` endpoint.
      *
@@ -45,7 +45,7 @@ impl Businesses {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get_resources_business_current(
         &self,

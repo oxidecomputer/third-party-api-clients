@@ -20,13 +20,13 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- A comma-separated list of report IDs.
-     * * `limit: &str` -- The amount of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `updated_at_min: &str` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `ids` -- A comma-separated list of report IDs.
+     * * `limit` -- The amount of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `updated_at_min` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_report(
         &self,
@@ -59,7 +59,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-01/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-01/reports.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -71,7 +71,7 @@ impl Analytics {
             .await
     }
     /**
-     * Creates a new report.
+     * Creates a new report
      *
      * This function performs a `POST` to the `/admin/api/2020-01/reports.json` endpoint.
      *
@@ -79,8 +79,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- The name of the report. Maximum length: 255 characters.
-     * * `shopify_ql: &str` -- The ShopifyQL the report will query.
+     * * `name` -- The name of the report. Maximum length: 255 characters.
+     * * `shopify_ql` -- The ShopifyQL the report will query.
      */
     pub async fn deprecated_202001_create_reports(
         &self,
@@ -98,7 +98,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-01/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-01/reports.json?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -110,7 +110,7 @@ impl Analytics {
             .await
     }
     /**
-     * Retrieves a single report created by your app.
+     * Retrieves a single report created by your app
      *
      * This function performs a `GET` to the `/admin/api/2020-01/reports/{report_id}.json` endpoint.
      *
@@ -118,8 +118,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `report_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_reports_param_report(
         &self,
@@ -150,7 +150,7 @@ impl Analytics {
             .await
     }
     /**
-     * Updates a report.
+     * Updates a report
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/reports/{report_id}.json` endpoint.
      *
@@ -158,7 +158,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_reports_param_report(
         &self,
@@ -183,7 +183,7 @@ impl Analytics {
             .await
     }
     /**
-     * Deletes a report.
+     * Deletes a report
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/reports/{report_id}.json` endpoint.
      *
@@ -191,7 +191,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_reports_param_report(
         &self,
@@ -223,13 +223,13 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- A comma-separated list of report IDs.
-     * * `limit: &str` -- The amount of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `updated_at_min: &str` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `ids` -- A comma-separated list of report IDs.
+     * * `limit` -- The amount of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `updated_at_min` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_report(
         &self,
@@ -262,7 +262,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-04/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-04/reports.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -274,7 +274,7 @@ impl Analytics {
             .await
     }
     /**
-     * Creates a new report.
+     * Creates a new report
      *
      * This function performs a `POST` to the `/admin/api/2020-04/reports.json` endpoint.
      *
@@ -282,8 +282,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- The name of the report. Maximum length: 255 characters.
-     * * `shopify_ql: &str` -- The ShopifyQL the report will query.
+     * * `name` -- The name of the report. Maximum length: 255 characters.
+     * * `shopify_ql` -- The ShopifyQL the report will query.
      */
     pub async fn deprecated_202004_create_reports(
         &self,
@@ -301,7 +301,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-04/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-04/reports.json?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -313,7 +313,7 @@ impl Analytics {
             .await
     }
     /**
-     * Retrieves a single report created by your app.
+     * Retrieves a single report created by your app
      *
      * This function performs a `GET` to the `/admin/api/2020-04/reports/{report_id}.json` endpoint.
      *
@@ -321,8 +321,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `report_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_reports_param_report(
         &self,
@@ -353,7 +353,7 @@ impl Analytics {
             .await
     }
     /**
-     * Updates a report.
+     * Updates a report
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/reports/{report_id}.json` endpoint.
      *
@@ -361,7 +361,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_reports_param_report(
         &self,
@@ -386,7 +386,7 @@ impl Analytics {
             .await
     }
     /**
-     * Deletes a report.
+     * Deletes a report
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/reports/{report_id}.json` endpoint.
      *
@@ -394,7 +394,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_reports_param_report(
         &self,
@@ -426,13 +426,13 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- A comma-separated list of report IDs.
-     * * `limit: &str` -- The amount of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `updated_at_min: &str` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `ids` -- A comma-separated list of report IDs.
+     * * `limit` -- The amount of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `updated_at_min` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_report(
         &self,
@@ -465,7 +465,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-07/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-07/reports.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -477,7 +477,7 @@ impl Analytics {
             .await
     }
     /**
-     * Creates a new report.
+     * Creates a new report
      *
      * This function performs a `POST` to the `/admin/api/2020-07/reports.json` endpoint.
      *
@@ -485,8 +485,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- The name of the report. Maximum length: 255 characters.
-     * * `shopify_ql: &str` -- The ShopifyQL the report will query.
+     * * `name` -- The name of the report. Maximum length: 255 characters.
+     * * `shopify_ql` -- The ShopifyQL the report will query.
      */
     pub async fn deprecated_202007_create_reports(
         &self,
@@ -504,7 +504,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-07/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-07/reports.json?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -516,7 +516,7 @@ impl Analytics {
             .await
     }
     /**
-     * Retrieves a single report created by your app.
+     * Retrieves a single report created by your app
      *
      * This function performs a `GET` to the `/admin/api/2020-07/reports/{report_id}.json` endpoint.
      *
@@ -524,8 +524,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `report_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_reports_param_report(
         &self,
@@ -556,7 +556,7 @@ impl Analytics {
             .await
     }
     /**
-     * Updates a report.
+     * Updates a report
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/reports/{report_id}.json` endpoint.
      *
@@ -564,7 +564,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_reports_param_report(
         &self,
@@ -589,7 +589,7 @@ impl Analytics {
             .await
     }
     /**
-     * Deletes a report.
+     * Deletes a report
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/reports/{report_id}.json` endpoint.
      *
@@ -597,7 +597,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_reports_param_report(
         &self,
@@ -629,13 +629,13 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- A comma-separated list of report IDs.
-     * * `limit: &str` -- The amount of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `updated_at_min: &str` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `ids` -- A comma-separated list of report IDs.
+     * * `limit` -- The amount of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `updated_at_min` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_report(
         &self,
@@ -668,7 +668,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-10/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-10/reports.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -680,7 +680,7 @@ impl Analytics {
             .await
     }
     /**
-     * Creates a new report.
+     * Creates a new report
      *
      * This function performs a `POST` to the `/admin/api/2020-10/reports.json` endpoint.
      *
@@ -688,8 +688,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- The name of the report. Maximum length: 255 characters.
-     * * `shopify_ql: &str` -- The ShopifyQL the report will query.
+     * * `name` -- The name of the report. Maximum length: 255 characters.
+     * * `shopify_ql` -- The ShopifyQL the report will query.
      */
     pub async fn create_reports(
         &self,
@@ -707,7 +707,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-10/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-10/reports.json?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -719,7 +719,7 @@ impl Analytics {
             .await
     }
     /**
-     * Retrieves a single report created by your app.
+     * Retrieves a single report created by your app
      *
      * This function performs a `GET` to the `/admin/api/2020-10/reports/{report_id}.json` endpoint.
      *
@@ -727,8 +727,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `report_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_reports_param_report(
         &self,
@@ -759,7 +759,7 @@ impl Analytics {
             .await
     }
     /**
-     * Updates a report.
+     * Updates a report
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/reports/{report_id}.json` endpoint.
      *
@@ -767,7 +767,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn update_reports_param_report(
         &self,
@@ -792,7 +792,7 @@ impl Analytics {
             .await
     }
     /**
-     * Deletes a report.
+     * Deletes a report
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/reports/{report_id}.json` endpoint.
      *
@@ -800,7 +800,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn delete_reports_param_report(
         &self,
@@ -832,13 +832,13 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- A comma-separated list of report IDs.
-     * * `limit: &str` -- The amount of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `updated_at_min: &str` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `ids` -- A comma-separated list of report IDs.
+     * * `limit` -- The amount of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `updated_at_min` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_report(
         &self,
@@ -871,7 +871,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2021-01/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2021-01/reports.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -883,7 +883,7 @@ impl Analytics {
             .await
     }
     /**
-     * Creates a new report.
+     * Creates a new report
      *
      * This function performs a `POST` to the `/admin/api/2021-01/reports.json` endpoint.
      *
@@ -891,8 +891,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- The name of the report. Maximum length: 255 characters.
-     * * `shopify_ql: &str` -- The ShopifyQL the report will query.
+     * * `name` -- The name of the report. Maximum length: 255 characters.
+     * * `shopify_ql` -- The ShopifyQL the report will query.
      */
     pub async fn deprecated_202101_create_reports(
         &self,
@@ -910,7 +910,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2021-01/reports.json?{}", query_), None);
+            .url(&format!("/admin/api/2021-01/reports.json?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -922,7 +922,7 @@ impl Analytics {
             .await
     }
     /**
-     * Retrieves a single report created by your app.
+     * Retrieves a single report created by your app
      *
      * This function performs a `GET` to the `/admin/api/2021-01/reports/{report_id}.json` endpoint.
      *
@@ -930,8 +930,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `report_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_reports_param_report(
         &self,
@@ -962,7 +962,7 @@ impl Analytics {
             .await
     }
     /**
-     * Updates a report.
+     * Updates a report
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/reports/{report_id}.json` endpoint.
      *
@@ -970,7 +970,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_reports_param_report(
         &self,
@@ -995,7 +995,7 @@ impl Analytics {
             .await
     }
     /**
-     * Deletes a report.
+     * Deletes a report
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/reports/{report_id}.json` endpoint.
      *
@@ -1003,7 +1003,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_reports_param_report(
         &self,
@@ -1035,13 +1035,13 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- A comma-separated list of report IDs.
-     * * `limit: &str` -- The amount of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `updated_at_min: &str` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00).
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `ids` -- A comma-separated list of report IDs.
+     * * `limit` -- The amount of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `updated_at_min` -- Show reports last updated after date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show reports last updated before date. (format: 2014-04-25T16:15:47-04:00)
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_report(
         &self,
@@ -1072,10 +1072,9 @@ impl Analytics {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/unstable/reports.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/unstable/reports.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1087,7 +1086,7 @@ impl Analytics {
             .await
     }
     /**
-     * Creates a new report.
+     * Creates a new report
      *
      * This function performs a `POST` to the `/admin/api/unstable/reports.json` endpoint.
      *
@@ -1095,8 +1094,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `name: &str` -- The name of the report. Maximum length: 255 characters.
-     * * `shopify_ql: &str` -- The ShopifyQL the report will query.
+     * * `name` -- The name of the report. Maximum length: 255 characters.
+     * * `shopify_ql` -- The ShopifyQL the report will query.
      */
     pub async fn deprecated_unstable_create_reports(
         &self,
@@ -1112,10 +1111,9 @@ impl Analytics {
             query_args.push(("shopify_ql".to_string(), shopify_ql.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/unstable/reports.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/unstable/reports.json?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -1127,7 +1125,7 @@ impl Analytics {
             .await
     }
     /**
-     * Retrieves a single report created by your app.
+     * Retrieves a single report created by your app
      *
      * This function performs a `GET` to the `/admin/api/unstable/reports/{report_id}.json` endpoint.
      *
@@ -1135,8 +1133,8 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `report_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_reports_param_report(
         &self,
@@ -1167,7 +1165,7 @@ impl Analytics {
             .await
     }
     /**
-     * Updates a report.
+     * Updates a report
      *
      * This function performs a `PUT` to the `/admin/api/unstable/reports/{report_id}.json` endpoint.
      *
@@ -1175,7 +1173,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_reports_param_report(
         &self,
@@ -1200,7 +1198,7 @@ impl Analytics {
             .await
     }
     /**
-     * Deletes a report.
+     * Deletes a report
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/reports/{report_id}.json` endpoint.
      *
@@ -1208,7 +1206,7 @@ impl Analytics {
      *
      * **Parameters:**
      *
-     * * `report_id: &str` -- storefront_access_token_id.
+     * * `report_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_reports_param_report(
         &self,

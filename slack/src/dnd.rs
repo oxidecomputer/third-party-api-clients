@@ -20,7 +20,7 @@ impl Dnd {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
+     * * `token` -- Authentication token. Requires scope: `dnd:write`
      */
     pub async fn end(&self) -> ClientResult<crate::Response<crate::types::DndEndSchema>> {
         let url = self.client.url("/dnd.endDnd", None);
@@ -43,7 +43,7 @@ impl Dnd {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
+     * * `token` -- Authentication token. Requires scope: `dnd:write`
      */
     pub async fn end_snooze(
         &self,
@@ -68,8 +68,8 @@ impl Dnd {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `dnd:read`.
-     * * `user: &str` -- User to fetch status for (defaults to current user).
+     * * `token` -- Authentication token. Requires scope: `dnd:read`
+     * * `user` -- User to fetch status for (defaults to current user)
      */
     pub async fn info(
         &self,
@@ -80,7 +80,7 @@ impl Dnd {
             query_args.push(("user".to_string(), user.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/dnd.info?{}", query_), None);
+        let url = self.client.url(&format!("/dnd.info?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -121,8 +121,8 @@ impl Dnd {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `dnd:read`.
-     * * `users: &str` -- Comma-separated list of users to fetch Do Not Disturb status for.
+     * * `token` -- Authentication token. Requires scope: `dnd:read`
+     * * `users` -- Comma-separated list of users to fetch Do Not Disturb status for
      */
     pub async fn team_info(
         &self,
@@ -133,7 +133,7 @@ impl Dnd {
             query_args.push(("users".to_string(), users.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/dnd.teamInfo?{}", query_), None);
+        let url = self.client.url(&format!("/dnd.teamInfo?{query_}"), None);
         self.client
             .get(
                 &url,

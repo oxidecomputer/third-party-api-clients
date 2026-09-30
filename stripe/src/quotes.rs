@@ -18,13 +18,12 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- The ID of the customer whose quotes will be retrieved.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::QuoteStatus` -- The status of the quote.
-     * * `test_clock: &str` -- Provides a list of quotes that are associated with the specified test clock. The response will not include quotes with test clocks if this and the customer parameter is not set.
+     * * `customer` -- The ID of the customer whose quotes will be retrieved.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- The status of the quote.
+     * * `test_clock` -- Provides a list of quotes that are associated with the specified test clock. The response will not include quotes with test clocks if this and the customer parameter is not set.
      */
     pub async fn get_page(
         &self,
@@ -55,7 +54,7 @@ impl Quotes {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/quotes?{}", query_), None);
+        let url = self.client.url(&format!("/v1/quotes?{query_}"), None);
         let resp: crate::Response<crate::types::GetQuotesResponse> = self
             .client
             .get(
@@ -98,7 +97,7 @@ impl Quotes {
             query_args.push(("test_clock".to_string(), test_clock.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/quotes?{}", query_), None);
+        let url = self.client.url(&format!("/v1/quotes?{query_}"), None);
         let crate::Response::<crate::types::GetQuotesResponse> {
             mut status,
             mut headers,
@@ -138,7 +137,7 @@ impl Quotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -153,7 +152,7 @@ impl Quotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -194,8 +193,7 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `quote: &str` -- The account's country.
+     * * `quote` -- The account's country.
      */
     pub async fn get(&self, quote: &str) -> ClientResult<crate::Response<crate::types::Quote>> {
         let url = self.client.url(
@@ -222,7 +220,7 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `quote: &str` -- The account's country.
+     * * `quote` -- The account's country.
      */
     pub async fn post_quotes(
         &self,
@@ -252,7 +250,7 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `quote: &str` -- The account's country.
+     * * `quote` -- The account's country.
      */
     pub async fn post_accept(
         &self,
@@ -282,7 +280,7 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `quote: &str` -- The account's country.
+     * * `quote` -- The account's country.
      */
     pub async fn post_cancel(
         &self,
@@ -312,11 +310,10 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `quote: &str` -- The account's country.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `quote` -- The account's country.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_computed_upfront_line_items(
         &self,
@@ -419,7 +416,7 @@ impl Quotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -434,7 +431,7 @@ impl Quotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -458,7 +455,7 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `quote: &str` -- The account's country.
+     * * `quote` -- The account's country.
      */
     pub async fn post_finalize(
         &self,
@@ -488,11 +485,10 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `quote: &str` -- The account's country.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `quote` -- The account's country.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_line_items(
         &self,
@@ -595,7 +591,7 @@ impl Quotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -610,7 +606,7 @@ impl Quotes {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -634,8 +630,7 @@ impl Quotes {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `quote: &str` -- The account's country.
+     * * `quote` -- The account's country.
      */
     pub async fn get_pdf(&self, quote: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

@@ -18,9 +18,9 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `page_token: &str` -- Token to specify the next page in the list.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `max_results` -- Maximum number of results to return.
+     * * `page_token` -- Token to specify the next page in the list.
      */
     pub async fn list(
         &self,
@@ -108,7 +108,7 @@ impl Roles {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -123,7 +123,7 @@ impl Roles {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -151,7 +151,7 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `customer` -- Immutable ID of the Google Workspace account.
      */
     pub async fn insert(
         &self,
@@ -182,8 +182,8 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_id: &str` -- Immutable ID of the role.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `role_id` -- Immutable ID of the role.
      */
     pub async fn get(
         &self,
@@ -215,8 +215,8 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_id: &str` -- Immutable ID of the role.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `role_id` -- Immutable ID of the role.
      */
     pub async fn update(
         &self,
@@ -249,8 +249,8 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_id: &str` -- Immutable ID of the role.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `role_id` -- Immutable ID of the role.
      */
     pub async fn delete(&self, customer: &str, role_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -278,8 +278,8 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_id: &str` -- Immutable ID of the role.
+     * * `customer` -- Immutable ID of the Google Workspace account.
+     * * `role_id` -- Immutable ID of the role.
      */
     pub async fn patch(
         &self,

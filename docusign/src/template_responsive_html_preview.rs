@@ -30,8 +30,8 @@ impl TemplateResponsiveHtmlPreview {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn responsive_html_post_template_preview(
         &self,

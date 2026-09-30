@@ -12,7 +12,7 @@ impl PaySchedules {
     }
 
     /**
-     * Get the pay schedules for a company.
+     * Get the pay schedules for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/pay_schedules` endpoint.
      *
@@ -40,7 +40,7 @@ impl PaySchedules {
             .await
     }
     /**
-     * Get the pay schedules for a company.
+     * Get the pay schedules for a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/pay_schedules` endpoint.
      *
@@ -70,7 +70,7 @@ impl PaySchedules {
             .await
     }
     /**
-     * Get a pay schedule.
+     * Get a pay schedule
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/pay_schedules/{pay_schedule_id_or_uuid}` endpoint.
      *
@@ -100,7 +100,7 @@ impl PaySchedules {
             .await
     }
     /**
-     * Update a pay schedule.
+     * Update a pay schedule
      *
      * This function performs a `PUT` to the `/v1/companies/{company_id_or_uuid}/pay_schedules/{pay_schedule_id_or_uuid}` endpoint.
      *

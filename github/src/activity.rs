@@ -12,7 +12,7 @@ impl Activity {
     }
 
     /**
-     * List public events.
+     * List public events
      *
      * This function performs a `GET` to the `/events` endpoint.
      *
@@ -22,8 +22,8 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_events(
         &self,
@@ -38,7 +38,7 @@ impl Activity {
             query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/events?{}", query_), None);
+        let url = self.client.url(&format!("/events?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -50,7 +50,7 @@ impl Activity {
             .await
     }
     /**
-     * List public events.
+     * List public events
      *
      * This function performs a `GET` to the `/events` endpoint.
      *
@@ -75,7 +75,7 @@ impl Activity {
             .await
     }
     /**
-     * Get feeds.
+     * Get feeds
      *
      * This function performs a `GET` to the `/feeds` endpoint.
      *
@@ -106,20 +106,18 @@ impl Activity {
             .await
     }
     /**
-     * List public events for a network of repositories.
+     * List public events for a network of repositories
      *
      * This function performs a `GET` to the `/networks/{owner}/{repo}/events` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_events_for_repo_network(
         &self,
@@ -156,13 +154,11 @@ impl Activity {
             .await
     }
     /**
-     * List public events for a network of repositories.
+     * List public events for a network of repositories
      *
      * This function performs a `GET` to the `/networks/{owner}/{repo}/events` endpoint.
      *
      * As opposed to `list_public_events_for_repo_network`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories>
      */
@@ -190,7 +186,7 @@ impl Activity {
             .await
     }
     /**
-     * List notifications for the authenticated user.
+     * List notifications for the authenticated user
      *
      * This function performs a `GET` to the `/notifications` endpoint.
      *
@@ -200,12 +196,12 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `all: bool` -- If `true`, show notifications marked as read.
-     * * `participating: bool` -- If `true`, only shows notifications in which the user is directly participating or mentioned.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `before: chrono::DateTime<chrono::Utc>` -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `all` -- If `true`, show notifications marked as read.
+     * * `participating` -- If `true`, only shows notifications in which the user is directly participating or mentioned.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `before` -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_notifications_for_authenticated_user(
         &self,
@@ -236,7 +232,7 @@ impl Activity {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/notifications?{}", query_), None);
+        let url = self.client.url(&format!("/notifications?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -248,7 +244,7 @@ impl Activity {
             .await
     }
     /**
-     * List notifications for the authenticated user.
+     * List notifications for the authenticated user
      *
      * This function performs a `GET` to the `/notifications` endpoint.
      *
@@ -279,7 +275,7 @@ impl Activity {
             query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/notifications?{}", query_), None);
+        let url = self.client.url(&format!("/notifications?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -291,7 +287,7 @@ impl Activity {
             .await
     }
     /**
-     * Mark notifications as read.
+     * Mark notifications as read
      *
      * This function performs a `PUT` to the `/notifications` endpoint.
      *
@@ -315,17 +311,15 @@ impl Activity {
             .await
     }
     /**
-     * Get a thread.
+     * Get a thread
      *
      * This function performs a `GET` to the `/notifications/threads/{thread_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#get-a-thread>
      *
      * **Parameters:**
      *
-     * * `thread_id: i64` -- thread_id parameter.
+     * * `thread_id` -- thread_id parameter
      */
     pub async fn get_thread(
         &self,
@@ -349,17 +343,15 @@ impl Activity {
             .await
     }
     /**
-     * Mark a thread as read.
+     * Mark a thread as read
      *
      * This function performs a `PATCH` to the `/notifications/threads/{thread_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#mark-a-thread-as-read>
      *
      * **Parameters:**
      *
-     * * `thread_id: i64` -- thread_id parameter.
+     * * `thread_id` -- thread_id parameter
      */
     pub async fn mark_thread_as_read(&self, thread_id: i64) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -380,7 +372,7 @@ impl Activity {
             .await
     }
     /**
-     * Get a thread subscription for the authenticated user.
+     * Get a thread subscription for the authenticated user
      *
      * This function performs a `GET` to the `/notifications/threads/{thread_id}/subscription` endpoint.
      *
@@ -392,7 +384,7 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `thread_id: i64` -- thread_id parameter.
+     * * `thread_id` -- thread_id parameter
      */
     pub async fn get_thread_subscription_for_authenticated_user(
         &self,
@@ -416,7 +408,7 @@ impl Activity {
             .await
     }
     /**
-     * Set a thread subscription.
+     * Set a thread subscription
      *
      * This function performs a `PUT` to the `/notifications/threads/{thread_id}/subscription` endpoint.
      *
@@ -430,7 +422,7 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `thread_id: i64` -- thread_id parameter.
+     * * `thread_id` -- thread_id parameter
      */
     pub async fn set_thread_subscription(
         &self,
@@ -455,7 +447,7 @@ impl Activity {
             .await
     }
     /**
-     * Delete a thread subscription.
+     * Delete a thread subscription
      *
      * This function performs a `DELETE` to the `/notifications/threads/{thread_id}/subscription` endpoint.
      *
@@ -465,7 +457,7 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `thread_id: i64` -- thread_id parameter.
+     * * `thread_id` -- thread_id parameter
      */
     pub async fn delete_thread_subscription(
         &self,
@@ -489,19 +481,17 @@ impl Activity {
             .await
     }
     /**
-     * List public organization events.
+     * List public organization events
      *
      * This function performs a `GET` to the `/orgs/{org}/events` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-organization-events>
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_org_events(
         &self,
@@ -536,13 +526,11 @@ impl Activity {
             .await
     }
     /**
-     * List public organization events.
+     * List public organization events
      *
      * This function performs a `GET` to the `/orgs/{org}/events` endpoint.
      *
      * As opposed to `list_public_org_events`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-organization-events>
      */
@@ -568,20 +556,18 @@ impl Activity {
             .await
     }
     /**
-     * List repository events.
+     * List repository events
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/events` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repository-events>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repo_events(
         &self,
@@ -618,13 +604,11 @@ impl Activity {
             .await
     }
     /**
-     * List repository events.
+     * List repository events
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/events` endpoint.
      *
      * As opposed to `list_repo_events`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repository-events>
      */
@@ -652,7 +636,7 @@ impl Activity {
             .await
     }
     /**
-     * List repository notifications for the authenticated user.
+     * List repository notifications for the authenticated user
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/notifications` endpoint.
      *
@@ -662,14 +646,14 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `all: bool` -- If `true`, show notifications marked as read.
-     * * `participating: bool` -- If `true`, only shows notifications in which the user is directly participating or mentioned.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `before: chrono::DateTime<chrono::Utc>` -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `all` -- If `true`, show notifications marked as read.
+     * * `participating` -- If `true`, only shows notifications in which the user is directly participating or mentioned.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `before` -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repo_notifications_for_authenticated_user(
         &self,
@@ -722,7 +706,7 @@ impl Activity {
             .await
     }
     /**
-     * List repository notifications for the authenticated user.
+     * List repository notifications for the authenticated user
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/notifications` endpoint.
      *
@@ -775,7 +759,7 @@ impl Activity {
             .await
     }
     /**
-     * Mark repository notifications as read.
+     * Mark repository notifications as read
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/notifications` endpoint.
      *
@@ -785,8 +769,8 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn mark_repo_notifications_as_read(
         &self,
@@ -813,7 +797,7 @@ impl Activity {
             .await
     }
     /**
-     * List stargazers.
+     * List stargazers
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stargazers` endpoint.
      *
@@ -825,10 +809,10 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_stargazers_for_repo(
         &self,
@@ -865,7 +849,7 @@ impl Activity {
             .await
     }
     /**
-     * List watchers.
+     * List watchers
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/subscribers` endpoint.
      *
@@ -875,10 +859,10 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_watchers_for_repo(
         &self,
@@ -915,7 +899,7 @@ impl Activity {
             .await
     }
     /**
-     * List watchers.
+     * List watchers
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/subscribers` endpoint.
      *
@@ -949,18 +933,16 @@ impl Activity {
             .await
     }
     /**
-     * Get a repository subscription.
+     * Get a repository subscription
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/subscription` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#get-a-repository-subscription>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn get_repo_subscription(
         &self,
@@ -986,7 +968,7 @@ impl Activity {
             .await
     }
     /**
-     * Set a repository subscription.
+     * Set a repository subscription
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/subscription` endpoint.
      *
@@ -996,8 +978,8 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn set_repo_subscription(
         &self,
@@ -1024,7 +1006,7 @@ impl Activity {
             .await
     }
     /**
-     * Delete a repository subscription.
+     * Delete a repository subscription
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/subscription` endpoint.
      *
@@ -1034,8 +1016,8 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn delete_repo_subscription(
         &self,
@@ -1061,7 +1043,7 @@ impl Activity {
             .await
     }
     /**
-     * List repositories starred by the authenticated user.
+     * List repositories starred by the authenticated user
      *
      * This function performs a `GET` to the `/user/starred` endpoint.
      *
@@ -1073,12 +1055,12 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_starred_by_authenticated_user(
         &self,
@@ -1101,7 +1083,7 @@ impl Activity {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/starred?{}", query_), None);
+        let url = self.client.url(&format!("/user/starred?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1113,7 +1095,7 @@ impl Activity {
             .await
     }
     /**
-     * List repositories starred by the authenticated user.
+     * List repositories starred by the authenticated user
      *
      * This function performs a `GET` to the `/user/starred` endpoint.
      *
@@ -1138,7 +1120,7 @@ impl Activity {
             query_args.push(("sort".to_string(), sort.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/starred?{}", query_), None);
+        let url = self.client.url(&format!("/user/starred?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -1150,18 +1132,16 @@ impl Activity {
             .await
     }
     /**
-     * Check if a repository is starred by the authenticated user.
+     * Check if a repository is starred by the authenticated user
      *
      * This function performs a `GET` to the `/user/starred/{owner}/{repo}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#check-if-a-repository-is-starred-by-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn check_repo_is_starred_by_authenticated_user(
         &self,
@@ -1187,7 +1167,7 @@ impl Activity {
             .await
     }
     /**
-     * Star a repository for the authenticated user.
+     * Star a repository for the authenticated user
      *
      * This function performs a `PUT` to the `/user/starred/{owner}/{repo}` endpoint.
      *
@@ -1197,8 +1177,8 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn star_repo_for_authenticated_user(
         &self,
@@ -1224,18 +1204,16 @@ impl Activity {
             .await
     }
     /**
-     * Unstar a repository for the authenticated user.
+     * Unstar a repository for the authenticated user
      *
      * This function performs a `DELETE` to the `/user/starred/{owner}/{repo}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#unstar-a-repository-for-the-authenticated-user>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn unstar_repo_for_authenticated_user(
         &self,
@@ -1261,7 +1239,7 @@ impl Activity {
             .await
     }
     /**
-     * List repositories watched by the authenticated user.
+     * List repositories watched by the authenticated user
      *
      * This function performs a `GET` to the `/user/subscriptions` endpoint.
      *
@@ -1271,8 +1249,8 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_watched_repos_for_authenticated_user(
         &self,
@@ -1289,7 +1267,7 @@ impl Activity {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/user/subscriptions?{}", query_), None);
+            .url(&format!("/user/subscriptions?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1301,7 +1279,7 @@ impl Activity {
             .await
     }
     /**
-     * List repositories watched by the authenticated user.
+     * List repositories watched by the authenticated user
      *
      * This function performs a `GET` to the `/user/subscriptions` endpoint.
      *
@@ -1326,7 +1304,7 @@ impl Activity {
             .await
     }
     /**
-     * List events for the authenticated user.
+     * List events for the authenticated user
      *
      * This function performs a `GET` to the `/users/{username}/events` endpoint.
      *
@@ -1336,9 +1314,9 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_events_for_authenticated_user(
         &self,
@@ -1373,7 +1351,7 @@ impl Activity {
             .await
     }
     /**
-     * List events for the authenticated user.
+     * List events for the authenticated user
      *
      * This function performs a `GET` to the `/users/{username}/events` endpoint.
      *
@@ -1405,7 +1383,7 @@ impl Activity {
             .await
     }
     /**
-     * List organization events for the authenticated user.
+     * List organization events for the authenticated user
      *
      * This function performs a `GET` to the `/users/{username}/events/orgs/{org}` endpoint.
      *
@@ -1415,10 +1393,10 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `org: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `org`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_org_events_for_authenticated_user(
         &self,
@@ -1455,7 +1433,7 @@ impl Activity {
             .await
     }
     /**
-     * List organization events for the authenticated user.
+     * List organization events for the authenticated user
      *
      * This function performs a `GET` to the `/users/{username}/events/orgs/{org}` endpoint.
      *
@@ -1489,19 +1467,17 @@ impl Activity {
             .await
     }
     /**
-     * List public events for a user.
+     * List public events for a user
      *
      * This function performs a `GET` to the `/users/{username}/events/public` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_public_events_for_user(
         &self,
@@ -1536,13 +1512,11 @@ impl Activity {
             .await
     }
     /**
-     * List public events for a user.
+     * List public events for a user
      *
      * This function performs a `GET` to the `/users/{username}/events/public` endpoint.
      *
      * As opposed to `list_public_events_for_user`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-user>
      */
@@ -1568,7 +1542,7 @@ impl Activity {
             .await
     }
     /**
-     * List events received by the authenticated user.
+     * List events received by the authenticated user
      *
      * This function performs a `GET` to the `/users/{username}/received_events` endpoint.
      *
@@ -1578,9 +1552,9 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_received_events_for_user(
         &self,
@@ -1615,7 +1589,7 @@ impl Activity {
             .await
     }
     /**
-     * List events received by the authenticated user.
+     * List events received by the authenticated user
      *
      * This function performs a `GET` to the `/users/{username}/received_events` endpoint.
      *
@@ -1647,19 +1621,17 @@ impl Activity {
             .await
     }
     /**
-     * List public events received by a user.
+     * List public events received by a user
      *
      * This function performs a `GET` to the `/users/{username}/received_events/public` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user>
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_received_public_events_for_user(
         &self,
@@ -1694,13 +1666,11 @@ impl Activity {
             .await
     }
     /**
-     * List public events received by a user.
+     * List public events received by a user
      *
      * This function performs a `GET` to the `/users/{username}/received_events/public` endpoint.
      *
      * As opposed to `list_received_public_events_for_user`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user>
      */
@@ -1726,7 +1696,7 @@ impl Activity {
             .await
     }
     /**
-     * List repositories starred by a user.
+     * List repositories starred by a user
      *
      * This function performs a `GET` to the `/users/{username}/starred` endpoint.
      *
@@ -1738,13 +1708,13 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_starred_by_user(
         &self,
@@ -1788,7 +1758,7 @@ impl Activity {
             .await
     }
     /**
-     * List repositories watched by a user.
+     * List repositories watched by a user
      *
      * This function performs a `GET` to the `/users/{username}/subscriptions` endpoint.
      *
@@ -1798,9 +1768,9 @@ impl Activity {
      *
      * **Parameters:**
      *
-     * * `username: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `username`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_repos_watched_by_user(
         &self,
@@ -1835,7 +1805,7 @@ impl Activity {
             .await
     }
     /**
-     * List repositories watched by a user.
+     * List repositories watched by a user
      *
      * This function performs a `GET` to the `/users/{username}/subscriptions` endpoint.
      *

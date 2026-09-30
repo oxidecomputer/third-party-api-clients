@@ -20,11 +20,11 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `ids_required: &str` -- Show only inventory items specified by a comma-separated list of IDs.
-     *                     (maximum: 100).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: i64` -- recurring_application_charge[capped_amount].
+     * * `ids_required` -- Show only inventory items specified by a comma-separated list of IDs.
+     *   (maximum: 100)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202001_get_item(
         &self,
@@ -49,7 +49,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/inventory_items.json?{}", query_),
+            &format!("/admin/api/2020-01/inventory_items.json?{query_}"),
             None,
         );
         self.client
@@ -63,7 +63,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single inventory item by ID.
+     * Retrieves a single inventory item by ID
      *
      * This function performs a `GET` to the `/admin/api/2020-01/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -71,7 +71,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_items_param_item(
         &self,
@@ -95,7 +95,7 @@ impl Inventory {
             .await
     }
     /**
-     * Updates an existing inventory item.
+     * Updates an existing inventory item
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -103,7 +103,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_items_param_item(
         &self,
@@ -136,11 +136,11 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `ids_required: &str` -- Show only inventory items specified by a comma-separated list of IDs.
-     *                     (maximum: 100).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: i64` -- recurring_application_charge[capped_amount].
+     * * `ids_required` -- Show only inventory items specified by a comma-separated list of IDs.
+     *   (maximum: 100)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202004_get_item(
         &self,
@@ -165,7 +165,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/inventory_items.json?{}", query_),
+            &format!("/admin/api/2020-04/inventory_items.json?{query_}"),
             None,
         );
         self.client
@@ -179,7 +179,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single inventory item by ID.
+     * Retrieves a single inventory item by ID
      *
      * This function performs a `GET` to the `/admin/api/2020-04/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -187,7 +187,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_items_param_item(
         &self,
@@ -211,7 +211,7 @@ impl Inventory {
             .await
     }
     /**
-     * Updates an existing inventory item.
+     * Updates an existing inventory item
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -219,7 +219,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_items_param_item(
         &self,
@@ -252,11 +252,11 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `ids_required: &str` -- Show only inventory items specified by a comma-separated list of IDs.
-     *                     (maximum: 100).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: i64` -- recurring_application_charge[capped_amount].
+     * * `ids_required` -- Show only inventory items specified by a comma-separated list of IDs.
+     *   (maximum: 100)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202007_get_item(
         &self,
@@ -281,7 +281,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/inventory_items.json?{}", query_),
+            &format!("/admin/api/2020-07/inventory_items.json?{query_}"),
             None,
         );
         self.client
@@ -295,7 +295,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single inventory item by ID.
+     * Retrieves a single inventory item by ID
      *
      * This function performs a `GET` to the `/admin/api/2020-07/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -303,7 +303,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_items_param_item(
         &self,
@@ -327,7 +327,7 @@ impl Inventory {
             .await
     }
     /**
-     * Updates an existing inventory item.
+     * Updates an existing inventory item
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -335,7 +335,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_items_param_item(
         &self,
@@ -368,11 +368,11 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `ids_required: &str` -- Show only inventory items specified by a comma-separated list of IDs.
-     *                     (maximum: 100).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: i64` -- recurring_application_charge[capped_amount].
+     * * `ids_required` -- Show only inventory items specified by a comma-separated list of IDs.
+     *   (maximum: 100)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- recurring_application_charge[capped_amount]
      */
     pub async fn get_item(
         &self,
@@ -397,7 +397,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/inventory_items.json?{}", query_),
+            &format!("/admin/api/2020-10/inventory_items.json?{query_}"),
             None,
         );
         self.client
@@ -411,7 +411,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single inventory item by ID.
+     * Retrieves a single inventory item by ID
      *
      * This function performs a `GET` to the `/admin/api/2020-10/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -419,7 +419,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn get_items_param_item(
         &self,
@@ -443,7 +443,7 @@ impl Inventory {
             .await
     }
     /**
-     * Updates an existing inventory item.
+     * Updates an existing inventory item
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -451,7 +451,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn update_items_param_item(
         &self,
@@ -484,11 +484,11 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `ids_required: &str` -- Show only inventory items specified by a comma-separated list of IDs.
-     *                     (maximum: 100).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: i64` -- recurring_application_charge[capped_amount].
+     * * `ids_required` -- Show only inventory items specified by a comma-separated list of IDs.
+     *   (maximum: 100)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202101_get_item(
         &self,
@@ -513,7 +513,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/inventory_items.json?{}", query_),
+            &format!("/admin/api/2021-01/inventory_items.json?{query_}"),
             None,
         );
         self.client
@@ -527,7 +527,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single inventory item by ID.
+     * Retrieves a single inventory item by ID
      *
      * This function performs a `GET` to the `/admin/api/2021-01/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -535,7 +535,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_items_param_item(
         &self,
@@ -559,7 +559,7 @@ impl Inventory {
             .await
     }
     /**
-     * Updates an existing inventory item.
+     * Updates an existing inventory item
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -567,7 +567,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_items_param_item(
         &self,
@@ -600,11 +600,11 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `ids_required: &str` -- Show only inventory items specified by a comma-separated list of IDs.
-     *                     (maximum: 100).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `ids: i64` -- recurring_application_charge[capped_amount].
+     * * `ids_required` -- Show only inventory items specified by a comma-separated list of IDs.
+     *   (maximum: 100)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `ids` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_unstable_get_item(
         &self,
@@ -629,7 +629,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/inventory_items.json?{}", query_),
+            &format!("/admin/api/unstable/inventory_items.json?{query_}"),
             None,
         );
         self.client
@@ -643,7 +643,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single inventory item by ID.
+     * Retrieves a single inventory item by ID
      *
      * This function performs a `GET` to the `/admin/api/unstable/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -651,7 +651,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_items_param_item(
         &self,
@@ -675,7 +675,7 @@ impl Inventory {
             .await
     }
     /**
-     * Updates an existing inventory item.
+     * Updates an existing inventory item
      *
      * This function performs a `PUT` to the `/admin/api/unstable/inventory_items/{inventory_item_id}.json` endpoint.
      *
@@ -683,7 +683,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_id: &str` -- storefront_access_token_id.
+     * * `inventory_item_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_items_param_item(
         &self,
@@ -708,24 +708,24 @@ impl Inventory {
             .await
     }
     /**
-    * Retrieves a list of inventory levels.
-             You must include inventory_item_ids, location_ids, or both as filter parameters.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-     *                     (maximum: 50).
-    * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-     *                     (maximum: 50).
-    * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-    * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
-    */
+     * Retrieves a list of inventory levels.
+     * You must include inventory_item_ids, location_ids, or both as filter parameters.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_ids` -- A comma-separated list of inventory item IDs.
+     *   (maximum: 50)
+     * * `location_ids` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
+     *   (maximum: 50)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `updated_at_min` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
+     */
     pub async fn deprecated_202001_get_level(
         &self,
         inventory_item_ids: &str,
@@ -751,7 +751,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-01/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -765,22 +765,22 @@ impl Inventory {
             .await
     }
     /**
-    * Deletes an inventory level of an inventory item at a location.
-             Deleting an inventory level for an inventory item removes that item from the specified location.
-             Every inventory item must have at least one inventory level. To move inventory to another location,
-             first connect the inventory item to another location, and then delete the previous inventory level.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `inventory_item_id: i64` -- recurring_application_charge[capped_amount].
-    * * `location_id: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Deletes an inventory level of an inventory item at a location.
+     * Deleting an inventory level for an inventory item removes that item from the specified location.
+     * Every inventory item must have at least one inventory level. To move inventory to another location,
+     * first connect the inventory item to another location, and then delete the previous inventory level.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `inventory_item_id` -- recurring_application_charge[capped_amount]
+     * * `location_id` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202001_delete_levels(
         &self,
         inventory_item_id_required: &str,
@@ -816,7 +816,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-01/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -830,7 +830,7 @@ impl Inventory {
             .await
     }
     /**
-     * Adjusts the inventory level of an inventory item at a single location.
+     * Adjusts the inventory level of an inventory item at a single location
      *
      * This function performs a `POST` to the `/admin/api/2020-01/inventory_levels/adjust.json` endpoint.
      *
@@ -838,9 +838,9 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_required: &str` -- The ID of the inventory item.
-     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-     * * `available_adjustment_required: &str` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_adjustment_required` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
      */
     pub async fn deprecated_202001_create_levels_adjust(
         &self,
@@ -876,7 +876,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/inventory_levels/adjust.json?{}", query_),
+            &format!("/admin/api/2020-01/inventory_levels/adjust.json?{query_}"),
             None,
         );
         self.client
@@ -890,21 +890,21 @@ impl Inventory {
             .await
     }
     /**
-    * Connects an inventory item to a location by creating an inventory level at that location.
-           When connecting inventory items to locations, it's important to understand the rules around
-           fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/inventory_levels/connect.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID of the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Connects an inventory item to a location by creating an inventory level at that location.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/inventory_levels/connect.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `relocate_if_necessary` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202001_create_levels_connect(
         &self,
         inventory_item_id_required: &str,
@@ -937,10 +937,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/inventory_levels/connect.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/inventory_levels/connect.json?{query_}"),
             None,
         );
         self.client
@@ -954,23 +951,23 @@ impl Inventory {
             .await
     }
     /**
-    * Sets the inventory level for an inventory item at a location.
-             If the specified location is not connected, it will be automatically connected first.
-             When connecting inventory items to locations, it's important to understand the rules around
-             fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/inventory_levels/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `available_required: &str` -- Sets the available inventory quantity.
-    * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Sets the inventory level for an inventory item at a location.
+     * If the specified location is not connected, it will be automatically connected first.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/inventory_levels/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_required` -- Sets the available inventory quantity.
+     * * `disconnect_if_necessary` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202001_create_levels_set(
         &self,
         inventory_item_id_required: &str,
@@ -1012,7 +1009,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/inventory_levels/set.json?{}", query_),
+            &format!("/admin/api/2020-01/inventory_levels/set.json?{query_}"),
             None,
         );
         self.client
@@ -1026,24 +1023,24 @@ impl Inventory {
             .await
     }
     /**
-    * Retrieves a list of inventory levels.
-             You must include inventory_item_ids, location_ids, or both as filter parameters.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-     *                     (maximum: 50).
-    * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-     *                     (maximum: 50).
-    * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-    * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
-    */
+     * Retrieves a list of inventory levels.
+     * You must include inventory_item_ids, location_ids, or both as filter parameters.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_ids` -- A comma-separated list of inventory item IDs.
+     *   (maximum: 50)
+     * * `location_ids` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
+     *   (maximum: 50)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `updated_at_min` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
+     */
     pub async fn deprecated_202004_get_level(
         &self,
         inventory_item_ids: &str,
@@ -1069,7 +1066,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-04/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -1083,22 +1080,22 @@ impl Inventory {
             .await
     }
     /**
-    * Deletes an inventory level of an inventory item at a location.
-             Deleting an inventory level for an inventory item removes that item from the specified location.
-             Every inventory item must have at least one inventory level. To move inventory to another location,
-             first connect the inventory item to another location, and then delete the previous inventory level.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `inventory_item_id: i64` -- recurring_application_charge[capped_amount].
-    * * `location_id: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Deletes an inventory level of an inventory item at a location.
+     * Deleting an inventory level for an inventory item removes that item from the specified location.
+     * Every inventory item must have at least one inventory level. To move inventory to another location,
+     * first connect the inventory item to another location, and then delete the previous inventory level.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `inventory_item_id` -- recurring_application_charge[capped_amount]
+     * * `location_id` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202004_delete_levels(
         &self,
         inventory_item_id_required: &str,
@@ -1134,7 +1131,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-04/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -1148,7 +1145,7 @@ impl Inventory {
             .await
     }
     /**
-     * Adjusts the inventory level of an inventory item at a single location.
+     * Adjusts the inventory level of an inventory item at a single location
      *
      * This function performs a `POST` to the `/admin/api/2020-04/inventory_levels/adjust.json` endpoint.
      *
@@ -1156,9 +1153,9 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_required: &str` -- The ID of the inventory item.
-     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-     * * `available_adjustment_required: &str` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_adjustment_required` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
      */
     pub async fn deprecated_202004_create_levels_adjust(
         &self,
@@ -1194,7 +1191,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/inventory_levels/adjust.json?{}", query_),
+            &format!("/admin/api/2020-04/inventory_levels/adjust.json?{query_}"),
             None,
         );
         self.client
@@ -1208,21 +1205,21 @@ impl Inventory {
             .await
     }
     /**
-    * Connects an inventory item to a location by creating an inventory level at that location.
-           When connecting inventory items to locations, it's important to understand the rules around
-           fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/inventory_levels/connect.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID of the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Connects an inventory item to a location by creating an inventory level at that location.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/inventory_levels/connect.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `relocate_if_necessary` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202004_create_levels_connect(
         &self,
         inventory_item_id_required: &str,
@@ -1255,10 +1252,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-04/inventory_levels/connect.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-04/inventory_levels/connect.json?{query_}"),
             None,
         );
         self.client
@@ -1272,23 +1266,23 @@ impl Inventory {
             .await
     }
     /**
-    * Sets the inventory level for an inventory item at a location.
-             If the specified location is not connected, it will be automatically connected first.
-             When connecting inventory items to locations, it's important to understand the rules around
-             fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/inventory_levels/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `available_required: &str` -- Sets the available inventory quantity.
-    * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Sets the inventory level for an inventory item at a location.
+     * If the specified location is not connected, it will be automatically connected first.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/inventory_levels/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_required` -- Sets the available inventory quantity.
+     * * `disconnect_if_necessary` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202004_create_levels_set(
         &self,
         inventory_item_id_required: &str,
@@ -1330,7 +1324,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/inventory_levels/set.json?{}", query_),
+            &format!("/admin/api/2020-04/inventory_levels/set.json?{query_}"),
             None,
         );
         self.client
@@ -1344,24 +1338,24 @@ impl Inventory {
             .await
     }
     /**
-    * Retrieves a list of inventory levels.
-             You must include inventory_item_ids, location_ids, or both as filter parameters.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-     *                     (maximum: 50).
-    * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-     *                     (maximum: 50).
-    * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-    * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
-    */
+     * Retrieves a list of inventory levels.
+     * You must include inventory_item_ids, location_ids, or both as filter parameters.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_ids` -- A comma-separated list of inventory item IDs.
+     *   (maximum: 50)
+     * * `location_ids` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
+     *   (maximum: 50)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `updated_at_min` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
+     */
     pub async fn deprecated_202007_get_level(
         &self,
         inventory_item_ids: &str,
@@ -1387,7 +1381,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-07/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -1401,22 +1395,22 @@ impl Inventory {
             .await
     }
     /**
-    * Deletes an inventory level of an inventory item at a location.
-             Deleting an inventory level for an inventory item removes that item from the specified location.
-             Every inventory item must have at least one inventory level. To move inventory to another location,
-             first connect the inventory item to another location, and then delete the previous inventory level.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `inventory_item_id: i64` -- recurring_application_charge[capped_amount].
-    * * `location_id: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Deletes an inventory level of an inventory item at a location.
+     * Deleting an inventory level for an inventory item removes that item from the specified location.
+     * Every inventory item must have at least one inventory level. To move inventory to another location,
+     * first connect the inventory item to another location, and then delete the previous inventory level.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `inventory_item_id` -- recurring_application_charge[capped_amount]
+     * * `location_id` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202007_delete_levels(
         &self,
         inventory_item_id_required: &str,
@@ -1452,7 +1446,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-07/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -1466,7 +1460,7 @@ impl Inventory {
             .await
     }
     /**
-     * Adjusts the inventory level of an inventory item at a single location.
+     * Adjusts the inventory level of an inventory item at a single location
      *
      * This function performs a `POST` to the `/admin/api/2020-07/inventory_levels/adjust.json` endpoint.
      *
@@ -1474,9 +1468,9 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_required: &str` -- The ID of the inventory item.
-     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-     * * `available_adjustment_required: &str` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_adjustment_required` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
      */
     pub async fn deprecated_202007_create_levels_adjust(
         &self,
@@ -1512,7 +1506,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/inventory_levels/adjust.json?{}", query_),
+            &format!("/admin/api/2020-07/inventory_levels/adjust.json?{query_}"),
             None,
         );
         self.client
@@ -1526,21 +1520,21 @@ impl Inventory {
             .await
     }
     /**
-    * Connects an inventory item to a location by creating an inventory level at that location.
-           When connecting inventory items to locations, it's important to understand the rules around
-           fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/inventory_levels/connect.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID of the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Connects an inventory item to a location by creating an inventory level at that location.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/inventory_levels/connect.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `relocate_if_necessary` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202007_create_levels_connect(
         &self,
         inventory_item_id_required: &str,
@@ -1573,10 +1567,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-07/inventory_levels/connect.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-07/inventory_levels/connect.json?{query_}"),
             None,
         );
         self.client
@@ -1590,23 +1581,23 @@ impl Inventory {
             .await
     }
     /**
-    * Sets the inventory level for an inventory item at a location.
-             If the specified location is not connected, it will be automatically connected first.
-             When connecting inventory items to locations, it's important to understand the rules around
-             fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/inventory_levels/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `available_required: &str` -- Sets the available inventory quantity.
-    * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Sets the inventory level for an inventory item at a location.
+     * If the specified location is not connected, it will be automatically connected first.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/inventory_levels/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_required` -- Sets the available inventory quantity.
+     * * `disconnect_if_necessary` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202007_create_levels_set(
         &self,
         inventory_item_id_required: &str,
@@ -1648,7 +1639,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/inventory_levels/set.json?{}", query_),
+            &format!("/admin/api/2020-07/inventory_levels/set.json?{query_}"),
             None,
         );
         self.client
@@ -1662,24 +1653,24 @@ impl Inventory {
             .await
     }
     /**
-    * Retrieves a list of inventory levels.
-             You must include inventory_item_ids, location_ids, or both as filter parameters.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-     *                     (maximum: 50).
-    * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-     *                     (maximum: 50).
-    * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-    * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
-    */
+     * Retrieves a list of inventory levels.
+     * You must include inventory_item_ids, location_ids, or both as filter parameters.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_ids` -- A comma-separated list of inventory item IDs.
+     *   (maximum: 50)
+     * * `location_ids` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
+     *   (maximum: 50)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `updated_at_min` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
+     */
     pub async fn get_level(
         &self,
         inventory_item_ids: &str,
@@ -1705,7 +1696,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-10/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -1719,22 +1710,22 @@ impl Inventory {
             .await
     }
     /**
-    * Deletes an inventory level of an inventory item at a location.
-             Deleting an inventory level for an inventory item removes that item from the specified location.
-             Every inventory item must have at least one inventory level. To move inventory to another location,
-             first connect the inventory item to another location, and then delete the previous inventory level.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `inventory_item_id: i64` -- recurring_application_charge[capped_amount].
-    * * `location_id: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Deletes an inventory level of an inventory item at a location.
+     * Deleting an inventory level for an inventory item removes that item from the specified location.
+     * Every inventory item must have at least one inventory level. To move inventory to another location,
+     * first connect the inventory item to another location, and then delete the previous inventory level.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `inventory_item_id` -- recurring_application_charge[capped_amount]
+     * * `location_id` -- recurring_application_charge[capped_amount]
+     */
     pub async fn delete_levels(
         &self,
         inventory_item_id_required: &str,
@@ -1770,7 +1761,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2020-10/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -1784,7 +1775,7 @@ impl Inventory {
             .await
     }
     /**
-     * Adjusts the inventory level of an inventory item at a single location.
+     * Adjusts the inventory level of an inventory item at a single location
      *
      * This function performs a `POST` to the `/admin/api/2020-10/inventory_levels/adjust.json` endpoint.
      *
@@ -1792,9 +1783,9 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_required: &str` -- The ID of the inventory item.
-     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-     * * `available_adjustment_required: &str` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_adjustment_required` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
      */
     pub async fn create_levels_adjust(
         &self,
@@ -1830,7 +1821,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/inventory_levels/adjust.json?{}", query_),
+            &format!("/admin/api/2020-10/inventory_levels/adjust.json?{query_}"),
             None,
         );
         self.client
@@ -1844,21 +1835,21 @@ impl Inventory {
             .await
     }
     /**
-    * Connects an inventory item to a location by creating an inventory level at that location.
-           When connecting inventory items to locations, it's important to understand the rules around
-           fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/inventory_levels/connect.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID of the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Connects an inventory item to a location by creating an inventory level at that location.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/inventory_levels/connect.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `relocate_if_necessary` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn create_levels_connect(
         &self,
         inventory_item_id_required: &str,
@@ -1891,10 +1882,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-10/inventory_levels/connect.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-10/inventory_levels/connect.json?{query_}"),
             None,
         );
         self.client
@@ -1908,23 +1896,23 @@ impl Inventory {
             .await
     }
     /**
-    * Sets the inventory level for an inventory item at a location.
-             If the specified location is not connected, it will be automatically connected first.
-             When connecting inventory items to locations, it's important to understand the rules around
-             fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/inventory_levels/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `available_required: &str` -- Sets the available inventory quantity.
-    * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Sets the inventory level for an inventory item at a location.
+     * If the specified location is not connected, it will be automatically connected first.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/inventory_levels/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_required` -- Sets the available inventory quantity.
+     * * `disconnect_if_necessary` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn create_levels_set(
         &self,
         inventory_item_id_required: &str,
@@ -1966,7 +1954,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/inventory_levels/set.json?{}", query_),
+            &format!("/admin/api/2020-10/inventory_levels/set.json?{query_}"),
             None,
         );
         self.client
@@ -1980,24 +1968,24 @@ impl Inventory {
             .await
     }
     /**
-    * Retrieves a list of inventory levels.
-             You must include inventory_item_ids, location_ids, or both as filter parameters.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-     *                     (maximum: 50).
-    * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-     *                     (maximum: 50).
-    * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-    * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
-    */
+     * Retrieves a list of inventory levels.
+     * You must include inventory_item_ids, location_ids, or both as filter parameters.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_ids` -- A comma-separated list of inventory item IDs.
+     *   (maximum: 50)
+     * * `location_ids` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
+     *   (maximum: 50)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `updated_at_min` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
+     */
     pub async fn deprecated_202101_get_level(
         &self,
         inventory_item_ids: &str,
@@ -2023,7 +2011,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2021-01/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -2037,22 +2025,22 @@ impl Inventory {
             .await
     }
     /**
-    * Deletes an inventory level of an inventory item at a location.
-             Deleting an inventory level for an inventory item removes that item from the specified location.
-             Every inventory item must have at least one inventory level. To move inventory to another location,
-             first connect the inventory item to another location, and then delete the previous inventory level.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `inventory_item_id: i64` -- recurring_application_charge[capped_amount].
-    * * `location_id: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Deletes an inventory level of an inventory item at a location.
+     * Deleting an inventory level for an inventory item removes that item from the specified location.
+     * Every inventory item must have at least one inventory level. To move inventory to another location,
+     * first connect the inventory item to another location, and then delete the previous inventory level.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `inventory_item_id` -- recurring_application_charge[capped_amount]
+     * * `location_id` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_202101_delete_levels(
         &self,
         inventory_item_id_required: &str,
@@ -2088,7 +2076,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/inventory_levels.json?{}", query_),
+            &format!("/admin/api/2021-01/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -2102,7 +2090,7 @@ impl Inventory {
             .await
     }
     /**
-     * Adjusts the inventory level of an inventory item at a single location.
+     * Adjusts the inventory level of an inventory item at a single location
      *
      * This function performs a `POST` to the `/admin/api/2021-01/inventory_levels/adjust.json` endpoint.
      *
@@ -2110,9 +2098,9 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_required: &str` -- The ID of the inventory item.
-     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-     * * `available_adjustment_required: &str` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_adjustment_required` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
      */
     pub async fn deprecated_202101_create_levels_adjust(
         &self,
@@ -2148,7 +2136,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/inventory_levels/adjust.json?{}", query_),
+            &format!("/admin/api/2021-01/inventory_levels/adjust.json?{query_}"),
             None,
         );
         self.client
@@ -2162,21 +2150,21 @@ impl Inventory {
             .await
     }
     /**
-    * Connects an inventory item to a location by creating an inventory level at that location.
-           When connecting inventory items to locations, it's important to understand the rules around
-           fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/inventory_levels/connect.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID of the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Connects an inventory item to a location by creating an inventory level at that location.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/inventory_levels/connect.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `relocate_if_necessary` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202101_create_levels_connect(
         &self,
         inventory_item_id_required: &str,
@@ -2209,10 +2197,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2021-01/inventory_levels/connect.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2021-01/inventory_levels/connect.json?{query_}"),
             None,
         );
         self.client
@@ -2226,23 +2211,23 @@ impl Inventory {
             .await
     }
     /**
-    * Sets the inventory level for an inventory item at a location.
-             If the specified location is not connected, it will be automatically connected first.
-             When connecting inventory items to locations, it's important to understand the rules around
-             fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/inventory_levels/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `available_required: &str` -- Sets the available inventory quantity.
-    * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Sets the inventory level for an inventory item at a location.
+     * If the specified location is not connected, it will be automatically connected first.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/inventory_levels/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_required` -- Sets the available inventory quantity.
+     * * `disconnect_if_necessary` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_202101_create_levels_set(
         &self,
         inventory_item_id_required: &str,
@@ -2284,7 +2269,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/inventory_levels/set.json?{}", query_),
+            &format!("/admin/api/2021-01/inventory_levels/set.json?{query_}"),
             None,
         );
         self.client
@@ -2298,24 +2283,24 @@ impl Inventory {
             .await
     }
     /**
-    * Retrieves a list of inventory levels.
-             You must include inventory_item_ids, location_ids, or both as filter parameters.
-             Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_ids: &str` -- A comma-separated list of inventory item IDs.
-     *                     (maximum: 50).
-    * * `location_ids: &str` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
-     *                     (maximum: 50).
-    * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-    * * `updated_at_min: &str` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
-    */
+     * Retrieves a list of inventory levels.
+     * You must include inventory_item_ids, location_ids, or both as filter parameters.
+     * Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_ids` -- A comma-separated list of inventory item IDs.
+     *   (maximum: 50)
+     * * `location_ids` -- A comma-separated list of location IDs. To find the ID of a location, use the Location resource.
+     *   (maximum: 50)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `updated_at_min` -- Show inventory levels updated at or after date (format: 2019-03-19T01:21:44-04:00).
+     */
     pub async fn deprecated_unstable_get_level(
         &self,
         inventory_item_ids: &str,
@@ -2341,7 +2326,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/inventory_levels.json?{}", query_),
+            &format!("/admin/api/unstable/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -2355,22 +2340,22 @@ impl Inventory {
             .await
     }
     /**
-    * Deletes an inventory level of an inventory item at a location.
-             Deleting an inventory level for an inventory item removes that item from the specified location.
-             Every inventory item must have at least one inventory level. To move inventory to another location,
-             first connect the inventory item to another location, and then delete the previous inventory level.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/inventory_levels.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `inventory_item_id: i64` -- recurring_application_charge[capped_amount].
-    * * `location_id: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Deletes an inventory level of an inventory item at a location.
+     * Deleting an inventory level for an inventory item removes that item from the specified location.
+     * Every inventory item must have at least one inventory level. To move inventory to another location,
+     * first connect the inventory item to another location, and then delete the previous inventory level.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/inventory_levels.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `inventory_item_id` -- recurring_application_charge[capped_amount]
+     * * `location_id` -- recurring_application_charge[capped_amount]
+     */
     pub async fn deprecated_unstable_delete_levels(
         &self,
         inventory_item_id_required: &str,
@@ -2406,7 +2391,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/inventory_levels.json?{}", query_),
+            &format!("/admin/api/unstable/inventory_levels.json?{query_}"),
             None,
         );
         self.client
@@ -2420,7 +2405,7 @@ impl Inventory {
             .await
     }
     /**
-     * Adjusts the inventory level of an inventory item at a single location.
+     * Adjusts the inventory level of an inventory item at a single location
      *
      * This function performs a `POST` to the `/admin/api/unstable/inventory_levels/adjust.json` endpoint.
      *
@@ -2428,9 +2413,9 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `inventory_item_required: &str` -- The ID of the inventory item.
-     * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-     * * `available_adjustment_required: &str` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_adjustment_required` -- The amount to adjust the available inventory quantity. Send negative values to subtract from the current available quantity. For example, "available_adjustment": 2 increases the current available quantity by 2, and "available_adjustment": -3decreases the current available quantity by 3.
      */
     pub async fn deprecated_unstable_create_levels_adjust(
         &self,
@@ -2466,10 +2451,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/inventory_levels/adjust.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/inventory_levels/adjust.json?{query_}"),
             None,
         );
         self.client
@@ -2483,21 +2465,21 @@ impl Inventory {
             .await
     }
     /**
-    * Connects an inventory item to a location by creating an inventory level at that location.
-           When connecting inventory items to locations, it's important to understand the rules around
-           fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/inventory_levels/connect.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-unstable
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID of the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `relocate_if_necessary: &str` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Connects an inventory item to a location by creating an inventory level at that location.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/inventory_levels/connect.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#connect-unstable
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID of the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `relocate_if_necessary` -- Whether inventory for any previously connected locations will be relocated. This property is ignored when no fulfillment service location is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_unstable_create_levels_connect(
         &self,
         inventory_item_id_required: &str,
@@ -2530,10 +2512,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/inventory_levels/connect.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/inventory_levels/connect.json?{query_}"),
             None,
         );
         self.client
@@ -2547,23 +2526,23 @@ impl Inventory {
             .await
     }
     /**
-    * Sets the inventory level for an inventory item at a location.
-             If the specified location is not connected, it will be automatically connected first.
-             When connecting inventory items to locations, it's important to understand the rules around
-             fulfillment service locations.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/inventory_levels/set.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-unstable
-    *
-    * **Parameters:**
-    *
-    * * `inventory_item_required: &str` -- The ID for the inventory item.
-    * * `location_required: &str` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
-    * * `available_required: &str` -- Sets the available inventory quantity.
-    * * `disconnect_if_necessary: &str` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
-     *                     (default: false).
-    */
+     * Sets the inventory level for an inventory item at a location.
+     * If the specified location is not connected, it will be automatically connected first.
+     * When connecting inventory items to locations, it's important to understand the rules around
+     * fulfillment service locations.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/inventory_levels/set.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/inventory/inventorylevel#set-unstable
+     *
+     * **Parameters:**
+     *
+     * * `inventory_item_required` -- The ID for the inventory item.
+     * * `location_required` -- The ID of the location that the inventory level belongs to. To find the ID of the location, use the Location resource.
+     * * `available_required` -- Sets the available inventory quantity.
+     * * `disconnect_if_necessary` -- Whether inventory for any previously connected locations will be set to 0 and the locations disconnected. This property is ignored when no fulfillment service  is involved. For more information, see Inventory levels and fulfillment service locations.
+     *   (default: false)
+     */
     pub async fn deprecated_unstable_create_levels_set(
         &self,
         inventory_item_id_required: &str,
@@ -2605,7 +2584,7 @@ impl Inventory {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/inventory_levels/set.json?{}", query_),
+            &format!("/admin/api/unstable/inventory_levels/set.json?{query_}"),
             None,
         );
         self.client
@@ -2619,7 +2598,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a list of locations.
+     * Retrieves a list of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-01/locations.json` endpoint.
      *
@@ -2638,7 +2617,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single location by its ID.
+     * Retrieves a single location by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-01/locations/{location_id}.json` endpoint.
      *
@@ -2646,7 +2625,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_locations_param_location(
         &self,
@@ -2670,7 +2649,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a count of locations.
+     * Retrieves a count of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-01/locations/count.json` endpoint.
      *
@@ -2699,7 +2678,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_locations_param_location_level(
         &self,
@@ -2723,7 +2702,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a list of locations.
+     * Retrieves a list of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-04/locations.json` endpoint.
      *
@@ -2742,7 +2721,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single location by its ID.
+     * Retrieves a single location by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-04/locations/{location_id}.json` endpoint.
      *
@@ -2750,7 +2729,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_locations_param_location(
         &self,
@@ -2774,7 +2753,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a count of locations.
+     * Retrieves a count of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-04/locations/count.json` endpoint.
      *
@@ -2803,7 +2782,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_locations_param_location_level(
         &self,
@@ -2827,7 +2806,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a list of locations.
+     * Retrieves a list of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-07/locations.json` endpoint.
      *
@@ -2846,7 +2825,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single location by its ID.
+     * Retrieves a single location by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-07/locations/{location_id}.json` endpoint.
      *
@@ -2854,7 +2833,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_locations_param_location(
         &self,
@@ -2878,7 +2857,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a count of locations.
+     * Retrieves a count of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-07/locations/count.json` endpoint.
      *
@@ -2907,7 +2886,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_locations_param_location_level(
         &self,
@@ -2931,7 +2910,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a list of locations.
+     * Retrieves a list of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-10/locations.json` endpoint.
      *
@@ -2950,7 +2929,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single location by its ID.
+     * Retrieves a single location by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-10/locations/{location_id}.json` endpoint.
      *
@@ -2958,7 +2937,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn get_locations_param_location(
         &self,
@@ -2982,7 +2961,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a count of locations.
+     * Retrieves a count of locations
      *
      * This function performs a `GET` to the `/admin/api/2020-10/locations/count.json` endpoint.
      *
@@ -3011,7 +2990,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn get_locations_param_location_level(
         &self,
@@ -3035,7 +3014,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a list of locations.
+     * Retrieves a list of locations
      *
      * This function performs a `GET` to the `/admin/api/2021-01/locations.json` endpoint.
      *
@@ -3054,7 +3033,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single location by its ID.
+     * Retrieves a single location by its ID
      *
      * This function performs a `GET` to the `/admin/api/2021-01/locations/{location_id}.json` endpoint.
      *
@@ -3062,7 +3041,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_locations_param_location(
         &self,
@@ -3086,7 +3065,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a count of locations.
+     * Retrieves a count of locations
      *
      * This function performs a `GET` to the `/admin/api/2021-01/locations/count.json` endpoint.
      *
@@ -3115,7 +3094,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_locations_param_location_level(
         &self,
@@ -3139,7 +3118,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a list of locations.
+     * Retrieves a list of locations
      *
      * This function performs a `GET` to the `/admin/api/unstable/locations.json` endpoint.
      *
@@ -3158,7 +3137,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a single location by its ID.
+     * Retrieves a single location by its ID
      *
      * This function performs a `GET` to the `/admin/api/unstable/locations/{location_id}.json` endpoint.
      *
@@ -3166,7 +3145,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_locations_param_location(
         &self,
@@ -3190,7 +3169,7 @@ impl Inventory {
             .await
     }
     /**
-     * Retrieves a count of locations.
+     * Retrieves a count of locations
      *
      * This function performs a `GET` to the `/admin/api/unstable/locations/count.json` endpoint.
      *
@@ -3221,7 +3200,7 @@ impl Inventory {
      *
      * **Parameters:**
      *
-     * * `location_id: &str` -- storefront_access_token_id.
+     * * `location_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_locations_param_location_level(
         &self,

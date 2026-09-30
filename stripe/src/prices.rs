@@ -18,28 +18,21 @@ impl Prices {
      *
      * **Parameters:**
      *
-     * * `active: bool` -- Only return prices that are active or inactive (e.g., pass `false` to list all inactive prices).
-     * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
-     * * `currency: &str` -- Only return prices for the given currency.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `lookup_keys: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `product: &str` -- Only return prices for the given product.
-     * * `recurring: &str` -- Only return prices with these recurring fields.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `type_: crate::types::PriceType` -- One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
+     * * `active` -- Only return prices that are active or inactive (e.g., pass `false` to list all inactive prices).
+     * * `currency` -- Only return prices for the given currency.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `product` -- Only return prices for the given product.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `type_` -- One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
      */
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
-        lookup_keys: &[String],
         product: &str,
-        recurring: &str,
         starting_after: &str,
         type_: crate::types::PriceType,
     ) -> ClientResult<crate::Response<Vec<crate::types::PriceData>>> {
@@ -66,7 +59,7 @@ impl Prices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/prices?{}", query_), None);
+        let url = self.client.url(&format!("/v1/prices?{query_}"), None);
         let resp: crate::Response<crate::types::PriceList> = self
             .client
             .get(
@@ -95,11 +88,8 @@ impl Prices {
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
         currency: &str,
-        lookup_keys: &[String],
         product: &str,
-        recurring: &str,
         type_: crate::types::PriceType,
     ) -> ClientResult<crate::Response<Vec<crate::types::PriceData>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -116,7 +106,7 @@ impl Prices {
             query_args.push(("type".to_string(), type_.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/prices?{}", query_), None);
+        let url = self.client.url(&format!("/v1/prices?{query_}"), None);
         let crate::Response::<crate::types::PriceList> {
             mut status,
             mut headers,
@@ -156,7 +146,7 @@ impl Prices {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -171,7 +161,7 @@ impl Prices {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -215,10 +205,9 @@ impl Prices {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `page: &str` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
-     * * `query: &str` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for prices](https://stripe.com/docs/search#query-fields-for-prices).
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `page` -- A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
+     * * `query` -- The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for prices](https://stripe.com/docs/search#query-fields-for-prices).
      */
     pub async fn get_search(
         &self,
@@ -239,7 +228,7 @@ impl Prices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/prices/search?{}", query_), None);
+            .url(&format!("/v1/prices/search?{query_}"), None);
         let resp: crate::Response<crate::types::SearchResult> = self
             .client
             .get(
@@ -279,7 +268,7 @@ impl Prices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/prices/search?{}", query_), None);
+            .url(&format!("/v1/prices/search?{query_}"), None);
         let crate::Response::<crate::types::SearchResult> {
             mut status,
             mut headers,
@@ -319,7 +308,7 @@ impl Prices {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -334,7 +323,7 @@ impl Prices {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -358,8 +347,7 @@ impl Prices {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `price: &str` -- The account's country.
+     * * `price` -- The account's country.
      */
     pub async fn get(&self, price: &str) -> ClientResult<crate::Response<crate::types::PriceData>> {
         let url = self.client.url(
@@ -386,7 +374,7 @@ impl Prices {
      *
      * **Parameters:**
      *
-     * * `price: &str` -- The account's country.
+     * * `price` -- The account's country.
      */
     pub async fn post_prices(
         &self,

@@ -18,13 +18,13 @@ impl Mobiledevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `max_results: i64` -- Maximum number of results to return. Max allowed value is 100.
-     * * `order_by: crate::types::DirectoryMobiledevicesListOrderBy` -- Device property to use for sorting results.
-     * * `page_token: &str` -- Token to specify next page in the list.
-     * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
-     * * `query: &str` -- Search string in the format given at https://developers.google.com/admin-sdk/directory/v1/search-operators.
-     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `max_results` -- Maximum number of results to return. Max allowed value is 100.
+     * * `order_by` -- Device property to use for sorting results.
+     * * `page_token` -- Token to specify next page in the list
+     * * `projection` -- Restrict information returned to a set of selected fields.
+     * * `query` -- Search string in the format given at https://developers.google.com/admin-sdk/directory/v1/search-operators
+     * * `sort_order` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
      */
     pub async fn list(
         &self,
@@ -147,7 +147,7 @@ impl Mobiledevices {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -162,7 +162,7 @@ impl Mobiledevices {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -190,9 +190,9 @@ impl Mobiledevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
-     * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `resource_id` -- The unique ID the API service uses to identify the mobile device.
+     * * `projection` -- Restrict information returned to a set of selected fields.
      */
     pub async fn get(
         &self,
@@ -231,8 +231,8 @@ impl Mobiledevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `resource_id` -- The unique ID the API service uses to identify the mobile device.
      */
     pub async fn delete(
         &self,
@@ -264,8 +264,8 @@ impl Mobiledevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `resource_id` -- The unique ID the API service uses to identify the mobile device.
      */
     pub async fn action(
         &self,

@@ -12,7 +12,7 @@ impl EmailCnameRecords {
     }
 
     /**
-     * Email DNS records to a co-worker.
+     * Email DNS records to a co-worker
      *
      * This function performs a `POST` to the `/whitelabel/dns/email` endpoint.
      *

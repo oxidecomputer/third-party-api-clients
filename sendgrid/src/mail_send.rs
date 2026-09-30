@@ -12,7 +12,7 @@ impl MailSend {
     }
 
     /**
-     * v3 Mail Send.
+     * v3 Mail Send
      *
      * This function performs a `POST` to the `/mail/send` endpoint.
      *
@@ -48,7 +48,7 @@ impl MailSend {
      * For more information about Dynamic Transactional Templates and Handlebars, see our documentation and reference pages.
      *
      * * [How to send an email with Dynamic Transactional Templates
-     * ](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)
+     *   ](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)
      * * [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/)
      *
      * ## Mail body compression
@@ -57,11 +57,11 @@ impl MailSend {
      *
      * To use mail body compression:
      *
-     * 1. Add a `Content-Encoding` header, with a value of `gzip`.  
+     * 1. Add a `Content-Encoding` header, with a value of `gzip`.
      *    a. `Content-Encoding: gzip`
-     * 2. Send the gzip as a data-binary.  
+     * 2. Send the gzip as a data-binary.
      *    a. `--data-binary '@data.json.gz'
-     * `
+     *    `
      */
     pub async fn post(
         &self,

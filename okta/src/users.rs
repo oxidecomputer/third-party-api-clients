@@ -12,7 +12,7 @@ impl Users {
     }
 
     /**
-     * List Users.
+     * List Users
      *
      * This function performs a `GET` to the `/api/v1/users` endpoint.
      *
@@ -20,13 +20,13 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `q: &str` -- Finds a user that matches firstName, lastName, and email properties.
-     * * `after: &str` -- Specifies the pagination cursor for the next page of users.
-     * * `limit: i64` -- Specifies the number of results returned.
-     * * `filter: &str` -- Filters users with a supported expression for a subset of properties.
-     * * `search: &str` -- Searches for users with a supported filtering  expression for most properties.
-     * * `sort_by: &str`
-     * * `sort_order: &str`
+     * * `q` -- Finds a user that matches firstName, lastName, and email properties
+     * * `after` -- Specifies the pagination cursor for the next page of users
+     * * `limit` -- Specifies the number of results returned
+     * * `filter` -- Filters users with a supported expression for a subset of properties
+     * * `search` -- Searches for users with a supported filtering  expression for most properties
+     * * `sort_by`
+     * * `sort_order`
      */
     pub async fn list(
         &self,
@@ -61,7 +61,7 @@ impl Users {
             query_args.push(("sortOrder".to_string(), sort_order.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/users?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/users?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -73,7 +73,7 @@ impl Users {
             .await
     }
     /**
-     * List Users.
+     * List Users
      *
      * This function performs a `GET` to the `/api/v1/users` endpoint.
      *
@@ -106,7 +106,7 @@ impl Users {
             query_args.push(("sortOrder".to_string(), sort_order.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/users?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/users?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -118,7 +118,7 @@ impl Users {
             .await
     }
     /**
-     * Create User.
+     * Create User
      *
      * This function performs a `POST` to the `/api/v1/users` endpoint.
      *
@@ -126,9 +126,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `activate: bool` -- Executes activation lifecycle operation when creating the user.
-     * * `provider: bool` -- Indicates whether to create a user with a specified authentication provider.
-     * * `next_login: &str` -- With activate=true, set nextLogin to "changePassword" to have the password be EXPIRED, so user must change it the next time they log in.
+     * * `activate` -- Executes activation lifecycle operation when creating the user
+     * * `provider` -- Indicates whether to create a user with a specified authentication provider
+     * * `next_login` -- With activate=true, set nextLogin to "changePassword" to have the password be EXPIRED, so user must change it the next time they log in.
      */
     pub async fn create(
         &self,
@@ -148,7 +148,7 @@ impl Users {
             query_args.push(("provider".to_string(), provider.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api/v1/users?{}", query_), None);
+        let url = self.client.url(&format!("/api/v1/users?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -164,9 +164,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `associated_user_id: &str`
-     * * `primary_relationship_name: &str`
-     * * `primary_user_id: &str`
+     * * `associated_user_id`
+     * * `primary_relationship_name`
+     * * `primary_user_id`
      */
     pub async fn set_linked_object_for(
         &self,
@@ -194,7 +194,7 @@ impl Users {
             .await
     }
     /**
-     * Get User.
+     * Get User
      *
      * This function performs a `GET` to the `/api/v1/users/{userId}` endpoint.
      *
@@ -202,7 +202,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn get(&self, user_id: &str) -> ClientResult<crate::Response<crate::types::User>> {
         let url = self.client.url(
@@ -223,7 +223,7 @@ impl Users {
             .await
     }
     /**
-     * Update User.
+     * Update User
      *
      * This function performs a `PUT` to the `/api/v1/users/{userId}` endpoint.
      *
@@ -231,8 +231,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `strict: bool`
+     * * `user_id`
+     * * `strict`
      */
     pub async fn update(
         &self,
@@ -270,8 +270,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `strict: bool`
+     * * `user_id`
+     * * `strict`
      */
     pub async fn partial_update(
         &self,
@@ -303,7 +303,7 @@ impl Users {
             .await
     }
     /**
-     * Delete User.
+     * Delete User
      *
      * This function performs a `DELETE` to the `/api/v1/users/{userId}` endpoint.
      *
@@ -311,8 +311,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `send_email: bool`
+     * * `user_id`
+     * * `send_email`
      */
     pub async fn deactivate_or_delete(
         &self,
@@ -343,7 +343,7 @@ impl Users {
             .await
     }
     /**
-     * Get Assigned App Links.
+     * Get Assigned App Links
      *
      * This function performs a `GET` to the `/api/v1/users/{userId}/appLinks` endpoint.
      *
@@ -351,7 +351,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn list_app_links(
         &self,
@@ -375,7 +375,7 @@ impl Users {
             .await
     }
     /**
-     * Get Assigned App Links.
+     * Get Assigned App Links
      *
      * This function performs a `GET` to the `/api/v1/users/{userId}/appLinks` endpoint.
      *
@@ -411,7 +411,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn list_clients(
         &self,
@@ -469,11 +469,11 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `client_id: &str`
-     * * `expand: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `user_id`
+     * * `client_id`
+     * * `expand`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_grants_for_and_clients(
         &self,
@@ -557,8 +557,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `client_id: &str`
+     * * `user_id`
+     * * `client_id`
      */
     pub async fn revoke_grants_for_and_client(
         &self,
@@ -590,11 +590,11 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `client_id: &str`
-     * * `expand: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `user_id`
+     * * `client_id`
+     * * `expand`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_refresh_tokens_for_and_clients(
         &self,
@@ -678,8 +678,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `client_id: &str`
+     * * `user_id`
+     * * `client_id`
      */
     pub async fn revoke_tokens_for_and_client(
         &self,
@@ -711,12 +711,12 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `client_id: &str`
-     * * `token_id: &str`
-     * * `expand: &str`
-     * * `limit: i64`
-     * * `after: &str`
+     * * `user_id`
+     * * `client_id`
+     * * `token_id`
+     * * `expand`
+     * * `limit`
+     * * `after`
      */
     pub async fn get_refresh_token_for_and_client(
         &self,
@@ -765,9 +765,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `client_id: &str`
-     * * `token_id: &str`
+     * * `user_id`
+     * * `client_id`
+     * * `token_id`
      */
     pub async fn revoke_token_for_and_client(
         &self,
@@ -795,7 +795,7 @@ impl Users {
             .await
     }
     /**
-     * Change Password.
+     * Change Password
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/credentials/change_password` endpoint.
      *
@@ -803,8 +803,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `strict: bool`
+     * * `user_id`
+     * * `strict`
      */
     pub async fn change_password(
         &self,
@@ -836,7 +836,7 @@ impl Users {
             .await
     }
     /**
-     * Change Recovery Question.
+     * Change Recovery Question
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/credentials/change_recovery_question` endpoint.
      *
@@ -844,7 +844,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn change_recovery_question(
         &self,
@@ -869,13 +869,13 @@ impl Users {
             .await
     }
     /**
-     * Forgot Password.
+     * Forgot Password
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/credentials/forgot_password` endpoint.
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn post_credentials_forgot_password(
         &self,
@@ -905,11 +905,11 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `scope_id: &str`
-     * * `expand: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `user_id`
+     * * `scope_id`
+     * * `expand`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_grants(
         &self,
@@ -997,7 +997,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn revoke_grants(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1024,9 +1024,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `grant_id: &str`
-     * * `expand: &str`
+     * * `user_id`
+     * * `grant_id`
+     * * `expand`
      */
     pub async fn get_grant(
         &self,
@@ -1065,8 +1065,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `grant_id: &str`
+     * * `user_id`
+     * * `grant_id`
      */
     pub async fn revoke_grant(
         &self,
@@ -1092,7 +1092,7 @@ impl Users {
             .await
     }
     /**
-     * Get Member Groups.
+     * Get Member Groups
      *
      * This function performs a `GET` to the `/api/v1/users/{userId}/groups` endpoint.
      *
@@ -1100,7 +1100,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn list_groups(
         &self,
@@ -1124,7 +1124,7 @@ impl Users {
             .await
     }
     /**
-     * Get Member Groups.
+     * Get Member Groups
      *
      * This function performs a `GET` to the `/api/v1/users/{userId}/groups` endpoint.
      *
@@ -1154,7 +1154,7 @@ impl Users {
             .await
     }
     /**
-     * Listing IdPs associated with a user.
+     * Listing IdPs associated with a user
      *
      * This function performs a `GET` to the `/api/v1/users/{userId}/idps` endpoint.
      *
@@ -1162,7 +1162,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn list_identity_providers(
         &self,
@@ -1186,7 +1186,7 @@ impl Users {
             .await
     }
     /**
-     * Listing IdPs associated with a user.
+     * Listing IdPs associated with a user
      *
      * This function performs a `GET` to the `/api/v1/users/{userId}/idps` endpoint.
      *
@@ -1216,7 +1216,7 @@ impl Users {
             .await
     }
     /**
-     * Activate User.
+     * Activate User
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/activate` endpoint.
      *
@@ -1224,8 +1224,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `send_email: bool` -- Sends an activation email to the user if true.
+     * * `user_id`
+     * * `send_email` -- Sends an activation email to the user if true
      */
     pub async fn activate(
         &self,
@@ -1256,7 +1256,7 @@ impl Users {
             .await
     }
     /**
-     * Deactivate User.
+     * Deactivate User
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/deactivate` endpoint.
      *
@@ -1264,8 +1264,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `send_email: bool`
+     * * `user_id`
+     * * `send_email`
      */
     pub async fn deactivate(
         &self,
@@ -1296,7 +1296,7 @@ impl Users {
             .await
     }
     /**
-     * Expire Password.
+     * Expire Password
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/expire_password?tempPassword=false` endpoint.
      *
@@ -1304,7 +1304,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn expire_password(
         &self,
@@ -1328,7 +1328,7 @@ impl Users {
             .await
     }
     /**
-     * Expire Password.
+     * Expire Password
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/expire_password?tempPassword=true` endpoint.
      *
@@ -1336,7 +1336,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn expire_password_and_get_temporary(
         &self,
@@ -1360,7 +1360,7 @@ impl Users {
             .await
     }
     /**
-     * Reactivate User.
+     * Reactivate User
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/reactivate` endpoint.
      *
@@ -1368,8 +1368,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `send_email: bool` -- Sends an activation email to the user if true.
+     * * `user_id`
+     * * `send_email` -- Sends an activation email to the user if true
      */
     pub async fn reactivate(
         &self,
@@ -1400,7 +1400,7 @@ impl Users {
             .await
     }
     /**
-     * Reset Factors.
+     * Reset Factors
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/reset_factors` endpoint.
      *
@@ -1408,7 +1408,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn reset_factors(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1429,7 +1429,7 @@ impl Users {
             .await
     }
     /**
-     * Reset Password.
+     * Reset Password
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/reset_password` endpoint.
      *
@@ -1437,8 +1437,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `send_email: bool`
+     * * `user_id`
+     * * `send_email`
      */
     pub async fn reset_password(
         &self,
@@ -1469,7 +1469,7 @@ impl Users {
             .await
     }
     /**
-     * Suspend User.
+     * Suspend User
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/suspend` endpoint.
      *
@@ -1477,7 +1477,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn suspend(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1498,7 +1498,7 @@ impl Users {
             .await
     }
     /**
-     * Unlock User.
+     * Unlock User
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/unlock` endpoint.
      *
@@ -1506,7 +1506,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn unlock(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1527,7 +1527,7 @@ impl Users {
             .await
     }
     /**
-     * Unsuspend User.
+     * Unsuspend User
      *
      * This function performs a `POST` to the `/api/v1/users/{userId}/lifecycle/unsuspend` endpoint.
      *
@@ -1535,7 +1535,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
+     * * `user_id`
      */
     pub async fn unsuspend(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1562,10 +1562,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `relationship_name: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `user_id`
+     * * `relationship_name`
+     * * `after`
+     * * `limit`
      */
     pub async fn get_linked_objects_fors(
         &self,
@@ -1638,8 +1638,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `relationship_name: &str`
+     * * `user_id`
+     * * `relationship_name`
      */
     pub async fn remove_linked_object_for(
         &self,
@@ -1671,8 +1671,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `expand: &str`
+     * * `user_id`
+     * * `expand`
      */
     pub async fn list_assigned_roles_fors(
         &self,
@@ -1744,8 +1744,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `disable_notifications: &str`
+     * * `user_id`
+     * * `disable_notifications`
      */
     pub async fn assign_role(
         &self,
@@ -1786,8 +1786,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
+     * * `user_id`
+     * * `role_id`
      */
     pub async fn remove_role_from(
         &self,
@@ -1819,10 +1819,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `user_id`
+     * * `role_id`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_application_targets_for_administrator_roles(
         &self,
@@ -1895,8 +1895,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
+     * * `user_id`
+     * * `role_id`
      */
     pub async fn add_all_apps_as_target_role(
         &self,
@@ -1928,9 +1928,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
+     * * `user_id`
+     * * `role_id`
+     * * `app_name`
      */
     pub async fn add_application_target_admin_role_for(
         &self,
@@ -1964,9 +1964,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
+     * * `user_id`
+     * * `role_id`
+     * * `app_name`
      */
     pub async fn remove_application_target_from_administrator_role_for(
         &self,
@@ -1994,7 +1994,7 @@ impl Users {
             .await
     }
     /**
-     * Add App Instance Target to App Administrator Role given to a User.
+     * Add App Instance Target to App Administrator Role given to a User
      *
      * This function performs a `PUT` to the `/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}` endpoint.
      *
@@ -2002,10 +2002,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
-     * * `application_id: &str`
+     * * `user_id`
+     * * `role_id`
+     * * `app_name`
+     * * `application_id`
      */
     pub async fn add_application_target_app_admin_role_for(
         &self,
@@ -2035,7 +2035,7 @@ impl Users {
             .await
     }
     /**
-     * Remove App Instance Target to App Administrator Role given to a User.
+     * Remove App Instance Target to App Administrator Role given to a User
      *
      * This function performs a `DELETE` to the `/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}` endpoint.
      *
@@ -2043,10 +2043,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `app_name: &str`
-     * * `application_id: &str`
+     * * `user_id`
+     * * `role_id`
+     * * `app_name`
+     * * `application_id`
      */
     pub async fn remove_application_target_from_administrator_role_for_users(
         &self,
@@ -2082,10 +2082,10 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `after: &str`
-     * * `limit: i64`
+     * * `user_id`
+     * * `role_id`
+     * * `after`
+     * * `limit`
      */
     pub async fn list_group_targets_for_roles(
         &self,
@@ -2158,9 +2158,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `group_id: &str`
+     * * `user_id`
+     * * `role_id`
+     * * `group_id`
      */
     pub async fn add_group_target_role(
         &self,
@@ -2194,9 +2194,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `role_id: &str`
-     * * `group_id: &str`
+     * * `user_id`
+     * * `role_id`
+     * * `group_id`
      */
     pub async fn remove_group_target_from_role(
         &self,
@@ -2230,8 +2230,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str`
-     * * `oauth_tokens: bool` -- Revoke issued OpenID Connect and OAuth refresh and access tokens.
+     * * `user_id`
+     * * `oauth_tokens` -- Revoke issued OpenID Connect and OAuth refresh and access tokens
      */
     pub async fn clear_sessions(
         &self,

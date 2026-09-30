@@ -12,7 +12,7 @@ impl Workspaces {
     }
 
     /**
-     * List Workspaces.
+     * List Workspaces
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/workspaces` endpoint.
      *
@@ -20,7 +20,7 @@ impl Workspaces {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -44,7 +44,7 @@ impl Workspaces {
             .await
     }
     /**
-     * Create a Workspace.
+     * Create a Workspace
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/workspaces` endpoint.
      *
@@ -52,7 +52,7 @@ impl Workspaces {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -77,7 +77,7 @@ impl Workspaces {
             .await
     }
     /**
-     * Get Workspace.
+     * Get Workspace
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/workspaces/{workspaceId}` endpoint.
      *
@@ -85,8 +85,8 @@ impl Workspaces {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get_workspaces(
         &self,
@@ -112,7 +112,7 @@ impl Workspaces {
             .await
     }
     /**
-     * Update Workspace.
+     * Update Workspace
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/workspaces/{workspaceId}` endpoint.
      *
@@ -120,8 +120,8 @@ impl Workspaces {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -148,7 +148,7 @@ impl Workspaces {
             .await
     }
     /**
-     * Delete Workspace.
+     * Delete Workspace
      *
      * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/workspaces/{workspaceId}` endpoint.
      *
@@ -156,8 +156,8 @@ impl Workspaces {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `workspace_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(
         &self,

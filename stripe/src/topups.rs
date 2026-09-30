@@ -18,18 +18,13 @@ impl Topups {
      *
      * **Parameters:**
      *
-     * * `amount: &str` -- A positive integer representing how much to transfer.
-     * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::GetTopupsStatus` -- Only return top-ups that have the given status. One of `canceled`, `failed`, `pending` or `succeeded`.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- Only return top-ups that have the given status. One of `canceled`, `failed`, `pending` or `succeeded`.
      */
     pub async fn get_page(
         &self,
-        amount: &str,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -49,7 +44,7 @@ impl Topups {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/topups?{}", query_), None);
+        let url = self.client.url(&format!("/v1/topups?{query_}"), None);
         let resp: crate::Response<crate::types::TopupList> = self
             .client
             .get(
@@ -77,8 +72,6 @@ impl Topups {
      */
     pub async fn get_all(
         &self,
-        amount: &str,
-        created: &str,
         status: crate::types::GetTopupsStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::Topup>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -86,7 +79,7 @@ impl Topups {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/topups?{}", query_), None);
+        let url = self.client.url(&format!("/v1/topups?{query_}"), None);
         let crate::Response::<crate::types::TopupList> {
             mut status,
             mut headers,
@@ -126,7 +119,7 @@ impl Topups {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -141,7 +134,7 @@ impl Topups {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -182,8 +175,7 @@ impl Topups {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `topup: &str` -- The account's country.
+     * * `topup` -- The account's country.
      */
     pub async fn get(&self, topup: &str) -> ClientResult<crate::Response<crate::types::Topup>> {
         let url = self.client.url(
@@ -210,7 +202,7 @@ impl Topups {
      *
      * **Parameters:**
      *
-     * * `topup: &str` -- The account's country.
+     * * `topup` -- The account's country.
      */
     pub async fn post_topups(
         &self,
@@ -240,7 +232,7 @@ impl Topups {
      *
      * **Parameters:**
      *
-     * * `topup: &str` -- The account's country.
+     * * `topup` -- The account's country.
      */
     pub async fn post_cancel(
         &self,

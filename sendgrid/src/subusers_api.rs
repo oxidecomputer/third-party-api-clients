@@ -12,7 +12,7 @@ impl SubusersApi {
     }
 
     /**
-     * List all Subusers.
+     * List all Subusers
      *
      * This function performs a `GET` to the `/subusers` endpoint.
      *
@@ -22,9 +22,9 @@ impl SubusersApi {
      *
      * **Parameters:**
      *
-     * * `username: &str` -- The license key provided with your New Relic account.
-     * * `limit: i64` -- The number of results you would like to get in each request.
-     * * `offset: i64` -- The number of subusers to skip.
+     * * `username` -- The license key provided with your New Relic account.
+     * * `limit` -- The number of results you would like to get in each request.
+     * * `offset` -- The number of subusers to skip.
      */
     pub async fn get_subusers(
         &self,
@@ -43,7 +43,7 @@ impl SubusersApi {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/subusers?{}", query_), None);
+        let url = self.client.url(&format!("/subusers?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -55,7 +55,7 @@ impl SubusersApi {
             .await
     }
     /**
-     * List all Subusers.
+     * List all Subusers
      *
      * This function performs a `GET` to the `/subusers` endpoint.
      *
@@ -78,7 +78,7 @@ impl SubusersApi {
             query_args.push(("username".to_string(), username.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/subusers?{}", query_), None);
+        let url = self.client.url(&format!("/subusers?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -90,7 +90,7 @@ impl SubusersApi {
             .await
     }
     /**
-     * Create Subuser.
+     * Create Subuser
      *
      * This function performs a `POST` to the `/subusers` endpoint.
      *
@@ -112,7 +112,7 @@ impl SubusersApi {
             .await
     }
     /**
-     * Delete a subuser.
+     * Delete a subuser
      *
      * This function performs a `DELETE` to the `/subusers/{subuser_name}` endpoint.
      *
@@ -142,7 +142,7 @@ impl SubusersApi {
             .await
     }
     /**
-     * Enable/disable a subuser.
+     * Enable/disable a subuser
      *
      * This function performs a `PATCH` to the `/subusers/{subuser_name}` endpoint.
      *
@@ -171,7 +171,7 @@ impl SubusersApi {
             .await
     }
     /**
-     * Retrieve Subuser Reputations.
+     * Retrieve Subuser Reputations
      *
      * This function performs a `GET` to the `/subusers/reputations` endpoint.
      *
@@ -181,7 +181,7 @@ impl SubusersApi {
      *
      * **Parameters:**
      *
-     * * `usernames: &str` -- The license key provided with your New Relic account.
+     * * `usernames` -- The license key provided with your New Relic account.
      */
     pub async fn get_subusers_reputations(
         &self,
@@ -194,7 +194,7 @@ impl SubusersApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/subusers/reputations?{}", query_), None);
+            .url(&format!("/subusers/reputations?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -206,7 +206,7 @@ impl SubusersApi {
             .await
     }
     /**
-     * Retrieve Subuser Reputations.
+     * Retrieve Subuser Reputations
      *
      * This function performs a `GET` to the `/subusers/reputations` endpoint.
      *
@@ -227,7 +227,7 @@ impl SubusersApi {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/subusers/reputations?{}", query_), None);
+            .url(&format!("/subusers/reputations?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -239,7 +239,7 @@ impl SubusersApi {
             .await
     }
     /**
-     * Update IPs assigned to a subuser.
+     * Update IPs assigned to a subuser
      *
      * This function performs a `PUT` to the `/subusers/{subuser_name}/ips` endpoint.
      *

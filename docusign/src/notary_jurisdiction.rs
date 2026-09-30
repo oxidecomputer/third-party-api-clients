@@ -69,13 +69,12 @@ impl NotaryJurisdiction {
      * - The current user must be a notary.
      * - The `jurisdictionId` must be a jurisdiction that the notary is registered for.
      *
-     *
      * **Parameters:**
      *
-     * * `jurisdiction_id: &str` -- The ID of the jurisdiction.
+     * * `jurisdiction_id` -- The ID of the jurisdiction.
      *   The following jurisdictions
      *   are supported:
-     *   
+     *
      *   -  `5 - California`
      *   -  `6 - Colorado`
      *   -  `9 - Florida`
@@ -100,7 +99,6 @@ impl NotaryJurisdiction {
      *   -  `48 - West Virginia`
      *   -  `49 - Wisconsin`
      *   -  `62 - Florida Commissioner of Deeds`
-     *   .
      */
     pub async fn s_get_jurisdiction(
         &self,
@@ -187,13 +185,12 @@ impl NotaryJurisdiction {
      * }
      * ```
      *
-     *
      * **Parameters:**
      *
-     * * `jurisdiction_id: &str` -- The ID of the jurisdiction.
+     * * `jurisdiction_id` -- The ID of the jurisdiction.
      *   The following jurisdictions
      *   are supported:
-     *   
+     *
      *   -  `5 - California`
      *   -  `6 - Colorado`
      *   -  `9 - Florida`
@@ -218,7 +215,6 @@ impl NotaryJurisdiction {
      *   -  `48 - West Virginia`
      *   -  `49 - Wisconsin`
      *   -  `62 - Florida Commissioner of Deeds`
-     *   .
      */
     pub async fn s_put_jurisdiction(
         &self,
@@ -251,10 +247,10 @@ impl NotaryJurisdiction {
      *
      * **Parameters:**
      *
-     * * `jurisdiction_id: &str` -- The ID of the jurisdiction.
+     * * `jurisdiction_id` -- The ID of the jurisdiction.
      *   The following jurisdictions
      *   are supported:
-     *   
+     *
      *   -  `5 - California`
      *   -  `6 - Colorado`
      *   -  `9 - Florida`
@@ -279,7 +275,6 @@ impl NotaryJurisdiction {
      *   -  `48 - West Virginia`
      *   -  `49 - Wisconsin`
      *   -  `62 - Florida Commissioner of Deeds`
-     *   .
      */
     pub async fn s_delete_jurisdiction(
         &self,

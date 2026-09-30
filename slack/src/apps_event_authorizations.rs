@@ -20,10 +20,10 @@ impl AppsEventAuthorizations {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `authorizations:read`.
-     * * `event_context: &str`
-     * * `cursor: &str`
-     * * `limit: i64`
+     * * `token` -- Authentication token. Requires scope: `authorizations:read`
+     * * `event_context`
+     * * `cursor`
+     * * `limit`
      */
     pub async fn list(
         &self,
@@ -44,7 +44,7 @@ impl AppsEventAuthorizations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/apps.event.authorizations.list?{}", query_), None);
+            .url(&format!("/apps.event.authorizations.list?{query_}"), None);
         self.client
             .get(
                 &url,

@@ -31,7 +31,7 @@ impl Access {
             .await
     }
     /**
-     * Retrieves a list of storefront access tokens that have been issued.
+     * Retrieves a list of storefront access tokens that have been issued
      *
      * This function performs a `GET` to the `/admin/api/2020-01/storefront_access_tokens.json` endpoint.
      *
@@ -54,7 +54,7 @@ impl Access {
             .await
     }
     /**
-     * Creates a new storefront access token.
+     * Creates a new storefront access token
      *
      * This function performs a `POST` to the `/admin/api/2020-01/storefront_access_tokens.json` endpoint.
      *
@@ -78,7 +78,7 @@ impl Access {
             .await
     }
     /**
-     * Deletes an existing storefront access token.
+     * Deletes an existing storefront access token
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/storefront_access_tokens/{storefront_access_token_id}.json` endpoint.
      *
@@ -86,7 +86,7 @@ impl Access {
      *
      * **Parameters:**
      *
-     * * `storefront_access_token_id: &str` -- storefront_access_token_id.
+     * * `storefront_access_token_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_storefront_tokens_param_token(
         &self,
@@ -110,7 +110,7 @@ impl Access {
             .await
     }
     /**
-     * Retrieves a list of storefront access tokens that have been issued.
+     * Retrieves a list of storefront access tokens that have been issued
      *
      * This function performs a `GET` to the `/admin/api/2020-04/storefront_access_tokens.json` endpoint.
      *
@@ -133,7 +133,7 @@ impl Access {
             .await
     }
     /**
-     * Creates a new storefront access token.
+     * Creates a new storefront access token
      *
      * This function performs a `POST` to the `/admin/api/2020-04/storefront_access_tokens.json` endpoint.
      *
@@ -157,7 +157,7 @@ impl Access {
             .await
     }
     /**
-     * Deletes an existing storefront access token.
+     * Deletes an existing storefront access token
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/storefront_access_tokens/{storefront_access_token_id}.json` endpoint.
      *
@@ -165,7 +165,7 @@ impl Access {
      *
      * **Parameters:**
      *
-     * * `storefront_access_token_id: &str` -- storefront_access_token_id.
+     * * `storefront_access_token_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_storefront_tokens_param_token(
         &self,
@@ -189,7 +189,7 @@ impl Access {
             .await
     }
     /**
-     * Retrieves a list of storefront access tokens that have been issued.
+     * Retrieves a list of storefront access tokens that have been issued
      *
      * This function performs a `GET` to the `/admin/api/2020-07/storefront_access_tokens.json` endpoint.
      *
@@ -212,7 +212,7 @@ impl Access {
             .await
     }
     /**
-     * Creates a new storefront access token.
+     * Creates a new storefront access token
      *
      * This function performs a `POST` to the `/admin/api/2020-07/storefront_access_tokens.json` endpoint.
      *
@@ -236,7 +236,7 @@ impl Access {
             .await
     }
     /**
-     * Deletes an existing storefront access token.
+     * Deletes an existing storefront access token
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/storefront_access_tokens/{storefront_access_token_id}.json` endpoint.
      *
@@ -244,7 +244,7 @@ impl Access {
      *
      * **Parameters:**
      *
-     * * `storefront_access_token_id: &str` -- storefront_access_token_id.
+     * * `storefront_access_token_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_storefront_tokens_param_token(
         &self,
@@ -268,7 +268,7 @@ impl Access {
             .await
     }
     /**
-     * Retrieves a list of storefront access tokens that have been issued.
+     * Retrieves a list of storefront access tokens that have been issued
      *
      * This function performs a `GET` to the `/admin/api/2020-10/storefront_access_tokens.json` endpoint.
      *
@@ -289,7 +289,7 @@ impl Access {
             .await
     }
     /**
-     * Creates a new storefront access token.
+     * Creates a new storefront access token
      *
      * This function performs a `POST` to the `/admin/api/2020-10/storefront_access_tokens.json` endpoint.
      *
@@ -313,7 +313,7 @@ impl Access {
             .await
     }
     /**
-     * Deletes an existing storefront access token.
+     * Deletes an existing storefront access token
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/storefront_access_tokens/{storefront_access_token_id}.json` endpoint.
      *
@@ -321,7 +321,7 @@ impl Access {
      *
      * **Parameters:**
      *
-     * * `storefront_access_token_id: &str` -- storefront_access_token_id.
+     * * `storefront_access_token_id` -- storefront_access_token_id
      */
     pub async fn delete_storefront_tokens_param_token(
         &self,
@@ -345,7 +345,7 @@ impl Access {
             .await
     }
     /**
-     * Retrieves a list of storefront access tokens that have been issued.
+     * Retrieves a list of storefront access tokens that have been issued
      *
      * This function performs a `GET` to the `/admin/api/2021-01/storefront_access_tokens.json` endpoint.
      *
@@ -368,7 +368,7 @@ impl Access {
             .await
     }
     /**
-     * Creates a new storefront access token.
+     * Creates a new storefront access token
      *
      * This function performs a `POST` to the `/admin/api/2021-01/storefront_access_tokens.json` endpoint.
      *
@@ -392,7 +392,7 @@ impl Access {
             .await
     }
     /**
-     * Deletes an existing storefront access token.
+     * Deletes an existing storefront access token
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/storefront_access_tokens/{storefront_access_token_id}.json` endpoint.
      *
@@ -400,7 +400,7 @@ impl Access {
      *
      * **Parameters:**
      *
-     * * `storefront_access_token_id: &str` -- storefront_access_token_id.
+     * * `storefront_access_token_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_storefront_tokens_param_token(
         &self,
@@ -424,7 +424,7 @@ impl Access {
             .await
     }
     /**
-     * Retrieves a list of storefront access tokens that have been issued.
+     * Retrieves a list of storefront access tokens that have been issued
      *
      * This function performs a `GET` to the `/admin/api/unstable/storefront_access_tokens.json` endpoint.
      *
@@ -447,7 +447,7 @@ impl Access {
             .await
     }
     /**
-     * Creates a new storefront access token.
+     * Creates a new storefront access token
      *
      * This function performs a `POST` to the `/admin/api/unstable/storefront_access_tokens.json` endpoint.
      *
@@ -471,7 +471,7 @@ impl Access {
             .await
     }
     /**
-     * Deletes an existing storefront access token.
+     * Deletes an existing storefront access token
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/storefront_access_tokens/{storefront_access_token_id}.json` endpoint.
      *
@@ -479,7 +479,7 @@ impl Access {
      *
      * **Parameters:**
      *
-     * * `storefront_access_token_id: &str` -- storefront_access_token_id.
+     * * `storefront_access_token_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_storefront_tokens_param_token(
         &self,

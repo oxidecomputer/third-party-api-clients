@@ -24,7 +24,7 @@ impl SettingsEnforcedTls {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user(
         &self,
@@ -41,7 +41,7 @@ impl SettingsEnforcedTls {
             .await
     }
     /**
-     * Update Enforced TLS settings.
+     * Update Enforced TLS settings
      *
      * This function performs a `PATCH` to the `/user/settings/enforced_tls` endpoint.
      *
@@ -53,7 +53,7 @@ impl SettingsEnforcedTls {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_user(
         &self,

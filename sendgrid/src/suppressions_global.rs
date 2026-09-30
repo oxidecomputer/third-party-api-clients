@@ -20,7 +20,7 @@ impl SuppressionsGlobal {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_asm(
         &self,
@@ -38,7 +38,7 @@ impl SuppressionsGlobal {
             .await
     }
     /**
-     * Retrieve all global suppressions.
+     * Retrieve all global suppressions
      *
      * This function performs a `GET` to the `/suppression/unsubscribes` endpoint.
      *
@@ -46,11 +46,11 @@ impl SuppressionsGlobal {
      *
      * **Parameters:**
      *
-     * * `start_time: i64` -- Refers start of the time range in unix timestamp when an unsubscribe email was created (inclusive).
-     * * `end_time: i64` -- Refers end of the time range in unix timestamp when an unsubscribe email was created (inclusive).
-     * * `limit: i64` -- The number of results to display on each page.
-     * * `offset: i64` -- The point in the list of results to begin displaying global suppressions.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `start_time` -- Refers start of the time range in unix timestamp when an unsubscribe email was created (inclusive).
+     * * `end_time` -- Refers end of the time range in unix timestamp when an unsubscribe email was created (inclusive).
+     * * `limit` -- The number of results to display on each page.
+     * * `offset` -- The point in the list of results to begin displaying global suppressions.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_suppression_unsubscribes(
         &self,
@@ -75,7 +75,7 @@ impl SuppressionsGlobal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/unsubscribes?{}", query_), None);
+            .url(&format!("/suppression/unsubscribes?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -87,7 +87,7 @@ impl SuppressionsGlobal {
             .await
     }
     /**
-     * Retrieve all global suppressions.
+     * Retrieve all global suppressions
      *
      * This function performs a `GET` to the `/suppression/unsubscribes` endpoint.
      *
@@ -114,7 +114,7 @@ impl SuppressionsGlobal {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/suppression/unsubscribes?{}", query_), None);
+            .url(&format!("/suppression/unsubscribes?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -126,7 +126,7 @@ impl SuppressionsGlobal {
             .await
     }
     /**
-     * Retrieve a Global Suppression.
+     * Retrieve a Global Suppression
      *
      * This function performs a `GET` to the `/asm/suppressions/global/{email}` endpoint.
      *
@@ -136,7 +136,7 @@ impl SuppressionsGlobal {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_asm_email(
         &self,
@@ -160,7 +160,7 @@ impl SuppressionsGlobal {
             .await
     }
     /**
-     * Delete a Global Suppression.
+     * Delete a Global Suppression
      *
      * This function performs a `DELETE` to the `/asm/suppressions/global/{email}` endpoint.
      *
@@ -170,7 +170,7 @@ impl SuppressionsGlobal {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_asm_email(
         &self,

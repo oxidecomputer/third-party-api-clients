@@ -12,7 +12,7 @@ impl Pulls {
     }
 
     /**
-     * List pull requests.
+     * List pull requests
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls` endpoint.
      *
@@ -22,17 +22,17 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `head: &str` -- Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
-     * * `base: &str` -- Filter pulls by base branch name. Example: `gh-pages`.
-     * * `sort: crate::types::PullsListSort` -- What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `state` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * `head` -- Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
+     * * `base` -- Filter pulls by base branch name. Example: `gh-pages`.
+     * * `sort` -- What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list(
         &self,
@@ -89,7 +89,7 @@ impl Pulls {
             .await
     }
     /**
-     * List pull requests.
+     * List pull requests
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls` endpoint.
      *
@@ -146,7 +146,7 @@ impl Pulls {
             .await
     }
     /**
-     * Create a pull request.
+     * Create a pull request
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls` endpoint.
      *
@@ -162,8 +162,8 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create(
         &self,
@@ -190,7 +190,7 @@ impl Pulls {
             .await
     }
     /**
-     * List review comments in a repository.
+     * List review comments in a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments` endpoint.
      *
@@ -200,15 +200,15 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `sort: crate::types::PullsListReviewCommentsRepoSort`
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `sort`
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_review_comments_for_repo(
         &self,
@@ -257,7 +257,7 @@ impl Pulls {
             .await
     }
     /**
-     * List review comments in a repository.
+     * List review comments in a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments` endpoint.
      *
@@ -306,7 +306,7 @@ impl Pulls {
             .await
     }
     /**
-     * Get a review comment for a pull request.
+     * Get a review comment for a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}` endpoint.
      *
@@ -316,9 +316,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn get_review_comment(
         &self,
@@ -346,7 +346,7 @@ impl Pulls {
             .await
     }
     /**
-     * Delete a review comment for a pull request.
+     * Delete a review comment for a pull request
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}` endpoint.
      *
@@ -356,9 +356,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn delete_review_comment(
         &self,
@@ -386,7 +386,7 @@ impl Pulls {
             .await
     }
     /**
-     * Update a review comment for a pull request.
+     * Update a review comment for a pull request
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}` endpoint.
      *
@@ -396,9 +396,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn update_review_comment(
         &self,
@@ -427,7 +427,7 @@ impl Pulls {
             .await
     }
     /**
-     * Get a pull request.
+     * Get a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}` endpoint.
      *
@@ -451,9 +451,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn get(
         &self,
@@ -481,7 +481,7 @@ impl Pulls {
             .await
     }
     /**
-     * Update a pull request.
+     * Update a pull request
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/pulls/{pull_number}` endpoint.
      *
@@ -493,9 +493,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn update(
         &self,
@@ -524,7 +524,7 @@ impl Pulls {
             .await
     }
     /**
-     * List review comments on a pull request.
+     * List review comments on a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
      *
@@ -534,16 +534,16 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_review_comments(
         &self,
@@ -594,7 +594,7 @@ impl Pulls {
             .await
     }
     /**
-     * List review comments on a pull request.
+     * List review comments on a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
      *
@@ -645,10 +645,9 @@ impl Pulls {
             .await
     }
     /**
-     * Create a review comment for a pull request.
+     * Create a review comment for a pull request
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
-     *
      *
      * Creates a review comment in the pull request diff. To add a regular comment to a pull request timeline, see "[Create an issue comment](https://docs.github.com/rest/reference/issues#create-an-issue-comment)." We recommend creating a review comment using `line`, `side`, and optionally `start_line` and `start_side` if your comment applies to more than one line in the pull request diff.
      *
@@ -662,9 +661,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn create_review_comment(
         &self,
@@ -693,7 +692,7 @@ impl Pulls {
             .await
     }
     /**
-     * Create a reply for a review comment.
+     * Create a reply for a review comment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies` endpoint.
      *
@@ -705,10 +704,10 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn create_reply_for_review_comment(
         &self,
@@ -739,7 +738,7 @@ impl Pulls {
             .await
     }
     /**
-     * List commits on a pull request.
+     * List commits on a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/commits` endpoint.
      *
@@ -749,11 +748,11 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_commits(
         &self,
@@ -792,7 +791,7 @@ impl Pulls {
             .await
     }
     /**
-     * List commits on a pull request.
+     * List commits on a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/commits` endpoint.
      *
@@ -828,7 +827,7 @@ impl Pulls {
             .await
     }
     /**
-     * List pull requests files.
+     * List pull requests files
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/files` endpoint.
      *
@@ -838,11 +837,11 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_files(
         &self,
@@ -881,7 +880,7 @@ impl Pulls {
             .await
     }
     /**
-     * List pull requests files.
+     * List pull requests files
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/files` endpoint.
      *
@@ -917,19 +916,17 @@ impl Pulls {
             .await
     }
     /**
-     * Check if a pull request has been merged.
+     * Check if a pull request has been merged
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/merge` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#check-if-a-pull-request-has-been-merged>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn check_if_merged(
         &self,
@@ -957,7 +954,7 @@ impl Pulls {
             .await
     }
     /**
-     * Merge a pull request.
+     * Merge a pull request
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/merge` endpoint.
      *
@@ -967,9 +964,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn merge(
         &self,
@@ -998,21 +995,19 @@ impl Pulls {
             .await
     }
     /**
-     * List requested reviewers for a pull request.
+     * List requested reviewers for a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#list-requested-reviewers-for-a-pull-request>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_requested_reviewers(
         &self,
@@ -1051,7 +1046,7 @@ impl Pulls {
             .await
     }
     /**
-     * Request reviewers for a pull request.
+     * Request reviewers for a pull request
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers` endpoint.
      *
@@ -1061,9 +1056,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn request_reviewers(
         &self,
@@ -1092,19 +1087,17 @@ impl Pulls {
             .await
     }
     /**
-     * Remove requested reviewers from a pull request.
+     * Remove requested reviewers from a pull request
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#remove-requested-reviewers-from-a-pull-request>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn remove_requested_reviewers(
         &self,
@@ -1133,7 +1126,7 @@ impl Pulls {
             .await
     }
     /**
-     * List reviews for a pull request.
+     * List reviews for a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
      *
@@ -1143,11 +1136,11 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_reviews(
         &self,
@@ -1186,7 +1179,7 @@ impl Pulls {
             .await
     }
     /**
-     * List reviews for a pull request.
+     * List reviews for a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
      *
@@ -1222,7 +1215,7 @@ impl Pulls {
             .await
     }
     /**
-     * Create a review for a pull request.
+     * Create a review for a pull request
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
      *
@@ -1238,9 +1231,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn create_review(
         &self,
@@ -1269,20 +1262,18 @@ impl Pulls {
             .await
     }
     /**
-     * Get a review for a pull request.
+     * Get a review for a pull request
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#get-a-review-for-a-pull-request>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `review_id: i64` -- review_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `review_id` -- review_id parameter
      */
     pub async fn get_review(
         &self,
@@ -1312,7 +1303,7 @@ impl Pulls {
             .await
     }
     /**
-     * Update a review for a pull request.
+     * Update a review for a pull request
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}` endpoint.
      *
@@ -1322,10 +1313,10 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `review_id: i64` -- review_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `review_id` -- review_id parameter
      */
     pub async fn update_review(
         &self,
@@ -1356,20 +1347,18 @@ impl Pulls {
             .await
     }
     /**
-     * Delete a pending review for a pull request.
+     * Delete a pending review for a pull request
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#delete-a-pending-review-for-a-pull-request>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `review_id: i64` -- review_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `review_id` -- review_id parameter
      */
     pub async fn delete_pending_review(
         &self,
@@ -1399,7 +1388,7 @@ impl Pulls {
             .await
     }
     /**
-     * List comments for a pull request review.
+     * List comments for a pull request review
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments` endpoint.
      *
@@ -1409,12 +1398,12 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `review_id: i64` -- review_id parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `review_id` -- review_id parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_comments_for_review(
         &self,
@@ -1455,7 +1444,7 @@ impl Pulls {
             .await
     }
     /**
-     * List comments for a pull request review.
+     * List comments for a pull request review
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments` endpoint.
      *
@@ -1493,7 +1482,7 @@ impl Pulls {
             .await
     }
     /**
-     * Dismiss a review for a pull request.
+     * Dismiss a review for a pull request
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals` endpoint.
      *
@@ -1503,10 +1492,10 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `review_id: i64` -- review_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `review_id` -- review_id parameter
      */
     pub async fn dismiss_review(
         &self,
@@ -1537,20 +1526,18 @@ impl Pulls {
             .await
     }
     /**
-     * Submit a review for a pull request.
+     * Submit a review for a pull request
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
-     * * `review_id: i64` -- review_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
+     * * `review_id` -- review_id parameter
      */
     pub async fn submit_review(
         &self,
@@ -1581,7 +1568,7 @@ impl Pulls {
             .await
     }
     /**
-     * Update a pull request branch.
+     * Update a pull request branch
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/update-branch` endpoint.
      *
@@ -1591,9 +1578,9 @@ impl Pulls {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `pull_number: i64`
+     * * `owner`
+     * * `repo`
+     * * `pull_number`
      */
     pub async fn update_branch(
         &self,

@@ -197,7 +197,7 @@ pub mod enterprise_admin;
 pub mod gists;
 /// Raw Git functionality.
 pub mod git;
-/// View gitignore templates.
+/// View gitignore templates
 pub mod gitignore;
 #[cfg(feature = "httpcache")]
 #[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]
@@ -208,13 +208,13 @@ pub mod interactions;
 pub mod issues;
 /// View various OSS licenses.
 pub mod licenses;
-/// Render Github flavored markdown.
+/// Render Github flavored markdown
 pub mod markdown;
 /// Endpoints that give information about the API.
 pub mod meta;
 /// Move projects to or from GitHub.
 pub mod migrations;
-/// Manage access of OAuth applications.
+/// Manage access of OAuth applications
 pub mod oauth_authorizations;
 /// Interact with GitHub Orgs.
 pub mod orgs;
@@ -224,7 +224,7 @@ pub mod packages;
 pub mod projects;
 /// Interact with GitHub Pull Requests.
 pub mod pulls;
-/// Check your current rate limit status.
+/// Check your current rate limit status
 pub mod rate_limit;
 /// Interact with reactions to various GitHub entities.
 pub mod reactions;
@@ -518,7 +518,7 @@ impl Client {
                 Ok((parsed_url, None))
             }
             Some(crate::auth::Credentials::Token(token)) => {
-                let auth = format!("token {}", token);
+                let auth = format!("token {token}");
                 Ok((parsed_url, Some(auth)))
             }
             Some(crate::auth::Credentials::JWT(jwt)) => {
@@ -554,7 +554,7 @@ impl Client {
                         token.body.token
                     }
                 };
-                let auth = format!("token {}", token);
+                let auth = format!("token {token}");
                 Ok((parsed_url, Some(auth)))
             }
             None => Ok((parsed_url, None)),
@@ -739,7 +739,7 @@ impl Client {
             }
         } else {
             let error = match (remaining, reset) {
-                (Some(remaining), Some(reset)) if remaining == 0 => {
+                (Some(0), Some(reset)) => {
                     let now = std::time::SystemTime::now()
                         .duration_since(std::time::UNIX_EPOCH)
                         .unwrap()
@@ -1033,7 +1033,7 @@ impl Client {
         git::Git::new(self.clone())
     }
 
-    /// View gitignore templates.
+    /// View gitignore templates
     pub fn gitignore(&self) -> gitignore::Gitignore {
         gitignore::Gitignore::new(self.clone())
     }
@@ -1053,7 +1053,7 @@ impl Client {
         licenses::Licenses::new(self.clone())
     }
 
-    /// Render Github flavored markdown.
+    /// Render Github flavored markdown
     pub fn markdown(&self) -> markdown::Markdown {
         markdown::Markdown::new(self.clone())
     }
@@ -1068,7 +1068,7 @@ impl Client {
         migrations::Migrations::new(self.clone())
     }
 
-    /// Manage access of OAuth applications.
+    /// Manage access of OAuth applications
     pub fn oauth_authorizations(&self) -> oauth_authorizations::OauthAuthorizations {
         oauth_authorizations::OauthAuthorizations::new(self.clone())
     }
@@ -1093,7 +1093,7 @@ impl Client {
         pulls::Pulls::new(self.clone())
     }
 
-    /// Check your current rate limit status.
+    /// Check your current rate limit status
     pub fn rate_limit(&self) -> rate_limit::RateLimit {
         rate_limit::RateLimit::new(self.clone())
     }

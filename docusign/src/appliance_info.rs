@@ -16,11 +16,9 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/display_appliance_info/dynamicsystemsettings` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_dynamic_system_setting(
         &self,
@@ -48,11 +46,9 @@ impl ApplianceInfo {
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/display_appliance_info/templateInfo` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_template(
         &self,
@@ -80,12 +76,10 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get(
         &self,
@@ -115,12 +109,10 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/account_info` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_account(
         &self,
@@ -150,12 +142,10 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/custom_fields` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_custom_field(
         &self,
@@ -185,12 +175,10 @@ impl ApplianceInfo {
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/custom_fields/delete` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_delete_custom_fields(
         &self,
@@ -220,12 +208,10 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/date_signed` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_date_signed(
         &self,
@@ -255,13 +241,11 @@ impl ApplianceInfo {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/document/{documentId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_put_document(
         &self,
@@ -293,13 +277,11 @@ impl ApplianceInfo {
      *
      * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/document/{documentId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `document_id: &str` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `document_id` -- The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_delete_document(
         &self,
@@ -331,12 +313,10 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/document_page_list` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_document_page(
         &self,
@@ -366,12 +346,10 @@ impl ApplianceInfo {
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/image` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_image(
         &self,
@@ -401,14 +379,11 @@ impl ApplianceInfo {
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/localepolicy/{userId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
-     *   .
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_id` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      */
     pub async fn envelope_get_locale_policy(
         &self,
@@ -440,12 +415,10 @@ impl ApplianceInfo {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/page_info` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_put_page(
         &self,
@@ -475,12 +448,10 @@ impl ApplianceInfo {
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/page_info` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_post_page(
         &self,
@@ -510,12 +481,10 @@ impl ApplianceInfo {
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/page_info/delete` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_delete_page(
         &self,
@@ -545,12 +514,10 @@ impl ApplianceInfo {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/pdf` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_put_pdf(
         &self,
@@ -580,14 +547,12 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/pdf/{pdfId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `pdf_id: &str` -- **Deprecated**.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `pdf_id` -- **Deprecated**.
+     *
      *   The `pdfId` property in the consumer_disclosure PUT request is deprecated. For security reasons going forward, any value provided in the request packet must be ignored.
      */
     pub async fn envelope_get_pdf(
@@ -620,12 +585,10 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/pdf_blobs` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_pdf_blob(
         &self,
@@ -655,12 +618,10 @@ impl ApplianceInfo {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/pdf_blobs` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_put_pdf_blob(
         &self,
@@ -690,12 +651,10 @@ impl ApplianceInfo {
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/pdf_blobs` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_post_pdf_blob(
         &self,
@@ -725,12 +684,10 @@ impl ApplianceInfo {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/recipient_denied_copy` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_put_recipient_denied_document_copy(
         &self,
@@ -760,12 +717,10 @@ impl ApplianceInfo {
      *
      * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/recipient_denied_copy` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_delete_recipient_denied_document_copy(
         &self,
@@ -795,12 +750,10 @@ impl ApplianceInfo {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/signer_attachment_info` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_get_signer_attachment(
         &self,
@@ -830,12 +783,10 @@ impl ApplianceInfo {
      *
      * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/display_appliance_info/signer_attachment_info` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_delete_signer_attachment(
         &self,
@@ -864,8 +815,6 @@ impl ApplianceInfo {
      * Uploads Kazmon error for Display Appliance.
      *
      * This function performs a `POST` to the `/v2.1/display_appliance_info/error` endpoint.
-     *
-     *
      */
     pub async fn envelope_post_error(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/v2.1/display_appliance_info/error", None);
@@ -883,8 +832,6 @@ impl ApplianceInfo {
      * Returns signing URL for Display Appliance.
      *
      * This function performs a `POST` to the `/v2.1/display_appliance_info/redeem` endpoint.
-     *
-     *
      */
     pub async fn envelope_post_redeem(
         &self,

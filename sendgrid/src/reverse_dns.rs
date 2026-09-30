@@ -12,7 +12,7 @@ impl ReverseDns {
     }
 
     /**
-     * Retrieve all reverse DNS records.
+     * Retrieve all reverse DNS records
      *
      * This function performs a `GET` to the `/whitelabel/ips` endpoint.
      *
@@ -26,10 +26,10 @@ impl ReverseDns {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- The maximum number of results to retrieve.
-     * * `offset: i64` -- The point in the list of results to begin retrieving IP addresses from.
-     * * `ip: &str` -- The IP address segment that you'd like to use in a prefix search.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- The maximum number of results to retrieve.
+     * * `offset` -- The point in the list of results to begin retrieving IP addresses from.
+     * * `ip` -- The IP address segment that you'd like to use in a prefix search.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_ips(
         &self,
@@ -48,9 +48,7 @@ impl ReverseDns {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/whitelabel/ips?{}", query_), None);
+        let url = self.client.url(&format!("/whitelabel/ips?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -62,7 +60,7 @@ impl ReverseDns {
             .await
     }
     /**
-     * Retrieve all reverse DNS records.
+     * Retrieve all reverse DNS records
      *
      * This function performs a `GET` to the `/whitelabel/ips` endpoint.
      *
@@ -89,9 +87,7 @@ impl ReverseDns {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self
-            .client
-            .url(&format!("/whitelabel/ips?{}", query_), None);
+        let url = self.client.url(&format!("/whitelabel/ips?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -103,7 +99,7 @@ impl ReverseDns {
             .await
     }
     /**
-     * Set up reverse DNS.
+     * Set up reverse DNS
      *
      * This function performs a `POST` to the `/whitelabel/ips` endpoint.
      *
@@ -111,7 +107,7 @@ impl ReverseDns {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_whitelabel_ip(
         &self,
@@ -129,7 +125,7 @@ impl ReverseDns {
             .await
     }
     /**
-     * Validate a reverse DNS record.
+     * Validate a reverse DNS record
      *
      * This function performs a `POST` to the `/whitelabel/ips/{id}/validate` endpoint.
      *
@@ -143,7 +139,7 @@ impl ReverseDns {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_whitelabel_ips_validate(
         &self,
@@ -167,7 +163,7 @@ impl ReverseDns {
             .await
     }
     /**
-     * Retrieve a reverse DNS record.
+     * Retrieve a reverse DNS record
      *
      * This function performs a `GET` to the `/whitelabel/ips/{id}` endpoint.
      *
@@ -177,7 +173,7 @@ impl ReverseDns {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_whitelabel_ip(
         &self,
@@ -201,7 +197,7 @@ impl ReverseDns {
             .await
     }
     /**
-     * Delete a reverse DNS record.
+     * Delete a reverse DNS record
      *
      * This function performs a `DELETE` to the `/whitelabel/ips/{id}` endpoint.
      *
@@ -213,7 +209,7 @@ impl ReverseDns {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_whitelabel_ips(
         &self,

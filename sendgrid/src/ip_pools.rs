@@ -12,7 +12,7 @@ impl IpPools {
     }
 
     /**
-     * Retrieve all IP pools.
+     * Retrieve all IP pools
      *
      * This function performs a `GET` to the `/ips/pools` endpoint.
      *
@@ -33,7 +33,7 @@ impl IpPools {
             .await
     }
     /**
-     * Retrieve all IP pools.
+     * Retrieve all IP pools
      *
      * This function performs a `GET` to the `/ips/pools` endpoint.
      *
@@ -56,7 +56,7 @@ impl IpPools {
             .await
     }
     /**
-     * Create an IP pool.
+     * Create an IP pool
      *
      * This function performs a `POST` to the `/ips/pools` endpoint.
      *
@@ -64,9 +64,9 @@ impl IpPools {
      *
      * Before you can create an IP pool, you need to activate the IP in your SendGrid account:
      *
-     * 1. Log into your SendGrid account.  
-     * 1. Navigate to **Settings** and then select **IP Addresses**.  
-     * 1. Find the IP address you want to activate and then click **Edit**.  
+     * 1. Log into your SendGrid account.
+     * 1. Navigate to **Settings** and then select **IP Addresses**.
+     * 1. Find the IP address you want to activate and then click **Edit**.
      * 1. Check **Allow my account to send mail using this IP address**.
      * 1. Click **Save**.
      */
@@ -86,7 +86,7 @@ impl IpPools {
             .await
     }
     /**
-     * Add an IP address to a pool.
+     * Add an IP address to a pool
      *
      * This function performs a `POST` to the `/ips/pools/{pool_name}/ips` endpoint.
      *
@@ -96,9 +96,9 @@ impl IpPools {
      *
      * Before you can add an IP to a pool, you need to activate it in your SendGrid account:
      *
-     * 1. Log into your SendGrid account.  
-     * 1. Navigate to **Settings** and then select **IP Addresses**.  
-     * 1. Find the IP address you want to activate and then click **Edit**.  
+     * 1. Log into your SendGrid account.
+     * 1. Navigate to **Settings** and then select **IP Addresses**.
+     * 1. Find the IP address you want to activate and then click **Edit**.
      * 1. Check **Allow my account to send mail using this IP address**.
      * 1. Click **Save**.
      *
@@ -127,7 +127,7 @@ impl IpPools {
             .await
     }
     /**
-     * Retrieve all the IPs in a specified pool.
+     * Retrieve all the IPs in a specified pool
      *
      * This function performs a `GET` to the `/ips/pools/{pool_name}` endpoint.
      *
@@ -155,7 +155,7 @@ impl IpPools {
             .await
     }
     /**
-     * Rename an IP pool.
+     * Rename an IP pool
      *
      * This function performs a `PUT` to the `/ips/pools/{pool_name}` endpoint.
      *
@@ -184,7 +184,7 @@ impl IpPools {
             .await
     }
     /**
-     * Delete an IP pool.
+     * Delete an IP pool
      *
      * This function performs a `DELETE` to the `/ips/pools/{pool_name}` endpoint.
      *
@@ -212,7 +212,7 @@ impl IpPools {
             .await
     }
     /**
-     * Remove an IP address from a pool.
+     * Remove an IP address from a pool
      *
      * This function performs a `DELETE` to the `/ips/pools/{pool_name}/ips/{ip}` endpoint.
      *

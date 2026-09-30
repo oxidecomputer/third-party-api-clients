@@ -18,12 +18,12 @@ impl CalendarList {
      *
      * **Parameters:**
      *
-     * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
-     * * `min_access_role: crate::types::MinAccessRole` -- The minimum access role for the user in the returned entries. Optional. The default is no restriction.
-     * * `page_token: &str` -- Token specifying which result page to return. Optional.
-     * * `show_deleted: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-     * * `show_hidden: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-     * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
+     * * `max_results` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+     * * `min_access_role` -- The minimum access role for the user in the returned entries. Optional. The default is no restriction.
+     * * `page_token` -- Token specifying which result page to return. Optional.
+     * * `show_deleted` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * * `show_hidden` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * * `sync_token` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
      *   To ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.
      *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
      *   Learn more about incremental synchronization.
@@ -56,7 +56,7 @@ impl CalendarList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users/me/calendarList?{}", query_), None);
+            .url(&format!("/users/me/calendarList?{query_}"), None);
         let resp: crate::Response<crate::types::CalendarList> = self
             .client
             .get(
@@ -101,7 +101,7 @@ impl CalendarList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users/me/calendarList?{}", query_), None);
+            .url(&format!("/users/me/calendarList?{query_}"), None);
         let crate::Response::<crate::types::CalendarList> {
             mut status,
             mut headers,
@@ -130,7 +130,7 @@ impl CalendarList {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -145,7 +145,7 @@ impl CalendarList {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -173,7 +173,7 @@ impl CalendarList {
      *
      * **Parameters:**
      *
-     * * `color_rgb_format: bool` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
+     * * `color_rgb_format` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
      */
     pub async fn list_insert(
         &self,
@@ -187,7 +187,7 @@ impl CalendarList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users/me/calendarList?{}", query_), None);
+            .url(&format!("/users/me/calendarList?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -205,12 +205,12 @@ impl CalendarList {
      *
      * **Parameters:**
      *
-     * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
-     * * `min_access_role: crate::types::MinAccessRole` -- The minimum access role for the user in the returned entries. Optional. The default is no restriction.
-     * * `page_token: &str` -- Token specifying which result page to return. Optional.
-     * * `show_deleted: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-     * * `show_hidden: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
-     * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
+     * * `max_results` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+     * * `min_access_role` -- The minimum access role for the user in the returned entries. Optional. The default is no restriction.
+     * * `page_token` -- Token specifying which result page to return. Optional.
+     * * `show_deleted` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * * `show_hidden` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+     * * `sync_token` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
      *   To ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.
      *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
      *   Learn more about incremental synchronization.
@@ -244,7 +244,7 @@ impl CalendarList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users/me/calendarList/watch?{}", query_), None);
+            .url(&format!("/users/me/calendarList/watch?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -262,7 +262,7 @@ impl CalendarList {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn list_get(
         &self,
@@ -292,8 +292,8 @@ impl CalendarList {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `color_rgb_format: bool` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `color_rgb_format` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
      */
     pub async fn list_update(
         &self,
@@ -331,7 +331,7 @@ impl CalendarList {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn list_delete(&self, calendar_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -358,8 +358,8 @@ impl CalendarList {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `color_rgb_format: bool` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `color_rgb_format` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
      */
     pub async fn list_patch(
         &self,

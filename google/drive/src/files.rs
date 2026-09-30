@@ -18,20 +18,20 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `corpora: &str` -- Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency.
-     * * `corpus: crate::types::Corpus` -- The source of files to list. Deprecated: use 'corpora' instead.
-     * * `drive_id: &str` -- A link to this theme's background image.
-     * * `include_items_from_all_drives: bool` -- Whether both My Drive and shared drive items should be included in results.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `include_team_drive_items: bool` -- Whether the user has installed the requesting app.
-     * * `order_by: &str` -- A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
-     * * `page_size: i64` -- The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.
-     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
-     * * `q: &str` -- A query for filtering the file results. See the "Search for Files" guide for supported syntax.
-     * * `spaces: &str` -- A comma-separated list of spaces to query within the corpus. Supported values are 'drive' and 'appDataFolder'.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `team_drive_id: &str` -- A link to this theme's background image.
+     * * `corpora` -- Groupings of files to which the query applies. Supported groupings are: 'user' (files created by, opened by, or shared directly with the user), 'drive' (files in the specified shared drive as indicated by the 'driveId'), 'domain' (files shared to the user's domain), and 'allDrives' (A combination of 'user' and 'drive' for all drives where the user is a member). When able, use 'user' or 'drive', instead of 'allDrives', for efficiency.
+     * * `corpus` -- The source of files to list. Deprecated: use 'corpora' instead.
+     * * `drive_id` -- A link to this theme's background image.
+     * * `include_items_from_all_drives` -- Whether both My Drive and shared drive items should be included in results.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `include_team_drive_items` -- Whether the user has installed the requesting app.
+     * * `order_by` -- A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
+     * * `page_size` -- The maximum number of files to return per page. Partial or empty result pages are possible even before the end of the files list has been reached.
+     * * `page_token` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+     * * `q` -- A query for filtering the file results. See the "Search for Files" guide for supported syntax.
+     * * `spaces` -- A comma-separated list of spaces to query within the corpus. Supported values are 'drive' and 'appDataFolder'.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `team_drive_id` -- A link to this theme's background image.
      */
     pub async fn list(
         &self,
@@ -105,7 +105,7 @@ impl Files {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/files?{}", query_), None);
+        let url = self.client.url(&format!("/files?{query_}"), None);
         let resp: crate::Response<crate::types::FileList> = self
             .client
             .get(
@@ -195,7 +195,7 @@ impl Files {
             query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/files?{}", query_), None);
+        let url = self.client.url(&format!("/files?{query_}"), None);
         let crate::Response::<crate::types::FileList> {
             mut status,
             mut headers,
@@ -224,7 +224,7 @@ impl Files {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -239,7 +239,7 @@ impl Files {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -267,14 +267,14 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `enforce_single_parent: bool` -- Deprecated. Creating files in multiple folders is no longer supported.
-     * * `ignore_default_visibility: bool` -- Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `keep_revision_forever: bool` -- Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
-     * * `ocr_language: &str` -- A language hint for OCR processing during image import (ISO 639-1 code).
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `use_content_as_indexable_text: bool` -- Whether to use the uploaded content as indexable text.
+     * * `enforce_single_parent` -- Deprecated. Creating files in multiple folders is no longer supported.
+     * * `ignore_default_visibility` -- Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `keep_revision_forever` -- Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+     * * `ocr_language` -- A language hint for OCR processing during image import (ISO 639-1 code).
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `use_content_as_indexable_text` -- Whether to use the uploaded content as indexable text.
      */
     pub async fn create(
         &self,
@@ -328,7 +328,7 @@ impl Files {
             ));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/files?{}", query_), None);
+        let url = self.client.url(&format!("/files?{query_}"), None);
         self.client
             .post(
                 &url,
@@ -346,9 +346,9 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `count: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `space: &str` -- The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive').
-     * * `type_: &str` -- The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files').
+     * * `count` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `space` -- The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive')
+     * * `type_` -- The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files')
      */
     pub async fn generate_id(
         &self,
@@ -369,7 +369,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/files/generateIds?{}", query_), None);
+            .url(&format!("/files/generateIds?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -387,7 +387,7 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+     * * `enforce_single_parent` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
     pub async fn empty_trash(&self) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/files/trash", None);
@@ -408,11 +408,11 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `acknowledge_abuse: bool` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
+     * * `file_id` -- A link to this theme's background image.
+     * * `acknowledge_abuse` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
      */
     pub async fn get(
         &self,
@@ -473,10 +473,10 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
+     * * `file_id` -- A link to this theme's background image.
+     * * `enforce_single_parent` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
      */
     pub async fn delete(
         &self,
@@ -523,16 +523,16 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `add_parents: &str` -- A comma-separated list of parent IDs to add.
-     * * `enforce_single_parent: bool` -- Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `keep_revision_forever: bool` -- Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
-     * * `ocr_language: &str` -- A language hint for OCR processing during image import (ISO 639-1 code).
-     * * `remove_parents: &str` -- A comma-separated list of parent IDs to remove.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
-     * * `use_content_as_indexable_text: bool` -- Whether to use the uploaded content as indexable text.
+     * * `file_id` -- A link to this theme's background image.
+     * * `add_parents` -- A comma-separated list of parent IDs to add.
+     * * `enforce_single_parent` -- Deprecated. Adding files to multiple folders is no longer supported. Use shortcuts instead.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `keep_revision_forever` -- Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+     * * `ocr_language` -- A language hint for OCR processing during image import (ISO 639-1 code).
+     * * `remove_parents` -- A comma-separated list of parent IDs to remove.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
+     * * `use_content_as_indexable_text` -- Whether to use the uploaded content as indexable text.
      */
     pub async fn update(
         &self,
@@ -613,14 +613,14 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `enforce_single_parent: bool` -- Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.
-     * * `ignore_default_visibility: bool` -- Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `keep_revision_forever: bool` -- Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
-     * * `ocr_language: &str` -- A language hint for OCR processing during image import (ISO 639-1 code).
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
+     * * `file_id` -- A link to this theme's background image.
+     * * `enforce_single_parent` -- Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.
+     * * `ignore_default_visibility` -- Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `keep_revision_forever` -- Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
+     * * `ocr_language` -- A language hint for OCR processing during image import (ISO 639-1 code).
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
      */
     pub async fn copy(
         &self,
@@ -693,8 +693,8 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `mime_type: &str` -- The MIME type of the format requested for this export.
+     * * `file_id` -- A link to this theme's background image.
+     * * `mime_type` -- The MIME type of the format requested for this export.
      */
     pub async fn export(
         &self,
@@ -731,11 +731,11 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `acknowledge_abuse: bool` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
-     * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
-     * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
-     * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
+     * * `file_id` -- A link to this theme's background image.
+     * * `acknowledge_abuse` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+     * * `include_permissions_for_view` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
+     * * `supports_all_drives` -- Whether the requesting application supports both My Drives and shared drives.
+     * * `supports_team_drives` -- Whether the user has installed the requesting app.
      */
     pub async fn watch(
         &self,

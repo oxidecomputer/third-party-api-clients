@@ -18,7 +18,7 @@ impl Tokens {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn list(
         &self,
@@ -48,8 +48,8 @@ impl Tokens {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-     * * `client_id: &str` -- The Client ID of the application the token is issued to.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `client_id` -- The Client ID of the application the token is issued to.
      */
     pub async fn get(
         &self,
@@ -81,8 +81,8 @@ impl Tokens {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
-     * * `client_id: &str` -- The Client ID of the application the token is issued to.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `client_id` -- The Client ID of the application the token is issued to.
      */
     pub async fn delete(
         &self,

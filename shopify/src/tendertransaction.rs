@@ -20,13 +20,13 @@ impl Tendertransaction {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Retrieve only transactions after the specified ID.
-     * * `processed_at_min: &str` -- Show tender transactions processed_at or after the specified date.
-     * * `processed_at_max: &str` -- Show tender transactions processed_at or before the specified date.
-     * * `processed_at: &str` -- Show tender transactions processed at the specified date.
-     * * `order: &str` -- Show tender transactions ordered by processed_at in ascending or descending order.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Retrieve only transactions after the specified ID.
+     * * `processed_at_min` -- Show tender transactions processed_at or after the specified date.
+     * * `processed_at_max` -- Show tender transactions processed_at or before the specified date.
+     * * `processed_at` -- Show tender transactions processed at the specified date.
+     * * `order` -- Show tender transactions ordered by processed_at in ascending or descending order.
      */
     pub async fn deprecated_202001_get_tender_transaction(
         &self,
@@ -58,7 +58,7 @@ impl Tendertransaction {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/tender_transactions.json?{}", query_),
+            &format!("/admin/api/2020-01/tender_transactions.json?{query_}"),
             None,
         );
         self.client
@@ -80,13 +80,13 @@ impl Tendertransaction {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Retrieve only transactions after the specified ID.
-     * * `processed_at_min: &str` -- Show tender transactions processed_at or after the specified date.
-     * * `processed_at_max: &str` -- Show tender transactions processed_at or before the specified date.
-     * * `processed_at: &str` -- Show tender transactions processed at the specified date.
-     * * `order: &str` -- Show tender transactions ordered by processed_at in ascending or descending order.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Retrieve only transactions after the specified ID.
+     * * `processed_at_min` -- Show tender transactions processed_at or after the specified date.
+     * * `processed_at_max` -- Show tender transactions processed_at or before the specified date.
+     * * `processed_at` -- Show tender transactions processed at the specified date.
+     * * `order` -- Show tender transactions ordered by processed_at in ascending or descending order.
      */
     pub async fn deprecated_202004_get_tender_transaction(
         &self,
@@ -118,7 +118,7 @@ impl Tendertransaction {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/tender_transactions.json?{}", query_),
+            &format!("/admin/api/2020-04/tender_transactions.json?{query_}"),
             None,
         );
         self.client
@@ -140,13 +140,13 @@ impl Tendertransaction {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Retrieve only transactions after the specified ID.
-     * * `processed_at_min: &str` -- Show tender transactions processed_at or after the specified date.
-     * * `processed_at_max: &str` -- Show tender transactions processed_at or before the specified date.
-     * * `processed_at: &str` -- Show tender transactions processed at the specified date.
-     * * `order: &str` -- Show tender transactions ordered by processed_at in ascending or descending order.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Retrieve only transactions after the specified ID.
+     * * `processed_at_min` -- Show tender transactions processed_at or after the specified date.
+     * * `processed_at_max` -- Show tender transactions processed_at or before the specified date.
+     * * `processed_at` -- Show tender transactions processed at the specified date.
+     * * `order` -- Show tender transactions ordered by processed_at in ascending or descending order.
      */
     pub async fn deprecated_202007_get_tender_transaction(
         &self,
@@ -178,7 +178,7 @@ impl Tendertransaction {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/tender_transactions.json?{}", query_),
+            &format!("/admin/api/2020-07/tender_transactions.json?{query_}"),
             None,
         );
         self.client
@@ -200,13 +200,13 @@ impl Tendertransaction {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Retrieve only transactions after the specified ID.
-     * * `processed_at_min: &str` -- Show tender transactions processed_at or after the specified date.
-     * * `processed_at_max: &str` -- Show tender transactions processed_at or before the specified date.
-     * * `processed_at: &str` -- Show tender transactions processed at the specified date.
-     * * `order: &str` -- Show tender transactions ordered by processed_at in ascending or descending order.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Retrieve only transactions after the specified ID.
+     * * `processed_at_min` -- Show tender transactions processed_at or after the specified date.
+     * * `processed_at_max` -- Show tender transactions processed_at or before the specified date.
+     * * `processed_at` -- Show tender transactions processed at the specified date.
+     * * `order` -- Show tender transactions ordered by processed_at in ascending or descending order.
      */
     pub async fn get_tender_transaction(
         &self,
@@ -238,7 +238,7 @@ impl Tendertransaction {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/tender_transactions.json?{}", query_),
+            &format!("/admin/api/2020-10/tender_transactions.json?{query_}"),
             None,
         );
         self.client
@@ -260,13 +260,13 @@ impl Tendertransaction {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Retrieve only transactions after the specified ID.
-     * * `processed_at_min: &str` -- Show tender transactions processed_at or after the specified date.
-     * * `processed_at_max: &str` -- Show tender transactions processed_at or before the specified date.
-     * * `processed_at: &str` -- Show tender transactions processed at the specified date.
-     * * `order: &str` -- Show tender transactions ordered by processed_at in ascending or descending order.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Retrieve only transactions after the specified ID.
+     * * `processed_at_min` -- Show tender transactions processed_at or after the specified date.
+     * * `processed_at_max` -- Show tender transactions processed_at or before the specified date.
+     * * `processed_at` -- Show tender transactions processed at the specified date.
+     * * `order` -- Show tender transactions ordered by processed_at in ascending or descending order.
      */
     pub async fn deprecated_202101_get_tender_transaction(
         &self,
@@ -298,7 +298,7 @@ impl Tendertransaction {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/tender_transactions.json?{}", query_),
+            &format!("/admin/api/2021-01/tender_transactions.json?{query_}"),
             None,
         );
         self.client
@@ -320,13 +320,13 @@ impl Tendertransaction {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Retrieve only transactions after the specified ID.
-     * * `processed_at_min: &str` -- Show tender transactions processed_at or after the specified date.
-     * * `processed_at_max: &str` -- Show tender transactions processed_at or before the specified date.
-     * * `processed_at: &str` -- Show tender transactions processed at the specified date.
-     * * `order: &str` -- Show tender transactions ordered by processed_at in ascending or descending order.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Retrieve only transactions after the specified ID.
+     * * `processed_at_min` -- Show tender transactions processed_at or after the specified date.
+     * * `processed_at_max` -- Show tender transactions processed_at or before the specified date.
+     * * `processed_at` -- Show tender transactions processed at the specified date.
+     * * `order` -- Show tender transactions ordered by processed_at in ascending or descending order.
      */
     pub async fn deprecated_unstable_get_tender_transaction(
         &self,
@@ -358,7 +358,7 @@ impl Tendertransaction {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/tender_transactions.json?{}", query_),
+            &format!("/admin/api/unstable/tender_transactions.json?{query_}"),
             None,
         );
         self.client

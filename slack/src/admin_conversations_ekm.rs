@@ -20,11 +20,11 @@ impl AdminConversationsEkm {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:read`.
-     * * `channel_ids: &str` -- A comma-separated list of channels to filter to.
-     * * `team_ids: &str` -- A comma-separated list of the workspaces to which the channels you would like returned belong.
-     * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+     * * `token` -- Authentication token. Requires scope: `admin.conversations:read`
+     * * `channel_ids` -- A comma-separated list of channels to filter to.
+     * * `team_ids` -- A comma-separated list of the workspaces to which the channels you would like returned belong.
+     * * `limit` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
      */
     pub async fn list_original_connected_channel_info(
         &self,
@@ -48,10 +48,7 @@ impl AdminConversationsEkm {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin.conversations.ekm.listOriginalConnectedChannelInfo?{}",
-                query_
-            ),
+            &format!("/admin.conversations.ekm.listOriginalConnectedChannelInfo?{query_}"),
             None,
         );
         self.client

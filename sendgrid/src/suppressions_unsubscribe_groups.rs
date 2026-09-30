@@ -22,8 +22,8 @@ impl SuppressionsUnsubscribeGroups {
      *
      * **Parameters:**
      *
-     * * `id: i64`
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `id`
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_asm_groups(
         &self,
@@ -34,7 +34,7 @@ impl SuppressionsUnsubscribeGroups {
             query_args.push(("id".to_string(), id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/asm/groups?{}", query_), None);
+        let url = self.client.url(&format!("/asm/groups?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -65,7 +65,7 @@ impl SuppressionsUnsubscribeGroups {
             query_args.push(("id".to_string(), id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/asm/groups?{}", query_), None);
+        let url = self.client.url(&format!("/asm/groups?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -77,7 +77,7 @@ impl SuppressionsUnsubscribeGroups {
             .await
     }
     /**
-     * Create a new suppression group.
+     * Create a new suppression group
      *
      * This function performs a `POST` to the `/asm/groups` endpoint.
      *
@@ -87,7 +87,7 @@ impl SuppressionsUnsubscribeGroups {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_asm_group(
         &self,
@@ -113,7 +113,7 @@ impl SuppressionsUnsubscribeGroups {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_asm_groups_group(
         &self,
@@ -137,7 +137,7 @@ impl SuppressionsUnsubscribeGroups {
             .await
     }
     /**
-     * Delete a Suppression Group.
+     * Delete a Suppression Group
      *
      * This function performs a `DELETE` to the `/asm/groups/{group_id}` endpoint.
      *
@@ -149,7 +149,7 @@ impl SuppressionsUnsubscribeGroups {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_asm_groups_group(
         &self,
@@ -181,7 +181,7 @@ impl SuppressionsUnsubscribeGroups {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_asm_groups_group(
         &self,

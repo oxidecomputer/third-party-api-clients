@@ -20,7 +20,7 @@ impl AppsPermissions {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
+     * * `token` -- Authentication token. Requires scope: `none`
      */
     pub async fn info(
         &self,
@@ -45,9 +45,9 @@ impl AppsPermissions {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `scopes: &str` -- A comma separated list of scopes to request for.
-     * * `trigger_id: &str` -- Token used to trigger the permissions API.
+     * * `token` -- Authentication token. Requires scope: `none`
+     * * `scopes` -- A comma separated list of scopes to request for
+     * * `trigger_id` -- Token used to trigger the permissions API
      */
     pub async fn request(
         &self,
@@ -64,7 +64,7 @@ impl AppsPermissions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/apps.permissions.request?{}", query_), None);
+            .url(&format!("/apps.permissions.request?{query_}"), None);
         self.client
             .get(
                 &url,

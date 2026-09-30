@@ -12,7 +12,7 @@ impl Resources {
     }
 
     /**
-     * Lists resources for REST version specified.
+     * Lists resources for REST version specified
      *
      * This function performs a `GET` to the `/v2.1` endpoint.
      *

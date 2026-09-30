@@ -18,14 +18,14 @@ impl Chromeosdevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `order_by: crate::types::OrderBy` -- Device property to use for sorting results.
-     * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
-     * * `page_token: &str` -- The `pageToken` query parameter is used to request the next page of query results. The follow-on request's `pageToken` query parameter is the `nextPageToken` from your previous response.
-     * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
-     * * `query: &str` -- Search string in the format given at http://support.google.com/chromeos/a/bin/answer.py?answer=1698333.
-     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `max_results` -- Maximum number of results to return.
+     * * `order_by` -- Device property to use for sorting results.
+     * * `org_unit_path` -- The full path of the organizational unit or its unique ID.
+     * * `page_token` -- The `pageToken` query parameter is used to request the next page of query results. The follow-on request's `pageToken` query parameter is the `nextPageToken` from your previous response.
+     * * `projection` -- Restrict information returned to a set of selected fields.
+     * * `query` -- Search string in the format given at http://support.google.com/chromeos/a/bin/answer.py?answer=1698333
+     * * `sort_order` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
      */
     pub async fn list(
         &self,
@@ -156,7 +156,7 @@ impl Chromeosdevices {
                 } = self
                     .client
                     .get(
-                        &format!("{}?pageToken={}", url, page),
+                        &format!("{url}?pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -171,7 +171,7 @@ impl Chromeosdevices {
                 } = self
                     .client
                     .get(
-                        &format!("{}&pageToken={}", url, page),
+                        &format!("{url}&pageToken={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -199,8 +199,8 @@ impl Chromeosdevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `org_unit_path: &str` -- Full path of the target organizational unit or its ID.
+     * * `customer_id` -- Immutable ID of the Google Workspace account
+     * * `org_unit_path` -- Full path of the target organizational unit or its ID
      */
     pub async fn move_devices_ou(
         &self,
@@ -238,9 +238,9 @@ impl Chromeosdevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `device_id: &str` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/directory/v1/reference/chromeosdevices/list) method.
-     * * `projection: crate::types::Projection` -- Determines whether the response contains the full list of properties or only a subset.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `device_id` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/directory/v1/reference/chromeosdevices/list) method.
+     * * `projection` -- Determines whether the response contains the full list of properties or only a subset.
      */
     pub async fn get(
         &self,
@@ -279,9 +279,9 @@ impl Chromeosdevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `device_id: &str` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/v1/reference/chromeosdevices/list) method.
-     * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `device_id` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/v1/reference/chromeosdevices/list) method.
+     * * `projection` -- Restrict information returned to a set of selected fields.
      */
     pub async fn update(
         &self,
@@ -321,9 +321,9 @@ impl Chromeosdevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `device_id: &str` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/v1/reference/chromeosdevices/list) method.
-     * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `device_id` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/v1/reference/chromeosdevices/list) method.
+     * * `projection` -- Restrict information returned to a set of selected fields.
      */
     pub async fn patch(
         &self,
@@ -363,8 +363,8 @@ impl Chromeosdevices {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-     * * `resource_id: &str` -- The unique ID of the device. The `resourceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/directory/v1/reference/chromeosdevices/list) method.
+     * * `customer_id` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `resource_id` -- The unique ID of the device. The `resourceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/directory/v1/reference/chromeosdevices/list) method.
      */
     pub async fn action(
         &self,

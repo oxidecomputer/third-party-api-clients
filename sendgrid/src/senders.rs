@@ -12,7 +12,7 @@ impl Senders {
     }
 
     /**
-     * Create a Sender Identity.
+     * Create a Sender Identity
      *
      * This function performs a `POST` to the `/marketing/senders` endpoint.
      *
@@ -24,7 +24,7 @@ impl Senders {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_marketing(
         &self,

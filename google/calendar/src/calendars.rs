@@ -38,7 +38,7 @@ impl Calendars {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn get(
         &self,
@@ -68,7 +68,7 @@ impl Calendars {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn update(
         &self,
@@ -99,7 +99,7 @@ impl Calendars {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn delete(&self, calendar_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -126,7 +126,7 @@ impl Calendars {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn patch(
         &self,
@@ -157,7 +157,7 @@ impl Calendars {
      *
      * **Parameters:**
      *
-     * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+     * * `calendar_id` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
     pub async fn clear(&self, calendar_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

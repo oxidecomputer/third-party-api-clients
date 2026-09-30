@@ -58,9 +58,9 @@ impl AdminEmoji {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.teams:read`.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * * `token` -- Authentication token. Requires scope: `admin.teams:read`
+     * * `cursor` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * * `limit` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
      */
     pub async fn list(
         &self,
@@ -77,7 +77,7 @@ impl AdminEmoji {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin.emoji.list?{}", query_), None);
+            .url(&format!("/admin.emoji.list?{query_}"), None);
         self.client
             .get(
                 &url,

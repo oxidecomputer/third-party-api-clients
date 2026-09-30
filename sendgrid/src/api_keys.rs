@@ -12,7 +12,7 @@ impl ApiKeys {
     }
 
     /**
-     * Retrieve all API Keys belonging to the authenticated user.
+     * Retrieve all API Keys belonging to the authenticated user
      *
      * This function performs a `GET` to the `/api_keys` endpoint.
      *
@@ -26,8 +26,8 @@ impl ApiKeys {
      *
      * **Parameters:**
      *
-     * * `limit: i64`
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit`
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get(
         &self,
@@ -38,7 +38,7 @@ impl ApiKeys {
             query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/api_keys?{}", query_), None);
+        let url = self.client.url(&format!("/api_keys?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -50,7 +50,7 @@ impl ApiKeys {
             .await
     }
     /**
-     * Create API keys.
+     * Create API keys
      *
      * This function performs a `POST` to the `/api_keys` endpoint.
      *
@@ -70,7 +70,7 @@ impl ApiKeys {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn create(
         &self,
@@ -88,7 +88,7 @@ impl ApiKeys {
             .await
     }
     /**
-     * Retrieve an existing API Key.
+     * Retrieve an existing API Key
      *
      * This function performs a `GET` to the `/api_keys/{api_key_id}` endpoint.
      *
@@ -100,7 +100,7 @@ impl ApiKeys {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_key(
         &self,
@@ -124,7 +124,7 @@ impl ApiKeys {
             .await
     }
     /**
-     * Update API key name and scopes.
+     * Update API key name and scopes
      *
      * This function performs a `PUT` to the `/api_keys/{api_key_id}` endpoint.
      *
@@ -138,7 +138,7 @@ impl ApiKeys {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn put_key(
         &self,
@@ -163,7 +163,7 @@ impl ApiKeys {
             .await
     }
     /**
-     * Delete API keys.
+     * Delete API keys
      *
      * This function performs a `DELETE` to the `/api_keys/{api_key_id}` endpoint.
      *
@@ -173,7 +173,7 @@ impl ApiKeys {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_key(&self, api_key_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -194,7 +194,7 @@ impl ApiKeys {
             .await
     }
     /**
-     * Update API key name.
+     * Update API key name
      *
      * This function performs a `PATCH` to the `/api_keys/{api_key_id}` endpoint.
      *
@@ -204,7 +204,7 @@ impl ApiKeys {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_key(
         &self,

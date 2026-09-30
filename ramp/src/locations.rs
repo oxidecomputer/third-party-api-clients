@@ -12,7 +12,7 @@ impl Locations {
     }
 
     /**
-     * List locations.
+     * List locations
      *
      * This function performs a `GET` to the `/locations` endpoint.
      *
@@ -20,9 +20,9 @@ impl Locations {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `authorization` -- The OAuth2 token header
+     * * `start` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     pub async fn get_page(
         &self,
@@ -37,7 +37,7 @@ impl Locations {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/locations?{}", query_), None);
+        let url = self.client.url(&format!("/locations?{query_}"), None);
         let resp: crate::Response<crate::types::GetLocationResponse> = self
             .client
             .get(
@@ -57,7 +57,7 @@ impl Locations {
         ))
     }
     /**
-     * List locations.
+     * List locations
      *
      * This function performs a `GET` to the `/locations` endpoint.
      *
@@ -123,7 +123,7 @@ impl Locations {
         Ok(crate::Response::new(status, headers, data))
     }
     /**
-     * Create new location.
+     * Create new location
      *
      * This function performs a `POST` to the `/locations` endpoint.
      *
@@ -131,7 +131,7 @@ impl Locations {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn post(
         &self,
@@ -149,7 +149,7 @@ impl Locations {
             .await
     }
     /**
-     * GET a location.
+     * GET a location
      *
      * This function performs a `GET` to the `/locations/{id}` endpoint.
      *
@@ -157,7 +157,7 @@ impl Locations {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The OAuth2 token header.
+     * * `authorization` -- The OAuth2 token header
      */
     pub async fn get(&self, id: &str) -> ClientResult<crate::Response<crate::types::Location>> {
         let url = self.client.url(
@@ -175,7 +175,7 @@ impl Locations {
             .await
     }
     /**
-     * Update location.
+     * Update location
      *
      * This function performs a `PATCH` to the `/locations/{id}` endpoint.
      *

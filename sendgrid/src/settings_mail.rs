@@ -12,7 +12,7 @@ impl SettingsMail {
     }
 
     /**
-     * Retrieve all mail settings.
+     * Retrieve all mail settings
      *
      * This function performs a `GET` to the `/mail_settings` endpoint.
      *
@@ -22,9 +22,9 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `limit: i64` -- The number of settings to return.
-     * * `offset: i64` -- Where in the list of results to begin displaying settings.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `limit` -- The number of settings to return.
+     * * `offset` -- Where in the list of results to begin displaying settings.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings(
         &self,
@@ -39,7 +39,7 @@ impl SettingsMail {
             query_args.push(("offset".to_string(), offset.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/mail_settings?{}", query_), None);
+        let url = self.client.url(&format!("/mail_settings?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -51,7 +51,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Retrieve address whitelist mail settings.
+     * Retrieve address whitelist mail settings
      *
      * This function performs a `GET` to the `/mail_settings/address_whitelist` endpoint.
      *
@@ -63,7 +63,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_address_whitelist(
         &self,
@@ -80,7 +80,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Update address whitelist mail settings.
+     * Update address whitelist mail settings
      *
      * This function performs a `PATCH` to the `/mail_settings/address_whitelist` endpoint.
      *
@@ -98,7 +98,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_mail_settings_address_whitelist(
         &self,
@@ -116,7 +116,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Retrieve footer mail settings.
+     * Retrieve footer mail settings
      *
      * This function performs a `GET` to the `/mail_settings/footer` endpoint.
      *
@@ -128,7 +128,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_footer(
         &self,
@@ -145,7 +145,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Update footer mail settings.
+     * Update footer mail settings
      *
      * This function performs a `PATCH` to the `/mail_settings/footer` endpoint.
      *
@@ -157,7 +157,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_mail_settings_footer(
         &self,
@@ -175,7 +175,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Retrieve forward spam mail settings.
+     * Retrieve forward spam mail settings
      *
      * This function performs a `GET` to the `/mail_settings/forward_spam` endpoint.
      *
@@ -185,7 +185,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_forward_spam(
         &self,
@@ -202,7 +202,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Update forward spam mail settings.
+     * Update forward spam mail settings
      *
      * This function performs a `PATCH` to the `/mail_settings/forward_spam` endpoint.
      *
@@ -225,7 +225,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_mail_settings_forward_spam(
         &self,
@@ -243,7 +243,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Retrieve legacy template mail settings.
+     * Retrieve legacy template mail settings
      *
      * This function performs a `GET` to the `/mail_settings/template` endpoint.
      *
@@ -255,7 +255,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_template(
         &self,
@@ -272,7 +272,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Update template mail settings.
+     * Update template mail settings
      *
      * This function performs a `PATCH` to the `/mail_settings/template` endpoint.
      *
@@ -284,7 +284,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_mail_settings_template(
         &self,
@@ -302,7 +302,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Retrieve bounce purge mail settings.
+     * Retrieve bounce purge mail settings
      *
      * This function performs a `GET` to the `/mail_settings/bounce_purge` endpoint.
      *
@@ -318,7 +318,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_bounce_purge(
         &self,
@@ -335,7 +335,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Update bounce purge mail settings.
+     * Update bounce purge mail settings
      *
      * This function performs a `PATCH` to the `/mail_settings/bounce_purge` endpoint.
      *
@@ -351,7 +351,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_mail_settings_bounce_purge(
         &self,
@@ -369,7 +369,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Retrieve forward bounce mail settings.
+     * Retrieve forward bounce mail settings
      *
      * This function performs a `GET` to the `/mail_settings/forward_bounce` endpoint.
      *
@@ -379,7 +379,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_mail_settings_forward_bounce(
         &self,
@@ -396,7 +396,7 @@ impl SettingsMail {
             .await
     }
     /**
-     * Update forward bounce mail settings.
+     * Update forward bounce mail settings
      *
      * This function performs a `PATCH` to the `/mail_settings/forward_bounce` endpoint.
      *
@@ -408,7 +408,7 @@ impl SettingsMail {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_mail_settings_forward_bounce(
         &self,

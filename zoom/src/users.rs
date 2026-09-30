@@ -12,7 +12,7 @@ impl Users {
     }
 
     /**
-     * List users.
+     * List users
      *
      * This function performs a `GET` to the `/users` endpoint.
      *
@@ -22,19 +22,21 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `status: crate::types::UsersStatus` -- The user's status:
-     *  \* `active` — An active user.
-     *  \* `inactive` — A deactivated user.
-     *  \* `pending` — A pending user.
-     *  
-     *  This value defaults to `active`.
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `role_id: &str` -- The role's unique ID. Use this parameter to filter the response by a specific role. You can use the [List Roles](https://marketplace.zoom.us/docs/api-reference/zoom-api/roles/roles) API to get a role's unique ID value.
-     * * `page_number: &str` -- The page number of the current page in the returned records.
-     * * `include_fields: crate::types::UsersIncludeFields` -- Use this parameter to display one of the following attributes in the API call's response:
-     *  \* `custom_attributes` — Return the user's custom attributes.
-     *  \* `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `status` -- The user's status:
+     *
+     *   * `active` — An active user.
+     *   * `inactive` — A deactivated user.
+     *   * `pending` — A pending user.
+     *
+     *   This value defaults to `active`.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `role_id` -- The role's unique ID. Use this parameter to filter the response by a specific role. You can use the [List Roles](https://marketplace.zoom.us/docs/api-reference/zoom-api/roles/roles) API to get a role's unique ID value.
+     * * `page_number` -- The page number of the current page in the returned records.
+     * * `include_fields` -- Use this parameter to display one of the following attributes in the API call's response:
+     *
+     *   * `custom_attributes` — Return the user's custom attributes.
+     *   * `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn get_page(
         &self,
@@ -65,7 +67,7 @@ impl Users {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users?{}", query_), None);
+        let url = self.client.url(&format!("/users?{query_}"), None);
         let resp: crate::Response<crate::types::UsersResponseData> = self
             .client
             .get(
@@ -85,7 +87,7 @@ impl Users {
         ))
     }
     /**
-     * List users.
+     * List users
      *
      * This function performs a `GET` to the `/users` endpoint.
      *
@@ -112,7 +114,7 @@ impl Users {
             query_args.push(("status".to_string(), status.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users?{}", query_), None);
+        let url = self.client.url(&format!("/users?{query_}"), None);
         let crate::Response::<crate::types::UsersResponseData> {
             mut status,
             mut headers,
@@ -142,7 +144,7 @@ impl Users {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -157,7 +159,7 @@ impl Users {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -179,16 +181,18 @@ impl Users {
         Ok(crate::Response::new(status, headers, users))
     }
     /**
-     * Create users.
+     * Create users
      *
      * This function performs a `POST` to the `/users` endpoint.
      *
      * A Zoom account can have one or more users. Use this API to add a new user to your account.<br><br>
      * **Prerequisites:**<br>
+     *
      * * Pro or higher plan<br><br>
+     *
      * **Scopes:** `user:write:admin` `user:write`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn create(
         &self,
@@ -206,7 +210,7 @@ impl Users {
             .await
     }
     /**
-     * Get a user.
+     * Get a user
      *
      * This function performs a `GET` to the `/users/{userId}` endpoint.
      *
@@ -218,15 +222,15 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `login_type: crate::types::LoginType` -- The user's login method:
-     *  
-     *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *  
-     *  The following login methods are only available in China:
-     *  
-     *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `encrypted_email: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `login_type` -- The user's login method:
+     *
+     *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+     *
+     *   The following login methods are only available in China:
+     *
+     *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+     * * `encrypted_email` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     pub async fn user(
         &self,
@@ -261,7 +265,7 @@ impl Users {
             .await
     }
     /**
-     * Delete a user.
+     * Delete a user
      *
      * This function performs a `DELETE` to the `/users/{userId}` endpoint.
      *
@@ -275,12 +279,12 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `action: crate::types::UserDeleteAction` -- Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`.
-     * * `transfer_email: &str` -- User's first name.
-     * * `transfer_meeting: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
-     * * `transfer_webinar: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
-     * * `transfer_recording: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `action` -- Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`
+     * * `transfer_email` -- User's first name.
+     * * `transfer_meeting` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `transfer_webinar` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `transfer_recording` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     pub async fn delete(
         &self,
@@ -330,7 +334,7 @@ impl Users {
             .await
     }
     /**
-     * Update a user.
+     * Update a user
      *
      * This function performs a `PATCH` to the `/users/{userId}` endpoint.
      *
@@ -340,14 +344,14 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `login_type: crate::types::LoginType` -- The user's login method:
-     *  
-     *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *  
-     *  The following login methods are only available in China:
-     *  
-     *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `login_type` -- The user's login method:
+     *
+     *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+     *
+     *   The following login methods are only available in China:
+     *
+     *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
      */
     pub async fn update(
         &self,
@@ -379,7 +383,7 @@ impl Users {
             .await
     }
     /**
-     * Get user's ZAK.
+     * Get user's ZAK
      *
      * This function performs a `GET` to the `/users/me/zak` endpoint.
      *
@@ -387,8 +391,6 @@ impl Users {
      *
      * **Scope:** `user_zak:read`<br>
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-     *
-     *
      */
     pub async fn zak(&self) -> ClientResult<crate::Response<crate::types::UserZakResponse>> {
         let url = self.client.url("/users/me/zak", None);
@@ -403,7 +405,7 @@ impl Users {
             .await
     }
     /**
-     * List user assistants.
+     * List user assistants
      *
      * This function performs a `GET` to the `/users/{userId}/assistants` endpoint.
      *
@@ -414,12 +416,13 @@ impl Users {
      * **Scopes:** `user:read:admin`, `user:read`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * Current user as well as the assistant must have Licensed or an On-prem license.
      * * Assistants must be under the current user's account.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn assistant(
         &self,
@@ -443,7 +446,7 @@ impl Users {
             .await
     }
     /**
-     * Add assistants.
+     * Add assistants
      *
      * This function performs a `POST` to the `/users/{userId}/assistants` endpoint.
      *
@@ -454,12 +457,13 @@ impl Users {
      * **Scopes:** `user:write:admin`, `user:write`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * The user as well as the assistant must have Licensed or an On-prem license.
      * * Assistants must be under the current user's account.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn assistant_create(
         &self,
@@ -484,7 +488,7 @@ impl Users {
             .await
     }
     /**
-     * Delete user assistants.
+     * Delete user assistants
      *
      * This function performs a `DELETE` to the `/users/{userId}/assistants` endpoint.
      *
@@ -495,12 +499,13 @@ impl Users {
      * **Scopes:** `user:write:admin`, `user:write`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * The user as well as the assistant must have Licensed or an On-prem license.
      * * Assistants must be under the current user's account.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn assistants_delete(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -521,7 +526,7 @@ impl Users {
             .await
     }
     /**
-     * Delete a user assistant.
+     * Delete a user assistant
      *
      * This function performs a `DELETE` to the `/users/{userId}/assistants/{assistantId}` endpoint.
      *
@@ -532,13 +537,14 @@ impl Users {
      * **Scopes:** `user:write:admin`, `user:write`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * The user as well as the assistant must have Licensed or an On-prem license.
      * * Assistants must be under the current user's account.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `assistant_id: &str` -- User's first name.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `assistant_id` -- User's first name.
      */
     pub async fn assistant_delete(
         &self,
@@ -564,7 +570,7 @@ impl Users {
             .await
     }
     /**
-     * List user schedulers.
+     * List user schedulers
      *
      * This function performs a `GET` to the `/users/{userId}/schedulers` endpoint.
      *
@@ -575,11 +581,12 @@ impl Users {
      * **Scopes:** `user:read:admin`, `user:read`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * Current user must be under the same account as the scheduler.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn scheduler(
         &self,
@@ -603,7 +610,7 @@ impl Users {
             .await
     }
     /**
-     * Delete user schedulers.
+     * Delete user schedulers
      *
      * This function performs a `DELETE` to the `/users/{userId}/schedulers` endpoint.
      *
@@ -614,11 +621,12 @@ impl Users {
      * **Scopes:** `user:write:admin`, `user:write`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Current user (assistant) must be under the same account as the scheduler.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn schedulers_delete(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -639,7 +647,7 @@ impl Users {
             .await
     }
     /**
-     * Delete a scheduler.
+     * Delete a scheduler
      *
      * This function performs a `DELETE` to the `/users/{userId}/schedulers/{schedulerId}` endpoint.
      *
@@ -650,12 +658,13 @@ impl Users {
      * **Scopes:** `user:write:admin`, `user:write`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Current user must be under the same account as the scheduler.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `scheduler_id: &str` -- User's first name.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `scheduler_id` -- User's first name.
      */
     pub async fn scheduler_delete(
         &self,
@@ -681,7 +690,7 @@ impl Users {
             .await
     }
     /**
-     * Upload a user's profile picture.
+     * Upload a user's profile picture
      *
      * This function performs a `POST` to the `/users/{userId}/picture` endpoint.
      *
@@ -693,7 +702,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn picture(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -714,7 +723,7 @@ impl Users {
             .await
     }
     /**
-     * Get user settings.
+     * Get user settings
      *
      * This function performs a `GET` to the `/users/{userId}/settings` endpoint.
      *
@@ -724,26 +733,27 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `login_type: crate::types::LoginType` -- The user's login method:
-     *  
-     *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *  
-     *  The following login methods are only available in China:
-     *  
-     *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
-     * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `login_type` -- The user's login method:
+     *
+     *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+     *
+     *   The following login methods are only available in China:
+     *
+     *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
+     * * `custom_query_fields` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *   {
-     *       "schedule_meeting": {
-     *           "host_video": false
-     *       }
+     *   "schedule_meeting": {
+     *   "host_video": false
      *   }
-     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   }
+     *   You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn settings_domains(
         &self,
@@ -785,7 +795,7 @@ impl Users {
             .await
     }
     /**
-     * Get user settings.
+     * Get user settings
      *
      * This function performs a `GET` to the `/users/{userId}/settings` endpoint.
      *
@@ -795,26 +805,27 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `login_type: crate::types::LoginType` -- The user's login method:
-     *  
-     *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *  
-     *  The following login methods are only available in China:
-     *  
-     *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
-     * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `login_type` -- The user's login method:
+     *
+     *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+     *
+     *   The following login methods are only available in China:
+     *
+     *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
+     * * `custom_query_fields` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *   {
-     *       "schedule_meeting": {
-     *           "host_video": false
-     *       }
+     *   "schedule_meeting": {
+     *   "host_video": false
      *   }
-     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   }
+     *   You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn settings_user(
         &self,
@@ -856,7 +867,7 @@ impl Users {
             .await
     }
     /**
-     * Get user settings.
+     * Get user settings
      *
      * This function performs a `GET` to the `/users/{userId}/settings` endpoint.
      *
@@ -866,26 +877,27 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `login_type: crate::types::LoginType` -- The user's login method:
-     *  
-     *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *  
-     *  The following login methods are only available in China:
-     *  
-     *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
-     * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `login_type` -- The user's login method:
+     *
+     *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+     *
+     *   The following login methods are only available in China:
+     *
+     *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
+     * * `custom_query_fields` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *   {
-     *       "schedule_meeting": {
-     *           "host_video": false
-     *       }
+     *   "schedule_meeting": {
+     *   "host_video": false
      *   }
-     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   }
+     *   You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn settings_meeting_security(
         &self,
@@ -927,7 +939,7 @@ impl Users {
             .await
     }
     /**
-     * Get user settings.
+     * Get user settings
      *
      * This function performs a `GET` to the `/users/{userId}/settings` endpoint.
      *
@@ -937,26 +949,27 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `login_type: crate::types::LoginType` -- The user's login method:
-     *  
-     *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *  
-     *  The following login methods are only available in China:
-     *  
-     *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
-     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
-     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
-     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
-     *  \* `meeting_security` — View the account's meeting security settings.
-     * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `login_type` -- The user's login method:
+     *
+     *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+     *
+     *   The following login methods are only available in China:
+     *
+     *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+     * * `option` -- Use the following options to filter the results of the account's information:
+     *
+     *   * `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *   * `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *   * `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *   * `meeting_security` — View the account's meeting security settings.
+     * * `custom_query_fields` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *   {
-     *       "schedule_meeting": {
-     *           "host_video": false
-     *       }
+     *   "schedule_meeting": {
+     *   "host_video": false
      *   }
-     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   }
+     *   You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn setting(
         &self,
@@ -998,7 +1011,7 @@ impl Users {
             .await
     }
     /**
-     * Update user settings.
+     * Update user settings
      *
      * This function performs a `PATCH` to the `/users/{userId}/settings` endpoint.
      *
@@ -1008,8 +1021,8 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `option: crate::types::UserSettingsUpdateOption`
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `option`
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn settings_update(
         &self,
@@ -1041,7 +1054,7 @@ impl Users {
             .await
     }
     /**
-     * Update user status.
+     * Update user status
      *
      * This function performs a `PUT` to the `/users/{userId}/status` endpoint.
      *
@@ -1053,7 +1066,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn status(
         &self,
@@ -1078,7 +1091,7 @@ impl Users {
             .await
     }
     /**
-     * Update a user's password.
+     * Update a user's password
      *
      * This function performs a `PUT` to the `/users/{userId}/password` endpoint.
      *
@@ -1086,14 +1099,15 @@ impl Users {
      *
      * After this request is processed successfully, an email notification will be sent to the user stating that the password was changed.<br>
      * **Scopes:** `user:write:admin` `user:write`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      * **Prerequisites:**<br>
+     *
      * * Owner or admin of the Zoom account.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn password(
         &self,
@@ -1118,7 +1132,7 @@ impl Users {
             .await
     }
     /**
-     * Get user permissions.
+     * Get user permissions
      *
      * This function performs a `GET` to the `/users/{userId}/permissions` endpoint.
      *
@@ -1130,7 +1144,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn permission(
         &self,
@@ -1154,7 +1168,7 @@ impl Users {
             .await
     }
     /**
-     * Get a user token.
+     * Get a user token
      *
      * This function performs a `GET` to the `/users/{userId}/token` endpoint.
      *
@@ -1166,9 +1180,9 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `type_: crate::types::UserTokenType` -- User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
-     * * `ttl: i64` -- Use this field in conjunction with the `type` field where the value of `type` field is `zak`. The value of this field denotes the expiry time of the `zak` token in seconds. For example, if you would like the zak token to be expired after one hour of the token generation, the value of this field should be `3600`.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `type_` -- User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
+     * * `ttl` -- Use this field in conjunction with the `type` field where the value of `type` field is `zak`. The value of this field denotes the expiry time of the `zak` token in seconds. For example, if you would like the zak token to be expired after one hour of the token generation, the value of this field should be `3600`.
      */
     pub async fn token(
         &self,
@@ -1203,7 +1217,7 @@ impl Users {
             .await
     }
     /**
-     * Revoke a user's SSO token.
+     * Revoke a user's SSO token
      *
      * This function performs a `DELETE` to the `/users/{userId}/token` endpoint.
      *
@@ -1215,7 +1229,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn sso_token_delete(&self, user_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1236,7 +1250,7 @@ impl Users {
             .await
     }
     /**
-     * Check a user email.
+     * Check a user email
      *
      * This function performs a `GET` to the `/users/email` endpoint.
      *
@@ -1245,13 +1259,12 @@ impl Users {
      * <b>Note: </b>You can successfully check if a user is a registered Zoom user only if the user **signed up for Zoom via email and is within your account.** If you provide an email address of a user who is not in your account, the value of "existed_email" parameter will be "false" irrespective of whether or not the user is registered with Zoom. The response of this API call will not include users who joined Zoom using options such as "Sign in with SSO", "Sign in with Google" or "Sign in with Facebook" even if they are in the same account as yours.
      *
      * **Scopes:** `user:read:admin` `user:read`
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `email: &str` -- The email address to be verified.
+     * * `email` -- The email address to be verified.
      */
     pub async fn email(
         &self,
@@ -1262,7 +1275,7 @@ impl Users {
             query_args.push(("email".to_string(), email.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/users/email?{}", query_), None);
+        let url = self.client.url(&format!("/users/email?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1274,7 +1287,7 @@ impl Users {
             .await
     }
     /**
-     * Update a user's email.
+     * Update a user's email
      *
      * This function performs a `PUT` to the `/users/{userId}/email` endpoint.
      *
@@ -1286,12 +1299,13 @@ impl Users {
      * **Scopes:** `user:write:admin`, `user:write`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Managed domain must be enabled in the account.
      * * The new email address should not already exist in Zoom.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
+     * * `user_id` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
     pub async fn email_update(
         &self,
@@ -1316,19 +1330,19 @@ impl Users {
             .await
     }
     /**
-     * Check a user's PM room.
+     * Check a user's PM room
      *
      * This function performs a `GET` to the `/users/vanity_name` endpoint.
      *
      * A personal meeting room is a virtual meeting room that can be permanently assigned to a user.
      * Use this API to check if a personal meeting room with the given name exists or not.<br><br>
      * **Scopes:** `user:read:admin` `user:read`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `vanity_name: &str` -- Personal meeting room name.
+     * * `vanity_name` -- Personal meeting room name.
      */
     pub async fn vanity_name(
         &self,
@@ -1341,7 +1355,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/users/vanity_name?{}", query_), None);
+            .url(&format!("/users/vanity_name?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1353,7 +1367,7 @@ impl Users {
             .await
     }
     /**
-     * Switch a user's account.
+     * Switch a user's account
      *
      * This function performs a `PUT` to the `/accounts/{accountId}/users/{userId}/account` endpoint.
      *
@@ -1364,17 +1378,18 @@ impl Users {
      * To move a user from one sub account to another sub account, provide the sub account's Account ID as the value for `accountId`.
      *
      * **Prerequisites**:
+     *
      * * The account should have Pro or a higher plan with master account option enabled.
      * * The user whose account needs to be switched should not be an admin or an owner of that account.
      * * The user should not have the same [managed domain](https://support.zoom.us/hc/en-us/articles/203395207-What-is-Managed-Domain-) as the account owner.
      *
      * **Scope:** `user:master`<br>
      *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- User's first name.
+     * * `account_id` -- User's first name.
      */
     pub async fn switch_account(
         &self,
@@ -1401,7 +1416,7 @@ impl Users {
             .await
     }
     /**
-     * Update a user's presence status.
+     * Update a user's presence status
      *
      * This function performs a `PUT` to the `/users/{userId}/presence_status` endpoint.
      *
@@ -1410,6 +1425,7 @@ impl Users {
      * A user's status **cannot** be updated more than once per minute. For example, you can only submit a maximum of one update request per minute for a single user.
      *
      * Users in the Zoom desktop client and mobile apps are assigned with a [presence status](https://support.zoom.us/hc/en-us/articles/360032554051-Status-Icons). The presence status informs users of their contact's availability. Users can also change their own presence status to one the following:
+     *
      * * **Away**
      * * **Do not disturb**
      * * **Available**
@@ -1445,7 +1461,7 @@ impl Users {
             .await
     }
     /**
-     * Upload virtual background files.
+     * Upload virtual background files
      *
      * This function performs a `POST` to the `/users/{userId}/settings/virtual_backgrounds` endpoint.
      *
@@ -1457,11 +1473,12 @@ impl Users {
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Prerequisites:**
+     *
      * * Virtual background feature must be [enabled](https://support.zoom.us/hc/en-us/articles/210707503-Virtual-Background#h_2ef28080-fce9-4ac2-b567-dc958afab1b7) on the account.
      *
      * **Parameters:**
      *
-     * * `user_id: &str` -- Unique identifier of the user. Retrieve the value for this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
+     * * `user_id` -- Unique identifier of the user. Retrieve the value for this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
      */
     pub async fn upload_v_buser(
         &self,
@@ -1486,7 +1503,7 @@ impl Users {
             .await
     }
     /**
-     * Delete virtual background files.
+     * Delete virtual background files
      *
      * This function performs a `DELETE` to the `/users/{userId}/settings/virtual_backgrounds` endpoint.
      *
@@ -1495,12 +1512,13 @@ impl Users {
      * **Scopes:** `user:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * Virtual background feature must be [enabled](https://support.zoom.us/hc/en-us/articles/210707503-Virtual-Background#h_2ef28080-fce9-4ac2-b567-dc958afab1b7) on the account.
      *
      * **Parameters:**
      *
-     * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
-     * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API. .
+     * * `file_ids` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
+     * * `user_id` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
      */
     pub async fn del_vb(&self, user_id: &str, file_ids: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();

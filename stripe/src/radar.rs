@@ -18,12 +18,11 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `charge: &str` -- Only return early fraud warnings for the charge specified by this charge ID.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `payment_intent: &str` -- Only return early fraud warnings for charges that were created by the PaymentIntent specified by this PaymentIntent ID.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `charge` -- Only return early fraud warnings for the charge specified by this charge ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `payment_intent` -- Only return early fraud warnings for charges that were created by the PaymentIntent specified by this PaymentIntent ID.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_early_fraud_warnings(
         &self,
@@ -52,7 +51,7 @@ impl Radar {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
+            .url(&format!("/v1/radar/early_fraud_warnings?{query_}"), None);
         let resp: crate::Response<crate::types::RadarEarlyFraudWarningList> = self
             .client
             .get(
@@ -93,7 +92,7 @@ impl Radar {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/radar/early_fraud_warnings?{}", query_), None);
+            .url(&format!("/v1/radar/early_fraud_warnings?{query_}"), None);
         let crate::Response::<crate::types::RadarEarlyFraudWarningList> {
             mut status,
             mut headers,
@@ -133,7 +132,7 @@ impl Radar {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -148,7 +147,7 @@ impl Radar {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -174,8 +173,7 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `early_fraud_warning: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `early_fraud_warning` -- The account's country.
      */
     pub async fn get_early_fraud_warnings_warning(
         &self,
@@ -205,17 +203,14 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `created: &str`
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `value: &str` -- Return items belonging to the parent list whose value matches the specified value (using an "is like" match).
-     * * `value_list: &str` -- Identifier for the parent value list this item belongs to.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `value` -- Return items belonging to the parent list whose value matches the specified value (using an "is like" match).
+     * * `value_list` -- Identifier for the parent value list this item belongs to.
      */
     pub async fn get_value_list_items(
         &self,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -241,7 +236,7 @@ impl Radar {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/radar/value_list_items?{}", query_), None);
+            .url(&format!("/v1/radar/value_list_items?{query_}"), None);
         let resp: crate::Response<crate::types::ListItems> = self
             .client
             .get(
@@ -269,7 +264,6 @@ impl Radar {
      */
     pub async fn get_all_value_list_all_items(
         &self,
-        created: &str,
         value: &str,
         value_list: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarListItem>>> {
@@ -283,7 +277,7 @@ impl Radar {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/radar/value_list_items?{}", query_), None);
+            .url(&format!("/v1/radar/value_list_items?{query_}"), None);
         let crate::Response::<crate::types::ListItems> {
             mut status,
             mut headers,
@@ -323,7 +317,7 @@ impl Radar {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -338,7 +332,7 @@ impl Radar {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -381,8 +375,7 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `item: &str` -- The account's country.
+     * * `item` -- The account's country.
      */
     pub async fn get_value_list_items_item(
         &self,
@@ -412,7 +405,7 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `item: &str` -- The account's country.
+     * * `item` -- The account's country.
      */
     pub async fn delete_value_list_items_item(
         &self,
@@ -442,19 +435,16 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `alias: &str` -- The alias used to reference the value list when writing rules.
-     * * `contains: &str` -- A value contained within a value list - returns all value lists containing this value.
-     * * `created: &str`
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `alias` -- The alias used to reference the value list when writing rules.
+     * * `contains` -- A value contained within a value list - returns all value lists containing this value.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_value_lists(
         &self,
         alias: &str,
         contains: &str,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -478,7 +468,7 @@ impl Radar {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/radar/value_lists?{}", query_), None);
+            .url(&format!("/v1/radar/value_lists?{query_}"), None);
         let resp: crate::Response<crate::types::GetRadarValueListsResponse> = self
             .client
             .get(
@@ -508,7 +498,6 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::RadarList>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
@@ -520,7 +509,7 @@ impl Radar {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/radar/value_lists?{}", query_), None);
+            .url(&format!("/v1/radar/value_lists?{query_}"), None);
         let crate::Response::<crate::types::GetRadarValueListsResponse> {
             mut status,
             mut headers,
@@ -560,7 +549,7 @@ impl Radar {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -575,7 +564,7 @@ impl Radar {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -616,8 +605,7 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `value_list: &str` -- The account's country.
+     * * `value_list` -- The account's country.
      */
     pub async fn get_value_lists_list(
         &self,
@@ -647,7 +635,7 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `value_list: &str` -- The account's country.
+     * * `value_list` -- The account's country.
      */
     pub async fn post_value_lists_list(
         &self,
@@ -677,7 +665,7 @@ impl Radar {
      *
      * **Parameters:**
      *
-     * * `value_list: &str` -- The account's country.
+     * * `value_list` -- The account's country.
      */
     pub async fn delete_value_lists_list(
         &self,

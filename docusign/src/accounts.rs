@@ -82,7 +82,6 @@ impl Accounts {
      * The response returns the new account ID, password, and the default user
      * information for each newly created account.
      *
-     *
      * When creating multiple accounts,
      * the body of the request is a
      * `newAccountRequests`
@@ -135,12 +134,9 @@ impl Accounts {
      * in the response contains specific information
      * about the failure.
      *
-     *
-     *
      * [newAccountDefinition]: #/definitions/newAccountDefinition
      * [nameValue]: #/definitions/nameValue
      * [newAccountRequest]: #/definitions/newAccountRequest
-     *
      */
     pub async fn post(
         &self,
@@ -190,8 +186,8 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_account_settings: &str` -- When set to **true**, includes account settings
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_account_settings` -- When set to **true**, includes account settings
      *   in the response. If you omit this parameter, the default behavior is **false**.
      */
     pub async fn get(
@@ -234,7 +230,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(&self, account_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -265,13 +261,12 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_charges: &str` -- Specifies which billing charges to return.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_charges` -- Specifies which billing charges to return.
      *   Valid values are:
-     *   
+     *
      *   * envelopes
      *   * seats
-     *   .
      */
     pub async fn billing_charges_get(
         &self,
@@ -310,8 +305,8 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_part: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_part` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn captive_recipients_delete_part(
         &self,
@@ -346,8 +341,8 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `email: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `email` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipient_names_get(
         &self,
@@ -386,7 +381,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn settings_get(
         &self,
@@ -418,7 +413,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn settings_put(
         &self,
@@ -453,7 +448,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_purge_configuration_get(
         &self,
@@ -489,7 +484,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn envelope_purge_configuration_put(
         &self,
@@ -522,7 +517,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn notification_defaults_get(
         &self,
@@ -554,7 +549,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn notification_defaults_put(
         &self,
@@ -589,35 +584,35 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- Specifies the maximum number of results included in the response. If no value is specified, this defaults to 1000.
-     * * `envelopes_not_shared_user_status: &str` -- This query parameter works in conjunction with `user_ids`. When you specify one of the following user statuses, the query limits the results to only users that match the specified status:
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count` -- Specifies the maximum number of results included in the response. If no value is specified, this defaults to 1000.
+     * * `envelopes_not_shared_user_status` -- This query parameter works in conjunction with `user_ids`. When you specify one of the following user statuses, the query limits the results to only users that match the specified status:
+     *
      *   - `ActivationRequired`: Membership Activation required
      *   - `ActivationSent`: Membership activation sent to user
      *   - `Active`: User Membership is active
      *   - `Closed`: User Membership is closed
-     *   - `Disabled`: User Membership is disabled.
-     * * `folder_ids: &str` -- A comma-separated list of folder IDs for which to return shared item information. If `item_type` is set to `folders`, at least one folder ID is required.
-     * * `item_type: &str` -- Specifies the type of shared item being requested. The possible values are:
-     *   
+     *   - `Disabled`: User Membership is disabled
+     * * `folder_ids` -- A comma-separated list of folder IDs for which to return shared item information. If `item_type` is set to `folders`, at least one folder ID is required.
+     * * `item_type` -- Specifies the type of shared item being requested. The possible values are:
+     *
      *   - `envelopes`: Get information about envelope sharing between users.
      *   - `templates`: Get information about template sharing among users and groups.
      *   - `folders`: Get information about folder sharing among users and groups.
-     *   .
-     * * `search_text: &str` -- Filter user names based on the specified string. The wild-card '*' (asterisk) can be used in the string.
-     * * `shared: &str` -- A comma-separated list of sharing filters that specifies which users appear in the response.
-     *   
+     * * `search_text` -- Filter user names based on the specified string. The wild-card '*' (asterisk) can be used in the string.
+     * * `shared` -- A comma-separated list of sharing filters that specifies which users appear in the response.
+     *
      *   - `not_shared`: The response lists users who do not share items of `item_type` with the current user.
-     *   
+     *
      *   - `shared_to`: The response lists users in `user_list` who are sharing items to current user.
-     *   
+     *
      *   - `shared_from`: The response lists users in `user_list` who are sharing items from the current user.
-     *   
+     *
      *   - `shared_to_and_from`: The response lists users in `user_list` who are sharing items to and from the current user.
-     *   
+     *
      *   If the current user does not have administrative privileges, only the `shared_to` option is valid.
-     * * `start_position: &str` -- If the number of responses is greater than `count`, this specifies the number of responses to skip. Typically this value is a multiple of `count`. The default is 0.
-     * * `user_ids: &str` -- A comma-separated list of user IDs for whom the shared item information is being requested.
+     * * `start_position` -- If the number of responses is greater than `count`, this specifies the number of responses to skip. Typically this value is a multiple of `count`. The default is 0.
+     * * `user_ids` -- A comma-separated list of user IDs for whom the shared item information is being requested.
      */
     pub async fn shared_access_get(
         &self,
@@ -695,18 +690,16 @@ impl Accounts {
      *
      * **Note**: This functionality is a newer version of the [Update Group Share](https://developers.docusign.com/docs/esign-rest-api/reference/Templates/Templates/updateGroupShare) functionality.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `item_type: &str` -- Specifies the type of shared item being set:
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `item_type` -- Specifies the type of shared item being set:
+     *
      *   - `envelopes`: Set envelope sharing between users.
      *   - `templates`: Set information about template sharing among users and groups.
      *   - `folders`: Get information about folder sharing among users and groups.
-     *   .
-     * * `preserve_existing_shared_access: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_ids: &str` -- A comma-separated list of IDs for users whose shared item access is being set.
+     * * `preserve_existing_shared_access` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `user_ids` -- A comma-separated list of IDs for users whose shared item access is being set.
      */
     pub async fn shared_access_put(
         &self,
@@ -763,7 +756,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn supported_languages_get(
         &self,
@@ -795,7 +788,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn unsupported_file_types_get(
         &self,
@@ -823,12 +816,10 @@ impl Accounts {
      *
      * This function performs a `GET` to the `/v2.1/organization_exports/{organizationId}/account_settings/{resultId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `organization_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `result_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `organization_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `result_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn organization_exports_get_settings_export(
         &self,

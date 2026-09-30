@@ -20,9 +20,9 @@ impl SigningGroups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `group_type: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_users: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_type` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_users` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -65,7 +65,7 @@ impl SigningGroups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -90,7 +90,7 @@ impl SigningGroups {
             .await
     }
     /**
-     * Creates a signing group. .
+     * Creates a signing group.
      *
      * This function performs a `POST` to the `/v2.1/accounts/{accountId}/signing_groups` endpoint.
      *
@@ -104,7 +104,7 @@ impl SigningGroups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -137,7 +137,7 @@ impl SigningGroups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(
         &self,
@@ -162,7 +162,7 @@ impl SigningGroups {
             .await
     }
     /**
-     * Gets information about a signing group. .
+     * Gets information about a signing group.
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/signing_groups/{signingGroupId}` endpoint.
      *
@@ -170,9 +170,9 @@ impl SigningGroups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `signing_group_id: &str` -- Optional. The ID of the [signing group](https://support.docusign.com/en/guides/ndse-user-guide-signing-groups).
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signing_group_id` -- Optional. The ID of the [signing group](https://support.docusign.com/en/guides/ndse-user-guide-signing-groups).
+     *
      *   **Note**: When you send an envelope to a signing group, anyone in the group can open it and sign it with their own signature. For this reason, we recommend that you do not include non-signer recipients (such as carbon copy recipients) in the same signing group as signer recipients. However, you could create a second signing group for the non-signer recipients and change the default action of Needs to Sign to a different value, such as Receives a Copy.
      */
     pub async fn get_group(
@@ -199,7 +199,7 @@ impl SigningGroups {
             .await
     }
     /**
-     * Updates a signing group. .
+     * Updates a signing group.
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/signing_groups/{signingGroupId}` endpoint.
      *
@@ -207,9 +207,9 @@ impl SigningGroups {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `signing_group_id: &str` -- Optional. The ID of the [signing group](https://support.docusign.com/en/guides/ndse-user-guide-signing-groups).
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signing_group_id` -- Optional. The ID of the [signing group](https://support.docusign.com/en/guides/ndse-user-guide-signing-groups).
+     *
      *   **Note**: When you send an envelope to a signing group, anyone in the group can open it and sign it with their own signature. For this reason, we recommend that you do not include non-signer recipients (such as carbon copy recipients) in the same signing group as signer recipients. However, you could create a second signing group for the non-signer recipients and change the default action of Needs to Sign to a different value, such as Receives a Copy.
      */
     pub async fn put_group(

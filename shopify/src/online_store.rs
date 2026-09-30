@@ -20,26 +20,26 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Retrieve results based on their published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published articles.
-     *                           unpublished: Show only unpublished articles.
-     *                           any: Show articles of any published status.
-     * * `handle: &str` -- Retrieve an article with a specific handle.
-     * * `tag: &str` -- Filter articles with a specific tag.
-     * * `author: &str` -- Filter articles by article author.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Retrieve results based on their published status.
+     *   (default: any)
+     *
+     *   published: Show only published articles.
+     *   unpublished: Show only unpublished articles.
+     *   any: Show articles of any published status.
+     * * `handle` -- Retrieve an article with a specific handle.
+     * * `tag` -- Filter articles with a specific tag.
+     * * `author` -- Filter articles by article author.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_blogs_param_blog_article(
         &self,
@@ -118,7 +118,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates an article for a blog.
+     * Creates an article for a blog
      *
      * This function performs a `POST` to the `/admin/api/2020-01/blogs/{blog_id}/articles.json` endpoint.
      *
@@ -126,7 +126,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_blogs_param_blog_articles(
         &self,
@@ -151,7 +151,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all articles from a blog.
+     * Retrieves a count of all articles from a blog
      *
      * This function performs a `GET` to the `/admin/api/2020-01/blogs/{blog_id}/articles/count.json` endpoint.
      *
@@ -159,19 +159,19 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `created_at_min: &str` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count articles with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published articles.
-     *                           unpublished: Count only unpublished articles.
-     *                           any: Count all articles.
+     * * `blog_id` -- storefront_access_token_id
+     * * `created_at_min` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count articles with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published articles.
+     *   unpublished: Count only unpublished articles.
+     *   any: Count all articles.
      */
     pub async fn deprecated_202001_get_blogs_param_blog_articles_count(
         &self,
@@ -226,7 +226,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single article.
+     * Retrieves a single article
      *
      * This function performs a `GET` to the `/admin/api/2020-01/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -234,9 +234,9 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specifed by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specifed by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_blogs_param_blog_articles_article(
         &self,
@@ -269,7 +269,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an article.
+     * Updates an article
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -277,8 +277,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_blogs_param_blog_articles_article(
         &self,
@@ -305,7 +305,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes an article.
+     * Deletes an article
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -313,8 +313,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_blogs_param_blog_articles_article(
         &self,
@@ -340,7 +340,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list all of article authors.
+     * Retrieves a list all of article authors
      *
      * This function performs a `GET` to the `/admin/api/2020-01/articles/authors.json` endpoint.
      *
@@ -361,7 +361,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list of all the tags.
+     * Retrieves a list of all the tags
      *
      * This function performs a `GET` to the `/admin/api/2020-01/articles/tags.json` endpoint.
      *
@@ -369,8 +369,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of tags to retrieve.
-     * * `popular: &str` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
+     * * `limit` -- The maximum number of tags to retrieve.
+     * * `popular` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
      */
     pub async fn deprecated_202001_get_articles_tag(
         &self,
@@ -386,7 +386,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/articles/tags.json?{}", query_),
+            &format!("/admin/api/2020-01/articles/tags.json?{query_}"),
             None,
         );
         self.client
@@ -408,26 +408,26 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Retrieve results based on their published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published articles.
-     *                           unpublished: Show only unpublished articles.
-     *                           any: Show articles of any published status.
-     * * `handle: &str` -- Retrieve an article with a specific handle.
-     * * `tag: &str` -- Filter articles with a specific tag.
-     * * `author: &str` -- Filter articles by article author.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Retrieve results based on their published status.
+     *   (default: any)
+     *
+     *   published: Show only published articles.
+     *   unpublished: Show only unpublished articles.
+     *   any: Show articles of any published status.
+     * * `handle` -- Retrieve an article with a specific handle.
+     * * `tag` -- Filter articles with a specific tag.
+     * * `author` -- Filter articles by article author.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_blogs_param_blog_article(
         &self,
@@ -506,7 +506,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates an article for a blog.
+     * Creates an article for a blog
      *
      * This function performs a `POST` to the `/admin/api/2020-04/blogs/{blog_id}/articles.json` endpoint.
      *
@@ -514,7 +514,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_blogs_param_blog_articles(
         &self,
@@ -539,7 +539,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all articles from a blog.
+     * Retrieves a count of all articles from a blog
      *
      * This function performs a `GET` to the `/admin/api/2020-04/blogs/{blog_id}/articles/count.json` endpoint.
      *
@@ -547,19 +547,19 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `created_at_min: &str` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count articles with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published articles.
-     *                           unpublished: Count only unpublished articles.
-     *                           any: Count all articles.
+     * * `blog_id` -- storefront_access_token_id
+     * * `created_at_min` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count articles with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published articles.
+     *   unpublished: Count only unpublished articles.
+     *   any: Count all articles.
      */
     pub async fn deprecated_202004_get_blogs_param_blog_articles_count(
         &self,
@@ -614,7 +614,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single article.
+     * Retrieves a single article
      *
      * This function performs a `GET` to the `/admin/api/2020-04/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -622,9 +622,9 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specifed by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specifed by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_blogs_param_blog_articles_article(
         &self,
@@ -657,7 +657,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an article.
+     * Updates an article
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -665,8 +665,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_blogs_param_blog_articles_article(
         &self,
@@ -693,7 +693,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes an article.
+     * Deletes an article
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -701,8 +701,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_blogs_param_blog_articles_article(
         &self,
@@ -728,7 +728,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list all of article authors.
+     * Retrieves a list all of article authors
      *
      * This function performs a `GET` to the `/admin/api/2020-04/articles/authors.json` endpoint.
      *
@@ -749,7 +749,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list of all the tags.
+     * Retrieves a list of all the tags
      *
      * This function performs a `GET` to the `/admin/api/2020-04/articles/tags.json` endpoint.
      *
@@ -757,8 +757,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of tags to retrieve.
-     * * `popular: &str` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
+     * * `limit` -- The maximum number of tags to retrieve.
+     * * `popular` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
      */
     pub async fn deprecated_202004_get_articles_tag(
         &self,
@@ -774,7 +774,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/articles/tags.json?{}", query_),
+            &format!("/admin/api/2020-04/articles/tags.json?{query_}"),
             None,
         );
         self.client
@@ -796,26 +796,26 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Retrieve results based on their published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published articles.
-     *                           unpublished: Show only unpublished articles.
-     *                           any: Show articles of any published status.
-     * * `handle: &str` -- Retrieve an article with a specific handle.
-     * * `tag: &str` -- Filter articles with a specific tag.
-     * * `author: &str` -- Filter articles by article author.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Retrieve results based on their published status.
+     *   (default: any)
+     *
+     *   published: Show only published articles.
+     *   unpublished: Show only unpublished articles.
+     *   any: Show articles of any published status.
+     * * `handle` -- Retrieve an article with a specific handle.
+     * * `tag` -- Filter articles with a specific tag.
+     * * `author` -- Filter articles by article author.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_blogs_param_blog_article(
         &self,
@@ -894,7 +894,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates an article for a blog.
+     * Creates an article for a blog
      *
      * This function performs a `POST` to the `/admin/api/2020-07/blogs/{blog_id}/articles.json` endpoint.
      *
@@ -902,7 +902,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_create_blogs_param_blog_articles(
         &self,
@@ -927,7 +927,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all articles from a blog.
+     * Retrieves a count of all articles from a blog
      *
      * This function performs a `GET` to the `/admin/api/2020-07/blogs/{blog_id}/articles/count.json` endpoint.
      *
@@ -935,19 +935,19 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `created_at_min: &str` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count articles with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published articles.
-     *                           unpublished: Count only unpublished articles.
-     *                           any: Count all articles.
+     * * `blog_id` -- storefront_access_token_id
+     * * `created_at_min` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count articles with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published articles.
+     *   unpublished: Count only unpublished articles.
+     *   any: Count all articles.
      */
     pub async fn deprecated_202007_get_blogs_param_blog_articles_count(
         &self,
@@ -1002,7 +1002,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single article.
+     * Retrieves a single article
      *
      * This function performs a `GET` to the `/admin/api/2020-07/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1010,9 +1010,9 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specifed by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specifed by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_blogs_param_blog_articles_article(
         &self,
@@ -1045,7 +1045,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an article.
+     * Updates an article
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1053,8 +1053,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_blogs_param_blog_articles_article(
         &self,
@@ -1081,7 +1081,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes an article.
+     * Deletes an article
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1089,8 +1089,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_blogs_param_blog_articles_article(
         &self,
@@ -1116,7 +1116,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list all of article authors.
+     * Retrieves a list all of article authors
      *
      * This function performs a `GET` to the `/admin/api/2020-07/articles/authors.json` endpoint.
      *
@@ -1137,7 +1137,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list of all the tags.
+     * Retrieves a list of all the tags
      *
      * This function performs a `GET` to the `/admin/api/2020-07/articles/tags.json` endpoint.
      *
@@ -1145,8 +1145,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of tags to retrieve.
-     * * `popular: &str` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
+     * * `limit` -- The maximum number of tags to retrieve.
+     * * `popular` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
      */
     pub async fn deprecated_202007_get_articles_tag(
         &self,
@@ -1162,7 +1162,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/articles/tags.json?{}", query_),
+            &format!("/admin/api/2020-07/articles/tags.json?{query_}"),
             None,
         );
         self.client
@@ -1184,26 +1184,26 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Retrieve results based on their published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published articles.
-     *                           unpublished: Show only unpublished articles.
-     *                           any: Show articles of any published status.
-     * * `handle: &str` -- Retrieve an article with a specific handle.
-     * * `tag: &str` -- Filter articles with a specific tag.
-     * * `author: &str` -- Filter articles by article author.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Retrieve results based on their published status.
+     *   (default: any)
+     *
+     *   published: Show only published articles.
+     *   unpublished: Show only unpublished articles.
+     *   any: Show articles of any published status.
+     * * `handle` -- Retrieve an article with a specific handle.
+     * * `tag` -- Filter articles with a specific tag.
+     * * `author` -- Filter articles by article author.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_blogs_param_blog_article(
         &self,
@@ -1282,7 +1282,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates an article for a blog.
+     * Creates an article for a blog
      *
      * This function performs a `POST` to the `/admin/api/2020-10/blogs/{blog_id}/articles.json` endpoint.
      *
@@ -1290,7 +1290,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn create_blogs_param_blog_articles(
         &self,
@@ -1315,7 +1315,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all articles from a blog.
+     * Retrieves a count of all articles from a blog
      *
      * This function performs a `GET` to the `/admin/api/2020-10/blogs/{blog_id}/articles/count.json` endpoint.
      *
@@ -1323,19 +1323,19 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `created_at_min: &str` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count articles with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published articles.
-     *                           unpublished: Count only unpublished articles.
-     *                           any: Count all articles.
+     * * `blog_id` -- storefront_access_token_id
+     * * `created_at_min` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count articles with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published articles.
+     *   unpublished: Count only unpublished articles.
+     *   any: Count all articles.
      */
     pub async fn get_blogs_param_blog_articles_count(
         &self,
@@ -1390,7 +1390,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single article.
+     * Retrieves a single article
      *
      * This function performs a `GET` to the `/admin/api/2020-10/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1398,9 +1398,9 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specifed by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specifed by a comma-separated list of field names.
      */
     pub async fn get_blogs_param_blog_articles_article(
         &self,
@@ -1433,7 +1433,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an article.
+     * Updates an article
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1441,8 +1441,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn update_blogs_param_blog_articles_article(
         &self,
@@ -1469,7 +1469,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes an article.
+     * Deletes an article
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1477,8 +1477,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn delete_blogs_param_blog_articles_article(
         &self,
@@ -1504,7 +1504,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list all of article authors.
+     * Retrieves a list all of article authors
      *
      * This function performs a `GET` to the `/admin/api/2020-10/articles/authors.json` endpoint.
      *
@@ -1525,7 +1525,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list of all the tags.
+     * Retrieves a list of all the tags
      *
      * This function performs a `GET` to the `/admin/api/2020-10/articles/tags.json` endpoint.
      *
@@ -1533,8 +1533,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of tags to retrieve.
-     * * `popular: &str` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
+     * * `limit` -- The maximum number of tags to retrieve.
+     * * `popular` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
      */
     pub async fn get_articles_tag(
         &self,
@@ -1550,7 +1550,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/articles/tags.json?{}", query_),
+            &format!("/admin/api/2020-10/articles/tags.json?{query_}"),
             None,
         );
         self.client
@@ -1572,26 +1572,26 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Retrieve results based on their published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published articles.
-     *                           unpublished: Show only unpublished articles.
-     *                           any: Show articles of any published status.
-     * * `handle: &str` -- Retrieve an article with a specific handle.
-     * * `tag: &str` -- Filter articles with a specific tag.
-     * * `author: &str` -- Filter articles by article author.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Retrieve results based on their published status.
+     *   (default: any)
+     *
+     *   published: Show only published articles.
+     *   unpublished: Show only unpublished articles.
+     *   any: Show articles of any published status.
+     * * `handle` -- Retrieve an article with a specific handle.
+     * * `tag` -- Filter articles with a specific tag.
+     * * `author` -- Filter articles by article author.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_blogs_param_blog_article(
         &self,
@@ -1670,7 +1670,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates an article for a blog.
+     * Creates an article for a blog
      *
      * This function performs a `POST` to the `/admin/api/2021-01/blogs/{blog_id}/articles.json` endpoint.
      *
@@ -1678,7 +1678,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_create_blogs_param_blog_articles(
         &self,
@@ -1703,7 +1703,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all articles from a blog.
+     * Retrieves a count of all articles from a blog
      *
      * This function performs a `GET` to the `/admin/api/2021-01/blogs/{blog_id}/articles/count.json` endpoint.
      *
@@ -1711,19 +1711,19 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `created_at_min: &str` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count articles with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published articles.
-     *                           unpublished: Count only unpublished articles.
-     *                           any: Count all articles.
+     * * `blog_id` -- storefront_access_token_id
+     * * `created_at_min` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count articles with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published articles.
+     *   unpublished: Count only unpublished articles.
+     *   any: Count all articles.
      */
     pub async fn deprecated_202101_get_blogs_param_blog_articles_count(
         &self,
@@ -1778,7 +1778,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single article.
+     * Retrieves a single article
      *
      * This function performs a `GET` to the `/admin/api/2021-01/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1786,9 +1786,9 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specifed by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specifed by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_blogs_param_blog_articles_article(
         &self,
@@ -1821,7 +1821,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an article.
+     * Updates an article
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1829,8 +1829,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_blogs_param_blog_articles_article(
         &self,
@@ -1857,7 +1857,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes an article.
+     * Deletes an article
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -1865,8 +1865,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_blogs_param_blog_articles_article(
         &self,
@@ -1892,7 +1892,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list all of article authors.
+     * Retrieves a list all of article authors
      *
      * This function performs a `GET` to the `/admin/api/2021-01/articles/authors.json` endpoint.
      *
@@ -1913,7 +1913,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list of all the tags.
+     * Retrieves a list of all the tags
      *
      * This function performs a `GET` to the `/admin/api/2021-01/articles/tags.json` endpoint.
      *
@@ -1921,8 +1921,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of tags to retrieve.
-     * * `popular: &str` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
+     * * `limit` -- The maximum number of tags to retrieve.
+     * * `popular` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
      */
     pub async fn deprecated_202101_get_articles_tag(
         &self,
@@ -1938,7 +1938,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/articles/tags.json?{}", query_),
+            &format!("/admin/api/2021-01/articles/tags.json?{query_}"),
             None,
         );
         self.client
@@ -1960,26 +1960,26 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Retrieve results based on their published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published articles.
-     *                           unpublished: Show only unpublished articles.
-     *                           any: Show articles of any published status.
-     * * `handle: &str` -- Retrieve an article with a specific handle.
-     * * `tag: &str` -- Filter articles with a specific tag.
-     * * `author: &str` -- Filter articles by article author.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Retrieve results based on their published status.
+     *   (default: any)
+     *
+     *   published: Show only published articles.
+     *   unpublished: Show only unpublished articles.
+     *   any: Show articles of any published status.
+     * * `handle` -- Retrieve an article with a specific handle.
+     * * `tag` -- Filter articles with a specific tag.
+     * * `author` -- Filter articles by article author.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_blogs_param_blog_article(
         &self,
@@ -2058,7 +2058,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates an article for a blog.
+     * Creates an article for a blog
      *
      * This function performs a `POST` to the `/admin/api/unstable/blogs/{blog_id}/articles.json` endpoint.
      *
@@ -2066,7 +2066,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_create_blogs_param_blog_articles(
         &self,
@@ -2091,7 +2091,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all articles from a blog.
+     * Retrieves a count of all articles from a blog
      *
      * This function performs a `GET` to the `/admin/api/unstable/blogs/{blog_id}/articles/count.json` endpoint.
      *
@@ -2099,19 +2099,19 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `created_at_min: &str` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Count articles with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published articles.
-     *                           unpublished: Count only unpublished articles.
-     *                           any: Count all articles.
+     * * `blog_id` -- storefront_access_token_id
+     * * `created_at_min` -- Count articles created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count articles created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count articles last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count articles last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count articles published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count articles published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Count articles with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published articles.
+     *   unpublished: Count only unpublished articles.
+     *   any: Count all articles.
      */
     pub async fn deprecated_unstable_get_blogs_param_blog_articles_count(
         &self,
@@ -2166,7 +2166,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single article.
+     * Retrieves a single article
      *
      * This function performs a `GET` to the `/admin/api/unstable/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -2174,9 +2174,9 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specifed by a comma-separated list of field names.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specifed by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_blogs_param_blog_articles_article(
         &self,
@@ -2209,7 +2209,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an article.
+     * Updates an article
      *
      * This function performs a `PUT` to the `/admin/api/unstable/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -2217,8 +2217,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_blogs_param_blog_articles_article(
         &self,
@@ -2245,7 +2245,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes an article.
+     * Deletes an article
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/blogs/{blog_id}/articles/{article_id}.json` endpoint.
      *
@@ -2253,8 +2253,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `article_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
+     * * `article_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_blogs_param_blog_articles_article(
         &self,
@@ -2280,7 +2280,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list all of article authors.
+     * Retrieves a list all of article authors
      *
      * This function performs a `GET` to the `/admin/api/unstable/articles/authors.json` endpoint.
      *
@@ -2303,7 +2303,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a list of all the tags.
+     * Retrieves a list of all the tags
      *
      * This function performs a `GET` to the `/admin/api/unstable/articles/tags.json` endpoint.
      *
@@ -2311,8 +2311,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of tags to retrieve.
-     * * `popular: &str` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
+     * * `limit` -- The maximum number of tags to retrieve.
+     * * `popular` -- A flag for ordering retrieved tags. If present in the request, then the results will be ordered by popularity, starting with the most popular tag.
      */
     pub async fn deprecated_unstable_get_articles_tag(
         &self,
@@ -2328,7 +2328,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/articles/tags.json?{}", query_),
+            &format!("/admin/api/unstable/articles/tags.json?{query_}"),
             None,
         );
         self.client
@@ -2342,20 +2342,20 @@ impl OnlineStore {
             .await
     }
     /**
-    * Retrieves a single asset for a theme by its key.
-             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-             For more information on the key property, see Asset properties.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    * * `asset_key: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single asset for a theme by its key.
+     * To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+     * For more information on the key property, see Asset properties.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names
+     * * `asset_key` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_get_themes_param_theme_asset(
         &self,
         theme_id: &str,
@@ -2389,19 +2389,19 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates or updates an asset for a theme.
-             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `src: &str` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
-    * * `source_key: &str` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
-    */
+     * Creates or updates an asset for a theme.
+     * In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `src` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
+     * * `source_key` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
+     */
     pub async fn deprecated_202001_update_themes_param_theme_assets(
         &self,
         theme_id: &str,
@@ -2444,8 +2444,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `asset_key: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
+     * * `asset_key` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_themes_param_theme_assets(
         &self,
@@ -2476,20 +2476,20 @@ impl OnlineStore {
             .await
     }
     /**
-    * Retrieves a single asset for a theme by its key.
-             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-             For more information on the key property, see Asset properties.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    * * `asset_key: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single asset for a theme by its key.
+     * To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+     * For more information on the key property, see Asset properties.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names
+     * * `asset_key` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_get_themes_param_theme_asset(
         &self,
         theme_id: &str,
@@ -2523,19 +2523,19 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates or updates an asset for a theme.
-             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `src: &str` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
-    * * `source_key: &str` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
-    */
+     * Creates or updates an asset for a theme.
+     * In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `src` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
+     * * `source_key` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
+     */
     pub async fn deprecated_202004_update_themes_param_theme_assets(
         &self,
         theme_id: &str,
@@ -2578,8 +2578,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `asset_key: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
+     * * `asset_key` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_themes_param_theme_assets(
         &self,
@@ -2610,20 +2610,20 @@ impl OnlineStore {
             .await
     }
     /**
-    * Retrieves a single asset for a theme by its key.
-             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-             For more information on the key property, see Asset properties.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    * * `asset_key: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single asset for a theme by its key.
+     * To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+     * For more information on the key property, see Asset properties.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names
+     * * `asset_key` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_get_themes_param_theme_asset(
         &self,
         theme_id: &str,
@@ -2657,19 +2657,19 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates or updates an asset for a theme.
-             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `src: &str` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
-    * * `source_key: &str` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
-    */
+     * Creates or updates an asset for a theme.
+     * In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `src` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
+     * * `source_key` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
+     */
     pub async fn deprecated_202007_update_themes_param_theme_assets(
         &self,
         theme_id: &str,
@@ -2712,8 +2712,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `asset_key: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
+     * * `asset_key` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_themes_param_theme_assets(
         &self,
@@ -2744,20 +2744,20 @@ impl OnlineStore {
             .await
     }
     /**
-    * Retrieves a single asset for a theme by its key.
-             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-             For more information on the key property, see Asset properties.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    * * `asset_key: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single asset for a theme by its key.
+     * To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+     * For more information on the key property, see Asset properties.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names
+     * * `asset_key` -- storefront_access_token_id
+     */
     pub async fn get_themes_param_theme_asset(
         &self,
         theme_id: &str,
@@ -2791,19 +2791,19 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates or updates an asset for a theme.
-             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `src: &str` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
-    * * `source_key: &str` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
-    */
+     * Creates or updates an asset for a theme.
+     * In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `src` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
+     * * `source_key` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
+     */
     pub async fn update_themes_param_theme_assets(
         &self,
         theme_id: &str,
@@ -2846,8 +2846,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `asset_key: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
+     * * `asset_key` -- storefront_access_token_id
      */
     pub async fn delete_themes_param_theme_assets(
         &self,
@@ -2878,20 +2878,20 @@ impl OnlineStore {
             .await
     }
     /**
-    * Retrieves a single asset for a theme by its key.
-             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-             For more information on the key property, see Asset properties.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    * * `asset_key: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single asset for a theme by its key.
+     * To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+     * For more information on the key property, see Asset properties.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names
+     * * `asset_key` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_get_themes_param_theme_asset(
         &self,
         theme_id: &str,
@@ -2925,19 +2925,19 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates or updates an asset for a theme.
-             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `src: &str` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
-    * * `source_key: &str` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
-    */
+     * Creates or updates an asset for a theme.
+     * In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `src` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
+     * * `source_key` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
+     */
     pub async fn deprecated_202101_update_themes_param_theme_assets(
         &self,
         theme_id: &str,
@@ -2980,8 +2980,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `asset_key: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
+     * * `asset_key` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_themes_param_theme_assets(
         &self,
@@ -3012,20 +3012,20 @@ impl OnlineStore {
             .await
     }
     /**
-    * Retrieves a single asset for a theme by its key.
-             To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
-             For more information on the key property, see Asset properties.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    * * `asset_key: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single asset for a theme by its key.
+     * To retrieve a single asset, include asset[key]=#{asset_key} as a request parameter. For example, to retrieve the asset with a key of templates/index.liquid, the request might be /admin/themes/828155753/assets.json?asset[key]=templates/index.liquid.
+     * For more information on the key property, see Asset properties.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names
+     * * `asset_key` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_get_themes_param_theme_asset(
         &self,
         theme_id: &str,
@@ -3059,19 +3059,19 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates or updates an asset for a theme.
-             In the PUT request, you can include the src or source_key property to create the asset from an existing file.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/themes/{theme_id}/assets.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `theme_id: &str` -- storefront_access_token_id.
-    * * `src: &str` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
-    * * `source_key: &str` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
-    */
+     * Creates or updates an asset for a theme.
+     * In the PUT request, you can include the src or source_key property to create the asset from an existing file.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/themes/{theme_id}/assets.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/asset#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `theme_id` -- storefront_access_token_id
+     * * `src` -- The source URL of an image. Include in the body of the PUT request to upload the image to Shopify.
+     * * `source_key` -- The path within the theme to an existing asset. Include in the body of the PUT request to create a duplicate asset.
+     */
     pub async fn deprecated_unstable_update_themes_param_theme_assets(
         &self,
         theme_id: &str,
@@ -3114,8 +3114,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `asset_key: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
+     * * `asset_key` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_themes_param_theme_assets(
         &self,
@@ -3154,11 +3154,11 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `handle: &str` -- Filter by blog handle.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID
+     * * `handle` -- Filter by blog handle
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202001_get_blog(
         &self,
@@ -3183,7 +3183,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-01/blogs.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-01/blogs.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -3195,7 +3195,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Create a new blog.
+     * Create a new blog
      *
      * This function performs a `POST` to the `/admin/api/2020-01/blogs.json` endpoint.
      *
@@ -3217,7 +3217,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Get a count of all blogs.
+     * Get a count of all blogs
      *
      * This function performs a `GET` to the `/admin/api/2020-01/blogs/count.json` endpoint.
      *
@@ -3236,7 +3236,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Get a single blog by its ID.
+     * Get a single blog by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-01/blogs/{blog_id}.json` endpoint.
      *
@@ -3244,8 +3244,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- comma-separated list of fields to include in the response.
+     * * `blog_id` -- storefront_access_token_id
+     * * `fields` -- comma-separated list of fields to include in the response
      */
     pub async fn deprecated_202001_get_blogs_param_blog(
         &self,
@@ -3276,7 +3276,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Update a blog.
+     * Update a blog
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/blogs/{blog_id}.json` endpoint.
      *
@@ -3284,7 +3284,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_blogs_param_blog(
         &self,
@@ -3309,7 +3309,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Delete a blog.
+     * Delete a blog
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/blogs/{blog_id}.json` endpoint.
      *
@@ -3317,7 +3317,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `blog_id: &str` -- storefront_access_token_id.
+     * * `blog_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_blogs_param_blog(
         &self,
@@ -3349,29 +3349,29 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to retrieve.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show comments created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show comments created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show comments last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show comments last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Show comments published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Show comments published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-     * * `published_status: &str` -- Filter results by their published status.
-     *                     (default: any)
-     *                       
-     *                           published: Show only published comments.
-     *                           unpublished: Show only unpublished comments.
-     *                           any: Show comments of any published status.
-     * * `status: &str` -- Filter results by their status.
-     *                       
-     *                           pending: Show only pending comments.
-     *                           published: Show only published comments.
-     *                           unapproved: Show only unapproved comments.
-     * * `article_id: i64` -- recurring_application_charge[capped_amount].
-     * * `blog_id: i64` -- recurring_application_charge[capped_amount].
+     * * `limit` -- The maximum number of results to retrieve.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show comments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Show comments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Show comments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Show comments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Show comments published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Show comments published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `published_status` -- Filter results by their published status.
+     *   (default: any)
+     *
+     *   published: Show only published comments.
+     *   unpublished: Show only unpublished comments.
+     *   any: Show comments of any published status.
+     * * `status` -- Filter results by their status.
+     *
+     *   pending: Show only pending comments.
+     *   published: Show only published comments.
+     *   unapproved: Show only unapproved comments.
+     * * `article_id` -- recurring_application_charge[capped_amount]
+     * * `blog_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202001_get_comment(
         &self,
@@ -3430,10 +3430,9 @@ impl OnlineStore {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-01/comments.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/comments.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -3445,7 +3444,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates a comment for an article.
+     * Creates a comment for an article
      *
      * This function performs a `POST` to the `/admin/api/2020-01/comments.json` endpoint.
      *
@@ -3467,7 +3466,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of comments.
+     * Retrieves a count of comments
      *
      * This function performs a `GET` to the `/admin/api/2020-01/comments/count.json` endpoint.
      *
@@ -3475,25 +3474,25 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `created_at_min: &str` -- Count comments created after date (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Count comments created before date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Count comments last updated after date (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Count comments last updated before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_min: &str` -- Count comments published after date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_at_max: &str` -- Count comments published before date (format: 2014-04-25T16:15:47-04:00).
-     * * `published_status: &str` -- Retrieve a count of comments with a given published status.
-     *                     (default: any)
-     *                       
-     *                           published: Count only published comments.
-     *                           unpublished: Count only unpublished comments.
-     *                           any: Count comments of any published status.
-     * * `status: &str` -- Retrieve a count of comments with a given status.
-     *                       
-     *                           pending: Count pending comments.
-     *                           published: Count published comments.
-     *                           unapproved: Count unapproved comments.
-     * * `article_id: i64` -- recurring_application_charge[capped_amount].
-     * * `blog_id: i64` -- recurring_application_charge[capped_amount].
+     * * `created_at_min` -- Count comments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max` -- Count comments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min` -- Count comments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max` -- Count comments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_min` -- Count comments published after date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_at_max` -- Count comments published before date (format: 2014-04-25T16:15:47-04:00).
+     * * `published_status` -- Retrieve a count of comments with a given published status.
+     *   (default: any)
+     *
+     *   published: Count only published comments.
+     *   unpublished: Count only unpublished comments.
+     *   any: Count comments of any published status.
+     * * `status` -- Retrieve a count of comments with a given status.
+     *
+     *   pending: Count pending comments.
+     *   published: Count published comments.
+     *   unapproved: Count unapproved comments.
+     * * `article_id` -- recurring_application_charge[capped_amount]
+     * * `blog_id` -- recurring_application_charge[capped_amount]
      */
     pub async fn deprecated_202001_get_comments_count(
         &self,
@@ -3541,7 +3540,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/comments/count.json?{}", query_),
+            &format!("/admin/api/2020-01/comments/count.json?{query_}"),
             None,
         );
         self.client
@@ -3555,7 +3554,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single comment by its ID.
+     * Retrieves a single comment by its ID
      *
      * This function performs a `GET` to the `/admin/api/2020-01/comments/{comment_id}.json` endpoint.
      *
@@ -3563,8 +3562,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `comment_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `comment_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_comments_param_comment(
         &self,
@@ -3595,7 +3594,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates a comment of an article.
+     * Updates a comment of an article
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/comments/{comment_id}.json` endpoint.
      *
@@ -3603,7 +3602,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `comment_id: &str` -- storefront_access_token_id.
+     * * `comment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_comments_param_comment(
         &self,
@@ -3628,7 +3627,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Marks a comment as spam.
+     * Marks a comment as spam
      *
      * This function performs a `POST` to the `/admin/api/2020-01/comments/{comment_id}/spam.json` endpoint.
      *
@@ -3636,7 +3635,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `comment_id: &str` -- storefront_access_token_id.
+     * * `comment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_comments_param_comment_spam(
         &self,
@@ -3661,7 +3660,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Marks a comment as not spam.
+     * Marks a comment as not spam
      *
      * This function performs a `POST` to the `/admin/api/2020-01/comments/{comment_id}/not_spam.json` endpoint.
      *
@@ -3669,7 +3668,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `comment_id: &str` -- storefront_access_token_id.
+     * * `comment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_comments_param_comment_not_spam(
         &self,
@@ -3694,7 +3693,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Approves a comment.
+     * Approves a comment
      *
      * This function performs a `POST` to the `/admin/api/2020-01/comments/{comment_id}/approve.json` endpoint.
      *
@@ -3702,7 +3701,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `comment_id: &str` -- storefront_access_token_id.
+     * * `comment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_comments_param_comment_approve(
         &self,
@@ -3727,7 +3726,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Removes a comment.
+     * Removes a comment
      *
      * This function performs a `POST` to the `/admin/api/2020-01/comments/{comment_id}/remove.json` endpoint.
      *
@@ -3735,7 +3734,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `comment_id: &str` -- storefront_access_token_id.
+     * * `comment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_comments_param_comment_remove(
         &self,
@@ -3760,7 +3759,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Restores a previously removed comment.
+     * Restores a previously removed comment
      *
      * This function performs a `POST` to the `/admin/api/2020-01/comments/{comment_id}/restore.json` endpoint.
      *
@@ -3768,7 +3767,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `comment_id: &str` -- storefront_access_token_id.
+     * * `comment_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_comments_param_comment_restore(
         &self,
@@ -3801,12 +3800,12 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `path: &str` -- Show redirects with a given path.
-     * * `target: &str` -- Show redirects with a given target.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `path` -- Show redirects with a given path.
+     * * `target` -- Show redirects with a given target.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_redirect(
         &self,
@@ -3833,10 +3832,9 @@ impl OnlineStore {
             query_args.push(("target".to_string(), target.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-01/redirects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/redirects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -3848,13 +3846,13 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/redirects.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-01
-    */
+     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
+     * For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/redirects.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-01
+     */
     pub async fn deprecated_202001_create_redirects(
         &self,
         body: &serde_json::Value,
@@ -3871,7 +3869,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of URL redirects.
+     * Retrieves a count of URL redirects
      *
      * This function performs a `GET` to the `/admin/api/2020-01/redirects/count.json` endpoint.
      *
@@ -3879,8 +3877,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `path: &str` -- Count redirects with given path.
-     * * `target: &str` -- Count redirects with given target.
+     * * `path` -- Count redirects with given path.
+     * * `target` -- Count redirects with given target.
      */
     pub async fn deprecated_202001_get_redirects_count(
         &self,
@@ -3896,7 +3894,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/redirects/count.json?{}", query_),
+            &format!("/admin/api/2020-01/redirects/count.json?{query_}"),
             None,
         );
         self.client
@@ -3910,7 +3908,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single redirect.
+     * Retrieves a single redirect
      *
      * This function performs a `GET` to the `/admin/api/2020-01/redirects/{redirect_id}.json` endpoint.
      *
@@ -3918,8 +3916,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `redirect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_redirects_param_redirect(
         &self,
@@ -3950,7 +3948,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an existing redirect.
+     * Updates an existing redirect
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/redirects/{redirect_id}.json` endpoint.
      *
@@ -3958,7 +3956,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_redirects_param_redirect(
         &self,
@@ -3983,7 +3981,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a redirect.
+     * Deletes a redirect
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/redirects/{redirect_id}.json` endpoint.
      *
@@ -3991,7 +3989,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_redirects_param_redirect(
         &self,
@@ -4023,12 +4021,12 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `path: &str` -- Show redirects with a given path.
-     * * `target: &str` -- Show redirects with a given target.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `path` -- Show redirects with a given path.
+     * * `target` -- Show redirects with a given target.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_redirect(
         &self,
@@ -4055,10 +4053,9 @@ impl OnlineStore {
             query_args.push(("target".to_string(), target.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-04/redirects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/redirects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -4070,13 +4067,13 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/redirects.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-04
-    */
+     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
+     * For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/redirects.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-04
+     */
     pub async fn deprecated_202004_create_redirects(
         &self,
         body: &serde_json::Value,
@@ -4093,7 +4090,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of URL redirects.
+     * Retrieves a count of URL redirects
      *
      * This function performs a `GET` to the `/admin/api/2020-04/redirects/count.json` endpoint.
      *
@@ -4101,8 +4098,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `path: &str` -- Count redirects with given path.
-     * * `target: &str` -- Count redirects with given target.
+     * * `path` -- Count redirects with given path.
+     * * `target` -- Count redirects with given target.
      */
     pub async fn deprecated_202004_get_redirects_count(
         &self,
@@ -4118,7 +4115,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/redirects/count.json?{}", query_),
+            &format!("/admin/api/2020-04/redirects/count.json?{query_}"),
             None,
         );
         self.client
@@ -4132,7 +4129,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single redirect.
+     * Retrieves a single redirect
      *
      * This function performs a `GET` to the `/admin/api/2020-04/redirects/{redirect_id}.json` endpoint.
      *
@@ -4140,8 +4137,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `redirect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_redirects_param_redirect(
         &self,
@@ -4172,7 +4169,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an existing redirect.
+     * Updates an existing redirect
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/redirects/{redirect_id}.json` endpoint.
      *
@@ -4180,7 +4177,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_redirects_param_redirect(
         &self,
@@ -4205,7 +4202,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a redirect.
+     * Deletes a redirect
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/redirects/{redirect_id}.json` endpoint.
      *
@@ -4213,7 +4210,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_redirects_param_redirect(
         &self,
@@ -4245,12 +4242,12 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `path: &str` -- Show redirects with a given path.
-     * * `target: &str` -- Show redirects with a given target.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `path` -- Show redirects with a given path.
+     * * `target` -- Show redirects with a given target.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_redirect(
         &self,
@@ -4277,10 +4274,9 @@ impl OnlineStore {
             query_args.push(("target".to_string(), target.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-07/redirects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/redirects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -4292,13 +4288,13 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/redirects.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-07
-    */
+     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
+     * For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/redirects.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-07
+     */
     pub async fn deprecated_202007_create_redirects(
         &self,
         body: &serde_json::Value,
@@ -4315,7 +4311,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of URL redirects.
+     * Retrieves a count of URL redirects
      *
      * This function performs a `GET` to the `/admin/api/2020-07/redirects/count.json` endpoint.
      *
@@ -4323,8 +4319,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `path: &str` -- Count redirects with given path.
-     * * `target: &str` -- Count redirects with given target.
+     * * `path` -- Count redirects with given path.
+     * * `target` -- Count redirects with given target.
      */
     pub async fn deprecated_202007_get_redirects_count(
         &self,
@@ -4340,7 +4336,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/redirects/count.json?{}", query_),
+            &format!("/admin/api/2020-07/redirects/count.json?{query_}"),
             None,
         );
         self.client
@@ -4354,7 +4350,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single redirect.
+     * Retrieves a single redirect
      *
      * This function performs a `GET` to the `/admin/api/2020-07/redirects/{redirect_id}.json` endpoint.
      *
@@ -4362,8 +4358,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `redirect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_redirects_param_redirect(
         &self,
@@ -4394,7 +4390,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an existing redirect.
+     * Updates an existing redirect
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/redirects/{redirect_id}.json` endpoint.
      *
@@ -4402,7 +4398,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_redirects_param_redirect(
         &self,
@@ -4427,7 +4423,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a redirect.
+     * Deletes a redirect
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/redirects/{redirect_id}.json` endpoint.
      *
@@ -4435,7 +4431,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_redirects_param_redirect(
         &self,
@@ -4467,12 +4463,12 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `path: &str` -- Show redirects with a given path.
-     * * `target: &str` -- Show redirects with a given target.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `path` -- Show redirects with a given path.
+     * * `target` -- Show redirects with a given target.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_redirect(
         &self,
@@ -4499,10 +4495,9 @@ impl OnlineStore {
             query_args.push(("target".to_string(), target.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-10/redirects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/redirects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -4514,13 +4509,13 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/redirects.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-10
-    */
+     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
+     * For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/redirects.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2020-10
+     */
     pub async fn create_redirects(
         &self,
         body: &serde_json::Value,
@@ -4537,7 +4532,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of URL redirects.
+     * Retrieves a count of URL redirects
      *
      * This function performs a `GET` to the `/admin/api/2020-10/redirects/count.json` endpoint.
      *
@@ -4545,8 +4540,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `path: &str` -- Count redirects with given path.
-     * * `target: &str` -- Count redirects with given target.
+     * * `path` -- Count redirects with given path.
+     * * `target` -- Count redirects with given target.
      */
     pub async fn get_redirects_count(
         &self,
@@ -4562,7 +4557,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/redirects/count.json?{}", query_),
+            &format!("/admin/api/2020-10/redirects/count.json?{query_}"),
             None,
         );
         self.client
@@ -4576,7 +4571,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single redirect.
+     * Retrieves a single redirect
      *
      * This function performs a `GET` to the `/admin/api/2020-10/redirects/{redirect_id}.json` endpoint.
      *
@@ -4584,8 +4579,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `redirect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_redirects_param_redirect(
         &self,
@@ -4616,7 +4611,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an existing redirect.
+     * Updates an existing redirect
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/redirects/{redirect_id}.json` endpoint.
      *
@@ -4624,7 +4619,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn update_redirects_param_redirect(
         &self,
@@ -4649,7 +4644,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a redirect.
+     * Deletes a redirect
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/redirects/{redirect_id}.json` endpoint.
      *
@@ -4657,7 +4652,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn delete_redirects_param_redirect(
         &self,
@@ -4689,12 +4684,12 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `path: &str` -- Show redirects with a given path.
-     * * `target: &str` -- Show redirects with a given target.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `path` -- Show redirects with a given path.
+     * * `target` -- Show redirects with a given target.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_redirect(
         &self,
@@ -4721,10 +4716,9 @@ impl OnlineStore {
             query_args.push(("target".to_string(), target.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2021-01/redirects.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/redirects.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -4736,13 +4730,13 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/redirects.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2021-01
-    */
+     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
+     * For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/redirects.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-2021-01
+     */
     pub async fn deprecated_202101_create_redirects(
         &self,
         body: &serde_json::Value,
@@ -4759,7 +4753,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of URL redirects.
+     * Retrieves a count of URL redirects
      *
      * This function performs a `GET` to the `/admin/api/2021-01/redirects/count.json` endpoint.
      *
@@ -4767,8 +4761,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `path: &str` -- Count redirects with given path.
-     * * `target: &str` -- Count redirects with given target.
+     * * `path` -- Count redirects with given path.
+     * * `target` -- Count redirects with given target.
      */
     pub async fn deprecated_202101_get_redirects_count(
         &self,
@@ -4784,7 +4778,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/redirects/count.json?{}", query_),
+            &format!("/admin/api/2021-01/redirects/count.json?{query_}"),
             None,
         );
         self.client
@@ -4798,7 +4792,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single redirect.
+     * Retrieves a single redirect
      *
      * This function performs a `GET` to the `/admin/api/2021-01/redirects/{redirect_id}.json` endpoint.
      *
@@ -4806,8 +4800,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `redirect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_redirects_param_redirect(
         &self,
@@ -4838,7 +4832,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an existing redirect.
+     * Updates an existing redirect
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/redirects/{redirect_id}.json` endpoint.
      *
@@ -4846,7 +4840,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_redirects_param_redirect(
         &self,
@@ -4871,7 +4865,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a redirect.
+     * Deletes a redirect
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/redirects/{redirect_id}.json` endpoint.
      *
@@ -4879,7 +4873,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_redirects_param_redirect(
         &self,
@@ -4911,12 +4905,12 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `path: &str` -- Show redirects with a given path.
-     * * `target: &str` -- Show redirects with a given target.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `path` -- Show redirects with a given path.
+     * * `target` -- Show redirects with a given target.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_redirect(
         &self,
@@ -4944,7 +4938,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/redirects.json?{}", query_),
+            &format!("/admin/api/unstable/redirects.json?{query_}"),
             None,
         );
         self.client
@@ -4958,13 +4952,13 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
-             For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/redirects.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-unstable
-    */
+     * Creates a redirect. When you provide a full URL as the value of the path property, it will be saved as an absolute path without the domain.
+     * For example, "path": "http://www.johns-apparel.com/springwear" will be saved as "path": "springwear".
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/redirects.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/redirect#create-unstable
+     */
     pub async fn deprecated_unstable_create_redirects(
         &self,
         body: &serde_json::Value,
@@ -4981,7 +4975,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of URL redirects.
+     * Retrieves a count of URL redirects
      *
      * This function performs a `GET` to the `/admin/api/unstable/redirects/count.json` endpoint.
      *
@@ -4989,8 +4983,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `path: &str` -- Count redirects with given path.
-     * * `target: &str` -- Count redirects with given target.
+     * * `path` -- Count redirects with given path.
+     * * `target` -- Count redirects with given target.
      */
     pub async fn deprecated_unstable_get_redirects_count(
         &self,
@@ -5006,7 +5000,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/redirects/count.json?{}", query_),
+            &format!("/admin/api/unstable/redirects/count.json?{query_}"),
             None,
         );
         self.client
@@ -5020,7 +5014,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single redirect.
+     * Retrieves a single redirect
      *
      * This function performs a `GET` to the `/admin/api/unstable/redirects/{redirect_id}.json` endpoint.
      *
@@ -5028,8 +5022,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `redirect_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_redirects_param_redirect(
         &self,
@@ -5060,7 +5054,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates an existing redirect.
+     * Updates an existing redirect
      *
      * This function performs a `PUT` to the `/admin/api/unstable/redirects/{redirect_id}.json` endpoint.
      *
@@ -5068,7 +5062,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_redirects_param_redirect(
         &self,
@@ -5093,7 +5087,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a redirect.
+     * Deletes a redirect
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/redirects/{redirect_id}.json` endpoint.
      *
@@ -5101,7 +5095,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `redirect_id: &str` -- storefront_access_token_id.
+     * * `redirect_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_redirects_param_redirect(
         &self,
@@ -5133,15 +5127,15 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `src: &str` -- Show script tags with this URL.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit` -- The number of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `src` -- Show script tags with this URL.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_script_tag(
         &self,
@@ -5181,7 +5175,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/script_tags.json?{}", query_),
+            &format!("/admin/api/2020-01/script_tags.json?{query_}"),
             None,
         );
         self.client
@@ -5195,7 +5189,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates a new script tag.
+     * Creates a new script tag
      *
      * This function performs a `POST` to the `/admin/api/2020-01/script_tags.json` endpoint.
      *
@@ -5217,7 +5211,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all script tags.
+     * Retrieves a count of all script tags
      *
      * This function performs a `GET` to the `/admin/api/2020-01/script_tags/count.json` endpoint.
      *
@@ -5225,7 +5219,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `src: &str` -- Count only script tags with a given URL.
+     * * `src` -- Count only script tags with a given URL.
      */
     pub async fn deprecated_202001_get_script_tags_count(
         &self,
@@ -5237,7 +5231,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/script_tags/count.json?{}", query_),
+            &format!("/admin/api/2020-01/script_tags/count.json?{query_}"),
             None,
         );
         self.client
@@ -5251,7 +5245,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single script tag.
+     * Retrieves a single script tag
      *
      * This function performs a `GET` to the `/admin/api/2020-01/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5259,8 +5253,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `script_tag_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202001_get_script_tags_param_tag(
         &self,
@@ -5291,7 +5285,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates a script tag.
+     * Updates a script tag
      *
      * This function performs a `PUT` to the `/admin/api/2020-01/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5299,7 +5293,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_script_tags_param_tag(
         &self,
@@ -5324,7 +5318,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a script tag.
+     * Deletes a script tag
      *
      * This function performs a `DELETE` to the `/admin/api/2020-01/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5332,7 +5326,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_script_tags_param_tag(
         &self,
@@ -5364,15 +5358,15 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `src: &str` -- Show script tags with this URL.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit` -- The number of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `src` -- Show script tags with this URL.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_script_tag(
         &self,
@@ -5412,7 +5406,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/script_tags.json?{}", query_),
+            &format!("/admin/api/2020-04/script_tags.json?{query_}"),
             None,
         );
         self.client
@@ -5426,7 +5420,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates a new script tag.
+     * Creates a new script tag
      *
      * This function performs a `POST` to the `/admin/api/2020-04/script_tags.json` endpoint.
      *
@@ -5448,7 +5442,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all script tags.
+     * Retrieves a count of all script tags
      *
      * This function performs a `GET` to the `/admin/api/2020-04/script_tags/count.json` endpoint.
      *
@@ -5456,7 +5450,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `src: &str` -- Count only script tags with a given URL.
+     * * `src` -- Count only script tags with a given URL.
      */
     pub async fn deprecated_202004_get_script_tags_count(
         &self,
@@ -5468,7 +5462,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/script_tags/count.json?{}", query_),
+            &format!("/admin/api/2020-04/script_tags/count.json?{query_}"),
             None,
         );
         self.client
@@ -5482,7 +5476,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single script tag.
+     * Retrieves a single script tag
      *
      * This function performs a `GET` to the `/admin/api/2020-04/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5490,8 +5484,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `script_tag_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202004_get_script_tags_param_tag(
         &self,
@@ -5522,7 +5516,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates a script tag.
+     * Updates a script tag
      *
      * This function performs a `PUT` to the `/admin/api/2020-04/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5530,7 +5524,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_script_tags_param_tag(
         &self,
@@ -5555,7 +5549,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a script tag.
+     * Deletes a script tag
      *
      * This function performs a `DELETE` to the `/admin/api/2020-04/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5563,7 +5557,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_script_tags_param_tag(
         &self,
@@ -5595,15 +5589,15 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `src: &str` -- Show script tags with this URL.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit` -- The number of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `src` -- Show script tags with this URL.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_script_tag(
         &self,
@@ -5643,7 +5637,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/script_tags.json?{}", query_),
+            &format!("/admin/api/2020-07/script_tags.json?{query_}"),
             None,
         );
         self.client
@@ -5657,7 +5651,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates a new script tag.
+     * Creates a new script tag
      *
      * This function performs a `POST` to the `/admin/api/2020-07/script_tags.json` endpoint.
      *
@@ -5679,7 +5673,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all script tags.
+     * Retrieves a count of all script tags
      *
      * This function performs a `GET` to the `/admin/api/2020-07/script_tags/count.json` endpoint.
      *
@@ -5687,7 +5681,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `src: &str` -- Count only script tags with a given URL.
+     * * `src` -- Count only script tags with a given URL.
      */
     pub async fn deprecated_202007_get_script_tags_count(
         &self,
@@ -5699,7 +5693,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/script_tags/count.json?{}", query_),
+            &format!("/admin/api/2020-07/script_tags/count.json?{query_}"),
             None,
         );
         self.client
@@ -5713,7 +5707,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single script tag.
+     * Retrieves a single script tag
      *
      * This function performs a `GET` to the `/admin/api/2020-07/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5721,8 +5715,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `script_tag_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202007_get_script_tags_param_tag(
         &self,
@@ -5753,7 +5747,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates a script tag.
+     * Updates a script tag
      *
      * This function performs a `PUT` to the `/admin/api/2020-07/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5761,7 +5755,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_script_tags_param_tag(
         &self,
@@ -5786,7 +5780,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a script tag.
+     * Deletes a script tag
      *
      * This function performs a `DELETE` to the `/admin/api/2020-07/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5794,7 +5788,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_script_tags_param_tag(
         &self,
@@ -5826,15 +5820,15 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `src: &str` -- Show script tags with this URL.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit` -- The number of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `src` -- Show script tags with this URL.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_script_tag(
         &self,
@@ -5874,7 +5868,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/script_tags.json?{}", query_),
+            &format!("/admin/api/2020-10/script_tags.json?{query_}"),
             None,
         );
         self.client
@@ -5888,7 +5882,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates a new script tag.
+     * Creates a new script tag
      *
      * This function performs a `POST` to the `/admin/api/2020-10/script_tags.json` endpoint.
      *
@@ -5910,7 +5904,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all script tags.
+     * Retrieves a count of all script tags
      *
      * This function performs a `GET` to the `/admin/api/2020-10/script_tags/count.json` endpoint.
      *
@@ -5918,7 +5912,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `src: &str` -- Count only script tags with a given URL.
+     * * `src` -- Count only script tags with a given URL.
      */
     pub async fn get_script_tags_count(&self, src: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -5927,7 +5921,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/script_tags/count.json?{}", query_),
+            &format!("/admin/api/2020-10/script_tags/count.json?{query_}"),
             None,
         );
         self.client
@@ -5941,7 +5935,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single script tag.
+     * Retrieves a single script tag
      *
      * This function performs a `GET` to the `/admin/api/2020-10/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5949,8 +5943,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `script_tag_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn get_script_tags_param_tag(
         &self,
@@ -5981,7 +5975,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates a script tag.
+     * Updates a script tag
      *
      * This function performs a `PUT` to the `/admin/api/2020-10/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -5989,7 +5983,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn update_script_tags_param_tag(
         &self,
@@ -6014,7 +6008,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a script tag.
+     * Deletes a script tag
      *
      * This function performs a `DELETE` to the `/admin/api/2020-10/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -6022,7 +6016,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn delete_script_tags_param_tag(
         &self,
@@ -6054,15 +6048,15 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `src: &str` -- Show script tags with this URL.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit` -- The number of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `src` -- Show script tags with this URL.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_script_tag(
         &self,
@@ -6102,7 +6096,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/script_tags.json?{}", query_),
+            &format!("/admin/api/2021-01/script_tags.json?{query_}"),
             None,
         );
         self.client
@@ -6116,7 +6110,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates a new script tag.
+     * Creates a new script tag
      *
      * This function performs a `POST` to the `/admin/api/2021-01/script_tags.json` endpoint.
      *
@@ -6138,7 +6132,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all script tags.
+     * Retrieves a count of all script tags
      *
      * This function performs a `GET` to the `/admin/api/2021-01/script_tags/count.json` endpoint.
      *
@@ -6146,7 +6140,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `src: &str` -- Count only script tags with a given URL.
+     * * `src` -- Count only script tags with a given URL.
      */
     pub async fn deprecated_202101_get_script_tags_count(
         &self,
@@ -6158,7 +6152,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/script_tags/count.json?{}", query_),
+            &format!("/admin/api/2021-01/script_tags/count.json?{query_}"),
             None,
         );
         self.client
@@ -6172,7 +6166,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single script tag.
+     * Retrieves a single script tag
      *
      * This function performs a `GET` to the `/admin/api/2021-01/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -6180,8 +6174,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `script_tag_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_202101_get_script_tags_param_tag(
         &self,
@@ -6212,7 +6206,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates a script tag.
+     * Updates a script tag
      *
      * This function performs a `PUT` to the `/admin/api/2021-01/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -6220,7 +6214,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_script_tags_param_tag(
         &self,
@@ -6245,7 +6239,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a script tag.
+     * Deletes a script tag
      *
      * This function performs a `DELETE` to the `/admin/api/2021-01/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -6253,7 +6247,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_script_tags_param_tag(
         &self,
@@ -6285,15 +6279,15 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The number of results to return.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `created_at_min: &str` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00).
-     * * `src: &str` -- Show script tags with this URL.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit` -- The number of results to return.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `created_at_min` -- Show script tags created after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show script tags created before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show script tags last updated after this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show script tags last updated before this date. (format: 2014-04-25T16:15:47-04:00)
+     * * `src` -- Show script tags with this URL.
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_script_tag(
         &self,
@@ -6333,7 +6327,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/script_tags.json?{}", query_),
+            &format!("/admin/api/unstable/script_tags.json?{query_}"),
             None,
         );
         self.client
@@ -6347,7 +6341,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Creates a new script tag.
+     * Creates a new script tag
      *
      * This function performs a `POST` to the `/admin/api/unstable/script_tags.json` endpoint.
      *
@@ -6371,7 +6365,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a count of all script tags.
+     * Retrieves a count of all script tags
      *
      * This function performs a `GET` to the `/admin/api/unstable/script_tags/count.json` endpoint.
      *
@@ -6379,7 +6373,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `src: &str` -- Count only script tags with a given URL.
+     * * `src` -- Count only script tags with a given URL.
      */
     pub async fn deprecated_unstable_get_script_tags_count(
         &self,
@@ -6391,7 +6385,7 @@ impl OnlineStore {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/script_tags/count.json?{}", query_),
+            &format!("/admin/api/unstable/script_tags/count.json?{query_}"),
             None,
         );
         self.client
@@ -6405,7 +6399,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Retrieves a single script tag.
+     * Retrieves a single script tag
      *
      * This function performs a `GET` to the `/admin/api/unstable/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -6413,8 +6407,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `script_tag_id` -- storefront_access_token_id
+     * * `fields` -- A comma-separated list of fields to include in the response.
      */
     pub async fn deprecated_unstable_get_script_tags_param_tag(
         &self,
@@ -6445,7 +6439,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Updates a script tag.
+     * Updates a script tag
      *
      * This function performs a `PUT` to the `/admin/api/unstable/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -6453,7 +6447,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_script_tags_param_tag(
         &self,
@@ -6478,7 +6472,7 @@ impl OnlineStore {
             .await
     }
     /**
-     * Deletes a script tag.
+     * Deletes a script tag
      *
      * This function performs a `DELETE` to the `/admin/api/unstable/script_tags/{script_tag_id}.json` endpoint.
      *
@@ -6486,7 +6480,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `script_tag_id: &str` -- storefront_access_token_id.
+     * * `script_tag_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_script_tags_param_tag(
         &self,
@@ -6518,7 +6512,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_theme(
         &self,
@@ -6531,7 +6525,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-01/themes.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-01/themes.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -6543,15 +6537,15 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-             A new theme is always unpublished by default. To publish a theme when you create it, include
-             "role": "main" in the POST request. The theme will be published only after all
-             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/themes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-01
-    */
+     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
+     * A new theme is always unpublished by default. To publish a theme when you create it, include
+     * "role": "main" in the POST request. The theme will be published only after all
+     * of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/themes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-01
+     */
     pub async fn deprecated_202001_create_themes(
         &self,
         body: &serde_json::Value,
@@ -6576,8 +6570,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_themes_param_theme(
         &self,
@@ -6616,7 +6610,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_themes_param_theme(
         &self,
@@ -6649,7 +6643,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_themes_param_theme(
         &self,
@@ -6681,7 +6675,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_theme(
         &self,
@@ -6694,7 +6688,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-04/themes.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-04/themes.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -6706,15 +6700,15 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-             A new theme is always unpublished by default. To publish a theme when you create it, include
-             "role": "main" in the POST request. The theme will be published only after all
-             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/themes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-04
-    */
+     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
+     * A new theme is always unpublished by default. To publish a theme when you create it, include
+     * "role": "main" in the POST request. The theme will be published only after all
+     * of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/themes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-04
+     */
     pub async fn deprecated_202004_create_themes(
         &self,
         body: &serde_json::Value,
@@ -6739,8 +6733,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_themes_param_theme(
         &self,
@@ -6779,7 +6773,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_themes_param_theme(
         &self,
@@ -6812,7 +6806,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_themes_param_theme(
         &self,
@@ -6844,7 +6838,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_theme(
         &self,
@@ -6857,7 +6851,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-07/themes.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-07/themes.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -6869,15 +6863,15 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-             A new theme is always unpublished by default. To publish a theme when you create it, include
-             "role": "main" in the POST request. The theme will be published only after all
-             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/themes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-07
-    */
+     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
+     * A new theme is always unpublished by default. To publish a theme when you create it, include
+     * "role": "main" in the POST request. The theme will be published only after all
+     * of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/themes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-07
+     */
     pub async fn deprecated_202007_create_themes(
         &self,
         body: &serde_json::Value,
@@ -6902,8 +6896,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_themes_param_theme(
         &self,
@@ -6942,7 +6936,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_themes_param_theme(
         &self,
@@ -6975,7 +6969,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_themes_param_theme(
         &self,
@@ -7007,7 +7001,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_theme(&self, fields: &str) -> ClientResult<crate::Response<()>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -7017,7 +7011,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2020-10/themes.json?{}", query_), None);
+            .url(&format!("/admin/api/2020-10/themes.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -7029,15 +7023,15 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-             A new theme is always unpublished by default. To publish a theme when you create it, include
-             "role": "main" in the POST request. The theme will be published only after all
-             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/themes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-10
-    */
+     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
+     * A new theme is always unpublished by default. To publish a theme when you create it, include
+     * "role": "main" in the POST request. The theme will be published only after all
+     * of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/themes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2020-10
+     */
     pub async fn create_themes(
         &self,
         body: &serde_json::Value,
@@ -7062,8 +7056,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_themes_param_theme(
         &self,
@@ -7102,7 +7096,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn update_themes_param_theme(
         &self,
@@ -7135,7 +7129,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn delete_themes_param_theme(
         &self,
@@ -7167,7 +7161,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_theme(
         &self,
@@ -7180,7 +7174,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/2021-01/themes.json?{}", query_), None);
+            .url(&format!("/admin/api/2021-01/themes.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -7192,15 +7186,15 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-             A new theme is always unpublished by default. To publish a theme when you create it, include
-             "role": "main" in the POST request. The theme will be published only after all
-             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/themes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2021-01
-    */
+     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
+     * A new theme is always unpublished by default. To publish a theme when you create it, include
+     * "role": "main" in the POST request. The theme will be published only after all
+     * of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/themes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-2021-01
+     */
     pub async fn deprecated_202101_create_themes(
         &self,
         body: &serde_json::Value,
@@ -7225,8 +7219,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_themes_param_theme(
         &self,
@@ -7265,7 +7259,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_themes_param_theme(
         &self,
@@ -7298,7 +7292,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_themes_param_theme(
         &self,
@@ -7330,7 +7324,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_theme(
         &self,
@@ -7343,7 +7337,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/admin/api/unstable/themes.json?{}", query_), None);
+            .url(&format!("/admin/api/unstable/themes.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -7355,15 +7349,15 @@ impl OnlineStore {
             .await
     }
     /**
-    * Creates a theme by providing the public URL of a ZIP file that contains the theme.
-             A new theme is always unpublished by default. To publish a theme when you create it, include
-             "role": "main" in the POST request. The theme will be published only after all
-             of its files have been extracted and stored by Shopify, which might take a couple of minutes.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/themes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-unstable
-    */
+     * Creates a theme by providing the public URL of a ZIP file that contains the theme.
+     * A new theme is always unpublished by default. To publish a theme when you create it, include
+     * "role": "main" in the POST request. The theme will be published only after all
+     * of its files have been extracted and stored by Shopify, which might take a couple of minutes.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/themes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/online-store/theme#create-unstable
+     */
     pub async fn deprecated_unstable_create_themes(
         &self,
         body: &serde_json::Value,
@@ -7388,8 +7382,8 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `theme_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_themes_param_theme(
         &self,
@@ -7428,7 +7422,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_themes_param_theme(
         &self,
@@ -7461,7 +7455,7 @@ impl OnlineStore {
      *
      * **Parameters:**
      *
-     * * `theme_id: &str` -- storefront_access_token_id.
+     * * `theme_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_themes_param_theme(
         &self,

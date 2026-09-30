@@ -12,7 +12,7 @@ impl CommonAreaPhones {
     }
 
     /**
-     * List common area phones.
+     * List common area phones
      *
      * This function performs a `GET` to the `/phone/common_area_phones` endpoint.
      *
@@ -30,8 +30,8 @@ impl CommonAreaPhones {
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The total number of records returned from a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `page_size` -- The total number of records returned from a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn list(
         &self,
@@ -48,7 +48,7 @@ impl CommonAreaPhones {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/phone/common_area_phones?{}", query_), None);
+            .url(&format!("/phone/common_area_phones?{query_}"), None);
         let resp: crate::Response<crate::types::ListCommonAreaPhonesResponse> = self
             .client
             .get(
@@ -68,7 +68,7 @@ impl CommonAreaPhones {
         ))
     }
     /**
-     * List common area phones.
+     * List common area phones
      *
      * This function performs a `GET` to the `/phone/common_area_phones` endpoint.
      *
@@ -119,7 +119,7 @@ impl CommonAreaPhones {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -134,7 +134,7 @@ impl CommonAreaPhones {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -156,7 +156,7 @@ impl CommonAreaPhones {
         Ok(crate::Response::new(status, headers, common_area_phones))
     }
     /**
-     * Add a common area phone.
+     * Add a common area phone
      *
      * This function performs a `POST` to the `/phone/common_area_phones` endpoint.
      *
@@ -188,7 +188,7 @@ impl CommonAreaPhones {
             .await
     }
     /**
-     * Get common area phone details.
+     * Get common area phone details
      *
      * This function performs a `GET` to the `/phone/common_area_phones/{commonAreaPhoneId}` endpoint.
      *
@@ -199,13 +199,14 @@ impl CommonAreaPhones {
      * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      * * A [supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)
      *
      * **Parameters:**
      *
-     * * `common_area_phone_id: &str` -- Unique Identifier of the Common Area Phone. Use the unique identifier or the Mac address of the common area phone. The Mac address can be in hyphenated (`00-04-f2-5e-ec-3c`) or not hyphenated (`0004f25eec3c`) format. You can get this value from the [List Common Area Phones API](https://marketplace.zoom.us/docs/api-reference/zoom-api/common-area-phones/listcommonareaphones).
+     * * `common_area_phone_id` -- Unique Identifier of the Common Area Phone. Use the unique identifier or the Mac address of the common area phone. The Mac address can be in hyphenated (`00-04-f2-5e-ec-3c`) or not hyphenated (`0004f25eec3c`) format. You can get this value from the [List Common Area Phones API](https://marketplace.zoom.us/docs/api-reference/zoom-api/common-area-phones/listcommonareaphones).
      */
     pub async fn get(
         &self,
@@ -229,22 +230,23 @@ impl CommonAreaPhones {
             .await
     }
     /**
-     * Delete a common area phone.
+     * Delete a common area phone
      *
      * This function performs a `DELETE` to the `/phone/common_area_phones/{commonAreaPhoneId}` endpoint.
      *
      * A common area phone can be provisioned by a Zoom account owner or a Zoom admin so that anyone in an organization can use it. For example, if your office has shared desks that don't belong to a specific employees, you could add a common area phone so that any person can use it.<br> Use this API to remove the [common area phone](https://support.zoom.us/hc/en-us/articles/360028516231-Managing-Common-Area-Phones) from Zoom Phone System in an account.<br><br>**Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license.
      * * Account owner or admin permissions.
      * * [Supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)<br>
+     *
      * **Scopes:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
      *
-     * * `common_area_phone_id: &str` -- Unique Identifier of the common area phone.
+     * * `common_area_phone_id` -- Unique Identifier of the common area phone.
      */
     pub async fn delete(&self, common_area_phone_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -265,7 +267,7 @@ impl CommonAreaPhones {
             .await
     }
     /**
-     * Update common area phone.
+     * Update common area phone
      *
      * This function performs a `PATCH` to the `/phone/common_area_phones/{commonAreaPhoneId}` endpoint.
      *
@@ -304,18 +306,19 @@ impl CommonAreaPhones {
             .await
     }
     /**
-     * Assign phone numbers to common area phone.
+     * Assign phone numbers to common area phone
      *
      * This function performs a `POST` to the `/phone/common_area_phones/{commonAreaPhoneId}/phone_numbers` endpoint.
      *
      * Assign phone numbers to common area phone.<br><br>
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license.
      * * Account owner or admin permissions.
+     *
      * **Scope:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn assign_phone_numbers_common_area(
         &self,
@@ -340,7 +343,7 @@ impl CommonAreaPhones {
             .await
     }
     /**
-     * Unassign phone numbers from a common area phone.
+     * Unassign phone numbers from a common area phone
      *
      * This function performs a `DELETE` to the `/phone/common_area_phones/{commonAreaPhoneId}/phone_numbers/{phoneNumberId}` endpoint.
      *
@@ -349,13 +352,14 @@ impl CommonAreaPhones {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**<br>
+     *
      * * A Pro or a higher account with a Zoom Phone license
      * * An account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `common_area_phone_id: &str` -- The common area phone's unique ID.
-     * * `phone_number_id: &str` -- The phone number or the phone number's unique ID.
+     * * `common_area_phone_id` -- The common area phone's unique ID.
+     * * `phone_number_id` -- The phone number or the phone number's unique ID.
      */
     pub async fn unassign_phone_numbers_from_common_area(
         &self,
@@ -381,18 +385,19 @@ impl CommonAreaPhones {
             .await
     }
     /**
-     * Assign calling plans to common area phone.
+     * Assign calling plans to common area phone
      *
      * This function performs a `POST` to the `/phone/common_area_phones/{commonAreaPhoneId}/calling_plans` endpoint.
      *
      * Assign calling plans to common area phone.<br><br>
      * **Prerequisites:**<br>
+     *
      * * Pro or a higher account with Zoom Phone license.
      * * Account owner or admin permissions.
+     *
      * **Scope:** `phone:write:admin`<br>
      *
-     *
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn assign_calling_plans(
         &self,
@@ -418,7 +423,7 @@ impl CommonAreaPhones {
             .await
     }
     /**
-     * Unassign calling plan from a common area phone.
+     * Unassign calling plan from a common area phone
      *
      * This function performs a `DELETE` to the `/phone/common_area_phones/{commonAreaPhoneId}/calling_plans/{type}` endpoint.
      *
@@ -427,13 +432,14 @@ impl CommonAreaPhones {
      * **Scopes:** `phone:write:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Prerequisites:**
+     *
      * * A Pro or higher account with a Zoom Phone license
      * * An account owner or admin permissions
      *
      * **Parameters:**
      *
-     * * `common_area_phone_id: &str` -- The common area phone's unique ID.
-     * * `type_: &str` -- The [calling plan](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) to remove.
+     * * `common_area_phone_id` -- The common area phone's unique ID.
+     * * `type_` -- The [calling plan](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) to remove.
      */
     pub async fn unassign_calling_plans_from(
         &self,

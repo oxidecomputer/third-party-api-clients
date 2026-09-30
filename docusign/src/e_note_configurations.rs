@@ -16,11 +16,9 @@ impl ENoteConfigurations {
      *
      * This function performs a `GET` to the `/v2.1/accounts/{accountId}/settings/enote_configuration` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -48,11 +46,9 @@ impl ENoteConfigurations {
      *
      * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/settings/enote_configuration` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -81,11 +77,9 @@ impl ENoteConfigurations {
      *
      * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/settings/enote_configuration` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(&self, account_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

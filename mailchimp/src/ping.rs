@@ -12,7 +12,7 @@ impl Ping {
     }
 
     /**
-     * Ping.
+     * Ping
      *
      * This function performs a `GET` to the `/ping` endpoint.
      *

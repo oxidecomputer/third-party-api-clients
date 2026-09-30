@@ -20,15 +20,15 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to those after the specified ID.
-     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `ids` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to those after the specified ID.
+     * * `created_at_min` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get(
         &self,
@@ -67,10 +67,9 @@ impl Customers {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-01/customers.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-01/customers.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -112,12 +111,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `query: &str` -- Text to search for in the shop's customer data.
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `query` -- Text to search for in the shop's customer data.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_search(
         &self,
@@ -141,7 +140,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/customers/search.json?{}", query_),
+            &format!("/admin/api/2020-01/customers/search.json?{query_}"),
             None,
         );
         self.client
@@ -163,8 +162,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_param(
         &self,
@@ -203,7 +202,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_param(
         &self,
@@ -236,7 +235,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_param(
         &self,
@@ -260,17 +259,17 @@ impl Customers {
             .await
     }
     /**
-    * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
-               The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/customers/{customer_id}/account_activation_url.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
+     * The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/customers/{customer_id}/account_activation_url.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202001_create_param_account_activation_url(
         &self,
         customer_id: &str,
@@ -302,7 +301,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_param_send_invite(
         &self,
@@ -356,7 +355,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_param_order(
         &self,
@@ -388,15 +387,15 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to those after the specified ID.
-     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `ids` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to those after the specified ID.
+     * * `created_at_min` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get(
         &self,
@@ -435,10 +434,9 @@ impl Customers {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-04/customers.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-04/customers.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -480,12 +478,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `query: &str` -- Text to search for in the shop's customer data.
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `query` -- Text to search for in the shop's customer data.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_search(
         &self,
@@ -509,7 +507,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/customers/search.json?{}", query_),
+            &format!("/admin/api/2020-04/customers/search.json?{query_}"),
             None,
         );
         self.client
@@ -531,8 +529,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_param(
         &self,
@@ -571,7 +569,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_param(
         &self,
@@ -604,7 +602,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_param(
         &self,
@@ -628,17 +626,17 @@ impl Customers {
             .await
     }
     /**
-    * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
-               The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/customers/{customer_id}/account_activation_url.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
+     * The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/customers/{customer_id}/account_activation_url.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `customer_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202004_create_param_account_activation_url(
         &self,
         customer_id: &str,
@@ -670,7 +668,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_param_send_invite(
         &self,
@@ -724,7 +722,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_param_order(
         &self,
@@ -756,15 +754,15 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to those after the specified ID.
-     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `ids` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to those after the specified ID.
+     * * `created_at_min` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get(
         &self,
@@ -803,10 +801,9 @@ impl Customers {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-07/customers.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-07/customers.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -848,12 +845,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `query: &str` -- Text to search for in the shop's customer data.
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `query` -- Text to search for in the shop's customer data.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_search(
         &self,
@@ -877,7 +874,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/customers/search.json?{}", query_),
+            &format!("/admin/api/2020-07/customers/search.json?{query_}"),
             None,
         );
         self.client
@@ -899,8 +896,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_param(
         &self,
@@ -939,7 +936,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_param(
         &self,
@@ -972,7 +969,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_param(
         &self,
@@ -996,17 +993,17 @@ impl Customers {
             .await
     }
     /**
-    * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
-               The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/customers/{customer_id}/account_activation_url.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
+     * The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/customers/{customer_id}/account_activation_url.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `customer_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202007_create_param_account_activation_url(
         &self,
         customer_id: &str,
@@ -1038,7 +1035,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_create_param_send_invite(
         &self,
@@ -1092,7 +1089,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_param_order(
         &self,
@@ -1124,15 +1121,15 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to those after the specified ID.
-     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `ids` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to those after the specified ID.
+     * * `created_at_min` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get(
         &self,
@@ -1171,10 +1168,9 @@ impl Customers {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2020-10/customers.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2020-10/customers.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1213,12 +1209,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `query: &str` -- Text to search for in the shop's customer data.
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `query` -- Text to search for in the shop's customer data.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_search(
         &self,
@@ -1242,7 +1238,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/customers/search.json?{}", query_),
+            &format!("/admin/api/2020-10/customers/search.json?{query_}"),
             None,
         );
         self.client
@@ -1264,8 +1260,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_param(
         &self,
@@ -1304,7 +1300,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn update_param(
         &self,
@@ -1337,7 +1333,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn delete_param(&self, customer_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1358,17 +1354,17 @@ impl Customers {
             .await
     }
     /**
-    * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
-               The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/customers/{customer_id}/account_activation_url.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
+     * The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/customers/{customer_id}/account_activation_url.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `customer_id` -- storefront_access_token_id
+     */
     pub async fn create_param_account_activation_url(
         &self,
         customer_id: &str,
@@ -1400,7 +1396,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn create_param_send_invite(
         &self,
@@ -1454,7 +1450,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn get_param_order(&self, customer_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -1483,15 +1479,15 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to those after the specified ID.
-     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `ids` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to those after the specified ID.
+     * * `created_at_min` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get(
         &self,
@@ -1530,10 +1526,9 @@ impl Customers {
             query_args.push(("updated_at_min".to_string(), updated_at_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(
-            &format!("/admin/api/2021-01/customers.json?{}", query_),
-            None,
-        );
+        let url = self
+            .client
+            .url(&format!("/admin/api/2021-01/customers.json?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -1575,12 +1570,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `query: &str` -- Text to search for in the shop's customer data.
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `query` -- Text to search for in the shop's customer data.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_search(
         &self,
@@ -1604,7 +1599,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/customers/search.json?{}", query_),
+            &format!("/admin/api/2021-01/customers/search.json?{query_}"),
             None,
         );
         self.client
@@ -1626,8 +1621,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_param(
         &self,
@@ -1666,7 +1661,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_param(
         &self,
@@ -1699,7 +1694,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_param(
         &self,
@@ -1723,17 +1718,17 @@ impl Customers {
             .await
     }
     /**
-    * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
-               The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/customers/{customer_id}/account_activation_url.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
+     * The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/customers/{customer_id}/account_activation_url.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `customer_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_202101_create_param_account_activation_url(
         &self,
         customer_id: &str,
@@ -1765,7 +1760,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_create_param_send_invite(
         &self,
@@ -1819,7 +1814,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_param_order(
         &self,
@@ -1851,15 +1846,15 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `ids: &str` -- Restrict results to customers specified by a comma-separated list of IDs.
-     * * `since_id: &str` -- Restrict results to those after the specified ID.
-     * * `created_at_min: &str` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `created_at_max: &str` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_min: &str` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `updated_at_max: &str` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `ids` -- Restrict results to customers specified by a comma-separated list of IDs.
+     * * `since_id` -- Restrict results to those after the specified ID.
+     * * `created_at_min` -- Show customers created after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `created_at_max` -- Show customers created before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_min` -- Show customers last updated after a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `updated_at_max` -- Show customers last updated before a specified date.(format: 2014-04-25T16:15:47-04:00)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get(
         &self,
@@ -1899,7 +1894,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/customers.json?{}", query_),
+            &format!("/admin/api/unstable/customers.json?{query_}"),
             None,
         );
         self.client
@@ -1943,12 +1938,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `query: &str` -- Text to search for in the shop's customer data.
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `query` -- Text to search for in the shop's customer data.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_search(
         &self,
@@ -1972,7 +1967,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/unstable/customers/search.json?{}", query_),
+            &format!("/admin/api/unstable/customers/search.json?{query_}"),
             None,
         );
         self.client
@@ -1994,8 +1989,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_param(
         &self,
@@ -2034,7 +2029,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_param(
         &self,
@@ -2067,7 +2062,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_param(
         &self,
@@ -2091,17 +2086,17 @@ impl Customers {
             .await
     }
     /**
-    * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
-               The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/customers/{customer_id}/account_activation_url.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-unstable
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- storefront_access_token_id.
-    */
+     * Generate an account activation URL for a customer whose account is not yet enabled. This is useful when you've imported a large number of customers and want to send them activation emails all at once. Using this approach, you'll need to generate and send the activation emails yourself.
+     * The account activation URL generated by this endpoint is for one-time use and will expire after 30 days. If you make a new POST request to this endpoint, then a new URL will be generated. The new URL will be again valid for 30 days, but the previous URL will no longer be valid.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/customers/{customer_id}/account_activation_url.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/customers/customer#account_activation_url-unstable
+     *
+     * **Parameters:**
+     *
+     * * `customer_id` -- storefront_access_token_id
+     */
     pub async fn deprecated_unstable_create_param_account_activation_url(
         &self,
         customer_id: &str,
@@ -2133,7 +2128,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_create_param_send_invite(
         &self,
@@ -2187,7 +2182,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_param_order(
         &self,
@@ -2219,7 +2214,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_param_addresse(
         &self,
@@ -2251,7 +2246,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_create_param_addresses(
         &self,
@@ -2284,8 +2279,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_get_param_addresses_address(
         &self,
@@ -2319,8 +2314,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_param_addresses_address(
         &self,
@@ -2355,8 +2350,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_param_addresses_address(
         &self,
@@ -2390,9 +2385,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-     * * `operation: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_ids` -- recurring_application_charge[capped_amount]
+     * * `operation` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_param_addresses_set(
         &self,
@@ -2435,8 +2430,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_param_addresses_address_default(
         &self,
@@ -2470,7 +2465,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_param_addresse(
         &self,
@@ -2502,7 +2497,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_create_param_addresses(
         &self,
@@ -2535,8 +2530,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_get_param_addresses_address(
         &self,
@@ -2570,8 +2565,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_param_addresses_address(
         &self,
@@ -2606,8 +2601,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_param_addresses_address(
         &self,
@@ -2641,9 +2636,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-     * * `operation: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_ids` -- recurring_application_charge[capped_amount]
+     * * `operation` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_param_addresses_set(
         &self,
@@ -2686,8 +2681,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_param_addresses_address_default(
         &self,
@@ -2721,7 +2716,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_param_addresse(
         &self,
@@ -2753,7 +2748,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_create_param_addresses(
         &self,
@@ -2786,8 +2781,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_get_param_addresses_address(
         &self,
@@ -2821,8 +2816,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_param_addresses_address(
         &self,
@@ -2857,8 +2852,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_param_addresses_address(
         &self,
@@ -2892,9 +2887,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-     * * `operation: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_ids` -- recurring_application_charge[capped_amount]
+     * * `operation` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_param_addresses_set(
         &self,
@@ -2937,8 +2932,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_param_addresses_address_default(
         &self,
@@ -2972,7 +2967,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn get_param_addresse(&self, customer_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -3001,7 +2996,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn create_param_addresses(
         &self,
@@ -3034,8 +3029,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn get_param_addresses_address(
         &self,
@@ -3069,8 +3064,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn update_param_addresses_address(
         &self,
@@ -3105,8 +3100,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn delete_param_addresses_address(
         &self,
@@ -3140,9 +3135,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-     * * `operation: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_ids` -- recurring_application_charge[capped_amount]
+     * * `operation` -- storefront_access_token_id
      */
     pub async fn update_param_addresses_set(
         &self,
@@ -3185,8 +3180,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn update_param_addresses_address_default(
         &self,
@@ -3220,7 +3215,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_param_addresse(
         &self,
@@ -3252,7 +3247,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_create_param_addresses(
         &self,
@@ -3285,8 +3280,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_get_param_addresses_address(
         &self,
@@ -3320,8 +3315,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_param_addresses_address(
         &self,
@@ -3356,8 +3351,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_param_addresses_address(
         &self,
@@ -3391,9 +3386,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-     * * `operation: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_ids` -- recurring_application_charge[capped_amount]
+     * * `operation` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_param_addresses_set(
         &self,
@@ -3436,8 +3431,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_param_addresses_address_default(
         &self,
@@ -3471,7 +3466,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_param_addresse(
         &self,
@@ -3503,7 +3498,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_create_param_addresses(
         &self,
@@ -3536,8 +3531,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_get_param_addresses_address(
         &self,
@@ -3571,8 +3566,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_param_addresses_address(
         &self,
@@ -3607,8 +3602,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_param_addresses_address(
         &self,
@@ -3642,9 +3637,9 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_ids: i64` -- recurring_application_charge[capped_amount].
-     * * `operation: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_ids` -- recurring_application_charge[capped_amount]
+     * * `operation` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_param_addresses_set(
         &self,
@@ -3687,8 +3682,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_id: &str` -- storefront_access_token_id.
-     * * `address_id: &str` -- storefront_access_token_id.
+     * * `customer_id` -- storefront_access_token_id
+     * * `address_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_param_addresses_address_default(
         &self,
@@ -3722,10 +3717,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_saved_searche(
         &self,
@@ -3745,7 +3740,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-01/customer_saved_searches.json?{}", query_),
+            &format!("/admin/api/2020-01/customer_saved_searches.json?{query_}"),
             None,
         );
         self.client
@@ -3791,7 +3786,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202001_get_saved_searches_count(
         &self,
@@ -3803,10 +3798,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-01/customer_saved_searches/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-01/customer_saved_searches/count.json?{query_}"),
             None,
         );
         self.client
@@ -3828,8 +3820,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_saved_searches_param_search(
         &self,
@@ -3868,7 +3860,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_update_saved_searches_param_search(
         &self,
@@ -3901,7 +3893,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202001_delete_saved_searches_param_search(
         &self,
@@ -3933,12 +3925,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202001_get_saved_searches_param_search_customers(
         &self,
@@ -3985,10 +3977,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_saved_searche(
         &self,
@@ -4008,7 +4000,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-04/customer_saved_searches.json?{}", query_),
+            &format!("/admin/api/2020-04/customer_saved_searches.json?{query_}"),
             None,
         );
         self.client
@@ -4054,7 +4046,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202004_get_saved_searches_count(
         &self,
@@ -4066,10 +4058,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-04/customer_saved_searches/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-04/customer_saved_searches/count.json?{query_}"),
             None,
         );
         self.client
@@ -4091,8 +4080,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_saved_searches_param_search(
         &self,
@@ -4131,7 +4120,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_update_saved_searches_param_search(
         &self,
@@ -4164,7 +4153,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202004_delete_saved_searches_param_search(
         &self,
@@ -4196,12 +4185,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202004_get_saved_searches_param_search_customers(
         &self,
@@ -4248,10 +4237,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_saved_searche(
         &self,
@@ -4271,7 +4260,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-07/customer_saved_searches.json?{}", query_),
+            &format!("/admin/api/2020-07/customer_saved_searches.json?{query_}"),
             None,
         );
         self.client
@@ -4317,7 +4306,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202007_get_saved_searches_count(
         &self,
@@ -4329,10 +4318,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-07/customer_saved_searches/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-07/customer_saved_searches/count.json?{query_}"),
             None,
         );
         self.client
@@ -4354,8 +4340,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_saved_searches_param_search(
         &self,
@@ -4394,7 +4380,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_update_saved_searches_param_search(
         &self,
@@ -4427,7 +4413,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202007_delete_saved_searches_param_search(
         &self,
@@ -4459,12 +4445,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202007_get_saved_searches_param_search_customers(
         &self,
@@ -4511,10 +4497,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_saved_searche(
         &self,
@@ -4534,7 +4520,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2020-10/customer_saved_searches.json?{}", query_),
+            &format!("/admin/api/2020-10/customer_saved_searches.json?{query_}"),
             None,
         );
         self.client
@@ -4580,7 +4566,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn get_saved_searches_count(
         &self,
@@ -4592,10 +4578,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2020-10/customer_saved_searches/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2020-10/customer_saved_searches/count.json?{query_}"),
             None,
         );
         self.client
@@ -4617,8 +4600,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_saved_searches_param_search(
         &self,
@@ -4657,7 +4640,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn update_saved_searches_param_search(
         &self,
@@ -4690,7 +4673,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn delete_saved_searches_param_search(
         &self,
@@ -4722,12 +4705,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn get_saved_searches_param_search_customers(
         &self,
@@ -4774,10 +4757,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_saved_searche(
         &self,
@@ -4797,7 +4780,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!("/admin/api/2021-01/customer_saved_searches.json?{}", query_),
+            &format!("/admin/api/2021-01/customer_saved_searches.json?{query_}"),
             None,
         );
         self.client
@@ -4843,7 +4826,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_202101_get_saved_searches_count(
         &self,
@@ -4855,10 +4838,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/2021-01/customer_saved_searches/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/2021-01/customer_saved_searches/count.json?{query_}"),
             None,
         );
         self.client
@@ -4880,8 +4860,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_saved_searches_param_search(
         &self,
@@ -4920,7 +4900,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_update_saved_searches_param_search(
         &self,
@@ -4953,7 +4933,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_202101_delete_saved_searches_param_search(
         &self,
@@ -4985,12 +4965,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_202101_get_saved_searches_param_search_customers(
         &self,
@@ -5037,10 +5017,10 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `since_id: &str` -- Restrict results to after the specified ID.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `since_id` -- Restrict results to after the specified ID.
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_saved_searche(
         &self,
@@ -5060,10 +5040,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/customer_saved_searches.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/customer_saved_searches.json?{query_}"),
             None,
         );
         self.client
@@ -5109,7 +5086,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `since_id` -- Restrict results to after the specified ID
      */
     pub async fn deprecated_unstable_get_saved_searches_count(
         &self,
@@ -5121,10 +5098,7 @@ impl Customers {
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self.client.url(
-            &format!(
-                "/admin/api/unstable/customer_saved_searches/count.json?{}",
-                query_
-            ),
+            &format!("/admin/api/unstable/customer_saved_searches/count.json?{query_}"),
             None,
         );
         self.client
@@ -5146,8 +5120,8 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_saved_searches_param_search(
         &self,
@@ -5186,7 +5160,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_update_saved_searches_param_search(
         &self,
@@ -5219,7 +5193,7 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
+     * * `customer_saved_search_id` -- storefront_access_token_id
      */
     pub async fn deprecated_unstable_delete_saved_searches_param_search(
         &self,
@@ -5251,12 +5225,12 @@ impl Customers {
      *
      * **Parameters:**
      *
-     * * `customer_saved_search_id: &str` -- storefront_access_token_id.
-     * * `order: &str` -- Set the field and direction by which to order results.
-     *                     (default: last_order_date DESC).
-     * * `limit: &str` -- The maximum number of results to show.
-     *                     (default: 50, maximum: 250).
-     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     * * `customer_saved_search_id` -- storefront_access_token_id
+     * * `order` -- Set the field and direction by which to order results.
+     *   (default: last_order_date DESC)
+     * * `limit` -- The maximum number of results to show.
+     *   (default: 50, maximum: 250)
+     * * `fields` -- Show only certain fields, specified by a comma-separated list of field names.
      */
     pub async fn deprecated_unstable_get_saved_searches_param_search_customers(
         &self,

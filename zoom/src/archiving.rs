@@ -12,7 +12,7 @@ impl Archiving {
     }
 
     /**
-     * List archived files.
+     * List archived files
      *
      * This function performs a `GET` to the `/archive_files` endpoint.
      *
@@ -22,16 +22,17 @@ impl Archiving {
      * **Scope:** `recording:read:admin`<br>
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br><br>
      * **Prerequisites:** <br>
+     *
      * * Enable cloud recording.
      * * Follow the [enablement process](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data#h_01ENPBD3WR68D7FAKTBY92SG45) to access the archiving feature.
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `from: &str` -- Start date for the query in "yyyy-MM-dd'T'HH:mm:ss'Z'" format. The duration for the query defined using the "from" and "to" parameters should not exceed 7 days as this API only provides a week's data at once.
-     * * `to: &str` -- End date for the query in "yyyy-MM-dd'T'HH:mm:ss'Z'" format. .
-     * * `query_date_type: crate::types::ListArchivedFilesQueryDateType` -- The query date type for the `from` and `to` parameters.
+     * * `page_size` -- The number of records returned within a single API call.
+     * * `next_page_token` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     * * `from` -- Start date for the query in "yyyy-MM-dd'T'HH:mm:ss'Z'" format. The duration for the query defined using the "from" and "to" parameters should not exceed 7 days as this API only provides a week's data at once.
+     * * `to` -- End date for the query in "yyyy-MM-dd'T'HH:mm:ss'Z'" format.
+     * * `query_date_type` -- The query date type for the `from` and `to` parameters.
      */
     pub async fn list_archived_files(
         &self,
@@ -58,7 +59,7 @@ impl Archiving {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/archive_files?{}", query_), None);
+        let url = self.client.url(&format!("/archive_files?{query_}"), None);
         let resp: crate::Response<crate::types::ListArchivedFilesResponse> = self
             .client
             .get(
@@ -78,7 +79,7 @@ impl Archiving {
         ))
     }
     /**
-     * List archived files.
+     * List archived files
      *
      * This function performs a `GET` to the `/archive_files` endpoint.
      *
@@ -90,6 +91,7 @@ impl Archiving {
      * **Scope:** `recording:read:admin`<br>
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br><br>
      * **Prerequisites:** <br>
+     *
      * * Enable cloud recording.
      * * Follow the [enablement process](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data#h_01ENPBD3WR68D7FAKTBY92SG45) to access the archiving feature.
      */
@@ -110,7 +112,7 @@ impl Archiving {
             query_args.push(("to".to_string(), to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/archive_files?{}", query_), None);
+        let url = self.client.url(&format!("/archive_files?{query_}"), None);
         let crate::Response::<crate::types::ListArchivedFilesResponse> {
             mut status,
             mut headers,
@@ -140,7 +142,7 @@ impl Archiving {
                 } = self
                     .client
                     .get(
-                        &format!("{}?next_page_token={}", url, page),
+                        &format!("{url}?next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -155,7 +157,7 @@ impl Archiving {
                 } = self
                     .client
                     .get(
-                        &format!("{}&next_page_token={}", url, page),
+                        &format!("{url}&next_page_token={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -177,7 +179,7 @@ impl Archiving {
         Ok(crate::Response::new(status, headers, meetings))
     }
     /**
-     * Get meeting archived files.
+     * Get meeting archived files
      *
      * This function performs a `GET` to the `/past_meetings/{meetingUUID}/archive_files` endpoint.
      *
@@ -191,8 +193,8 @@ impl Archiving {
      *
      * **Parameters:**
      *
-     * * `meeting: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
-     *   
+     * * `meeting` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
+     *
      *   If the meeting UUID begins with a `/` character or contains a `//` character, you **must** double-encode the meeting UUID when using the meeting UUID for other API calls.
      */
     pub async fn testget_record_archived_file(

@@ -30,11 +30,10 @@ impl TemplateLocks {
      * [TemplateLocks: create](https://developers.docusign.com/docs/esign-rest-api/reference/templates/templatelocks/create/)
      * for a description of the `X-DocuSign-Edit` header.
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_get_template(
         &self,
@@ -70,7 +69,6 @@ impl TemplateLocks {
      * as described in
      * [TemplateLocks: create](https://developers.docusign.com/docs/esign-rest-api/reference/templates/templatelocks/create/).
      *
-     *
      * Use this method to change the duration
      * of the lock (`lockDurationInSeconds`)
      * or the `lockedByApp` string.
@@ -86,12 +84,10 @@ impl TemplateLocks {
      * }
      * ```
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_put_template(
         &self,
@@ -135,7 +131,6 @@ impl TemplateLocks {
      * every PUT method (typically a method that updates a template)
      * while the template is locked.
      *
-     *
      * If you do not provide the `lockToken` when accessing
      * a locked template, you will get the following
      * error:
@@ -146,7 +141,6 @@ impl TemplateLocks {
      *    "message": "The user is not the owner of the lock. The template is locked by another user or in another application"
      * }
      * ```
-     *
      *
      * ### The X-DocuSign-Edit header
      *
@@ -177,13 +171,10 @@ impl TemplateLocks {
      * X-DocuSign-Edit:<DocuSignEdit><LockToken>token-from-response</LockToken><LockDurationInSeconds>600</LockDurationInSeconds></DocuSignEdit>
      * ```
      *
-     *
-     *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_post_template(
         &self,
@@ -227,16 +218,14 @@ impl TemplateLocks {
      * changes made while the template was locked
      * are kept or discarded.
      *
-     *
      * | Query Parameter | Description                                                                                                                                                                         |
      * | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
      * | `save_changes`  | (Optional) When set to **true** (the default), any changes made while the lock was active are saved. When set to **false**, any changes made while the template was locked are discarded. |
      *
-     *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn lock_delete_template(
         &self,

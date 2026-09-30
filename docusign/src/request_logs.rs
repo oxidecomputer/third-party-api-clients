@@ -24,7 +24,7 @@ impl RequestLogs {
      *
      * **Parameters:**
      *
-     * * `encoding: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `encoding` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn api_get_log(
         &self,
@@ -37,7 +37,7 @@ impl RequestLogs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v2.1/diagnostics/request_logs?{}", query_), None);
+            .url(&format!("/v2.1/diagnostics/request_logs?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -82,7 +82,7 @@ impl RequestLogs {
      *
      * **Parameters:**
      *
-     * * `request_log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `request_log_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn api_get(
         &self,
@@ -145,7 +145,6 @@ impl RequestLogs {
      * Private information, such as passwords and integrator key information, which is normally located in the call header is omitted from the request/response log.
      *
      * API request logging only captures requests from the authenticated user. Any call that does not authenticate the user and resolve a userId is not logged.
-     *
      */
     pub async fn api_put_settings(
         &self,

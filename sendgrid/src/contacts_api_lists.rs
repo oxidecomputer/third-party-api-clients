@@ -12,7 +12,7 @@ impl ContactsApiLists {
     }
 
     /**
-     * Retrieve all lists.
+     * Retrieve all lists
      *
      * This function performs a `GET` to the `/contactdb/lists` endpoint.
      *
@@ -20,7 +20,7 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_lists(
         &self,
@@ -37,7 +37,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Create a List.
+     * Create a List
      *
      * This function performs a `POST` to the `/contactdb/lists` endpoint.
      *
@@ -45,7 +45,7 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_contactdb_list(
         &self,
@@ -63,7 +63,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Delete Multiple lists.
+     * Delete Multiple lists
      *
      * This function performs a `DELETE` to the `/contactdb/lists` endpoint.
      *
@@ -71,7 +71,7 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_lists(&self, body: &[i64]) -> ClientResult<crate::Response<()>> {
         let url = self.client.url("/contactdb/lists", None);
@@ -86,7 +86,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Retrieve a single list.
+     * Retrieve a single list
      *
      * This function performs a `GET` to the `/contactdb/lists/{list_id}` endpoint.
      *
@@ -94,8 +94,8 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `list_id: i64` -- The ID of the list to retrieve.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `list_id` -- The ID of the list to retrieve.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_lists_list(
         &self,
@@ -119,7 +119,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Delete a List.
+     * Delete a List
      *
      * This function performs a `DELETE` to the `/contactdb/lists/{list_id}` endpoint.
      *
@@ -127,8 +127,8 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `delete_contacts: bool` -- Adds the ability to delete all contacts on the list in addition to deleting the list.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `delete_contacts` -- Adds the ability to delete all contacts on the list in addition to deleting the list.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_lists_list(
         &self,
@@ -160,7 +160,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Update a List.
+     * Update a List
      *
      * This function performs a `PATCH` to the `/contactdb/lists/{list_id}` endpoint.
      *
@@ -168,8 +168,8 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `list_id: i64` -- The ID of the list you are updating.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `list_id` -- The ID of the list you are updating.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_contactdb_lists_list(
         &self,
@@ -194,7 +194,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Retrieve all recipients on a List.
+     * Retrieve all recipients on a List
      *
      * This function performs a `GET` to the `/contactdb/lists/{list_id}/recipients` endpoint.
      *
@@ -202,10 +202,10 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `page: i64` -- Page index of first recipient to return (must be a positive integer).
-     * * `page_size: i64` -- Number of recipients to return at a time (must be a positive integer between 1 and 1000).
-     * * `list_id: i64` -- The ID of the list whose recipients you are requesting.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `page` -- Page index of first recipient to return (must be a positive integer)
+     * * `page_size` -- Number of recipients to return at a time (must be a positive integer between 1 and 1000)
+     * * `list_id` -- The ID of the list whose recipients you are requesting.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_contactdb_lists_list_recipients(
         &self,
@@ -240,7 +240,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Add Multiple Recipients to a List.
+     * Add Multiple Recipients to a List
      *
      * This function performs a `POST` to the `/contactdb/lists/{list_id}/recipients` endpoint.
      *
@@ -250,7 +250,7 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_contactdb_lists_list_recipient(
         &self,
@@ -275,7 +275,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Add a Single Recipient to a List.
+     * Add a Single Recipient to a List
      *
      * This function performs a `POST` to the `/contactdb/lists/{list_id}/recipients/{recipient_id}` endpoint.
      *
@@ -283,7 +283,7 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_contactdb_lists_list_recipients_recipient(
         &self,
@@ -309,7 +309,7 @@ impl ContactsApiLists {
             .await
     }
     /**
-     * Delete a Single Recipient from a Single List.
+     * Delete a Single Recipient from a Single List
      *
      * This function performs a `DELETE` to the `/contactdb/lists/{list_id}/recipients/{recipient_id}` endpoint.
      *
@@ -317,9 +317,9 @@ impl ContactsApiLists {
      *
      * **Parameters:**
      *
-     * * `list_id: i64` -- The ID of the list you are taking this recipient away from.
-     * * `recipient_id: i64` -- The ID of the recipient to take off the list.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `list_id` -- The ID of the list you are taking this recipient away from.
+     * * `recipient_id` -- The ID of the recipient to take off the list.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_contactdb_lists_list_recipients_recipient(
         &self,

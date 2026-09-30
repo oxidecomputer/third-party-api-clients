@@ -12,7 +12,7 @@ impl Garnishments {
     }
 
     /**
-     * Get garnishments for an employee.
+     * Get garnishments for an employee
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/garnishments` endpoint.
      *
@@ -40,7 +40,7 @@ impl Garnishments {
             .await
     }
     /**
-     * Get garnishments for an employee.
+     * Get garnishments for an employee
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/garnishments` endpoint.
      *
@@ -70,7 +70,7 @@ impl Garnishments {
             .await
     }
     /**
-     * Create a garnishment.
+     * Create a garnishment
      *
      * This function performs a `POST` to the `/v1/employees/{employee_id}/garnishments` endpoint.
      *
@@ -99,7 +99,7 @@ impl Garnishments {
             .await
     }
     /**
-     * Get a garnishment.
+     * Get a garnishment
      *
      * This function performs a `GET` to the `/v1/garnishments/{garnishment_id}` endpoint.
      *
@@ -127,7 +127,7 @@ impl Garnishments {
             .await
     }
     /**
-     * Update a garnishment.
+     * Update a garnishment
      *
      * This function performs a `PUT` to the `/v1/garnishments/{garnishment_id}` endpoint.
      *

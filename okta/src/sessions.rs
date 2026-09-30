@@ -12,7 +12,7 @@ impl Sessions {
     }
 
     /**
-     * Create Session with Session Token.
+     * Create Session with Session Token
      *
      * This function performs a `POST` to the `/api/v1/sessions` endpoint.
      *
@@ -40,7 +40,7 @@ impl Sessions {
      *
      * **Parameters:**
      *
-     * * `session_id: &str`
+     * * `session_id`
      */
     pub async fn get(
         &self,
@@ -64,15 +64,13 @@ impl Sessions {
             .await
     }
     /**
-     * Close Session.
+     * Close Session
      *
      * This function performs a `DELETE` to the `/api/v1/sessions/{sessionId}` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `session_id: &str`
+     * * `session_id`
      */
     pub async fn end(&self, session_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -93,15 +91,13 @@ impl Sessions {
             .await
     }
     /**
-     * Refresh Session.
+     * Refresh Session
      *
      * This function performs a `POST` to the `/api/v1/sessions/{sessionId}/lifecycle/refresh` endpoint.
      *
-     *
-     *
      * **Parameters:**
      *
-     * * `session_id: &str`
+     * * `session_id`
      */
     pub async fn refresh(
         &self,

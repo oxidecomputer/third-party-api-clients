@@ -12,7 +12,7 @@ impl UserSchemas {
     }
 
     /**
-     * Fetches the Schema for an App User.
+     * Fetches the Schema for an App User
      *
      * This function performs a `GET` to the `/api/v1/meta/schemas/apps/{appInstanceId}/default` endpoint.
      *
@@ -20,7 +20,7 @@ impl UserSchemas {
      *
      * **Parameters:**
      *
-     * * `app_instance_id: &str`
+     * * `app_instance_id`
      */
     pub async fn get_application(
         &self,
@@ -52,7 +52,7 @@ impl UserSchemas {
      *
      * **Parameters:**
      *
-     * * `app_instance_id: &str`
+     * * `app_instance_id`
      */
     pub async fn update_application_user_profile(
         &self,
@@ -85,7 +85,7 @@ impl UserSchemas {
      *
      * **Parameters:**
      *
-     * * `schema_id: &str`
+     * * `schema_id`
      */
     pub async fn get(
         &self,
@@ -115,7 +115,7 @@ impl UserSchemas {
      *
      * **Parameters:**
      *
-     * * `schema_id: &str`
+     * * `schema_id`
      */
     pub async fn update_user_profile(
         &self,

@@ -20,7 +20,7 @@ impl AccountPasswordRules {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn get(
         &self,
@@ -54,7 +54,7 @@ impl AccountPasswordRules {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -82,8 +82,6 @@ impl AccountPasswordRules {
      * Gets membership account password rules.
      *
      * This function performs a `GET` to the `/v2.1/current_user/password_rules` endpoint.
-     *
-     *
      */
     pub async fn password_rules_get(
         &self,

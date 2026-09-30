@@ -12,7 +12,7 @@ impl Jobs {
     }
 
     /**
-     * Get a job.
+     * Get a job
      *
      * This function performs a `GET` to the `/v1/jobs/{job_id}` endpoint.
      *
@@ -37,7 +37,7 @@ impl Jobs {
             .await
     }
     /**
-     * Update a job.
+     * Update a job
      *
      * This function performs a `PUT` to the `/v1/jobs/{job_id}` endpoint.
      *
@@ -66,7 +66,7 @@ impl Jobs {
             .await
     }
     /**
-     * Delete an individual job.
+     * Delete an individual job
      *
      * This function performs a `DELETE` to the `/v1/jobs/{job_id}` endpoint.
      *
@@ -91,7 +91,7 @@ impl Jobs {
             .await
     }
     /**
-     * Get jobs for an employee.
+     * Get jobs for an employee
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/jobs` endpoint.
      *
@@ -119,7 +119,7 @@ impl Jobs {
             .await
     }
     /**
-     * Get jobs for an employee.
+     * Get jobs for an employee
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/jobs` endpoint.
      *
@@ -149,7 +149,7 @@ impl Jobs {
             .await
     }
     /**
-     * Create a job.
+     * Create a job
      *
      * This function performs a `POST` to the `/v1/employees/{employee_id}/jobs` endpoint.
      *
@@ -178,7 +178,7 @@ impl Jobs {
             .await
     }
     /**
-     * Create a compensation.
+     * Create a compensation
      *
      * This function performs a `POST` to the `/v1/jobs/{job_id}/compensations` endpoint.
      *

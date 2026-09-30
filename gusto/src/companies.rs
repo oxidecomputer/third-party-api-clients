@@ -12,7 +12,7 @@ impl Companies {
     }
 
     /**
-     * Get a company.
+     * Get a company
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}` endpoint.
      *
@@ -40,7 +40,7 @@ impl Companies {
             .await
     }
     /**
-     * Create a partner managed company (Beta).
+     * Create a partner managed company (Beta)
      *
      * This function performs a `POST` to the `/v1/partner_managed_companies` endpoint.
      *
@@ -56,6 +56,7 @@ impl Companies {
      * * Sends a welcome email to the new user.
      *
      * Additionally, on successful creation of the company, this API will do the following:
+     *
      * * Creates a link between the partner and the company.
      * * Creates access tokens and refresh tokens that can be used immediately.
      *
@@ -86,7 +87,7 @@ impl Companies {
             .await
     }
     /**
-     * Create a company.
+     * Create a company
      *
      * This function performs a `POST` to the `/v1/provision` endpoint.
      *

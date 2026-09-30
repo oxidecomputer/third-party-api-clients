@@ -18,7 +18,7 @@ impl TwoStepVerification {
      *
      * **Parameters:**
      *
-     * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+     * * `user_key` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
     pub async fn turn_off(&self, user_key: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

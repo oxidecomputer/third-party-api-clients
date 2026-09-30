@@ -12,7 +12,7 @@ impl Account {
     }
 
     /**
-     * Get Account.
+     * Get Account
      *
      * This function performs a `GET` to the `/account` endpoint.
      *

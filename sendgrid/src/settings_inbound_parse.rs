@@ -12,7 +12,7 @@ impl SettingsInboundParse {
     }
 
     /**
-     * Create a parse setting.
+     * Create a parse setting
      *
      * This function performs a `POST` to the `/user/webhooks/parse/settings` endpoint.
      *
@@ -28,7 +28,7 @@ impl SettingsInboundParse {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn post_user_webhooks_parse_setting(
         &self,
@@ -46,7 +46,7 @@ impl SettingsInboundParse {
             .await
     }
     /**
-     * Retrieve a specific parse setting.
+     * Retrieve a specific parse setting
      *
      * This function performs a `GET` to the `/user/webhooks/parse/settings/{hostname}` endpoint.
      *
@@ -56,7 +56,7 @@ impl SettingsInboundParse {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn get_user_webhooks_parse_settings_hostname(
         &self,
@@ -80,7 +80,7 @@ impl SettingsInboundParse {
             .await
     }
     /**
-     * Delete a parse setting.
+     * Delete a parse setting
      *
      * This function performs a `DELETE` to the `/user/webhooks/parse/settings/{hostname}` endpoint.
      *
@@ -90,7 +90,7 @@ impl SettingsInboundParse {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn delete_user_webhooks_parse_settings_hostname(
         &self,
@@ -114,7 +114,7 @@ impl SettingsInboundParse {
             .await
     }
     /**
-     * Update a parse setting.
+     * Update a parse setting
      *
      * This function performs a `PATCH` to the `/user/webhooks/parse/settings/{hostname}` endpoint.
      *
@@ -124,7 +124,7 @@ impl SettingsInboundParse {
      *
      * **Parameters:**
      *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     * * `on_behalf_of` -- The license key provided with your New Relic account.
      */
     pub async fn patch_user_webhooks_parse_settings_hostname(
         &self,

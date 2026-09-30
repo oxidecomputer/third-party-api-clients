@@ -167,9 +167,9 @@ impl FileOps for crate::files::Files {
         parent_id: &str,
         name: &str,
     ) -> ClientResult<Response<Vec<crate::types::File>>> {
-        let mut query = format!("name = '{}'", name);
+        let mut query = format!("name = '{name}'");
         if !parent_id.is_empty() {
-            query = format!("{} and '{}' in parents", query, parent_id);
+            query = format!("{query} and '{parent_id}' in parents");
         }
 
         self.list_all(
@@ -287,7 +287,7 @@ impl FileOps for crate::files::Files {
             .request_raw(
                 reqwest::Method::GET,
                 &self.client.url(
-                    &format!("/files/{}?supportsAllDrives=true&alt=media", id),
+                    &format!("/files/{id}?supportsAllDrives=true&alt=media"),
                     None,
                 ),
                 crate::Message::default(),
@@ -319,12 +319,10 @@ impl FileOps for crate::files::Files {
             file.parents = vec![drive_id.to_string()];
         }
 
-        let mut query = format!(
-            "name = '{}' and mimeType = 'application/vnd.google-apps.folder'",
-            name
-        );
+        let mut query =
+            format!("name = '{name}' and mimeType = 'application/vnd.google-apps.folder'");
         if !parent_id.is_empty() {
-            query = format!("{} and '{}' in parents", query, parent_id);
+            query = format!("{query} and '{parent_id}' in parents");
         }
 
         // Check if the folder exists.

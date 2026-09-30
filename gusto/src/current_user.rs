@@ -12,7 +12,7 @@ impl CurrentUser {
     }
 
     /**
-     * Get the current user.
+     * Get the current user
      *
      * This function performs a `GET` to the `/v1/me` endpoint.
      *

@@ -20,11 +20,11 @@ impl TemplateRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include_anchor_tab_locations: &str` --  When set to **true** and `include_tabs` is set to **true**, all tabs with anchor tab properties are included in the response. .
-     * * `include_extended: &str` --  When set to **true**, the extended properties are included in the response. .
-     * * `include_tabs: &str` -- When set to **true**, the tab information associated with the recipient is included in the response.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_anchor_tab_locations` -- When set to **true** and `include_tabs` is set to **true**, all tabs with anchor tab properties are included in the response.
+     * * `include_extended` -- When set to **true**, the extended properties are included in the response.
+     * * `include_tabs` -- When set to **true**, the tab information associated with the recipient is included in the response.
      */
     pub async fn recipients_get_template(
         &self,
@@ -78,10 +78,10 @@ impl TemplateRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `resend_envelope: &str` -- When set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `resend_envelope` -- When set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
+     *
      *   **Note**: Correcting an envelope is a different process. DocuSign always resends an envelope when you correct it, regardless of the value that you enter here.
      */
     pub async fn recipients_put_template(
@@ -124,10 +124,10 @@ impl TemplateRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `resend_envelope: &str` -- When set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `resend_envelope` -- When set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
+     *
      *   **Note**: Correcting an envelope is a different process. DocuSign always resends an envelope when you correct it, regardless of the value that you enter here.
      */
     pub async fn recipients_post_template(
@@ -170,8 +170,8 @@ impl TemplateRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_delete_template(
         &self,
@@ -206,9 +206,9 @@ impl TemplateRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `recipient_id` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn recipients_delete(
         &self,
@@ -247,8 +247,8 @@ impl TemplateRecipients {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn views_post_preview(
         &self,

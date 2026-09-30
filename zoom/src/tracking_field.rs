@@ -12,15 +12,16 @@ impl TrackingField {
     }
 
     /**
-     * List tracking fields.
+     * List tracking fields
      *
      * This function performs a `GET` to the `/tracking_fields` endpoint.
      *
      * [Tracking fields](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) allow you to analyze usage by various fields within an organization.<br> Use this API to list all the tracking fields on your Zoom account.<br><br>
      * **Scopes:** `trackingfield:read:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      * **Prerequisites:**
+     *
      * * Business, Education, API or higher plan
      */
     pub async fn trackingfield_list(&self) -> ClientResult<crate::Response<crate::types::Domains>> {
@@ -36,15 +37,16 @@ impl TrackingField {
             .await
     }
     /**
-     * Create a tracking field.
+     * Create a tracking field
      *
      * This function performs a `POST` to the `/tracking_fields` endpoint.
      *
      * [Tracking fields](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) allow you to analyze usage by various fields within an organization.<br> Use this API to create a new tracking field.<br><br>
      * **Scope:** `trackingfield:write:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**
+     *
      * * Business, Education, API or higher plan
      */
     pub async fn trackingfield_create(
@@ -63,21 +65,21 @@ impl TrackingField {
             .await
     }
     /**
-     * Get a tracking field.
+     * Get a tracking field
      *
      * This function performs a `GET` to the `/tracking_fields/{fieldId}` endpoint.
      *
      * [Tracking fields](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) allow you to analyze usage by various fields within an organization.<br><br> When scheduling a meeting, the tracking field will be included in the meeting options.<br>Use this API to get information on a tracking field.<br><br>
      * **Scopes:** `trackingfield:read:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
-     * **Prerequisites:**
-     * * Business, Education, API or higher plan
      *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
+     * **Prerequisites:**
+     *
+     * * Business, Education, API or higher plan
      *
      * **Parameters:**
      *
-     * * `field_id: &str` -- The Tracking Field ID.
+     * * `field_id` -- The Tracking Field ID
      */
     pub async fn trackingfield_get(
         &self,
@@ -101,20 +103,21 @@ impl TrackingField {
             .await
     }
     /**
-     * Delete a tracking field.
+     * Delete a tracking field
      *
      * This function performs a `DELETE` to the `/tracking_fields/{fieldId}` endpoint.
      *
      * [Tracking fields](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) allow you to analyze usage by various fields within an organization.<br> Use this API to delete a tracking field.<br><br>
      * **Scope:** `trackingfield:write:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**
+     *
      * * Business, Education, API or higher plan
      *
      * **Parameters:**
      *
-     * * `field_id: &str` -- The Tracking Field ID.
+     * * `field_id` -- The Tracking Field ID
      */
     pub async fn trackingfield_delete(&self, field_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(
@@ -135,20 +138,21 @@ impl TrackingField {
             .await
     }
     /**
-     * Update a tracking field.
+     * Update a tracking field
      *
      * This function performs a `PATCH` to the `/tracking_fields/{fieldId}` endpoint.
      *
      * [Tracking fields](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) allow you to analyze usage by various fields within an organization.<br> Use this API to update a tracking field.<br><br>
      * **Scope:** `trackingfield:write:admin`<br>
-     *  
-     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**
+     *
      * * Business, Education, API or higher plan
      *
      * **Parameters:**
      *
-     * * `field_id: &str` -- The Tracking Field ID.
+     * * `field_id` -- The Tracking Field ID
      */
     pub async fn trackingfield_update(
         &self,

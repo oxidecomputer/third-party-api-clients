@@ -18,17 +18,14 @@ impl Transfers {
      *
      * **Parameters:**
      *
-     * * `created: &str`
-     * * `destination: &str` -- Only return transfers for the destination specified by this account ID.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `transfer_group: &str` -- Only return transfers with the specified transfer group.
+     * * `destination` -- Only return transfers for the destination specified by this account ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `transfer_group` -- Only return transfers with the specified transfer group.
      */
     pub async fn get_page(
         &self,
-        created: &str,
         destination: &str,
         ending_before: &str,
         limit: i64,
@@ -52,7 +49,7 @@ impl Transfers {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/transfers?{}", query_), None);
+        let url = self.client.url(&format!("/v1/transfers?{query_}"), None);
         let resp: crate::Response<crate::types::TransferList> = self
             .client
             .get(
@@ -80,7 +77,6 @@ impl Transfers {
      */
     pub async fn get_all(
         &self,
-        created: &str,
         destination: &str,
         transfer_group: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::Transfer>>> {
@@ -92,7 +88,7 @@ impl Transfers {
             query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/v1/transfers?{}", query_), None);
+        let url = self.client.url(&format!("/v1/transfers?{query_}"), None);
         let crate::Response::<crate::types::TransferList> {
             mut status,
             mut headers,
@@ -132,7 +128,7 @@ impl Transfers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -147,7 +143,7 @@ impl Transfers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -188,11 +184,10 @@ impl Transfers {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `id` -- The account's country.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_reversals(
         &self,
@@ -295,7 +290,7 @@ impl Transfers {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -310,7 +305,7 @@ impl Transfers {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -338,7 +333,7 @@ impl Transfers {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
+     * * `id` -- The account's country.
      */
     pub async fn post_reversal(
         &self,
@@ -368,8 +363,7 @@ impl Transfers {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `transfer: &str` -- The account's country.
+     * * `transfer` -- The account's country.
      */
     pub async fn get(
         &self,
@@ -401,7 +395,7 @@ impl Transfers {
      *
      * **Parameters:**
      *
-     * * `transfer: &str` -- The account's country.
+     * * `transfer` -- The account's country.
      */
     pub async fn post_transfers(
         &self,
@@ -431,9 +425,8 @@ impl Transfers {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `id: &str` -- The account's country.
-     * * `transfer: &str` -- The account's country.
+     * * `id` -- The account's country.
+     * * `transfer` -- The account's country.
      */
     pub async fn get_reversal(
         &self,
@@ -467,8 +460,8 @@ impl Transfers {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- The account's country.
-     * * `transfer: &str` -- The account's country.
+     * * `id` -- The account's country.
+     * * `transfer` -- The account's country.
      */
     pub async fn post_reversal_transfers(
         &self,

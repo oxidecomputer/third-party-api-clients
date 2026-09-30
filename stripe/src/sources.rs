@@ -35,9 +35,8 @@ impl Sources {
      *
      * **Parameters:**
      *
-     * * `client_secret: &str` -- The client secret of the source. Required if a publishable key is used to retrieve the source.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `source: &str` -- The account's country.
+     * * `client_secret` -- The client secret of the source. Required if a publishable key is used to retrieve the source.
+     * * `source` -- The account's country.
      */
     pub async fn get(
         &self,
@@ -76,7 +75,7 @@ impl Sources {
      *
      * **Parameters:**
      *
-     * * `source: &str` -- The account's country.
+     * * `source` -- The account's country.
      */
     pub async fn post_sources(
         &self,
@@ -106,9 +105,8 @@ impl Sources {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `mandate_notification: &str` -- The account's country.
-     * * `source: &str` -- The account's country.
+     * * `mandate_notification` -- The account's country.
+     * * `source` -- The account's country.
      */
     pub async fn get_mandate_notifications_notification(
         &self,
@@ -140,11 +138,10 @@ impl Sources {
      *
      * **Parameters:**
      *
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `source: &str` -- The account's country.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `source` -- The account's country.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_transactions(
         &self,
@@ -247,7 +244,7 @@ impl Sources {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -262,7 +259,7 @@ impl Sources {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -286,9 +283,8 @@ impl Sources {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `source: &str` -- The account's country.
-     * * `source_transaction: &str` -- The account's country.
+     * * `source` -- The account's country.
+     * * `source_transaction` -- The account's country.
      */
     pub async fn get_transactions_transaction(
         &self,
@@ -320,7 +316,7 @@ impl Sources {
      *
      * **Parameters:**
      *
-     * * `source: &str` -- The account's country.
+     * * `source` -- The account's country.
      */
     pub async fn post_verify(
         &self,

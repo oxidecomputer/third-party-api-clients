@@ -12,7 +12,7 @@ impl Templates {
     }
 
     /**
-     * List SMS Templates.
+     * List SMS Templates
      *
      * This function performs a `GET` to the `/api/v1/templates/sms` endpoint.
      *
@@ -20,7 +20,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `template_type: &str`
+     * * `template_type`
      */
     pub async fn list_sms(
         &self,
@@ -33,7 +33,7 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/templates/sms?{}", query_), None);
+            .url(&format!("/api/v1/templates/sms?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -45,7 +45,7 @@ impl Templates {
             .await
     }
     /**
-     * List SMS Templates.
+     * List SMS Templates
      *
      * This function performs a `GET` to the `/api/v1/templates/sms` endpoint.
      *
@@ -64,7 +64,7 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/api/v1/templates/sms?{}", query_), None);
+            .url(&format!("/api/v1/templates/sms?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -76,7 +76,7 @@ impl Templates {
             .await
     }
     /**
-     * Add SMS Template.
+     * Add SMS Template
      *
      * This function performs a `POST` to the `/api/v1/templates/sms` endpoint.
      *
@@ -98,7 +98,7 @@ impl Templates {
             .await
     }
     /**
-     * Get SMS Template.
+     * Get SMS Template
      *
      * This function performs a `GET` to the `/api/v1/templates/sms/{templateId}` endpoint.
      *
@@ -106,7 +106,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `template_id: &str`
+     * * `template_id`
      */
     pub async fn get_sm(
         &self,
@@ -130,7 +130,7 @@ impl Templates {
             .await
     }
     /**
-     * Update SMS Template.
+     * Update SMS Template
      *
      * This function performs a `PUT` to the `/api/v1/templates/sms/{templateId}` endpoint.
      *
@@ -138,7 +138,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `template_id: &str`
+     * * `template_id`
      */
     pub async fn update_sms(
         &self,
@@ -163,7 +163,7 @@ impl Templates {
             .await
     }
     /**
-     * Partial SMS Template Update.
+     * Partial SMS Template Update
      *
      * This function performs a `POST` to the `/api/v1/templates/sms/{templateId}` endpoint.
      *
@@ -171,7 +171,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `template_id: &str`
+     * * `template_id`
      */
     pub async fn partial_update_sms(
         &self,
@@ -196,7 +196,7 @@ impl Templates {
             .await
     }
     /**
-     * Remove SMS Template.
+     * Remove SMS Template
      *
      * This function performs a `DELETE` to the `/api/v1/templates/sms/{templateId}` endpoint.
      *
@@ -204,7 +204,7 @@ impl Templates {
      *
      * **Parameters:**
      *
-     * * `template_id: &str`
+     * * `template_id`
      */
     pub async fn delete_sms(&self, template_id: &str) -> ClientResult<crate::Response<()>> {
         let url = self.client.url(

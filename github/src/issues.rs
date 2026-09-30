@@ -12,14 +12,13 @@ impl Issues {
     }
 
     /**
-     * List issues assigned to the authenticated user.
+     * List issues assigned to the authenticated user
      *
      * This function performs a `GET` to the `/issues` endpoint.
      *
      * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
      * repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
      * necessarily assigned to you.
-     *
      *
      * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
      * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
@@ -30,25 +29,25 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
-     *  \\* `assigned`: Issues assigned to you  
-     *  \\* `created`: Issues created by you  
-     *  \\* `mentioned`: Issues mentioning you  
-     *  \\* `subscribed`: Issues you're subscribed to updates for  
-     *  \\* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation.
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `collab: bool`
-     * * `orgs: bool`
-     * * `owned: bool`
-     * * `pulls: bool`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `filter` -- Indicates which sorts of issues to return. Can be one of:
+     *   \* `assigned`: Issues assigned to you
+     *   \* `created`: Issues created by you
+     *   \* `mentioned`: Issues mentioning you
+     *   \* `subscribed`: Issues you're subscribed to updates for
+     *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
+     * * `state` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * `labels` -- A list of comma separated label names. Example: `bug,ui,@high`
+     * * `sort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `collab`
+     * * `orgs`
+     * * `owned`
+     * * `pulls`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list(
         &self,
@@ -103,7 +102,7 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/issues?{}", query_), None);
+        let url = self.client.url(&format!("/issues?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -115,7 +114,7 @@ impl Issues {
             .await
     }
     /**
-     * List issues assigned to the authenticated user.
+     * List issues assigned to the authenticated user
      *
      * This function performs a `GET` to the `/issues` endpoint.
      *
@@ -124,7 +123,6 @@ impl Issues {
      * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
      * repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
      * necessarily assigned to you.
-     *
      *
      * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
      * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
@@ -178,7 +176,7 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/issues?{}", query_), None);
+        let url = self.client.url(&format!("/issues?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -190,7 +188,7 @@ impl Issues {
             .await
     }
     /**
-     * List organization issues assigned to the authenticated user.
+     * List organization issues assigned to the authenticated user
      *
      * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
      *
@@ -205,22 +203,22 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `org: &str`
-     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
-     *  \\* `assigned`: Issues assigned to you  
-     *  \\* `created`: Issues created by you  
-     *  \\* `mentioned`: Issues mentioning you  
-     *  \\* `subscribed`: Issues you're subscribed to updates for  
-     *  \\* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation.
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `org`
+     * * `filter` -- Indicates which sorts of issues to return. Can be one of:
+     *   \* `assigned`: Issues assigned to you
+     *   \* `created`: Issues created by you
+     *   \* `mentioned`: Issues mentioning you
+     *   \* `subscribed`: Issues you're subscribed to updates for
+     *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
+     * * `state` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * `labels` -- A list of comma separated label names. Example: `bug,ui,@high`
+     * * `sort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_org(
         &self,
@@ -279,7 +277,7 @@ impl Issues {
             .await
     }
     /**
-     * List organization issues assigned to the authenticated user.
+     * List organization issues assigned to the authenticated user
      *
      * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
      *
@@ -343,7 +341,7 @@ impl Issues {
             .await
     }
     /**
-     * List assignees.
+     * List assignees
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees` endpoint.
      *
@@ -353,10 +351,10 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_assignees(
         &self,
@@ -393,7 +391,7 @@ impl Issues {
             .await
     }
     /**
-     * List assignees.
+     * List assignees
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees` endpoint.
      *
@@ -427,7 +425,7 @@ impl Issues {
             .await
     }
     /**
-     * Check if a user can be assigned.
+     * Check if a user can be assigned
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees/{assignee}` endpoint.
      *
@@ -441,9 +439,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `assignee: &str`
+     * * `owner`
+     * * `repo`
+     * * `assignee`
      */
     pub async fn check_user_can_be_assigned(
         &self,
@@ -471,7 +469,7 @@ impl Issues {
             .await
     }
     /**
-     * List repository issues.
+     * List repository issues
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues` endpoint.
      *
@@ -486,21 +484,21 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `milestone: &str` -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `assignee: &str` -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
-     * * `creator: &str` -- The user that created the issue.
-     * * `mentioned: &str` -- A user that's mentioned in the issue.
-     * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `milestone` -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
+     * * `state` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * `assignee` -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
+     * * `creator` -- The user that created the issue.
+     * * `mentioned` -- A user that's mentioned in the issue.
+     * * `labels` -- A list of comma separated label names. Example: `bug,ui,@high`
+     * * `sort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_repo(
         &self,
@@ -573,7 +571,7 @@ impl Issues {
             .await
     }
     /**
-     * List repository issues.
+     * List repository issues
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues` endpoint.
      *
@@ -651,7 +649,7 @@ impl Issues {
             .await
     }
     /**
-     * Create an issue.
+     * Create an issue
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues` endpoint.
      *
@@ -663,8 +661,8 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create(
         &self,
@@ -691,7 +689,7 @@ impl Issues {
             .await
     }
     /**
-     * List issue comments for a repository.
+     * List issue comments for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments` endpoint.
      *
@@ -701,15 +699,15 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_comments_for_repo(
         &self,
@@ -758,7 +756,7 @@ impl Issues {
             .await
     }
     /**
-     * List issue comments for a repository.
+     * List issue comments for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments` endpoint.
      *
@@ -807,19 +805,17 @@ impl Issues {
             .await
     }
     /**
-     * Get an issue comment.
+     * Get an issue comment
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#get-an-issue-comment>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn get_comment(
         &self,
@@ -847,19 +843,17 @@ impl Issues {
             .await
     }
     /**
-     * Delete an issue comment.
+     * Delete an issue comment
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#delete-an-issue-comment>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn delete_comment(
         &self,
@@ -887,19 +881,17 @@ impl Issues {
             .await
     }
     /**
-     * Update an issue comment.
+     * Update an issue comment
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#update-an-issue-comment>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `comment_id: i64` -- comment_id parameter.
+     * * `owner`
+     * * `repo`
+     * * `comment_id` -- comment_id parameter
      */
     pub async fn update_comment(
         &self,
@@ -928,20 +920,18 @@ impl Issues {
             .await
     }
     /**
-     * List issue events for a repository.
+     * List issue events for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/events` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_events_for_repo(
         &self,
@@ -978,13 +968,11 @@ impl Issues {
             .await
     }
     /**
-     * List issue events for a repository.
+     * List issue events for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/events` endpoint.
      *
      * As opposed to `list_events_for_repo`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository>
      */
@@ -1012,19 +1000,17 @@ impl Issues {
             .await
     }
     /**
-     * Get an issue event.
+     * Get an issue event
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/events/{event_id}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#get-an-issue-event>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `event_id: i64`
+     * * `owner`
+     * * `repo`
+     * * `event_id`
      */
     pub async fn get_event(
         &self,
@@ -1052,7 +1038,7 @@ impl Issues {
             .await
     }
     /**
-     * Get an issue.
+     * Get an issue
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}` endpoint.
      *
@@ -1072,9 +1058,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn get(
         &self,
@@ -1102,7 +1088,7 @@ impl Issues {
             .await
     }
     /**
-     * Update an issue.
+     * Update an issue
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/issues/{issue_number}` endpoint.
      *
@@ -1112,9 +1098,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn update(
         &self,
@@ -1143,7 +1129,7 @@ impl Issues {
             .await
     }
     /**
-     * Add assignees to an issue.
+     * Add assignees to an issue
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/assignees` endpoint.
      *
@@ -1153,9 +1139,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn add_assignees(
         &self,
@@ -1184,7 +1170,7 @@ impl Issues {
             .await
     }
     /**
-     * Remove assignees from an issue.
+     * Remove assignees from an issue
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/assignees` endpoint.
      *
@@ -1194,9 +1180,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn remove_assignees(
         &self,
@@ -1225,7 +1211,7 @@ impl Issues {
             .await
     }
     /**
-     * List issue comments.
+     * List issue comments
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
      *
@@ -1235,12 +1221,12 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_comments(
         &self,
@@ -1283,7 +1269,7 @@ impl Issues {
             .await
     }
     /**
-     * List issue comments.
+     * List issue comments
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
      *
@@ -1326,7 +1312,7 @@ impl Issues {
             .await
     }
     /**
-     * Create an issue comment.
+     * Create an issue comment
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
      *
@@ -1336,9 +1322,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn create_comment(
         &self,
@@ -1367,21 +1353,19 @@ impl Issues {
             .await
     }
     /**
-     * List issue events.
+     * List issue events
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/events` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_events(
         &self,
@@ -1420,13 +1404,11 @@ impl Issues {
             .await
     }
     /**
-     * List issue events.
+     * List issue events
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/events` endpoint.
      *
      * As opposed to `list_events`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events>
      */
@@ -1456,21 +1438,19 @@ impl Issues {
             .await
     }
     /**
-     * List labels for an issue.
+     * List labels for an issue
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-an-issue>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_labels_on_issue(
         &self,
@@ -1509,13 +1489,11 @@ impl Issues {
             .await
     }
     /**
-     * List labels for an issue.
+     * List labels for an issue
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
      *
      * As opposed to `list_labels_on_issue`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-an-issue>
      */
@@ -1545,7 +1523,7 @@ impl Issues {
             .await
     }
     /**
-     * Set labels for an issue.
+     * Set labels for an issue
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
      *
@@ -1555,9 +1533,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn set_labels(
         &self,
@@ -1586,19 +1564,17 @@ impl Issues {
             .await
     }
     /**
-     * Add labels to an issue.
+     * Add labels to an issue
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#add-labels-to-an-issue>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn add_labels(
         &self,
@@ -1627,19 +1603,17 @@ impl Issues {
             .await
     }
     /**
-     * Remove all labels from an issue.
+     * Remove all labels from an issue
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#remove-all-labels-from-an-issue>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn remove_all_labels(
         &self,
@@ -1667,7 +1641,7 @@ impl Issues {
             .await
     }
     /**
-     * Remove a label from an issue.
+     * Remove a label from an issue
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}` endpoint.
      *
@@ -1677,10 +1651,10 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
-     * * `name: &str`
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
+     * * `name`
      */
     pub async fn remove_label(
         &self,
@@ -1710,7 +1684,7 @@ impl Issues {
             .await
     }
     /**
-     * Lock an issue.
+     * Lock an issue
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/issues/{issue_number}/lock` endpoint.
      *
@@ -1722,9 +1696,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn lock(
         &self,
@@ -1753,7 +1727,7 @@ impl Issues {
             .await
     }
     /**
-     * Unlock an issue.
+     * Unlock an issue
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/lock` endpoint.
      *
@@ -1763,9 +1737,9 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
      */
     pub async fn unlock(
         &self,
@@ -1793,21 +1767,19 @@ impl Issues {
             .await
     }
     /**
-     * List timeline events for an issue.
+     * List timeline events for an issue
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/timeline` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `issue_number: i64` -- issue_number parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `issue_number` -- issue_number parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_events_for_timeline(
         &self,
@@ -1846,13 +1818,11 @@ impl Issues {
             .await
     }
     /**
-     * List timeline events for an issue.
+     * List timeline events for an issue
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/timeline` endpoint.
      *
      * As opposed to `list_events_for_timeline`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue>
      */
@@ -1882,20 +1852,18 @@ impl Issues {
             .await
     }
     /**
-     * List labels for a repository.
+     * List labels for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/labels` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-a-repository>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_labels_for_repo(
         &self,
@@ -1932,13 +1900,11 @@ impl Issues {
             .await
     }
     /**
-     * List labels for a repository.
+     * List labels for a repository
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/labels` endpoint.
      *
      * As opposed to `list_labels_for_repo`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-a-repository>
      */
@@ -1966,18 +1932,16 @@ impl Issues {
             .await
     }
     /**
-     * Create a label.
+     * Create a label
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/labels` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#create-a-label>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_label(
         &self,
@@ -2004,19 +1968,17 @@ impl Issues {
             .await
     }
     /**
-     * Get a label.
+     * Get a label
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/labels/{name}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#get-a-label>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `name: &str`
+     * * `owner`
+     * * `repo`
+     * * `name`
      */
     pub async fn get_label(
         &self,
@@ -2044,19 +2006,17 @@ impl Issues {
             .await
     }
     /**
-     * Delete a label.
+     * Delete a label
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/labels/{name}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#delete-a-label>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `name: &str`
+     * * `owner`
+     * * `repo`
+     * * `name`
      */
     pub async fn delete_label(
         &self,
@@ -2084,19 +2044,17 @@ impl Issues {
             .await
     }
     /**
-     * Update a label.
+     * Update a label
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/labels/{name}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#update-a-label>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `name: &str`
+     * * `owner`
+     * * `repo`
+     * * `name`
      */
     pub async fn update_label(
         &self,
@@ -2125,25 +2083,23 @@ impl Issues {
             .await
     }
     /**
-     * List milestones.
+     * List milestones
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-milestones>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `sort: crate::types::IssuesListMilestonesSort` -- What to sort results by. Either `due_on` or `completeness`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `state` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * `sort` -- What to sort results by. Either `due_on` or `completeness`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_milestones(
         &self,
@@ -2192,13 +2148,11 @@ impl Issues {
             .await
     }
     /**
-     * List milestones.
+     * List milestones
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones` endpoint.
      *
      * As opposed to `list_milestones`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-milestones>
      */
@@ -2241,18 +2195,16 @@ impl Issues {
             .await
     }
     /**
-     * Create a milestone.
+     * Create a milestone
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/milestones` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#create-a-milestone>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
+     * * `owner`
+     * * `repo`
      */
     pub async fn create_milestone(
         &self,
@@ -2279,19 +2231,17 @@ impl Issues {
             .await
     }
     /**
-     * Get a milestone.
+     * Get a milestone
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones/{milestone_number}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#get-a-milestone>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `milestone_number: i64` -- milestone_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `milestone_number` -- milestone_number parameter
      */
     pub async fn get_milestone(
         &self,
@@ -2319,19 +2269,17 @@ impl Issues {
             .await
     }
     /**
-     * Delete a milestone.
+     * Delete a milestone
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/milestones/{milestone_number}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#delete-a-milestone>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `milestone_number: i64` -- milestone_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `milestone_number` -- milestone_number parameter
      */
     pub async fn delete_milestone(
         &self,
@@ -2359,19 +2307,17 @@ impl Issues {
             .await
     }
     /**
-     * Update a milestone.
+     * Update a milestone
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/milestones/{milestone_number}` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#update-a-milestone>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `milestone_number: i64` -- milestone_number parameter.
+     * * `owner`
+     * * `repo`
+     * * `milestone_number` -- milestone_number parameter
      */
     pub async fn update_milestone(
         &self,
@@ -2400,21 +2346,19 @@ impl Issues {
             .await
     }
     /**
-     * List labels for issues in a milestone.
+     * List labels for issues in a milestone
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones/{milestone_number}/labels` endpoint.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone>
      *
      * **Parameters:**
      *
-     * * `owner: &str`
-     * * `repo: &str`
-     * * `milestone_number: i64` -- milestone_number parameter.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `owner`
+     * * `repo`
+     * * `milestone_number` -- milestone_number parameter
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_labels_for_milestone(
         &self,
@@ -2453,13 +2397,11 @@ impl Issues {
             .await
     }
     /**
-     * List labels for issues in a milestone.
+     * List labels for issues in a milestone
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones/{milestone_number}/labels` endpoint.
      *
      * As opposed to `list_labels_for_milestone`, this function returns all the pages of the request at once.
-     *
-     *
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone>
      */
@@ -2489,7 +2431,7 @@ impl Issues {
             .await
     }
     /**
-     * List user account issues assigned to the authenticated user.
+     * List user account issues assigned to the authenticated user
      *
      * This function performs a `GET` to the `/user/issues` endpoint.
      *
@@ -2504,21 +2446,21 @@ impl Issues {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
-     *  \\* `assigned`: Issues assigned to you  
-     *  \\* `created`: Issues created by you  
-     *  \\* `mentioned`: Issues mentioning you  
-     *  \\* `subscribed`: Issues you're subscribed to updates for  
-     *  \\* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation.
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *  
-     *  The default is `desc`.
-     * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-     * * `per_page: i64` -- Results per page (max 100).
-     * * `page: i64` -- Page number of the results to fetch.
+     * * `filter` -- Indicates which sorts of issues to return. Can be one of:
+     *   \* `assigned`: Issues assigned to you
+     *   \* `created`: Issues created by you
+     *   \* `mentioned`: Issues mentioning you
+     *   \* `subscribed`: Issues you're subscribed to updates for
+     *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
+     * * `state` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * `labels` -- A list of comma separated label names. Example: `bug,ui,@high`
+     * * `sort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `direction` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * `since` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * `per_page` -- Results per page (max 100)
+     * * `page` -- Page number of the results to fetch.
      */
     pub async fn list_for_authenticated_user(
         &self,
@@ -2557,7 +2499,7 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/issues?{}", query_), None);
+        let url = self.client.url(&format!("/user/issues?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -2569,7 +2511,7 @@ impl Issues {
             .await
     }
     /**
-     * List user account issues assigned to the authenticated user.
+     * List user account issues assigned to the authenticated user
      *
      * This function performs a `GET` to the `/user/issues` endpoint.
      *
@@ -2613,7 +2555,7 @@ impl Issues {
             query_args.push(("state".to_string(), state.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/user/issues?{}", query_), None);
+        let url = self.client.url(&format!("/user/issues?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,

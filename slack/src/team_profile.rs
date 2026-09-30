@@ -20,8 +20,8 @@ impl TeamProfile {
      *
      * **Parameters:**
      *
-     * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
-     * * `visibility: &str` -- Filter by visibility.
+     * * `token` -- Authentication token. Requires scope: `users.profile:read`
+     * * `visibility` -- Filter by visibility.
      */
     pub async fn get(
         &self,
@@ -34,7 +34,7 @@ impl TeamProfile {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/team.profile.get?{}", query_), None);
+            .url(&format!("/team.profile.get?{query_}"), None);
         self.client
             .get(
                 &url,

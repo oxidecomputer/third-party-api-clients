@@ -12,7 +12,7 @@ impl IpWarmup {
     }
 
     /**
-     * Retrieve all IPs currently in warmup.
+     * Retrieve all IPs currently in warmup
      *
      * This function performs a `GET` to the `/ips/warmup` endpoint.
      *
@@ -33,7 +33,7 @@ impl IpWarmup {
             .await
     }
     /**
-     * Retrieve all IPs currently in warmup.
+     * Retrieve all IPs currently in warmup
      *
      * This function performs a `GET` to the `/ips/warmup` endpoint.
      *
@@ -56,7 +56,7 @@ impl IpWarmup {
             .await
     }
     /**
-     * Start warming up an IP address.
+     * Start warming up an IP address
      *
      * This function performs a `POST` to the `/ips/warmup` endpoint.
      *
@@ -78,7 +78,7 @@ impl IpWarmup {
             .await
     }
     /**
-     * Retrieve the warmup status for a specific IP address.
+     * Retrieve the warmup status for a specific IP address
      *
      * This function performs a `GET` to the `/ips/warmup/{ip_address}` endpoint.
      *
@@ -108,7 +108,7 @@ impl IpWarmup {
             .await
     }
     /**
-     * Retrieve the warmup status for a specific IP address.
+     * Retrieve the warmup status for a specific IP address
      *
      * This function performs a `GET` to the `/ips/warmup/{ip_address}` endpoint.
      *
@@ -140,7 +140,7 @@ impl IpWarmup {
             .await
     }
     /**
-     * Stop warming up an IP address.
+     * Stop warming up an IP address
      *
      * This function performs a `DELETE` to the `/ips/warmup/{ip_address}` endpoint.
      *

@@ -12,7 +12,7 @@ impl Captions {
     }
 
     /**
-     * Get Captions.
+     * Get Captions
      *
      * This function performs a `GET` to the `/jobs/{id}/captions` endpoint.
      *
@@ -21,11 +21,10 @@ impl Captions {
      * ***
      * Note: For streaming jobs, transient failure of our storage during a live session may prevent the final hypothesis elements from saving properly, resulting in an incomplete caption file. This is rare, but not impossible.
      *
-     *
      * **Parameters:**
      *
-     * * `accept: crate::types::Accept` -- MIME type specifying the caption output format.
-     * * `speaker_channel: i64` -- Identifies which channel of the job output to caption. Default is `null` which works only for jobs with no `speaker_channels_count` provided during job submission.
+     * * `accept` -- MIME type specifying the caption output format
+     * * `speaker_channel` -- Identifies which channel of the job output to caption. Default is `null` which works only for jobs with no `speaker_channels_count` provided during job submission.
      */
     pub async fn get(
         &self,

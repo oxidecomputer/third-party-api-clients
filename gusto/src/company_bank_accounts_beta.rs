@@ -12,7 +12,7 @@ impl CompanyBankAccountsBeta {
     }
 
     /**
-     * Get all company bank accounts.
+     * Get all company bank accounts
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/bank_accounts` endpoint.
      *
@@ -42,7 +42,7 @@ impl CompanyBankAccountsBeta {
             .await
     }
     /**
-     * Get all company bank accounts.
+     * Get all company bank accounts
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/bank_accounts` endpoint.
      *
@@ -74,7 +74,7 @@ impl CompanyBankAccountsBeta {
             .await
     }
     /**
-     * Create a company bank account.
+     * Create a company bank account
      *
      * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/bank_accounts` endpoint.
      *
@@ -105,7 +105,7 @@ impl CompanyBankAccountsBeta {
             .await
     }
     /**
-     * Verify a company bank account.
+     * Verify a company bank account
      *
      * This function performs a `PUT` to the `/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_uuid}/verify` endpoint.
      *

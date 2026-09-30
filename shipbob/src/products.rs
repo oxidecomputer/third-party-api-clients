@@ -12,29 +12,32 @@ impl Products {
     }
 
     /**
-     * Get multiple products.
+     * Get multiple products
      *
      * This function performs a `GET` to the `/product` endpoint.
      *
      * **Parameters:**
      *
-     * * `page: i64` -- Unique id of the channel.
-     * * `limit: i64` -- Amount of products per page to request.
-     * * `i_ds: &[String]` -- Comma separated list of product ids to filter by.
-     * * `reference_ids: &[String]` -- Comma separated list of reference ids to filter by.
-     * * `search: &str` -- Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -
+     * * `page` -- Unique id of the channel
+     * * `limit` -- Amount of products per page to request
+     * * `i_ds` -- Comma separated list of product ids to filter by
+     * * `reference_ids` -- Comma separated list of reference ids to filter by
+     * * `search` -- Search is available for 2 fields of the inventory record related to the product: Inventory ID and Name -
+     *
      *   1. Expected behavior for search by Inventory ID is exact match
      *   2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,
-     *   but must be consecutive characters. This is not case sensitive.
-     * * `active_status: crate::types::ProductActiveStatus` -- Status filter for products:
+     *      but must be consecutive characters. This is not case sensitive.
+     * * `active_status` -- Status filter for products:
+     *
      *   - Any: Include both active and inactive
      *   - Active: Filter products that are Active
-     *   - Inactive: Filter products that are Inactive.
-     * * `bundle_status: crate::types::ProductBundleStatus` -- Bundle filter for products:
+     *   - Inactive: Filter products that are Inactive
+     * * `bundle_status` -- Bundle filter for products:
+     *
      *   - Any: Don't filter and consider products that are bundles or not bundles
      *   - Bundle: Filter by products that are bundles
-     *   - NotBundle: Filter by products that are not bundles.
-     * * `channel_id: i64` -- Unique id of the channel.
+     *   - NotBundle: Filter by products that are not bundles
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get_page(
         &self,
@@ -69,7 +72,7 @@ impl Products {
             query_args.push(("Search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/product?{}", query_), None);
+        let url = self.client.url(&format!("/product?{query_}"), None);
         self.client
             .get(
                 &url,
@@ -81,7 +84,7 @@ impl Products {
             .await
     }
     /**
-     * Get multiple products.
+     * Get multiple products
      *
      * This function performs a `GET` to the `/product` endpoint.
      *
@@ -112,7 +115,7 @@ impl Products {
             query_args.push(("Search".to_string(), search.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = self.client.url(&format!("/product?{}", query_), None);
+        let url = self.client.url(&format!("/product?{query_}"), None);
         self.client
             .get_all_pages(
                 &url,
@@ -124,13 +127,13 @@ impl Products {
             .await
     }
     /**
-     * Add a single product to the store.
+     * Add a single product to the store
      *
      * This function performs a `POST` to the `/product` endpoint.
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post(
         &self,
@@ -148,14 +151,14 @@ impl Products {
             .await
     }
     /**
-     * Get a single product.
+     * Get a single product
      *
      * This function performs a `GET` to the `/product/{productId}` endpoint.
      *
      * **Parameters:**
      *
-     * * `product_id: i64` -- Unique identifier of the product.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `product_id` -- Unique identifier of the product
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn get(
         &self,
@@ -179,14 +182,14 @@ impl Products {
             .await
     }
     /**
-     * Modify a single product.
+     * Modify a single product
      *
      * This function performs a `PUT` to the `/product/{productId}` endpoint.
      *
      * **Parameters:**
      *
-     * * `product_id: i64` -- Unique identifier of the product to modify.
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `product_id` -- Unique identifier of the product to modify
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn put(
         &self,
@@ -211,13 +214,13 @@ impl Products {
             .await
     }
     /**
-     * Add multiple products to the store.
+     * Add multiple products to the store
      *
      * This function performs a `POST` to the `/product/batch` endpoint.
      *
      * **Parameters:**
      *
-     * * `channel_id: i64` -- Unique id of the channel.
+     * * `channel_id` -- Unique id of the channel
      */
     pub async fn post_batch(
         &self,

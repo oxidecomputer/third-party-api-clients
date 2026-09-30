@@ -12,7 +12,7 @@ impl CustomerJourneys {
     }
 
     /**
-     * Customer Journeys API trigger for a contact.
+     * Customer Journeys API trigger for a contact
      *
      * This function performs a `POST` to the `/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger` endpoint.
      *
@@ -20,8 +20,8 @@ impl CustomerJourneys {
      *
      * **Parameters:**
      *
-     * * `journey_id: i64` -- The display order for interests.
-     * * `step_id: i64` -- The display order for interests.
+     * * `journey_id` -- The display order for interests.
+     * * `step_id` -- The display order for interests.
      */
     pub async fn post_steps_actions_trigger(
         &self,

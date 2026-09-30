@@ -18,20 +18,17 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `card: &str` -- Only return authorizations that belong to the given card.
-     * * `cardholder: &str` -- Only return authorizations that belong to the given cardholder.
-     * * `created: &str` -- Only return authorizations that were created during the given date interval.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::IssuingAuthorizationStatus` -- Only return authorizations with the given status. One of `pending`, `closed`, or `reversed`.
+     * * `card` -- Only return authorizations that belong to the given card.
+     * * `cardholder` -- Only return authorizations that belong to the given cardholder.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- Only return authorizations with the given status. One of `pending`, `closed`, or `reversed`.
      */
     pub async fn get_authorizations(
         &self,
         card: &str,
         cardholder: &str,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -59,7 +56,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/authorizations?{}", query_), None);
+            .url(&format!("/v1/issuing/authorizations?{query_}"), None);
         let resp: crate::Response<crate::types::GetIssuingAuthorizationsResponse> = self
             .client
             .get(
@@ -89,7 +86,6 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        created: &str,
         status: crate::types::IssuingAuthorizationStatus,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingAuthorization>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -105,7 +101,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/authorizations?{}", query_), None);
+            .url(&format!("/v1/issuing/authorizations?{query_}"), None);
         let crate::Response::<crate::types::GetIssuingAuthorizationsResponse> {
             mut status,
             mut headers,
@@ -145,7 +141,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -160,7 +156,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -184,8 +180,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `authorization` -- The account's country.
      */
     pub async fn get_authorizations_authorization(
         &self,
@@ -215,7 +210,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The account's country.
+     * * `authorization` -- The account's country.
      */
     pub async fn post_authorizations_authorization(
         &self,
@@ -245,7 +240,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The account's country.
+     * * `authorization` -- The account's country.
      */
     pub async fn post_authorizations_authorization_approve(
         &self,
@@ -275,7 +270,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `authorization: &str` -- The account's country.
+     * * `authorization` -- The account's country.
      */
     pub async fn post_authorizations_authorization_decline(
         &self,
@@ -305,19 +300,16 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `created: &str` -- Only return cardholders that were created during the given date interval.
-     * * `email: &str` -- Only return cardholders that have the given email address.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `phone_number: &str` -- Only return cardholders that have the given phone number.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::IssuingCardholderStatus` -- Only return cardholders that have the given status. One of `active`, `inactive`, or `blocked`.
-     * * `type_: crate::types::AccountHolderType` -- Type of entity that holds the account. This can be either `individual` or `company`.
+     * * `email` -- Only return cardholders that have the given email address.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `phone_number` -- Only return cardholders that have the given phone number.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- Only return cardholders that have the given status. One of `active`, `inactive`, or `blocked`.
+     * * `type_` -- Type of entity that holds the account. This can be either `individual` or `company`.
      */
     pub async fn get_cardholders(
         &self,
-        created: &str,
         email: &str,
         ending_before: &str,
         limit: i64,
@@ -351,7 +343,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/cardholders?{}", query_), None);
+            .url(&format!("/v1/issuing/cardholders?{query_}"), None);
         let resp: crate::Response<crate::types::GetIssuingCardholdersResponse> = self
             .client
             .get(
@@ -379,7 +371,6 @@ impl Issuing {
      */
     pub async fn get_all_cardholders(
         &self,
-        created: &str,
         email: &str,
         phone_number: &str,
         status: crate::types::IssuingCardholderStatus,
@@ -401,7 +392,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/cardholders?{}", query_), None);
+            .url(&format!("/v1/issuing/cardholders?{query_}"), None);
         let crate::Response::<crate::types::GetIssuingCardholdersResponse> {
             mut status,
             mut headers,
@@ -441,7 +432,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -456,7 +447,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -499,8 +490,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `cardholder: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `cardholder` -- The account's country.
      */
     pub async fn get_cardholders_cardholder(
         &self,
@@ -530,7 +520,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `cardholder: &str` -- The account's country.
+     * * `cardholder` -- The account's country.
      */
     pub async fn post_cardholders_cardholder(
         &self,
@@ -560,22 +550,19 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `cardholder: &str` -- Only return cards belonging to the Cardholder with the provided ID.
-     * * `created: &str` -- Only return cards that were issued during the given date interval.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `exp_month: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-     * * `exp_year: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `last_4: &str` -- Only return cards that have the given last four digits.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::IssuingCardStatus` -- Only return cards that have the given status. One of `active`, `inactive`, or `canceled`.
-     * * `type_: crate::types::IssuingCardType` -- Only return cards that have the given type. One of `virtual` or `physical`.
+     * * `cardholder` -- Only return cards belonging to the Cardholder with the provided ID.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `exp_month` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `exp_year` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `last_4` -- Only return cards that have the given last four digits.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- Only return cards that have the given status. One of `active`, `inactive`, or `canceled`.
+     * * `type_` -- Only return cards that have the given type. One of `virtual` or `physical`.
      */
     pub async fn get_cards(
         &self,
         cardholder: &str,
-        created: &str,
         ending_before: &str,
         exp_month: i64,
         exp_year: i64,
@@ -616,7 +603,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/cards?{}", query_), None);
+            .url(&format!("/v1/issuing/cards?{query_}"), None);
         let resp: crate::Response<crate::types::GetIssuingCardsResponse> = self
             .client
             .get(
@@ -645,7 +632,6 @@ impl Issuing {
     pub async fn get_all_cards(
         &self,
         cardholder: &str,
-        created: &str,
         exp_month: i64,
         exp_year: i64,
         last_4: &str,
@@ -674,7 +660,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/cards?{}", query_), None);
+            .url(&format!("/v1/issuing/cards?{query_}"), None);
         let crate::Response::<crate::types::GetIssuingCardsResponse> {
             mut status,
             mut headers,
@@ -714,7 +700,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -729,7 +715,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -770,8 +756,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `card: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `card` -- The account's country.
      */
     pub async fn get_cards_card(
         &self,
@@ -801,7 +786,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `card: &str` -- The account's country.
+     * * `card` -- The account's country.
      */
     pub async fn post_cards_card(
         &self,
@@ -831,17 +816,14 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `created: &str` -- Select Issuing disputes that were created during the given date interval.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `status: crate::types::IssuingDisputeStatus` -- Select Issuing disputes with the given status.
-     * * `transaction: &str` -- Select the Issuing dispute for the given transaction.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `status` -- Select Issuing disputes with the given status.
+     * * `transaction` -- Select the Issuing dispute for the given transaction.
      */
     pub async fn get_disputes(
         &self,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -867,7 +849,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/disputes?{}", query_), None);
+            .url(&format!("/v1/issuing/disputes?{query_}"), None);
         let resp: crate::Response<crate::types::IssuingDisputeList> = self
             .client
             .get(
@@ -895,7 +877,6 @@ impl Issuing {
      */
     pub async fn get_all_disputes(
         &self,
-        created: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingDispute>>> {
@@ -909,7 +890,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/disputes?{}", query_), None);
+            .url(&format!("/v1/issuing/disputes?{query_}"), None);
         let crate::Response::<crate::types::IssuingDisputeList> {
             mut status,
             mut headers,
@@ -949,7 +930,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -964,7 +945,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1007,8 +988,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `dispute: &str` -- The account's country.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `dispute` -- The account's country.
      */
     pub async fn get_disputes_dispute(
         &self,
@@ -1038,7 +1018,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `dispute: &str` -- The account's country.
+     * * `dispute` -- The account's country.
      */
     pub async fn post_disputes_dispute(
         &self,
@@ -1068,7 +1048,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `dispute: &str` -- The account's country.
+     * * `dispute` -- The account's country.
      */
     pub async fn post_disputes_dispute_submit(
         &self,
@@ -1098,15 +1078,12 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `created: &str` -- Only return issuing settlements that were created during the given date interval.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
      */
     pub async fn get_settlements(
         &self,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -1124,7 +1101,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/settlements?{}", query_), None);
+            .url(&format!("/v1/issuing/settlements?{query_}"), None);
         let resp: crate::Response<crate::types::GetIssuingSettlementsResponse> = self
             .client
             .get(
@@ -1152,7 +1129,6 @@ impl Issuing {
      */
     pub async fn get_all_settlements(
         &self,
-        created: &str,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingSettlement>>> {
         let url = self.client.url("/v1/issuing/settlements", None);
         let crate::Response::<crate::types::GetIssuingSettlementsResponse> {
@@ -1194,7 +1170,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1209,7 +1185,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1233,8 +1209,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `settlement: &str` -- The account's country.
+     * * `settlement` -- The account's country.
      */
     pub async fn get_settlements_settlement(
         &self,
@@ -1264,7 +1239,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `settlement: &str` -- The account's country.
+     * * `settlement` -- The account's country.
      */
     pub async fn post_settlements_settlement(
         &self,
@@ -1294,20 +1269,17 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `card: &str` -- Only return transactions that belong to the given card.
-     * * `cardholder: &str` -- Only return transactions that belong to the given cardholder.
-     * * `created: &str` -- Only return transactions that were created during the given date interval.
-     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-     * * `type_: crate::types::IssuingTransactionType` -- Only return transactions that have the given type. One of `capture` or `refund`.
+     * * `card` -- Only return transactions that belong to the given card.
+     * * `cardholder` -- Only return transactions that belong to the given cardholder.
+     * * `ending_before` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `limit` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `type_` -- Only return transactions that have the given type. One of `capture` or `refund`.
      */
     pub async fn get_transactions(
         &self,
         card: &str,
         cardholder: &str,
-        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -1335,7 +1307,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/transactions?{}", query_), None);
+            .url(&format!("/v1/issuing/transactions?{query_}"), None);
         let resp: crate::Response<crate::types::GetIssuingTransactionsResponse> = self
             .client
             .get(
@@ -1365,7 +1337,6 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        created: &str,
         type_: crate::types::IssuingTransactionType,
     ) -> ClientResult<crate::Response<Vec<crate::types::IssuingTransaction>>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1381,7 +1352,7 @@ impl Issuing {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = self
             .client
-            .url(&format!("/v1/issuing/transactions?{}", query_), None);
+            .url(&format!("/v1/issuing/transactions?{query_}"), None);
         let crate::Response::<crate::types::GetIssuingTransactionsResponse> {
             mut status,
             mut headers,
@@ -1421,7 +1392,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}?startng_after={}", url, page),
+                        &format!("{url}?startng_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1436,7 +1407,7 @@ impl Issuing {
                 } = self
                     .client
                     .get(
-                        &format!("{}&starting_after={}", url, page),
+                        &format!("{url}&starting_after={page}"),
                         crate::Message {
                             body: None,
                             content_type: None,
@@ -1460,8 +1431,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-     * * `transaction: &str` -- The account's country.
+     * * `transaction` -- The account's country.
      */
     pub async fn get_transactions_transaction(
         &self,
@@ -1491,7 +1461,7 @@ impl Issuing {
      *
      * **Parameters:**
      *
-     * * `transaction: &str` -- The account's country.
+     * * `transaction` -- The account's country.
      */
     pub async fn post_transactions_transaction(
         &self,

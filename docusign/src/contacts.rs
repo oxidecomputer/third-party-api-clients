@@ -20,7 +20,7 @@ impl Contacts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn put(
         &self,
@@ -55,7 +55,7 @@ impl Contacts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn post(
         &self,
@@ -88,7 +88,7 @@ impl Contacts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete(
         &self,
@@ -132,12 +132,12 @@ impl Contacts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `contact_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `cloud_provider: &str` -- (Optional) The cloud provider from which to retrieve the contacts. Valid values are:
-     *   
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `contact_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `cloud_provider` -- (Optional) The cloud provider from which to retrieve the contacts. Valid values are:
+     *
      *   - `rooms`
-     *   - `docusignCore` (default).
+     *   - `docusignCore` (default)
      */
     pub async fn get(
         &self,
@@ -178,8 +178,8 @@ impl Contacts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `contact_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `account_id` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `contact_id` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
     pub async fn delete_contacts(
         &self,
