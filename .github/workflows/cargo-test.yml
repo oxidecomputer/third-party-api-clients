@@ -9,6 +9,8 @@ on:
       - '**/Cargo.lock'
       - .github/workflows/cargo-test.yml
 name: cargo test
+permissions:
+  contents: read
 jobs:
   cargotest:
     name: cargo test

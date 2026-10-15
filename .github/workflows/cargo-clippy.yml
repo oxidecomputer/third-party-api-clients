@@ -9,6 +9,8 @@ on:
       - '**/Cargo.lock'
       - .github/workflows/cargo-clippy.yml
 name: cargo clippy
+permissions:
+  contents: read
 jobs:
   cargoclippy:
     name: cargo clippy
